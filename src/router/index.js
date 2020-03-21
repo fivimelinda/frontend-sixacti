@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import RequestLowongan from '../components/RequestLowongan/RequestLowongan.vue'
 import formCreateLoker from '../components/LowonganKerja/formCreateLoker.vue'
+import listLoker from '../components/LowonganKerja/ListLokerComponent.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/buatLoker',
     name: 'formCreateLoker',
     component: formCreateLoker
+  },
+  {
+    path: '/listLoker',
+    name: 'listLoker',
+    component: listLoker
   },
   {
     path: '/about',
