@@ -5,6 +5,9 @@
       {{message}}
     </div>
     <div class="container">
+      <div class="row mt-5 mb-3 ml-1">
+        <button class="btn btn-success w-25" v-on:click="addLokerClicked()">Add</button>
+      </div>
       <table class="table">
         <thead>
           <tr>
@@ -16,6 +19,11 @@
           <tr v-for="loker in loker" v-bind:key="loker.idLowongan">
             <td>{{loker.idLowongan}}</td>
             <td>{{loker.deskripsi}}</td>
+            <td>
+              <button class="btn btn-light" v-on:click="detailLokerClicked(loker.idLowongan)">
+                Detail
+              </button>
+            </td>
             <td>
               <button class="btn btn-warning" v-on:click="deleteLokerClicked(loker.idLowongan)">
                 Hapus
@@ -34,7 +42,8 @@ export default {
     name : "LokerList",
     data() {
         return{
-            loker : []
+            loker : [],
+            message : ""
         };
     },
 
@@ -50,7 +59,16 @@ export default {
             this.message = "Delete of Loker " + idLowongan + " successful";
             this.refreshLoker();
           });
+        },
+        detailLokerClicked(idLowongan){
+          var link = "detailLoker/" + idLowongan;
+          this.$router.push(link);
+        },
+        addLokerClicked(){
+          this.$router.push("/buatLoker");
         }
+
+
         
     },
     created(){
