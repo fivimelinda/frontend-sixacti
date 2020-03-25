@@ -12,12 +12,12 @@
         <div class="col-xs-12 col-sm-6 col-md-4" v-for="loker in loker" v-bind:key="loker.idLowongan">
           <div class="card mb-4" id="cardLoker">
             <div class="card-header" id="cardHeader">
-              <span id="titleCard">{{loker.idLowongan}}</span>
+              <span id="titleCard">{{loker.judulLoker}}</span>
             </div>
             <div class="card-body">
               <span class="mb-1" id="lokerDesc">{{loker.deskripsi}}</span>
-              <p class="mt-1 mb-3">Departement</p>
-              <p id="periodeDesc">Periode</p>
+              <p class="mt-1 mb-5" id="deptSect">{{loker.departement}} - {{loker.section}}</p>
+              <p id="periodeDesc">Periode {{loker.tanggalMulai | formatDate}} - {{loker.tanggalBerakhir | formatDate}}</p>
 
             </div>
             <div class="card-footer" id="card-footer">
@@ -71,7 +71,16 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import moment from 'moment'
 import LowonganKerjaService from '../../service/LowonganKerjaService';
+
+Vue.config.productionTip = false
+Vue.filter('formatDate', function(value){
+  if(value){
+    return moment(String(value)).format('MMMM YYYY')
+  }
+});
 export default {
     name : "LokerList",
     data() {
@@ -158,6 +167,19 @@ export default {
   line-height: 15px;
 
   color: #7D0022;
+}
+
+#deptSect{
+  font-family: Archivo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 13px;
+  /* identical to box height */
+
+
+  color: #9B9B9B;
+
 }
 
 #hapusBtn{
