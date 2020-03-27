@@ -23,38 +23,38 @@
 
             <div class="form-group">
                 <div class="mb-2 label">Judul Lowongan Pekerjaan</div>
-                <input class="form-control" v-model="deskripsi" placeholder="Masukan Judul Lowongan Pekerjaan" />
+                <input class="form-control" v-model="judulLoker" placeholder="Masukan Judul Lowongan Pekerjaan" />
             </div>
 
             <div class="form-group">
                 <div class="mb-2 label">Departement</div>
-                <input class="form-control" id="departement" placeholder="Masukan nama departement" />
+                <input class="form-control" v-model="departement" placeholder="Masukan nama departement" disabled/>
             </div>
 
             <div class="form-group">
                 <div class="mb-2 label">Section</div>
-                <input class="form-control" id="section" placeholder="Masukan nama section" />
+                <input class="form-control" v-model="section" placeholder="Masukan nama section" />
             </div>
 
             <div class="row">
                 <div class="col-6">
                 <div class="form-group">
                     <div class="mb-2 label">Tanggal Mulai</div>
-                    <input type="date" class="form-control" id="tanggal" />
+                    <input type="date" class="form-control" v-model="tanggalMulai" />
                 </div>
                 </div>
 
                 <div class="col-6">
                 <div class="form-group">
-                    <div class="mb-2 label">Tanggal Mulai</div>
-                    <input type="date" class="form-control" id="tanggal" />
+                    <div class="mb-2 label">Tanggal Berakhir</div>
+                    <input type="date" class="form-control" v-model="tanggalBerakhir" />
                 </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="mb-2 label">Deskripsi</div>
-                <b-textarea class="form-control" id="deskripsi"/>
+                <b-textarea class="form-control" v-model="deskripsi"/>
             </div>
 
             <button type="submit" class=" mt-5 mb-5 btn btn-danger">simpan</button>
@@ -119,6 +119,11 @@ export default {
     name: "detailLoker",
     data(){
         return{
+            judulLoker:"",
+            departement: "",
+            section: "",
+            tanggalMulai: "",
+            tanggalBerakhir: "",
             deskripsi: "",
             errors: []
         };
@@ -132,6 +137,11 @@ export default {
     methods: {
         refreshLokerDetails() {
             LowonganKerjaService.getLokerById(this.idLowongan).then(res => {
+                this.judulLoker = res.data.judulLoker;
+                this.departement = res.data.departement;
+                this.section = res.data.section;
+                this.tanggalMulai = res.data.tanggalMulai;
+                this.tanggalBerakhir = res.data.tanggalBerakhir;
                 this.deskripsi = res.data.deskripsi;
             });
         },

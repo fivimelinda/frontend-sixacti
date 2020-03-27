@@ -6,44 +6,48 @@
     <div class="card">
       <div class="card-header">Formulir Pembuatan Lowongan Pekerjaan</div>
       <div class="card-body">
-        <form>
-          <div class="form-group">
-            <div class="mb-2 label">Judul Lowongan Pekerjaan</div>
-            <input class="form-control" v-model="deskripsi" placeholder="Masukan Judul Lowongan Pekerjaan" />
-          </div>
-
-          <div class="form-group">
-            <div class="mb-2 label">Departement</div>
-            <input class="form-control" id="departement" placeholder="Masukan nama departement" />
-          </div>
-
-          <div class="form-group">
-            <div class="mb-2 label">Section</div>
-            <input class="form-control" id="section" placeholder="Masukan nama section" />
-          </div>
-
-          <div class="row">
-            <div class="col-6">
-              <div class="form-group">
-                <div class="mb-2 label">Tanggal Mulai</div>
-                <input type="date" class="form-control" id="tanggal" />
-              </div>
+        <form @submit="validateAndSubmit()">
+            <div v-if="errors.length">
+                <div class="alert alert-warning" v-bind:key="index" v-for="(error,index) in errors"></div>
             </div>
 
-            <div class="col-6">
-              <div class="form-group">
-                <div class="mb-2 label">Tanggal Mulai</div>
-                <input type="date" class="form-control" id="tanggal" />
-              </div>
+            <div class="form-group">
+                <div class="mb-2 label">Judul Lowongan Pekerjaan</div>
+                <input class="form-control" v-model="judulLoker" placeholder="Masukan Judul Lowongan Pekerjaan" />
             </div>
-          </div>
 
-          <div class="form-group">
-            <div class="mb-2 label">Deskripsi</div>
-            <b-textarea class="form-control" id="deskripsi"/>
-          </div>
+            <div class="form-group">
+                <div class="mb-2 label">Departement</div>
+                <input class="form-control" v-model="departement" placeholder="Masukan nama departement" disabled/>
+            </div>
 
-          <button type="submit" class=" mt-5 mb-5 btn btn-danger">simpan</button>
+            <div class="form-group">
+                <div class="mb-2 label">Section</div>
+                <input class="form-control" v-model="section" placeholder="Masukan nama section" />
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                <div class="form-group">
+                    <div class="mb-2 label">Tanggal Mulai</div>
+                    <input type="date" class="form-control" v-model="tanggalMulai" />
+                </div>
+                </div>
+
+                <div class="col-6">
+                <div class="form-group">
+                    <div class="mb-2 label">Tanggal Berakhir</div>
+                    <input type="date" class="form-control" v-model="tanggalBerakhir" />
+                </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="mb-2 label">Deskripsi</div>
+                <b-textarea class="form-control" v-model="deskripsi"/>
+            </div>
+
+            <button type="submit" class=" mt-5 mb-5 btn btn-danger">simpan</button>
 
         </form>
 
