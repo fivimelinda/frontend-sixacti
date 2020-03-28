@@ -1,4 +1,4 @@
-<template>
+<!--<template>
     <sweet-modal icon="success" v-show="value">
 	Berhasil!
     </sweet-modal>
@@ -16,4 +16,4 @@ export default {
         SweetModal
     }
 }
-</script>
+</script>-->
