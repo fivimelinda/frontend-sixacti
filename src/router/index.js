@@ -11,6 +11,8 @@ import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import { LayoutPlugin } from 'bootstrap-vue'
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
+import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
+import fileLamaran from '../components/Lamaran/fileLamaran.vue'
 
 Vue.use(Vuetify);
 Vue.use(VueRouter)
@@ -119,6 +121,16 @@ const routes = [
     path: '/detailLoker/:idLowongan',
     name: 'detailLoker',
     component: detailLoker
+  },
+  {
+    path: '/LamaranKerja',
+    name:'LamaranKerja',
+    component: LamaranKerja
+  },
+  {
+    path: '/fileLamaran',
+    name:'fileLamaran',
+    component: fileLamaran
   },
   {
     path: '/about',
