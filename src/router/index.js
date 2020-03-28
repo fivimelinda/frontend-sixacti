@@ -9,7 +9,7 @@ import formCuti from '../components/Cuti/formCuti.vue'
 import viewCuti from '../components/Cuti/viewCuti.vue'
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
-import { LayoutPlugin } from 'bootstrap-vue'
+// import { LayoutPlugin } from 'bootstrap-vue'
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
 import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
 import fileLamaran from '../components/Lamaran/fileLamaran.vue'
