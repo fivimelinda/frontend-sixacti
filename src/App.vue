@@ -1,37 +1,28 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-view />
-    </div>
-  </div>
+  <v-app>
+    <Navbar/>
+
+    <v-content>
+       <router-view></router-view>
+    </v-content>
+
+  </v-app>
 </template>
-
-<style>
-
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-
+<style scoped>
 @import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Archivo&display=swap');
-
-
+.application {
+  font-family: "Oswald";
+}
 </style>
+<script>
+import Navbar from '@/components/Navbar'
+export default {
+  name: 'App',
+  components:{ Navbar },
+  data () {
+    return {
+      //
+    }
+  }
+}
+</script>

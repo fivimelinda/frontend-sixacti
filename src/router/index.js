@@ -5,9 +5,14 @@ import RequestLowongan from '../components/RequestLowongan/RequestLowongan.vue'
 import formCreateLoker from '../components/LowonganKerja/formCreateLoker.vue'
 import FormUpdateLoker from '../components/LowonganKerja/FormUpdateLoker.vue'
 import listLoker from '../components/LowonganKerja/ListLokerComponent.vue'
+import formCuti from '../components/Cuti/formCuti.vue'
+import viewCuti from '../components/Cuti/viewCuti.vue'
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
 import { LayoutPlugin } from 'bootstrap-vue'
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
 
+Vue.use(Vuetify);
 Vue.use(VueRouter)
 
 const emptyComponent = {
@@ -123,10 +128,20 @@ const routes = [
     component: listLoker
   },
   {
+    path: '/formCuti',
+    name: 'formCuti',
+    component: formCuti
+  },
+  {
+    path: '/cuti',
+    name: 'cuti',
+    component: viewCuti
+  },
+  {
     path: '/detailLoker/:idLowongan',
     name: 'detailLoker',
     component: detailLoker
-  },  
+  },
   {
     path: '/about',
     name: 'About',
