@@ -152,13 +152,6 @@ const routes = [
   }
 ]
 
-//<<<<<<< HEAD
-export default new VueRouter({routes})
-// =======
-// const router = new VueRouter({
-//   mode: 'history',
-//   routes
-// })
-
-// export default router
-//>>>>>>> master
+export default new VueRouter({
+  mode:'history',
+  routes})
