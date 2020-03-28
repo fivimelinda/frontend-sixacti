@@ -81,6 +81,28 @@ const routes = [
     component: Home
   },
   {
+    path: '/tes',
+    name: 'tes',
+    component: emptyComponent,
+    children:[
+      {
+        path: 'tulis',
+        name: 'tulis',
+        component: emptyComponent,
+      },
+      {
+        path: 'medis',
+        name: 'medis',
+        component: emptyComponent,
+      },
+      {
+        path: 'wawancara',
+        name: 'wawancara',
+        component: emptyComponent
+      },
+    ]
+  },
+  {
     path: '/RequestLowongan',
     name: 'RequestLowongan',
     component: RequestLowongan
