@@ -115,10 +115,11 @@ const routes = [
     name: 'cuti',
     component: viewCuti
   },
+  {
     path: '/detailLoker/:idLowongan',
     name: 'detailLoker',
     component: detailLoker
-  },  
+  },
   {
     path: '/about',
     name: 'About',
