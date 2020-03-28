@@ -4,7 +4,12 @@ import Home from '../views/Home.vue'
 import RequestLowongan from '../components/RequestLowongan/RequestLowongan.vue'
 import formCreateLoker from '../components/LowonganKerja/formCreateLoker.vue'
 import listLoker from '../components/LowonganKerja/ListLokerComponent.vue'
+import formCuti from '../components/Cuti/formCuti.vue'
+import viewCuti from '../components/Cuti/viewCuti.vue'
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
 
+Vue.use(Vuetify);
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,6 +32,16 @@ const routes = [
     path: '/listLoker',
     name: 'listLoker',
     component: listLoker
+  },
+  {
+    path: '/formCuti',
+    name: 'formCuti',
+    component: formCuti
+  },
+  {
+    path: '/cuti',
+    name: 'cuti',
+    component: viewCuti
   },
   {
     path: '/about',
