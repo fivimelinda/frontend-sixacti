@@ -1,15 +1,23 @@
 import axios from "axios";
 
-
+const URI = 'http://localhost:8081/api';
 
 class LowonganKerjaService {
+    getLokerById(idLowongan){
+        return axios.get(URI + "/detailLoker/" + idLowongan) ;
+    }
+    
     retrieveAllLoker() {
-        return axios.get('http://localhost:8081/api/listLoker');
+        return axios.get(URI+"/listLoker");
     }
 
     deleteLoker(idLowongan){
-        var link = "http://localhost:8081/api/hapusLoker/" + idLowongan
+        var link = URI + "/hapusLoker/" + idLowongan
         return axios.delete(link);
+    }
+
+    updateLoker(idLowongan, loker){
+        return axios.get(URI + "/ubahLoker/" + idLowongan, loker);
     }
 }
 
