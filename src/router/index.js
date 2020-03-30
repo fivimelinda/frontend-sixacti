@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import RequestLowongan from '../components/RequestLowongan/RequestLowongan.vue'
+import ListRequestLowongan from '../components/RequestLowongan/ListRequestLowongan.vue'
 import formCreateLoker from '../components/LowonganKerja/formCreateLoker.vue'
 import FormUpdateLoker from '../components/LowonganKerja/FormUpdateLoker.vue'
 import listLoker from '../components/LowonganKerja/ListLokerComponent.vue'
@@ -9,7 +10,7 @@ import formCuti from '../components/Cuti/formCuti.vue'
 import viewCuti from '../components/Cuti/viewCuti.vue'
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
-import { LayoutPlugin } from 'bootstrap-vue'
+//import { LayoutPlugin } from 'bootstrap-vue'
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
 import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
 import fileLamaran from '../components/Lamaran/fileLamaran.vue'
@@ -93,7 +94,12 @@ const routes = [
     component: RequestLowongan
   },
   {
-    path: '/buatLoker',
+    path: '/ListRequestLowongan',
+    name: 'ListRequestLowongan',
+    component: ListRequestLowongan
+  },
+  {
+    path: '/buatLoker/:id',
     name: 'formCreateLoker',
     component: formCreateLoker
   },
@@ -143,7 +149,7 @@ const routes = [
 ]
 
 //<<<<<<< HEAD
-export default new VueRouter({routes})
+export default new VueRouter({routes, mode: 'history'})
 // =======
 // const router = new VueRouter({
 //   mode: 'history',

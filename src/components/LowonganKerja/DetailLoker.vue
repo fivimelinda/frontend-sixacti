@@ -23,7 +23,7 @@
 
             <div class="form-group">
                 <div class="mb-2 label">Judul Lowongan Pekerjaan</div>
-                <input class="form-control" v-model="judulLoker" placeholder="Masukan Judul Lowongan Pekerjaan" />
+                <input class="form-control" v-model="judulLoker" placeholder="Masukan Judul Lowongan Pekerjaan" disabled />
             </div>
 
             <div class="form-group">
@@ -33,21 +33,21 @@
 
             <div class="form-group">
                 <div class="mb-2 label">Section</div>
-                <input class="form-control" v-model="section" placeholder="Masukan nama section" />
+                <input class="form-control" v-model="section" placeholder="Masukan nama section" disabled/>
             </div>
 
             <div class="row">
                 <div class="col-6">
                 <div class="form-group">
                     <div class="mb-2 label">Tanggal Mulai</div>
-                    <input type="date" class="form-control" v-model="tanggalMulai" />
+                    <input type="date" class="form-control" id="tanggalMulai" v-model="tanggalMulai" />
                 </div>
                 </div>
 
                 <div class="col-6">
                 <div class="form-group">
                     <div class="mb-2 label">Tanggal Berakhir</div>
-                    <input type="date" class="form-control" v-model="tanggalBerakhir" />
+                    <input type="date" class="form-control" id="tanggalBerakhir" v-model="tanggalBerakhir" />
                 </div>
                 </div>
             </div>
@@ -140,8 +140,8 @@ export default {
                 this.judulLoker = res.data.judulLoker;
                 this.departement = res.data.departement;
                 this.section = res.data.section;
-                this.tanggalMulai = res.data.tanggalMulai;
-                this.tanggalBerakhir = res.data.tanggalBerakhir;
+                this.tanggalMulai = res.data.tanggalMulai.toString();
+                this.tanggalBerakhir = res.data.tanggalBerakhir.toString();
                 this.deskripsi = res.data.deskripsi;
             });
         },
