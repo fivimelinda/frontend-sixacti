@@ -17,7 +17,11 @@ class LowonganKerjaService {
     }
 
     updateLoker(idLowongan, loker){
-        return axios.get(URI + "/ubahLoker/" + idLowongan, loker);
+        return axios.put(`${URI}/ubahLoker/${idLowongan}`, loker);
+    }
+
+    addLoker(idReqLowongan, loker){
+        return axios.post(URI + "/addLoker/" + idReqLowongan, loker);
     }
 }
 
