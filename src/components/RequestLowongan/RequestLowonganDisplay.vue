@@ -68,7 +68,7 @@ export default {
 
         click: function (req) {
             console.log("Clicked with "+ req.id);
-            window.location.href= "#/RequestLowongan/"+req.id;
+            window.location.href= "/RequestLowongan/"+req.id;
         }
     }
 }
