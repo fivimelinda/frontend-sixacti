@@ -89,12 +89,12 @@ const routes = [
     component: Home
   },
   {
-    path: '/RequestLowongan',
+    path: '/RequestLowongan/add',
     name: 'RequestLowongan',
     component: RequestLowongan
   },
   {
-    path: '/RequestLowongan/all',
+    path: '/RequestLowongan',
     name: 'RequestLowonganDisplay',
     component: RequestLowonganDisplay
   },
