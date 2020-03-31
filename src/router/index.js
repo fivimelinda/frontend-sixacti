@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import RequestLowongan from '../components/RequestLowongan/RequestLowongan.vue'
+import RequestLowonganDisplay from '../components/RequestLowongan/RequestLowonganDisplay.vue'
+import RequestLowonganId from '../components/RequestLowongan/RequestLowonganId.vue'
 import ListRequestLowongan from '../components/RequestLowongan/ListRequestLowongan.vue'
 import formCreateLoker from '../components/LowonganKerja/formCreateLoker.vue'
 import FormUpdateLoker from '../components/LowonganKerja/FormUpdateLoker.vue'
@@ -89,9 +91,19 @@ const routes = [
     component: Home
   },
   {
-    path: '/RequestLowongan',
+    path: '/RequestLowongan/add',
     name: 'RequestLowongan',
     component: RequestLowongan
+  },
+  {
+    path: '/RequestLowongan',
+    name: 'RequestLowonganDisplay',
+    component: RequestLowonganDisplay
+  },
+  {
+    path: '/RequestLowongan/:id',
+    name: 'RequestLowonganId',
+    component: RequestLowonganId
   },
   {
     path: '/ListRequestLowongan',
