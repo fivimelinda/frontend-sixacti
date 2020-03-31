@@ -10,11 +10,11 @@
 
             <div class="form-group">
               <div class="mb-2 label">Foto Kartu Tanda Penduduk*</div>
-              <input class="form-control" type="file" id="fotoKtp" required>
+              <input class="form-control" type="file" @change="onFileSelected" id="fotoKtp" required>
             </div>
             <div class="form-group">
               <div class="mb-2 label">Foto Kartu Keluarga*</div>
-              <input class="form-control" type="file" id="fotoKk" required>
+              <input class="form-control" type="file" id="fotoKk">
             </div>
              <div class="form-group">
                <div class="mb-2 label">Foto Nomor Pokok Wajib Pajak</div>
@@ -30,12 +30,12 @@
             </div>
             <div class="form-group">
               <div class="mb-2 label">Resume*</div>
-              <input class="form-control" type="file" id="resume" required>
+              <input class="form-control" type="file" id="resume" >
             </div>
 
 
           <button class=" mt-5 mb-5 btn btn-primary" v-on:click="beforeLamaranClicked()">Before</button>
-            <button type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
+            <button @click="onUpload" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
         </form>
 
       </div>
@@ -50,10 +50,27 @@
 
 
 <script>
+import axios from 'axios';
 export default {
+  name:'fileLamaran',
+  data(){
+    return{
+      selectedFile: null
+    }
+  },
   methods:{
     beforeLamaranClicked(){
       this.$router.push("/LamaranKerja");
+    },
+    onFileSelected(event){
+      this.selectedFile = event.target.files[0]
+    },
+    onUpload(){
+      const fd = new FormData();
+      fd.append('image', this.selectedFile, this.selectedFile.name)
+      axios.post('http://localhost:8081/api/uploadFile', fd).then( res => {
+        console.log(res)
+      })
     }
   }
 }
