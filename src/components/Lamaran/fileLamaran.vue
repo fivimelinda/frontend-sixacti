@@ -6,11 +6,11 @@
     <div class="card">
       <div class="card-header">Formulir Pembuatan Lamaran Pekerjaan</div>
       <div class="card-body">
-        <form>
+        <form enctype="multipart/form-data">
 
             <div class="form-group">
               <div class="mb-2 label">Foto Kartu Tanda Penduduk*</div>
-              <input class="form-control" type="file" @change="onFileSelected" id="fotoKtp" required>
+              <input class="form-control" type="file" ref="file" v-on:change="handleFileUpload()" id="file" required>
             </div>
             <div class="form-group">
               <div class="mb-2 label">Foto Kartu Keluarga*</div>
@@ -35,7 +35,7 @@
 
 
           <button class=" mt-5 mb-5 btn btn-primary" v-on:click="beforeLamaranClicked()">Before</button>
-            <button @click="onUpload" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
+            <button v-on:click="submitFile()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
         </form>
 
       </div>
@@ -55,23 +55,43 @@ export default {
   name:'fileLamaran',
   data(){
     return{
-      selectedFile: null
+      file:''
     }
   },
   methods:{
     beforeLamaranClicked(){
       this.$router.push("/LamaranKerja");
     },
-    onFileSelected(event){
-      this.selectedFile = event.target.files[0]
+    handleFileUpload(){
+      this.file = this.$refs.file.files[0];
     },
-    onUpload(){
-      const fd = new FormData();
-      fd.append('image', this.selectedFile, this.selectedFile.name)
-      axios.post('http://localhost:8081/api/uploadFile', fd).then( res => {
-        console.log(res)
-      })
-    }
+    submitFile(){
+      let formData = new FormData();
+
+            /*
+                Add the form data we need to submit
+            */
+      formData.append('file', this.file);
+
+        /*
+          Make the request to the POST /single-file URL
+        */
+            axios.post('localhost:8081/api/uploadFile',
+               formData,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+            ).then(function(){
+          console.log('SUCCESS!!');
+        })
+        .catch(function(){
+          console.log('FAILURE!!');
+        });
+      },
+      
+    
   }
 }
 </script>
