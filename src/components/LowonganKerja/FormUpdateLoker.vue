@@ -1,7 +1,7 @@
 <template>
   <div class="FormCreateLoker">
     <br />
-    <h1>Buat Lowongan Pekerjaan</h1>
+    <h1>Ubah Lowongan Pekerjaan</h1>
     <br />
     <div class="card">
       <div class="card-header">Formulir Pembuatan Lowongan Pekerjaan</div>

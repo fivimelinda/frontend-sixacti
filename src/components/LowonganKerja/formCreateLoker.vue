@@ -33,7 +33,7 @@
 
           <div class="form-group">
             <hr class="border border-danger">
-            <p id="dateWanted">Tanggal Dibutuhkan Lowongan : {{dateWanted | formatDate}}</p>
+            <p id="dateWanted">Tanggal Dibutuhkan Lowongan : {{dateWanted}}</p>
           </div>
 
           <div class="row">
@@ -154,7 +154,7 @@ export default {
                 this.jobTitle = res.data.jobTitle;
                 this.departement = res.data.departement;
                 this.section = res.data.section;
-                this.dateWanted = res.data.dateWanted;
+                this.dateWanted = moment(res.data.dateWanted).format("DD MMMM YYYY");
                 
             });
         },
