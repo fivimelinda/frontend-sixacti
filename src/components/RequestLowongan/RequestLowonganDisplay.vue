@@ -22,7 +22,7 @@
     <div class="box-up">
         <p class="box-text">Riwayat Request Lowongan Pekerjaan</p>
     </div>
-    <table class="table">
+    <table class="table table-hover">
         <thead class="table-borderless">
             <tr class="tr-top">
                 <th scope="col">No.</th>
@@ -33,8 +33,8 @@
             </tr>
         </thead>
         <tbody class="tbody">
-            <tr v-for="req in requestLowongan" :key="req.id" class="content">
-                <th scope=row>{{req.id}}</th>
+            <tr v-for="req in requestLowongan" :key="req.id" v-on:click="click(req)"  class="content">
+                <th scope=row class="th-bottom">{{req.id}}</th>
                 <td>{{req.jobTitle}}</td>
                 <td>{{req.jumlah}}</td>
                 <td>{{req.dateWanted}}</td>
@@ -64,6 +64,11 @@ export default {
             }).catch((err) => {
                 console.log(err);
             })
+        },
+
+        click: function (req) {
+            console.log("Clicked with "+ req.id);
+            window.location.href= "#/RequestLowongan/"+req.id;
         }
     }
 }
@@ -123,6 +128,14 @@ thead{
     color: white;
     margin-left: 15px;
     padding: 10px;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th{
+    background-color: #FFDDE3;
+}
+
+.th-bottom:hover{
+    border-left: 3px solid red;
 }
 
 </style>
