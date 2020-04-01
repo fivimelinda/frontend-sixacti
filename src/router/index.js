@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import Home from '../views/Home.vue'
+import AuthLayout from '../components/Auth/AuthLayout.vue'
+import TesLayout from '../components/Tes/TesLayout.vue'
 import RequestLowongan from '../components/RequestLowongan/RequestLowongan.vue'
 import formCreateLoker from '../components/LowonganKerja/formCreateLoker.vue'
 import FormUpdateLoker from '../components/LowonganKerja/FormUpdateLoker.vue'
@@ -29,22 +32,22 @@ const routes = [
   // path untuk authentikasi 
   {
     path: '/auth',
-    component: emptyComponent,
+    component: AuthLayout,
     children :[
       {
         name:'login',
         path:'login',
-        component:emptyComponent
+        component: () => import('../components/Auth/Login/Login.vue')
       },
       {
         name:'signup',
         path:'signup',
-        component : emptyComponent
+        component : () => import('../components/Auth/SignUp/SignUp.vue')
       },
       {
         name: 'change-password',
         path: 'change-password',
-        component: emptyComponent
+        component: () => import('../components/Auth/RecoverPassword/RecoverPassword.vue')
       },
       {
         path: '',
@@ -63,7 +66,7 @@ const routes = [
       {
         name:'not-found',
         path:'not-found',
-        component:emptyComponent
+        component: () => import('../components/Error/404-Pages/404.vue')
       }
     ]
   },
@@ -74,7 +77,7 @@ const routes = [
       {
         name:'internal-server',
         path:'internal-server',
-        component:emptyComponent
+        component: () => import('../components/Error/502-Pages/502.vue')
       }
     ]
   },
@@ -88,22 +91,22 @@ const routes = [
   {
     path: '/tes',
     name: 'tes',
-    component: emptyComponent,
+    component: TesLayout,
     children:[
       {
         path: 'tulis',
         name: 'tulis',
-        component: emptyComponent,
+        component: () => import('../components/Tes/TesTulis/TesTulis.vue'),
       },
       {
         path: 'medis',
         name: 'medis',
-        component: emptyComponent,
+        component: () => import('../components/Tes/TesMedis/TesMedis.vue'),
       },
       {
         path: 'wawancara',
         name: 'wawancara',
-        component: emptyComponent
+        component: () => import('../components/Tes/TesWawancara/TesWawancara.vue')
       },
     ]
   },
