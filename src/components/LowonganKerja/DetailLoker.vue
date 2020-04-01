@@ -10,9 +10,15 @@
             </h1>
         </div>
 
-        <div class="col-xs-12 col-sm-6 col-md-4">
+        <!-- <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="d-flex justify-content-center">
                 <button class="btn btn-lg btn-danger" id="viewPelamar"><span id="daftarPelamar">Daftar Pelamar</span></button> 
+            </div>
+            
+        </div> -->
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Apply</span></button> 
             </div>
             
         </div>
@@ -154,6 +160,12 @@ export default {
             var link = "/ubahLoker/" + idLowongan;
             this.$router.push(link);
         },
+
+        lamaranClicked(){
+            var idLowongan = this.idLowongan;
+            var apply = "/LamaranKerja/" + idLowongan;
+            this.$router.push(apply);
+        }
     },
     created(){
         this.refreshLokerDetails();

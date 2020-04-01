@@ -12,7 +12,7 @@
               <div class="mb-2 label">Foto Kartu Tanda Penduduk*</div>
               <input class="form-control" type="file" ref="file" v-on:change="handleFileUpload()" id="file" required>
             </div>
-            <!-- <div class="form-group">
+            <div class="form-group">
               <div class="mb-2 label">Foto Kartu Keluarga*</div>
               <input class="form-control" type="file" id="fotoKk">
             </div>
@@ -31,7 +31,7 @@
             <div class="form-group">
               <div class="mb-2 label">Resume*</div>
               <input class="form-control" type="file" id="resume" >
-            </div> -->
+            </div>
 
 
           <button class=" mt-5 mb-5 btn btn-primary" v-on:click="beforeLamaranClicked()">Before</button>
