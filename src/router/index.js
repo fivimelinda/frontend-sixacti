@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+
+import Layout from '../components/Admin/Layout'
+//import Home from '../views/Home.vue'
 import RequestLowongan from '../components/RequestLowongan/RequestLowongan.vue'
 import formCreateLoker from '../components/LowonganKerja/formCreateLoker.vue'
 import FormUpdateLoker from '../components/LowonganKerja/FormUpdateLoker.vue'
@@ -34,17 +36,17 @@ const routes = [
       {
         name:'login',
         path:'login',
-        component:emptyComponent
+        component: () => import('../components/Auth/Login/Login.vue')
       },
       {
         name:'signup',
         path:'signup',
-        component : emptyComponent
+        component : () => import('../components/Auth/SignUp/SignUp.vue')
       },
       {
         name: 'change-password',
         path: 'change-password',
-        component: emptyComponent
+        component: () => import ('../components/Auth/RecoverPassword/RecoverPassword.vue')
       },
       {
         path: '',
@@ -83,7 +85,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Layout
   },
   {
     path: '/tes',

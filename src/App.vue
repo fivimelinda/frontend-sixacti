@@ -1,12 +1,13 @@
 <template>
-  <v-app>
+  <!-- <v-app>
     <Navbar/>
-
     <v-content>
        <router-view></router-view>
     </v-content>
-
-  </v-app>
+  </v-app> -->
+  <div id='app' class="app">
+    <router-view/>
+  </div>
 </template>
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
@@ -15,10 +16,13 @@
 }
 </style>
 <script>
-import Navbar from '@/components/Navbar'
+//import Navbar from './components/Navbar'
+
 export default {
   name: 'App',
-  components:{ Navbar },
+  // components:{
+  //   Navbar
+  // },
   data () {
     return {
       //
