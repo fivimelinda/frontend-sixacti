@@ -12,7 +12,7 @@
               <div class="mb-2 label">Foto Kartu Tanda Penduduk*</div>
               <input class="form-control" type="file" ref="file" v-on:change="handleFileUpload()" id="file" required>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <div class="mb-2 label">Foto Kartu Keluarga*</div>
               <input class="form-control" type="file" id="fotoKk">
             </div>
@@ -31,7 +31,7 @@
             <div class="form-group">
               <div class="mb-2 label">Resume*</div>
               <input class="form-control" type="file" id="resume" >
-            </div>
+            </div> -->
 
 
           <button class=" mt-5 mb-5 btn btn-primary" v-on:click="beforeLamaranClicked()">Before</button>
@@ -67,23 +67,9 @@ export default {
     },
     submitFile(){
       let formData = new FormData();
-
-            /*
-                Add the form data we need to submit
-            */
       formData.append('file', this.file);
-
-        /*
-          Make the request to the POST /single-file URL
-        */
-            axios.post('localhost:8081/api/uploadFile',
-               formData,
-                {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-              }
-            ).then(function(){
+      axios.post('http://localhost:8081/api/uploadFile',
+        formData).then(function(){
           console.log('SUCCESS!!');
         })
         .catch(function(){
