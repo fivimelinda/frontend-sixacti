@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h3>All Courses</h3>
+    <h3 class="mt-10">Daftar Request Lowongan Pekerjaan</h3>
     <div v-if="message" class="alert alert-success">
       {{message}}
     </div>
@@ -14,13 +14,13 @@
             <div class="card-body">
               <!-- <span class="mb-1" id="lokerDesc">{{loker.deskripsi}}</span> -->
               <p class="mt-1 mb-5" id="deptSect">{{reqLoker.departement}} - {{reqLoker.section}}</p>
-              <p id="periodeDesc">Dibutuhkan : {{reqLoker.dateWanted | formatDate}}</p>
+              <p id="periodeDesc">Dibutuhkan Lowongan : {{reqLoker.dateWanted | formatDate}}</p>
 
             </div>
             <div class="card-footer" id="card-footer">
               <div class="row">
                 <div class="col-6 mb-3">
-                  <button class="btn btn-danger w-100" v-on:click="buatLokerClicked(reqLoker.id)">Buat</button>
+                  <button class="btn btn-danger w-100" v-on:click="buatLokerClicked(reqLoker.id)"><plus-circle-icon class="mr-3"></plus-circle-icon>Buat</button>
                 </div>
                 <div class="col-6 mb-3">
                   <button class="btn btn-light border-danger w-100" id="hapusBtn"  v-on:click="deleteLokerClicked(loker.idLowongan)">Tolak Request</button>
@@ -70,15 +70,19 @@
 <script>
 import Vue from 'vue'
 import moment from 'moment'
+import { PlusCircleIcon } from 'vue-feather-icons'
 import RequestLowonganService from '../../service/RequestLowonganService';
 
 Vue.config.productionTip = false
 Vue.filter('formatDate', function(value){
   if(value){
-    return moment(String(value)).format('DD MMMM YYYY')
+    return moment(String(value)).format("DD MMMM YYYY")
   }
 });
 export default {
+    components: {
+      PlusCircleIcon
+    },
     name : "LokerList",
     data() {
         return{

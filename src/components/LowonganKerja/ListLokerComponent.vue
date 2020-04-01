@@ -1,13 +1,11 @@
 <template>
   <div class="container">
-    <h3>All Courses</h3>
+    <h3 class="mt-10">Daftar Lowongan Pekerjaan</h3>
     <div v-if="message" class="alert alert-success">
       {{message}}
     </div>
     <div class="container-fluid">
-      <div class="row mt-5 mb-3 ml-1">
-        <button class="btn btn-success w-25" v-on:click="addLokerClicked()">Add</button>
-      </div>
+      
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4" v-for="loker in loker" v-bind:key="loker.idLowongan">
           <div class="card mb-4" id="cardLoker">
