@@ -141,6 +141,11 @@ export default {
       pengalamanKerja : "",
     }
   },
+  computed: {
+    idLowongan(){
+      return this.$route.params.idLowongan;
+    }
+  },
   methods:{
     nextLamaranClicked(){
       this.$router.push("/fileLamaran");
@@ -149,7 +154,7 @@ export default {
         e.preventDefault();
         this.errors = [];
         if(this.errors.length === 0) {
-          LamaranService.addLamaran({
+          LamaranService.addLamaran(this.idLowongan,{
             nik : this.nik,
             namaIbu : this.namaIbu,
             alamatDomisili : this.alamatDomisili,

@@ -141,7 +141,7 @@ const routes = [
     component: detailLoker
   },
   {
-    path: '/LamaranKerja',
+    path: '/LamaranKerja/:idLowongan',
     name:'LamaranKerja',
     component: LamaranKerja
   },

@@ -67,23 +67,9 @@ export default {
     },
     submitFile(){
       let formData = new FormData();
-
-            /*
-                Add the form data we need to submit
-            */
       formData.append('file', this.file);
-
-        /*
-          Make the request to the POST /single-file URL
-        */
-            axios.post('localhost:8081/api/uploadFile',
-               formData,
-                {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-              }
-            ).then(function(){
+      axios.post('http://localhost:8081/api/uploadFile',
+        formData).then(function(){
           console.log('SUCCESS!!');
         })
         .catch(function(){

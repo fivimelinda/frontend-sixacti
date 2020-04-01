@@ -4,8 +4,8 @@ const URI = 'http://localhost:8081/api';
 
 class LamaranService {
 
-    addLamaran(lamaran){
-        return axios.post(URI + "/addLamaran", lamaran);
+    addLamaran(idLowongan, lamaran){
+        return axios.post(URI + "/addLamaran/" + idLowongan, lamaran);
     }
 }
 
