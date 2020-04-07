@@ -1,124 +1,133 @@
 <template>
-    <!-- <div>
-        <h1>Detail</h1>
-        <div class="container">
-            <button class="btn btn-success" v-on:click="updateLokerClicked(idLowongan)">
-                Ubah
-            </button>
-            <div>{{idLowongan}}</div>
-            <div>{{deskripsi}}</div>           
+
+<div class="container mt-10">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+            <h1 id="judul">
+                {{judulLoker}} 
+                <a id="ubahBtn" v-on:click="updateLokerClicked()">
+                <edit-icon size="14"></edit-icon> Ubah</a>
+            </h1>
         </div>
-    </div> -->
-    <div class="FormCreateLoker">
-    <br />
-    <h1>Buat Lowongan Pekerjaan</h1>
-    <br />
-    <div class="card">
-      <div class="card-header">Formulir Pembuatan Lowongan Pekerjaan</div>
-      <div class="card-body">
-        <form @submit="validateAndSubmit()">
-            <div v-if="errors.length">
-                <div class="alert alert-warning" v-bind:key="index" v-for="(error,index) in errors"></div>
+
+        <!-- <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-lg btn-danger" id="viewPelamar"><span id="daftarPelamar">Daftar Pelamar</span></button> 
             </div>
-
-            <div class="form-group">
-                <div class="mb-2 label">Judul Lowongan Pekerjaan</div>
-                <input class="form-control" v-model="judulLoker" placeholder="Masukan Judul Lowongan Pekerjaan" />
+            
+        </div> -->
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Apply</span></button> 
             </div>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md">
+            <h4 id="deptSect">Departement : {{departement}} - Section : {{section}}  </h4>
+        </div>
 
-            <div class="form-group">
-                <div class="mb-2 label">Departement</div>
-                <input class="form-control" v-model="departement" placeholder="Masukan nama departement" disabled/>
-            </div>
-
-            <div class="form-group">
-                <div class="mb-2 label">Section</div>
-                <input class="form-control" v-model="section" placeholder="Masukan nama section" />
-            </div>
-
-            <div class="row">
-                <div class="col-6">
-                <div class="form-group">
-                    <div class="mb-2 label">Tanggal Mulai</div>
-                    <input type="date" class="form-control" v-model="tanggalMulai" />
-                </div>
-                </div>
-
-                <div class="col-6">
-                <div class="form-group">
-                    <div class="mb-2 label">Tanggal Berakhir</div>
-                    <input type="date" class="form-control" v-model="tanggalBerakhir" />
-                </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="mb-2 label">Deskripsi</div>
-                <b-textarea class="form-control" v-model="deskripsi"/>
-            </div>
-
-            <button type="submit" class=" mt-5 mb-5 btn btn-danger">simpan</button>
-
-        </form>
-
-      </div>
-
+        <div class="col-xs-12 col-sm-6 col-md-8">
+            <h4 id="deptSect">
+               <calendar-icon class="ml-3 mr-2"></calendar-icon>{{tanggalMulai}} - {{tanggalBerakhir}}
+            </h4>
+        </div>
     </div>
 
-    <br>
-    <br>
+    <hr>
 
-  </div>
+    <div id="deskripsi" class="container-fluid">
+        {{deskripsi}}
+    </div>
+    
+
+    
+
+
+</div>
+    
 </template>
 
 <style scoped>
-.FormCreateLoker {
-  background-color: #F6EDF0;
+
+#judul{
+    font-family: Archivo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 39px;
+
+    color: #C53751;
 }
 
-h1{
-  font-family: 'oswald';
-  text-align: left;
-  margin-left: 10%;
+#ubahBtn{
+    font-family: Archivo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 15px;
+
+    color: #A6A6A6;
 }
 
-.card {
-  margin-left: 10%;
-  margin-right: 10%;
-  background-color: white;
+ div.parentElement{text-align: center;}
+.btn-danger{
+    background-color: #C53751;
+    min-height: 48px;
+    min-width: 200px;
+
+    display: inline-block;
+
+    font-family: Archivo;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 22px;
+
+    text-align: center;
+
+    color: #FFFFFF;
 }
 
-.card-header {
-  background-color: #C53751;
-  font-family: 'oswald';
-  text-align: left;
-  font-style: medium;
-  font-size: 20px;
-  color: white;
+#deskripsi{
+    font-family: Archivo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 20px;
+
+    color: rgb(31, 29, 29);    
 }
 
-form{
-    margin-left: 10%;
-    margin-right: 10%;
-    
-}
+#deptSect{
+    font-family: Archivo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 20px;
 
-.label{
-    text-align: left;
-    font-family: 'archivo';
-    color: black;
-    margin-bottom: 2px;
-}
+    /* identical to box height */
 
+    color: #000000;
+}
 
 </style>
 
 <script>
+import moment from 'moment';
+import { EditIcon,CalendarIcon } from 'vue-feather-icons'
 import LowonganKerjaService from '../../service/LowonganKerjaService';
+
 export default {
+    components: {
+        EditIcon,
+        CalendarIcon
+    },
     name: "detailLoker",
     data(){
         return{
+            id:"",
             judulLoker:"",
             departement: "",
             section: "",
@@ -137,36 +146,25 @@ export default {
     methods: {
         refreshLokerDetails() {
             LowonganKerjaService.getLokerById(this.idLowongan).then(res => {
+                this.id = res.data.idLowongan
                 this.judulLoker = res.data.judulLoker;
                 this.departement = res.data.departement;
                 this.section = res.data.section;
-                this.tanggalMulai = res.data.tanggalMulai;
-                this.tanggalBerakhir = res.data.tanggalBerakhir;
+                this.tanggalMulai = moment(res.data.tanggalMulai).format("MMMM YYYY");
+                this.tanggalBerakhir = moment(res.data.tanggalBerakhir).format("MMMM YYYY");
                 this.deskripsi = res.data.deskripsi;
             });
         },
-        updateLokerClicked(idLowongan){
-          var link = "ubahLoker/" + idLowongan;
-          this.$router.push(link);
+        updateLokerClicked(){
+            var idLowongan = this.idLowongan;
+            var link = "/ubahLoker/" + idLowongan;
+            this.$router.push(link);
         },
-        validateAndSubmit() {
-            console.log({
-                idLowongan: this.idLowongan,
-                description: this.deskripsi
-            });
-            // LowonganKerjaService.updateLoker(this.idLowongan, {
-            //     idLowongan: this.idLowongan,
-            //     description: this.deskripsi
-            // })
-            // e.preventDefault();
-            // this.errors = [];
-            // if(!this.deskripsi){
-            //     this.errors.push("Enter valid values");
-            // }
-            // else if(this.deskripsi.length < 5){
-            //     this.errors.push("Enter at least 5 chars");
-            // }
 
+        lamaranClicked(){
+            var idLowongan = this.idLowongan;
+            var apply = "/LamaranKerja/" + idLowongan;
+            this.$router.push(apply);
         }
     },
     created(){

@@ -5,6 +5,9 @@ import Home from '../views/Home.vue'
 import AuthLayout from '../components/Auth/AuthLayout.vue'
 import TesLayout from '../components/Tes/TesLayout.vue'
 import RequestLowongan from '../components/RequestLowongan/RequestLowongan.vue'
+import RequestLowonganDisplay from '../components/RequestLowongan/RequestLowonganDisplay.vue'
+import RequestLowonganId from '../components/RequestLowongan/RequestLowonganId.vue'
+import ListRequestLowongan from '../components/RequestLowongan/ListRequestLowongan.vue'
 import formCreateLoker from '../components/LowonganKerja/formCreateLoker.vue'
 import FormUpdateLoker from '../components/LowonganKerja/FormUpdateLoker.vue'
 import listLoker from '../components/LowonganKerja/ListLokerComponent.vue'
@@ -14,6 +17,8 @@ import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 //import { LayoutPlugin } from 'bootstrap-vue'
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
+import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
+import fileLamaran from '../components/Lamaran/fileLamaran.vue'
 
 Vue.use(Vuetify);
 Vue.use(VueRouter)
@@ -111,12 +116,28 @@ const routes = [
     ]
   },
   {
-    path: '/RequestLowongan',
+    //path: '/RequestLowongan',
+    path: '/RequestLowongan/add',
     name: 'RequestLowongan',
     component: RequestLowongan
   },
   {
-    path: '/buatLoker',
+    path: '/RequestLowongan',
+    name: 'RequestLowonganDisplay',
+    component: RequestLowonganDisplay
+  },
+  {
+    path: '/RequestLowongan/:id',
+    name: 'RequestLowonganId',
+    component: RequestLowonganId
+  },
+  {
+    path: '/ListRequestLowongan',
+    name: 'ListRequestLowongan',
+    component: ListRequestLowongan
+  },
+  {
+    path: '/buatLoker/:id',
     name: 'formCreateLoker',
     component: formCreateLoker
   },
@@ -144,6 +165,16 @@ const routes = [
     path: '/detailLoker/:idLowongan',
     name: 'detailLoker',
     component: detailLoker
+  },
+  {
+    path: '/LamaranKerja/:idLowongan',
+    name:'LamaranKerja',
+    component: LamaranKerja
+  },
+  {
+    path: '/fileLamaran',
+    name:'fileLamaran',
+    component: fileLamaran
   },
   {
     path: '/about',
