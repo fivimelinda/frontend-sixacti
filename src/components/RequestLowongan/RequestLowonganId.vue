@@ -76,6 +76,10 @@
 
             <div>
             </div>
+            <br>
+            <button type="button" v-on:click="deleteData" class="btn btn-danger" id="deleteButton">Delete</button>
+            <br>
+            <br>
         </div>
         <br>
         <br>
@@ -116,6 +120,9 @@ export default {
             }).catch((err) => {
                 console.log(err);
             })
+        },
+        deleteData() {
+            axios.delete('http://localhost:8081/request/delete/'+this.$route.params.id)
         }
     }
 }
@@ -123,6 +130,11 @@ export default {
 </script>
 
 <style scoped>
+
+#deleteButton{
+    margin: auto;
+    display: block;
+}
 
 .content{
     font-size: 20px;

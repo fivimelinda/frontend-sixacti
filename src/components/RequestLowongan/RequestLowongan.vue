@@ -8,7 +8,7 @@
                 <div class="tulisan-box">Employment Requisition Form</div>
             </div>
             <br>
-            <form>
+            <form @submit ="formSubmit">
                 <div class="form-group">
                     <div class="label">Judul lowongan pekerjaan*</div>
                     <input class="form-control" id="judul" placeholder="masukkan judul lowongan pekerjaan" v-model="judul">
@@ -36,9 +36,9 @@
                 <br>
                 <div class="radio">
                     <div class="label">Shift*</div>
-                        <input type="radio" name="shift" v-model="shift" value="ya">Ya
+                        <input type="radio" name="shift" v-model="shift" value=yes>Ya
                     <br>
-                        <input type="radio" name="shift" v-model="shift" value="tidak">Tidak
+                        <input type="radio" name="shift" v-model="shift" value=no>Tidak
                 </div>
                 <br>
                 <div class="form-group">
@@ -49,9 +49,9 @@
                 <br>
                 <div class="radio">
                     <div class="label">Addition*</div>
-                        <input type="radio" name="addition" v-model="addition" value="ya">Ya
+                        <input type="radio" name="addition" v-model="addition" value=yes>Ya
                     <br>
-                        <input type="radio" name="addition" v-model="addition" value="tidak">Tidak
+                        <input type="radio" name="addition" v-model="addition" value=no>Tidak
                 </div>
                 <br>
                 <div class="form-group">
@@ -75,9 +75,7 @@
                 <b-button v-b-modal.modal-1 class="btn btn-danger">Simpan</b-button>
                 <br>
                 <br>
-                 <b-button v-b-modal.modal-1>Launch demo modal</b-button>
-
-            <b-modal id="modal-1" title="BootstrapVue">
+            <b-modal id="modal-1" title="BootstrapVue" v-bind:hide-footer="true">
                 <div class="detail">
                     <p class="title">Judul</p>
                     <p class="subtitle">{{ judul }}</p>
@@ -113,7 +111,7 @@
                     <p class="title">Replacement</p>
                     <p class="subtitle">{{replacement}}</p>
                     <hr>
-                    <button type="submit" class="btn btn-danger">Simpan</button>
+                    <button type="submit" class="btn btn-danger" @click="formSubmit">Submit</button>
                 </div>
             </b-modal>
             </form>
@@ -126,6 +124,8 @@
 </template>
 
 <script>
+
+
 export default {
     name:'Test',
     props: {
@@ -144,6 +144,29 @@ export default {
             jumlah: '',
             gaji: '',
             replacement: ''
+        }
+    },
+    methods: {
+        formSubmit(e) {
+            e.preventDefault();
+            let currentObj = this;
+            this.axios.post('http://localhost:8081/request/add', {
+                "jobTitle" : this.judul,
+                "departement" : this.departemen,
+                "section" : this.section,
+                "supervisor" : this.supervisor,
+                "dateWanted" : this.tanggal,
+                "shift" : (this.shift == "true"),
+                "jumlah" : this.jumlah,
+                "gaji" : this.gaji,
+                "status" : "pending"
+            })
+            .then(function (response) {
+                currentObj.output = response.data;
+            })
+            .catch(function (error) {
+                currentObj.output = error;
+            })
         }
     }
 }
