@@ -108,8 +108,9 @@
             </div>
           </div>
 
+          
           <button type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan dan Lanjutkan</button>
-          <button class=" mt-5 mb-5 btn btn-primary" v-on:click="nextLamaranClicked()">Lanjutkan</button>
+          <button class="btn btn-light border-danger w-10" v-on:click="nextLamaranClicked()">Selanjutnya</button>
          
         </form>
 

@@ -34,7 +34,8 @@
             </div> -->
 
             <button v-on:click="submitFile()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
-            <button class=" mt-5 mb-5 btn btn-primary" v-on:click="afterClicked()">Selanjutnya</button>
+            <br>
+            <button class=" mt-5 mb-5 btn btn-danger" v-on:click="afterClicked()">Selanjutnya</button>
         </form>
 
       </div>

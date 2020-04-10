@@ -34,7 +34,9 @@
             </div> -->
 
             <button v-on:click="submitFile()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
-            <button class=" mt-5 mb-5 btn btn-primary" v-on:click="afterClicked()">Tutup</button>
+            <br>
+            <button class=" btn btn-light border-danger w-10" v-on:click="beforeClicked()">Kembali</button>    
+            <button class=" mt-5 mb-5 btn btn-danger" v-on:click="afterClicked()">Tutup</button>
         </form>
 
       </div>
@@ -58,6 +60,9 @@ export default {
     }
   },
   methods:{
+    beforeClicked(){
+      this.$router.push("/fileKis");
+    },
     afterClicked(){
       this.$router.push("/listLoker");
     },
