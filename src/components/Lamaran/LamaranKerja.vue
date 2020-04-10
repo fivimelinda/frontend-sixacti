@@ -7,12 +7,6 @@
       <div class="card-header">Formulir Pembuatan Lamaran Pekerjaan</div>
       <div class="card-body">
          <form @submit.prevent="validateAndSubmit">
-          <!-- <div v-if="errors.length">
-                <div 
-                class="alert alert-warning" 
-                v-bind:key="index" 
-                v-for="(error,index) in errors">{{error}}</div>
-          </div> -->
           <div class="form-group">
             <div class="mb-2 label">Nomor Induk Kependudukan*</div>
             <input class="form-control" id="nik" v-model="nik" placeholder="masukkan nomor induk kependudukan" required>
@@ -95,15 +89,29 @@
               <input class="form-control" id="npwp" v-model="npwp" placeholder="masukkan nomor pokok wajib pajak">
             </div>
 
-              <div class="form-group">
-                <div class="mb-2 label">Pengalaman</div>
-                <b-textarea class="form-control" id="pengalamanKerja" v-model="pengalamanKerja" placeholder="masukkan pengalaman kerja"/>
+            <div class="form-group">
+            <div class="mb-2 label">Pengalaman Kerja</div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <div class="mb-2 label">Tahun Kerja</div>
+                  <input type="number" class="form-control" id="tahunKerja" v-model="tahunKerja" placeholder="masukkan tahun kerja"  />
+                </div>
               </div>
 
+              <div class="col-6">
+                <div class="form-group">
+                  <div class="mb-2 label">Nama Pekerjaan</div>
+                  <input type="text" class="form-control" id="namaPekerjaan" v-model="namaPekerjaan" placeholder="masukkan nama pekerjaan" />
+                </div>
+              </div>
+            </div>
+          </div>
 
-
-          <button class=" mt-5 mb-5 btn btn-danger" v-on:click="nextLamaranClicked()">Next</button>
-          <button type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
+          
+          <button type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan dan Lanjutkan</button>
+          <button class="btn btn-light border-danger w-10" v-on:click="nextLamaranClicked()">Selanjutnya</button>
+         
         </form>
 
       </div>
@@ -139,6 +147,8 @@ export default {
       noBpjsKesehatan : "",
       noKis : "",
       pengalamanKerja : "",
+      tahunKerja : "",
+      namaPekerjaan : "",
     }
   },
   computed: {
@@ -169,7 +179,9 @@ export default {
             noBpjsKetenagakerjaan : this.noBpjsKetenagakerjaan,
             noBpjsKesehatan : this.noBpjsKesehatan,
             noKis : this.noKis,
-            pengalamanKerja : this.pengalamanKerja
+            pengalamanKerja : this.pengalamanKerja,
+            tahunKerja : this.tahunKerja,
+            namaPekerjaan : this.namaPekerjaan
           })
           .then(()=> {
             this.$router.push("/fileLamaran");

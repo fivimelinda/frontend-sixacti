@@ -16,6 +16,12 @@ import "vuetify/dist/vuetify.min.css";
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
 import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
 import fileLamaran from '../components/Lamaran/fileLamaran.vue'
+import fileKk from '../components/Lamaran/fileKk'
+import fileNpwp from '../components/Lamaran/fileNpwp'
+import fileBpjsKes from '../components/Lamaran/fileBpjsKes'
+import fileBpjsKet from '../components/Lamaran/fileBpjsKet'
+import fileResume from '../components/Lamaran/fileResume'
+import fileKis from '../components/Lamaran/fileKis'
 
 Vue.use(Vuetify);
 Vue.use(VueRouter)
@@ -150,6 +156,37 @@ const routes = [
     name:'fileLamaran',
     component: fileLamaran
   },
+  {
+    path: '/fileKk',
+    name:'fileKk',
+    component: fileKk
+  },
+  {
+    path: '/fileNpwp',
+    name:'fileNpwp',
+    component: fileNpwp
+  },
+  {
+    path: '/fileBpjsKet',
+    name:'fileBpjsKet',
+    component: fileBpjsKet
+  },
+  {
+    path: '/fileBpjsKes',
+    name:'fileBpjsKes',
+    component: fileBpjsKes
+  },
+  {
+    path: '/fileResume',
+    name:'fileResume',
+    component: fileResume
+  },
+  {
+    path: '/fileKis',
+    name:'fileKis',
+    component: fileKis
+  },
+
   {
     path: '/about',
     name: 'About',
