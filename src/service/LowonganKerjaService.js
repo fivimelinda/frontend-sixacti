@@ -11,9 +11,12 @@ class LowonganKerjaService {
         return axios.get(URI+"/listLoker");
     }
 
+    // deleteLoker(idLowongan, loker){
+    //     return axios.put(`${URI}/hapusLoker/${idLowongan}`, loker);
+    // }
+
     deleteLoker(idLowongan){
-        var link = URI + "/hapusLoker/" + idLowongan
-        return axios.delete(link);
+        return axios.delete(`${URI}/hapusLoker/${idLowongan}`);
     }
 
     updateLoker(idLowongan, loker){
