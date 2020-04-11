@@ -35,7 +35,7 @@
         <div v-if="!isOpen">
         <div class="d-flex justify-center">
             <v-btn
-            class="m-3"
+            class="mb-3"
             @click="create()"
             >
             <v-icon>{{mdi.plus}}</v-icon>
@@ -75,11 +75,90 @@
                     <b-col>: {{person.tes.riwayat_penyakit}}</b-col>
                 </b-row>
             </v-card-text>
-            <v-divider></v-divider>    
-                <div v-if="!validasi">
-                    <v-card-actions>
+            <v-divider></v-divider>  
+                <div v-if="!validasi" class="d-flex justify-content-center">
+                    <v-btn class="mr-2 mb-3">
+                        <v-icon>
+                            {{icons.mdiPencil}}
+                        </v-icon>
+                        <b-button size="sm" v-b-modal.modal-center @click="update()">Ubah</b-button>
+                    </v-btn>
+                    <v-btn
+                    class="ml-2 mb-3"
+                    v-if="!validasi"
+                    >
+                        <v-icon>
+                            {{mdi.check}}
+                        </v-icon>
+                        <b-button size="sm" v-b-modal.valid-center>Selesai</b-button>
+                    </v-btn>
+
+                    <b-modal
+                    scrollable
+                    centered
+                    hide-footer
+                    id="valid-center"
+                    title="BootstrapVue"
+                    >
+                    <template
+                    v-slot:modal-title>
+                        <!-- header modal -->
+                        Konfirmasi
+                    </template>
+                    <div>
+                        <div>
+                            Apakah anda yakin ingin?
+                        </div>
+                        <b-button-group>
+                            <b-button class="mr-3 rounded" @click="valid()">Iya</b-button>
+                            <b-button class="rounded" @click="$bvModal.hide('valid-center')">Batal</b-button>
+                        </b-button-group>
+                    </div>
+                    <!-- <template v-slot:modal-footer> -->
+                        <!-- footer modal -->
+                        <!-- i'm footer!
+                    </template>
+                        <p class="my-4">Vertically centered modal!</p> -->
+                    </b-modal>
+                    
+                    <!-- <modal-success v-bind:success="success"></modal-success> -->
+                    <b-modal
+                    scrollable
+                    hide-footer
+                    v-model="success"
+                    id="modal-center"
+                    title="BootstrapVue"
+                    >
+                    <template
+                    v-slot:modal-title>
+                        <!-- header modal -->
+                        Ubah Tes Medis
+                    </template>
+                    <form-tes-medis
+                    v-if="isUpdate"
+                    v-bind:isUpdate="isUpdate"
+                    v-bind:form="{
+                        berat_badan:person.tes.berat_badan,
+                        tinggi_badan:person.tes.tinggi_badan,
+                        tekanan_darah:person.tes.tekanan_darah,
+                        buta_warna:person.tes.buta_warna,
+                        riwayat_penyakit:person.tes.riwayat_penyakit
+                    }" @submit="subsub()">
+                    </form-tes-medis>
+                    <!-- <template v-slot:modal-footer> -->
+                        <!-- footer modal -->
+                        <!-- i'm footer!
+                    </template>
+                        <p class="my-4">Vertically centered modal!</p> -->
+                    </b-modal>
+                    
+                </div>
+        </v-card>
+        </div>
+        <!-- modal bootstrap -->
+            <!-- <v-card-actions> -->
                         <!-- modal update -->
-                    <v-dialog
+                    <!-- <v-dialog
                     max-width="600px"
                     v-model="dialog"
                     >
@@ -114,28 +193,16 @@
                                 buta_warna:person.tes.buta_warna,
                                 riwayat_penyakit:person.tes.riwayat_penyakit
                             }" @submit="subsub()"></form-tes-medis>
-                        </v-card-text>
+                        </v-card-text> -->
                         <!-- <v-card-actions>
                             <v-btn class="mr-3" @click="simpan(person)">Simpan</v-btn>
                             <v-btn>Batal</v-btn>
                         </v-card-actions> -->
-                    </v-card>
+                    <!-- </v-card>
                     </v-dialog>
-                        <v-btn
-                        @click="valid()"
-                        v-if="!validasi"
-                        >
-                            <v-icon>
-                                {{mdi.check}}
-                            </v-icon>
-                            valid
-                        </v-btn>
-                    </v-card-actions>
-                </div>
-        </v-card>
-        </div>
-        <!-- modal bootstrap -->
-        
+                        
+                    </v-card-actions> -->
+
             <!-- <b-button v-b-modal.modal-center>Launch centered modal</b-button> -->
             <!-- <modal-success v-bind:success="success"></modal-success> -->
             <!-- <b-modal
