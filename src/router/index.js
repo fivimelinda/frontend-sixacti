@@ -20,6 +20,8 @@ import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
 import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
 import fileLamaran from '../components/Lamaran/fileLamaran.vue'
 
+import Login from '../components/Auth/Login/Login.vue'
+
 Vue.use(Vuetify);
 Vue.use(VueRouter)
 
@@ -42,7 +44,7 @@ const routes = [
       {
         name:'login',
         path:'login',
-        component: () => import('../components/Auth/Login/Login.vue')
+        component: Login
       },
       {
         name:'signup',
@@ -97,23 +99,23 @@ const routes = [
     path: '/tes',
     name: 'tes',
     component: TesLayout,
-    children:[
-      {
-        path: 'tulis',
-        name: 'tulis',
-        component: () => import('../components/Tes/TesTulis/TesTulis.vue'),
-      },
-      {
-        path: 'medis',
-        name: 'medis',
-        component: () => import('../components/Tes/TesMedis/TesMedis.vue'),
-      },
-      {
-        path: 'wawancara',
-        name: 'wawancara',
-        component: () => import('../components/Tes/TesWawancara/TesWawancara.vue')
-      },
-    ]
+    // children:[
+    //   {
+    //     path: 'tulis',
+    //     name: 'tulis',
+    //     component: () => import('../components/Tes/TesTulis/TesTulis.vue'),
+    //   },
+    //   {
+    //     path: 'medis',
+    //     name: 'medis',
+    //     component: () => import('../components/Tes/TesMedis/TesMedis.vue'),
+    //   },
+    //   {
+    //     path: 'wawancara',
+    //     name: 'wawancara',
+    //     component: () => import('../components/Tes/TesWawancara/TesWawancara.vue')
+    //   },
+    // ]
   },
   {
     //path: '/RequestLowongan',

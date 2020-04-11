@@ -21,7 +21,8 @@ Vue.use(VModal)
 Vue.config.productionTip = false
 
 new Vue({
+  el:'#app',
   router,
   vuetify,
   render: h => h(App)
-}).$mount('#app')
+})
