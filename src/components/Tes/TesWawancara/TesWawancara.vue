@@ -9,7 +9,7 @@
         v-bind:isCreate="isCreate"
         v-bind:form="form" @submit="subsub()" @batal="cancle()"></form-tes-wawancara>
 
-        <div class="d-flex justify-center">
+        <div v-if="!isCreate" class="d-flex justify-center">
             <v-btn color="#C53751"><v-icon color="white">{{icons.plus}}</v-icon><b-button class="button-primary" @click="create()" size="sm">Tambah Tes Wawancara</b-button></v-btn>
         </div>
         
