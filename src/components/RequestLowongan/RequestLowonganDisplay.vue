@@ -34,7 +34,7 @@
         </thead>
         <tbody class="tbody">
             <tr v-for="req in requestLowongan" :key="req.id" v-on:click="click(req)"  class="content">
-                <th scope=row class="th-bottom">{{req.id}}</th>
+                <th scope=row class="th-bottom" v-text="getLast()" v-bind="add()"></th>
                 <td>{{req.jobTitle}}</td>
                 <td>{{req.jumlah}}</td>
                 <td>{{req.dateWanted}}</td>
@@ -51,7 +51,8 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            requestLowongan: []
+            requestLowongan: [],
+            counter2: 1
         }
     },
     mounted() {
@@ -69,6 +70,14 @@ export default {
         click: function (req) {
             console.log("Clicked with "+ req.id);
             window.location.href= "/RequestLowongan/"+req.id;
+        },
+
+        add(){
+            this.counter2 ++;
+        },
+
+        getLast(){
+            return this.counter2-(this.requestLowongan.length*100)
         }
     }
 }
