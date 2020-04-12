@@ -120,6 +120,47 @@
         </div>
         <br>
         <br>
+
+<b-modal size="lg" ref="my-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Employment requisition berhasil dibuat
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="centang"
+            :src="require('@/assets/success.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
+
+
+        <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Employment requisition gagal dibuat
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
+
+
     </div>
 </template>
 
@@ -143,7 +184,8 @@ export default {
             addition: '',
             jumlah: '',
             gaji: '',
-            replacement: ''
+            replacement: '',
+            retStatus: ''
         }
     },
     methods: {
@@ -159,14 +201,40 @@ export default {
                 "shift" : (this.shift == "true"),
                 "jumlah" : this.jumlah,
                 "gaji" : this.gaji,
-                "status" : "pending"
+                "status" : "pending",
+                "periodeKontrak" : this.periode,
+                "addition" : (this.addition == "true"),
+                "namaReplacement" : this.replacement
             })
-            .then(function (response) {
-                currentObj.output = response.data;
+            // .then(function (response) {
+            //     currentObj.output = response.data;
+            //     console.log(currentObj.status)
+            // })
+            .then(ress => {
+                this.retStatus = ress.data
+
+                if(ress.status == 200){
+                    this.openModal()
+                }
+                else{
+                    this.errorModal()
+                }
             })
-            .catch(function (error) {
-                currentObj.output = error;
+            .catch((err) => {
+                currentObj.output = err;
+                console.log(err);
+                this.errorModal()
             })
+        },
+
+         openModal() {
+            this.$refs['my-modal'].show();
+            window.setTimeout(function() {
+                window.location.href = "/RequestLowongan";
+            }, 2000);
+        },
+        errorModal(){
+            this.$refs['error-modal'].show();
         }
     }
 }
