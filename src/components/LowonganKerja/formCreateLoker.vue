@@ -46,7 +46,7 @@
 
             <div class="col-6">
               <div class="form-group">
-                <div class="mb-2 label">Tanggal Mulai</div>
+                <div class="mb-2 label">Tanggal Berakhir</div>
                 <input type="date" class="form-control" id="tanggalBerakhir" v-model="tanggalBerakhir" />
               </div>
             </div>
@@ -140,7 +140,7 @@ export default {
       tanggalMulai : "",
       tanggalBerakhir : "",
       deskripsi : "",
-      errors: []
+      errors: [],
     }
   },
   computed: {
@@ -161,8 +161,6 @@ export default {
         validateAndSubmit(e) {
             e.preventDefault();
             this.errors = [];
-
-
             if(!this.deskripsi){
                 this.errors.push("Enter valid values");
             }

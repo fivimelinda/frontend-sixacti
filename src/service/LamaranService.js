@@ -7,6 +7,7 @@ class LamaranService {
     addLamaran(idLowongan, lamaran){
         return axios.post(URI + "/addLamaran/" + idLowongan, lamaran);
     }
+
 }
 
 export default new LamaranService();

@@ -9,7 +9,7 @@
         <form enctype="multipart/form-data">
 
             <div class="form-group">
-              <div class="mb-2 label">Foto Kartu Tanda Penduduk*</div>
+              <div class="mb-2 label">Foto Kartu Keluarga*</div>
               <input class="form-control" type="file" ref="file" v-on:change="handleFileUpload()" id="file" required>
             </div>
             <!-- <div class="form-group">
@@ -35,6 +35,7 @@
 
             <button v-on:click="submitFile()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
             <br>
+            <button class=" btn btn-light border-danger w-10" v-on:click="beforeClicked()">Kembali</button>
             <button class=" mt-5 mb-5 btn btn-danger" v-on:click="afterClicked()">Selanjutnya</button>
         </form>
 
@@ -64,17 +65,19 @@ export default {
     }
   },
   methods:{
+    beforeClicked(){
+      this.$router.push("/fileLamaran/"+this.idLamaran);
+    },
     afterClicked(){
-      this.$router.push("/fileKk/"+this.idLamaran);
+      this.$router.push("/fileNpwp/"+this.idLamaran);
     },
     handleFileUpload(){
       this.file = this.$refs.file.files[0];
     },
-
     submitFile(){
       let formData = new FormData();
       formData.append('file', this.file);
-      axios.post('http://localhost:8081/api/uploadKtp/' + this.idLamaran,
+      axios.post('http://localhost:8081/api/uploadKk/' + this.idLamaran,
         formData).then(function(){
           console.log('SUCCESS!!');
         })

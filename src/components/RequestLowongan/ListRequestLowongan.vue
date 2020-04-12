@@ -18,7 +18,7 @@
 
             </div>
             <div class="card-footer" id="card-footer">
-              <div class="row">
+              <div class="row" > 
                 <div class="col-6 mb-3">
                   <button class="btn btn-danger w-100" v-on:click="buatLokerClicked(reqLoker.id)"><plus-circle-icon class="mr-3"></plus-circle-icon>Buat</button>
                 </div>
@@ -26,43 +26,14 @@
                   <button class="btn btn-light border-danger w-100" id="hapusBtn"  v-on:click="deleteLokerClicked(loker.idLowongan)">Tolak Request</button>
                 </div>
               </div>
-              <!-- <div style="height:5px;background-color:#C53751; "></div> -->
               
             </div>
           </div>
         </div>
-        
+        <!-- v-if="reqLoker.status != 'Diterima'" -->
         
       </div>
       
-
-
-
-
-      <!-- <table class="table">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="loker in loker" v-bind:key="loker.idLowongan">
-            <td>{{loker.idLowongan}}</td>
-            <td>{{loker.deskripsi}}</td>
-            <td>
-              <button class="btn btn-light" v-on:click="detailLokerClicked(loker.idLowongan)">
-                Detail
-              </button>
-            </td>
-            <td>
-              <button class="btn btn-warning" v-on:click="deleteLokerClicked(loker.idLowongan)">
-                Hapus
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
     </div>
   </div>
 </template>
