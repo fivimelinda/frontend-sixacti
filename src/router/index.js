@@ -152,37 +152,37 @@ const routes = [
     component: LamaranKerja
   },
   {
-    path: '/fileLamaran',
+    path: '/fileLamaran/:idLamaran',
     name:'fileLamaran',
     component: fileLamaran
   },
   {
-    path: '/fileKk',
+    path: '/fileKk/:idLamaran',
     name:'fileKk',
     component: fileKk
   },
   {
-    path: '/fileNpwp',
+    path: '/fileNpwp/:idLamaran',
     name:'fileNpwp',
     component: fileNpwp
   },
   {
-    path: '/fileBpjsKet',
+    path: '/fileBpjsKet/:idLamaran',
     name:'fileBpjsKet',
     component: fileBpjsKet
   },
   {
-    path: '/fileBpjsKes',
+    path: '/fileBpjsKes/:idLamaran',
     name:'fileBpjsKes',
     component: fileBpjsKes
   },
   {
-    path: '/fileResume',
+    path: '/fileResume/:idLamaran',
     name:'fileResume',
     component: fileResume
   },
   {
-    path: '/fileKis',
+    path: '/fileKis/:idLamaran',
     name:'fileKis',
     component: fileKis
   },

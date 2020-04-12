@@ -110,7 +110,7 @@
 
           
           <button type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan dan Lanjutkan</button>
-          <button class="btn btn-light border-danger w-10" v-on:click="nextLamaranClicked()">Selanjutnya</button>
+          <button class="btn btn-light border-danger w-10" v-on:click="nextLamaranClicked(idLamaran)">Selanjutnya</button>
          
         </form>
 
@@ -183,8 +183,9 @@ export default {
             tahunKerja : this.tahunKerja,
             namaPekerjaan : this.namaPekerjaan
           })
-          .then(()=> {
-            this.$router.push("/fileLamaran");
+          .then((response)=> {
+            console.log(response)
+            this.$router.push("/fileLamaran/"+ response.data);
           });
         }
      }

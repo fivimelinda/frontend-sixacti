@@ -59,9 +59,14 @@ export default {
       file:''
     }
   },
+  computed: {
+    idLamaran(){
+      return this.$route.params.idLamaran;
+    }
+  },
   methods:{
     beforeClicked(){
-      this.$router.push("/fileKis");
+      this.$router.push("/fileKis/"+this.idLamaran);
     },
     afterClicked(){
       this.$router.push("/listLoker");
@@ -72,7 +77,7 @@ export default {
     submitFile(){
       let formData = new FormData();
       formData.append('file', this.file);
-      axios.post('http://localhost:8081/api/uploadFile',
+      axios.post('http://localhost:8081/api/uploadFile/' + this.idLamaran,
         formData).then(function(){
           console.log('SUCCESS!!');
         })

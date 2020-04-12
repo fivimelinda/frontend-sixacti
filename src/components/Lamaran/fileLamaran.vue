@@ -58,17 +58,23 @@ export default {
       file:''
     }
   },
+  computed: {
+    idLamaran(){
+      return this.$route.params.idLamaran;
+    }
+  },
   methods:{
     afterClicked(){
-      this.$router.push("/fileKk");
+      this.$router.push("/fileKk/"+this.idLamaran);
     },
     handleFileUpload(){
       this.file = this.$refs.file.files[0];
     },
+
     submitFile(){
       let formData = new FormData();
       formData.append('file', this.file);
-      axios.post('http://localhost:8081/api/uploadKtp',
+      axios.post('http://localhost:8081/api/uploadKtp/' + this.idLamaran,
         formData).then(function(){
           console.log('SUCCESS!!');
         })
