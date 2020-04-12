@@ -14,7 +14,7 @@
             <div class="card-body">
               <!-- <span class="mb-1" id="lokerDesc">{{loker.deskripsi}}</span> -->
               <p class="mt-1 mb-5" id="deptSect">{{reqLoker.departement}} - {{reqLoker.section}}</p>
-              <p id="periodeDesc">Dibutuhkan Lowongan : {{reqLoker.dateWanted | formatDate}}</p>
+              <p id="periodeDesc">Dibutuhkan Lowongan : {{reqLoker.dateWanted | formatDateReq}}</p>
 
             </div>
             <div class="card-footer" id="card-footer">
@@ -45,7 +45,7 @@ import { PlusCircleIcon } from 'vue-feather-icons'
 import RequestLowonganService from '../../service/RequestLowonganService';
 
 Vue.config.productionTip = false
-Vue.filter('formatDate', function(value){
+Vue.filter('formatDateReq', function(value){
   if(value){
     return moment(String(value)).format("DD MMMM YYYY")
   }

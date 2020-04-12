@@ -33,17 +33,25 @@
 
             <div class="row">
                 <div class="col-6">
-                <fieldset class="form-group">
+                <div class="form-group">
                     <div class="mb-2 label">Tanggal Mulai</div>
-                    <input type="date" class="form-control" v-model="tanggalMulai" />
-                </fieldset>
+                    <b-form-datepicker id="datepickerStart-invalid" :state="dateStartState" class="mb-2" v-model="tanggalMulai"></b-form-datepicker>
+                    
+                    <b-form-invalid-feedback id="input-live-feedback-start">
+                    Tanggal yang anda masukan tidak valid
+                    </b-form-invalid-feedback>
+                </div>
                 </div>
 
                 <div class="col-6">
-                <fieldset class="form-group">
+                <div class="form-group">
                     <div class="mb-2 label">Tanggal Berakhir</div>
-                    <input type="date" class="form-control" v-model="tanggalBerakhir" />
-                </fieldset>
+                    <b-form-datepicker id="datepickerEnd-invalid" :state="dateEndState" class="mb-2" v-model="tanggalBerakhir"></b-form-datepicker>
+                    
+                    <b-form-invalid-feedback id="input-live-feedback-end">
+                    Tanggal yang anda masukan tidak valid
+                    </b-form-invalid-feedback>
+                </div>
                 </div>
             </div>
 
@@ -109,6 +117,7 @@ form{
 </style>
 
 <script>
+import moment from 'moment'
 import LowonganKerjaService from '../../service/LowonganKerjaService';
 export default {
     name: "detailLoker",
@@ -127,6 +136,44 @@ export default {
     computed: {
         idLowongan() {
             return this.$route.params.idLowongan;
+        },
+        dateStartState(){
+            var start = this.tanggalMulai;
+            console.log(start);
+            console.log(this.tanggalBerakhir);
+            if(this.tanggalMulai == ""){
+                return null;
+            }
+            else{
+                var currentDate = moment(new Date()).format("DD MMMM YYYY");
+                var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
+                return !moment(tglMulai).isBefore(currentDate);
+            }
+          
+        },
+        dateEndState(){
+            if(this.tanggalBerakhir == ""){
+                return null;
+            }
+            else{
+                var currentDate = moment(new Date()).format("DD MMMM YYYY");
+                var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
+                var tglBerakhir = moment(this.tanggalBerakhir).format("DD MMMM YYYY");
+                if(moment(tglBerakhir).isBefore(tglMulai)){
+                    return false;
+                }
+                else if(moment(tglBerakhir).isBefore(currentDate)){
+                    return false;
+                }
+                else if(moment(tglBerakhir).isSame(tglMulai)){
+                    console.log("hi");
+                    return true;
+                }
+                else{
+                    return true;
+                }
+            }
+            
         }
     },
     methods: {
@@ -135,14 +182,29 @@ export default {
                 this.judulLoker = res.data.judulLoker;
                 this.departement = res.data.departement;
                 this.section = res.data.section;
-                this.tanggalMulai = res.data.tanggalMulai;
-                this.tanggalBerakhir = res.data.tanggalBerakhir;
+                this.tanggalMulai = moment(res.data.tanggalMulai).format("YYYY-MM-DD");
+                this.tanggalBerakhir = moment(res.data.tanggalBerakhir).format("YYYY-MM-DD");
                 this.deskripsi = res.data.deskripsi;
             });
         },
         validateAndSubmit(e) {
             e.preventDefault();
             this.errors = [];
+
+            var currentDate = moment(new Date()).format("DD MMMM YYYY");
+            var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
+            var tglBerakhir = moment(this.tanggalBerakhir).format("DD MMMM YYYY");
+
+            if(moment(tglMulai).isBefore(currentDate)){
+              console.log("Tanggal mulai yang anda masukan tidak valid")
+              this.errors.push("Tanggal mulai yang anda masukan tidak valid");
+            }
+
+            if(moment(tglBerakhir).isBefore(tglMulai)){
+              console.log("Tanggal berakhir yang anda masukan tidak valid")
+              this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
+            }
+
             if(!this.deskripsi){
                 this.errors.push("Enter valid values");
             }
