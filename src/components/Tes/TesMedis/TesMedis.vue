@@ -5,45 +5,19 @@
         <sweet-modal icon="success" ref="failed">{{message}}</sweet-modal>
 
         <!-- form tes -->
-        <form-tes-medis v-if="isCreate"
+        <form-tes-medis v-if="isCreate && !isSubmit"
         v-bind:isCreate="isCreate"
-        v-bind:form="form" @submit="subsub()"></form-tes-medis>
+        v-bind:form="form" @submit="subsub()"
+        @batal="cancle()"></form-tes-medis>
 
-        <div v-for="data in new_data" :key="data.length">
-            <div v-if="data != null">
-                <v-card 
-                class="mx-auto"
-                max-width="600"
-                >
-                    <v-card-title>
-                        <div class="subtitle-1">
-                            Tes Medis
-                        </div>
-                    </v-card-title>
-                    <v-card-text>
-                        <div>Nama : {{data.name}}</div>
-                        <div>Berat Badan        : {{data.tes.berat_badan}}</div>
-                        <div>Tinggi Badan       : {{data.tes.tinggi_badan}}</div>
-                        <div>Tekanan Darah      : {{data.tes.tekanan_darah}}</div>
-                        <div>Buta Warna         : {{data.tes.buta_warna}}</div>
-                        <div>Riwayat Penyakit   : {{data.tes.riwayat_penyakit}}</div>
-                    </v-card-text>
-                </v-card>
-            </div>
+        
+        <div>
+        <div v-if="!isOpen" class="d-flex justify-center">
+            <v-btn color="#C53751"><v-icon color="white">{{mdi.plus}}</v-icon><b-button class="button-primary" @click="create()" size="sm">Tambah Tes Medis</b-button></v-btn>
         </div>
         
-        <div v-if="!isOpen">
-        <div class="d-flex justify-center">
-            <v-btn
-            class="mb-3"
-            @click="create()"
-            >
-            <v-icon>{{mdi.plus}}</v-icon>
-                Tambah Tes Tulis
-            </v-btn>
-        </div>
-        
-        <v-card 
+        <v-card
+        v-else-if="isSubmit" 
         class="mx-auto"
         max-width="600"
         >
@@ -77,20 +51,21 @@
             </v-card-text>
             <v-divider></v-divider>  
                 <div v-if="!validasi" class="d-flex justify-content-center">
-                    <v-btn class="mr-2 mb-3">
-                        <v-icon>
+                    <v-btn color="black" class="mr-2 mb-3">
+                        <v-icon color="white">
                             {{icons.mdiPencil}}
                         </v-icon>
-                        <b-button size="sm" v-b-modal.modal-center @click="update()">Ubah</b-button>
+                        <b-button class="button" size="sm" v-b-modal.modal-center @click="update()">Ubah</b-button>
                     </v-btn>
                     <v-btn
-                    class="ml-2 mb-3"
+                    color="black"
+                    class="ml-2 mb-3 button"
                     v-if="!validasi"
                     >
-                        <v-icon>
+                        <v-icon color="white">
                             {{mdi.check}}
                         </v-icon>
-                        <b-button size="sm" v-b-modal.valid-center>Selesai</b-button>
+                        <b-button class="button" size="sm" v-b-modal.valid-center>Selesai</b-button>
                     </v-btn>
 
                     <b-modal
@@ -128,6 +103,7 @@
                     v-model="success"
                     id="modal-center"
                     title="BootstrapVue"
+                    ref="update-modal"
                     >
                     <template
                     v-slot:modal-title>
@@ -155,6 +131,29 @@
                 </div>
         </v-card>
         </div>
+        <!-- <div v-for="data in new_data" :key="data.length">
+            <div v-if="data != null">
+                <v-card 
+                class="mx-auto"
+                max-width="600"
+                >
+                    <v-card-title>
+                        <div class="subtitle-1">
+                            Tes Medis
+                        </div>
+                    </v-card-title>
+                    <v-card-text>
+                        <div>Nama : {{data.name}}</div>
+                        <div>Berat Badan        : {{data.tes.berat_badan}}</div>
+                        <div>Tinggi Badan       : {{data.tes.tinggi_badan}}</div>
+                        <div>Tekanan Darah      : {{data.tes.tekanan_darah}}</div>
+                        <div>Buta Warna         : {{data.tes.buta_warna}}</div>
+                        <div>Riwayat Penyakit   : {{data.tes.riwayat_penyakit}}</div>
+                    </v-card-text>
+                </v-card>
+            </div>
+        </div> -->
+        
         <!-- modal bootstrap -->
             <!-- <v-card-actions> -->
                         <!-- modal update -->
@@ -292,6 +291,7 @@ export default {
             isOpen : false,
             isCreate : false,
             isUpdate : false,
+            isSubmit:false,
             mdi : {
                 plus : 'mdi-plus',
                 check : 'mdi-check',
@@ -323,6 +323,10 @@ export default {
             this.isOpen = true;
             this.isCreate = true;
         },
+        cancle(){
+            this.isOpen = false;
+            this.isCreate = false;
+        },
         update(){
             this.isUpdate = true;
         },
@@ -338,6 +342,7 @@ export default {
                     }
                 }
             this.new_data.push(people);
+            this.isSubmit = true;
             this.buka();
         },
         tampilkan(){
@@ -368,4 +373,9 @@ export default {
     border:none !important;
 }
 
+.button-primary{
+    color:white !important;
+    background-color: #C53751 !important;
+    border:none;
+}
 </style>

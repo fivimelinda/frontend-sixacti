@@ -1,5 +1,6 @@
 <template>
-    <div
+    <v-container>
+        <div
         class="my-auto mt-3">
         <v-card
         max-width="576px"
@@ -11,12 +12,12 @@
                 <b-form
                 >
                     <b-form-group
-                    id="berat_badan"
+                    id="nilai"
                     >
-                    <label for="input1">Berat Badan (kg)</label>
+                    <label for="input1">nilai</label>
                         <b-form-input
                         id="input1"
-                        v-model="form.berat_badan"
+                        v-model="form.nilai"
                         type="text"
                         placeholder=""
                         class="bg-white input rounded">
@@ -24,47 +25,12 @@
                     </b-form-group>
 
                     <b-form-group
-                    id="tingi_badan"
+                    id="umpan_balik"
                     >
-                        <label for="input2">Tinggi Badan (cm)</label>
+                        <label for="input2">Umpan Balik</label>
                         <b-form-input
                         id="input2"
-                        v-model="form.tinggi_badan"
-                        type="text"
-                        placeholder=""
-                        class="bg-white input rounded">
-                        </b-form-input>
-                    </b-form-group>
-
-                    <b-form-group
-                    id="tekanan_darah"
-                    >
-                        <label for="input3">Tekanan Darah</label>
-                        <b-form-input
-                        id="input3"
-                        v-model="form.tekanan_darah"
-                        type="text"
-                        placeholder=""
-                        class="bg-white input rounded">
-                        </b-form-input>
-                    </b-form-group>
-                    
-                    <b-form-group>
-                        <label for="input4">Buta Warna</label>
-                        <b-form-radio-group id="input4" v-model="form.buta_warna">
-                            <b-form-radio name="radios" value="tidak" class="input-radio">Tidak</b-form-radio>
-                            <b-form-radio name="radios" value="partial" class="input-radio">Partial</b-form-radio>
-                            <b-form-radio name="radios" value="total" class="input-radio">Total</b-form-radio>
-                        </b-form-radio-group>
-                    </b-form-group>
-
-                    <b-form-group
-                    id="riwayat_penyakit"
-                    >
-                        <label for="input5">Riwayat Penyakit</label>
-                        <b-form-input
-                        id="input5"
-                        v-model="form.riwayat_penyakit"
+                        v-model="form.umpan_balik"
                         type="text"
                         placeholder=""
                         class="bg-white input rounded">
@@ -80,35 +46,38 @@
         </b-card>
         </v-card>
         </div>
+    </v-container>
 </template>
 
 <script>
+
 export default {
-    name:'form-tes-medis',
-    props:{
+name:"form-tes-wawancara",
+props:{
         form:Object,
         isOpen:Boolean,
         isCreate:Boolean,
         isUpdate:Boolean
-    }
-    ,
-    data(){
-        return{
-
-        }
     },
-    methods:{
+components:{
+
+},
+
+data(){
+    return{
+
+    }
+},
+methods:{
         submit(){
             this.$emit('submit')
         },
-
         batal(){
             this.$emit('batal')
         }
     }
 }
 </script>
-
 <style lang="scss" scoped>
 .border{
     border:none !important;
@@ -119,7 +88,6 @@ label{
     margin: none;
     padding: none;
 }
-
 .shadow-custom{
     box-shadow: 0px 1px 6px 1px rgba(0, 0, 0, 0.07),0px 1px 6px 1px rgba(0, 0, 0, 0.07);
 }
@@ -148,5 +116,4 @@ label{
     background-color: #C53751 !important;
     border:none !important;
 }
-
 </style>

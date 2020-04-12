@@ -2,10 +2,10 @@
     <div class="tes">
         <v-container>
             <div>
-                <div class="text-md-left">
+                <div class="text-md-left" style="color:#C53751">
                     Tes Medis
                 </div>
-                <hr/>
+                <hr style="color:#C53751"/>
                 <tes-medis/>
             </div>
             <div>
@@ -13,14 +13,14 @@
                     Tes Tulis
                 </div>
                 <hr/>
-                <tes-wawancara/>
+                <tes-tulis/>
             </div>
             <div>
                 <div class="text-md-left">
                     Tes Wawancara
                 </div>
                 <hr/>
-                <tes-tulis/>
+                <tes-wawancara/>
             </div>
         </v-container>
     </div>
@@ -46,6 +46,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+.button{
+    border:none !important;
+    color:white;
+    background-color: black !important;
+}
 </style>
