@@ -59,12 +59,17 @@ export default {
       file:''
     }
   },
+  computed: {
+    idLamaran(){
+      return this.$route.params.idLamaran;
+    }
+  },
   methods:{
     beforeClicked(){
-      this.$router.push("/fileLamaran");
+      this.$router.push("/fileLamaran/"+this.idLamaran);
     },
     afterClicked(){
-      this.$router.push("/fileNpwp");
+      this.$router.push("/fileNpwp/"+this.idLamaran);
     },
     handleFileUpload(){
       this.file = this.$refs.file.files[0];
@@ -72,7 +77,7 @@ export default {
     submitFile(){
       let formData = new FormData();
       formData.append('file', this.file);
-      axios.post('http://localhost:8081/api/uploadKk',
+      axios.post('http://localhost:8081/api/uploadKk/' + this.idLamaran,
         formData).then(function(){
           console.log('SUCCESS!!');
         })
