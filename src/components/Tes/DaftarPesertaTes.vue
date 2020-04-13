@@ -1,0 +1,92 @@
+<template>
+    <v-container>
+        <div v-for="(data, index) in dummy" :key="index">
+            <b-card title="Daftar Peserta Tes">
+                <card-test>
+                    <b-button :id="'button' + index" @click="tes(data.idPelamar)" variant="primary">people {{data.idPelamar}}</b-button>
+                </card-test>
+            </b-card>
+        </div>
+    </v-container>
+</template>
+
+<script>
+export default {
+    name:"daftar-peserta-tes",
+    data(){
+        return{
+            dummy:[
+                {
+                    "idPelamar":1,
+                    "userPelamar":{
+                        "nik":1
+                    },
+                    "lamaran":{
+                        "idLamaran":1
+                    },
+                    "tesTulis":{
+                        "idTesTulis":1
+                    },
+                    "tesMedis":{
+                        "idTesMEdis":1
+                    },
+                    "tesWawancara":{
+                        "idTesWawancara":1
+                    }
+                }
+                ,{
+                    "idPelamar":2,
+                    "userPelamar":{
+                        "nik":2
+                    },
+                    "lamaran":{
+                        "idLamaran":2
+                    },
+                    "tesTulis":{
+                        "idTesTulis":2
+                    },
+                    "tesMedis":null,
+                    "tesWawancara":null
+                },
+                {
+                    "idPelamar":3,
+                    "userPelamar":{
+                        "nik":3
+                    },
+                    "lamaran":{
+                        "idLamaran":3
+                    },
+                    "tesTulis":{
+                        "idTesTulis":3
+                    },
+                    "tesMedis":{
+                        "idTesMEdis":3
+                    },
+                    "tesWawancara":null
+                },
+                {
+                    "idPelamar":4,
+                    "userPelamar":{
+                        "nik":4
+                    },
+                    "lamaran":{
+                        "idLamaran":4
+                    },
+                    "tesTulis":null,
+                    "tesMedis":null,
+                    "tesWawancara":null
+                },
+            ]
+        }
+    },
+    methods:{
+        tes(idPelamar){
+            this.$router.push('/tes/'+idPelamar);
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+
+</style>

@@ -5,153 +5,127 @@
         <sweet-modal icon="success" ref="failed">{{message}}</sweet-modal>
 
         <!-- form tes -->
-        <form-tes-medis v-if="isCreate && !isSubmit"
-        v-bind:isCreate="isCreate"
-        v-bind:form="form" @submit="subsub()"
-        @batal="cancle()"></form-tes-medis>
+        <form-tes-medis v-if="isTesMedisFormOpen && !isTesMedisSubmit"
+        v-bind:isCreate="isTesMedisFormOpen"
+        v-bind:form="form" @submit="createTesMedis(form)"
+        @batal="cancleCreateTesMedis()"></form-tes-medis>
 
         
         <div>
-            <div v-if="!isCreate" class="d-flex justify-center">
-                <v-btn color="#C53751"><v-icon color="white">{{mdi.plus}}</v-icon><b-button class="button-primary" @click="create()" size="sm">Tambah Tes Medis</b-button></v-btn>
+            <!-- kondisikan ketika masih tidak ada value untuk tes medis -->
+            <div v-if="tes_medis === null && !isTesMedisFormOpen" class="d-flex justify-center">
+                <v-btn color="#C53751"><v-icon color="white">{{mdi.plus}}</v-icon><b-button class="button-primary" @click="openFormTesMedis()" size="sm">Tambah Tes Medis</b-button></v-btn>
             </div>
-        
-        <v-card
-        v-else-if="isSubmit" 
-        class="mx-auto"
-        max-width="600"
-        >
-            <v-card-title>
-                <div class="subtitle-1">
-                    Tes Medis
-                </div>
-            </v-card-title>
-            <v-card-text>
-                <div>Nama : {{person.name}}</div>
-                <b-row>
-                    <b-col>Berat Badan</b-col>
-                    <b-col>: {{person.tes.berat_badan}}</b-col>
-                </b-row>
-                <b-row>
-                    <b-col>Tinggi Badan</b-col>
-                    <b-col>: {{person.tes.tinggi_badan}}</b-col>
-                </b-row>
-                <b-row>
-                    <b-col>Tekanan Darah</b-col>
-                    <b-col>: {{person.tes.tekanan_darah}}</b-col>
-                </b-row>
-                <b-row>
-                    <b-col>Buta Warna</b-col>
-                    <b-col>: {{person.tes.buta_warna}}</b-col>
-                </b-row>
-                <b-row>
-                    <b-col>Riwayat Penyakit</b-col>
-                    <b-col>: {{person.tes.riwayat_penyakit}}</b-col>
-                </b-row>
-            </v-card-text>
-            <v-divider></v-divider>  
-                <div v-if="!validasi" class="d-flex justify-content-center">
-                    <v-btn color="black" class="mr-2 mb-3">
-                        <v-icon color="white">
-                            {{icons.mdiPencil}}
-                        </v-icon>
-                        <b-button class="button" size="sm" v-b-modal.modal-center @click="update()">Ubah</b-button>
-                    </v-btn>
-                    <v-btn
-                    color="black"
-                    class="ml-2 mb-3 button"
-                    v-if="!validasi"
-                    >
-                        <v-icon color="white">
-                            {{mdi.check}}
-                        </v-icon>
-                        <b-button class="button" size="sm" v-b-modal.valid-center>Selesai</b-button>
-                    </v-btn>
 
-                    <b-modal
-                    scrollable
-                    centered
-                    hide-footer
-                    id="valid-center"
-                    title="BootstrapVue"
-                    >
-                    <template
-                    v-slot:modal-title>
-                        <!-- header modal -->
-                        Konfirmasi
-                    </template>
-                    <div>
-                        <div>
-                            Apakah anda yakin ingin?
-                        </div>
-                        <b-button-group>
-                            <b-button class="mr-3 rounded" @click="valid()">Iya</b-button>
-                            <b-button class="rounded" @click="$bvModal.hide('valid-center')">Batal</b-button>
-                        </b-button-group>
+            <!-- masukkan untuk untuk tes medis yang sudah mengandung value -->
+            <v-card
+            class="mx-auto mb-3"
+            max-width="600"
+            v-else-if="!(tes_medis === null)"
+            >
+                <v-card-title>
+                    <div class="subtitle-1 text-center">
+                        Data Hasil Tes Medis
                     </div>
-                    <!-- <template v-slot:modal-footer> -->
-                        <!-- footer modal -->
-                        <!-- i'm footer!
-                    </template>
-                        <p class="my-4">Vertically centered modal!</p> -->
-                    </b-modal>
-                    
-                    <!-- <modal-success v-bind:success="success"></modal-success> -->
-                    <b-modal
-                    scrollable
-                    hide-footer
-                    v-model="success"
-                    id="modal-center"
-                    title="BootstrapVue"
-                    ref="update-modal"
-                    >
-                    <template
-                    v-slot:modal-title>
-                        <!-- header modal -->
-                        Ubah Tes Medis
-                    </template>
-                    <form-tes-medis
-                    v-if="isUpdate"
-                    v-bind:isUpdate="isUpdate"
-                    v-bind:form="{
-                        berat_badan:person.tes.berat_badan,
-                        tinggi_badan:person.tes.tinggi_badan,
-                        tekanan_darah:person.tes.tekanan_darah,
-                        buta_warna:person.tes.buta_warna,
-                        riwayat_penyakit:person.tes.riwayat_penyakit
-                    }" @submit="subsub()">
-                    </form-tes-medis>
-                    <!-- <template v-slot:modal-footer> -->
-                        <!-- footer modal -->
-                        <!-- i'm footer!
-                    </template>
-                        <p class="my-4">Vertically centered modal!</p> -->
-                    </b-modal>
-                    
-                </div>
-        </v-card>
-        </div>
-        <div v-for="data in new_data" :key="data.length">
-            <div v-if="data != null">
-                <v-card 
-                class="mx-auto"
-                max-width="600"
-                >
-                    <v-card-title>
-                        <div class="subtitle-1">
-                            Tes Medis
+                </v-card-title>
+                <!-- Isi Tes -->
+                <v-card-text>
+                    <b-row class="m-1">
+                        <b-col>Berat Badan</b-col>
+                        <b-col>: {{tes_medis.beratBadan}}</b-col>
+                    </b-row>
+                    <b-row class="m-1">
+                        <b-col>Tinggi Badan</b-col>
+                        <b-col>: {{tes_medis.tinggiBadan}}</b-col>
+                    </b-row>
+                    <b-row class="m-1">
+                        <b-col>Tekanan Darah</b-col>
+                        <b-col>: {{tes_medis.tekananDarah}}</b-col>
+                    </b-row>
+                    <b-row class="m-1">
+                        <b-col>Buta Warna</b-col>
+                        <b-col>: {{tes_medis.butaWarna}}</b-col>
+                    </b-row>
+                    <b-row class="m-1">
+                        <b-col>Riwayat Penyakit</b-col>
+                        <b-col>: {{tes_medis.riwayatPenyakit}}</b-col>
+                    </b-row>
+                </v-card-text>
+
+                <!-- Action -->
+                <v-divider></v-divider>  
+                    <div v-if="!tes_medis.isEdit && !isValid" class="d-flex justify-content-center">
+                        <!-- button untuk mengubah -->
+                        <v-btn color="black" class="mr-2 mb-3">
+                            <v-icon color="white">
+                                {{icons.mdiPencil}}
+                            </v-icon>
+                            <b-button class="button" size="sm" v-b-modal.tes-medis @click="openModelUpdateTesMedis()">Ubah</b-button>
+                        </v-btn>
+
+                        <!-- <modal-success v-bind:success="success"></modal-success> -->
+                        <!-- Modal untuk mengubah data -->
+                        <b-modal
+                        scrollable
+                        hide-footer
+                        v-model="success"
+                        id="tes-medis"
+                        title="BootstrapVue"
+                        ref="update-modal"
+                        >
+                        <template
+                        v-slot:modal-title>
+                            <!-- header modal -->
+                            Ubah Tes Medis
+                        </template>
+                        <form-tes-medis
+                        v-if="isUpdate"
+                        v-bind:isUpdate="isUpdate"
+                        v-bind:form="form" @submit="updateTesMedis()"
+                        >
+                        </form-tes-medis>
+                        </b-modal>
+
+                        <!-- Button untuk selesai/valid -->
+                        <v-btn
+                        outlined
+                        color="black"
+                        class="ml-2 mb-3"
+                        v-if="!isValid"
+                        >
+                        <strong>
+                            <v-icon color="black">
+                                {{mdi.check}}
+                            </v-icon>
+                        </strong>
+                            <b-button class="button-secondary" size="sm" v-b-modal.valid-medis>Selesai</b-button>
+                        </v-btn>
+
+                        <!-- Modal untuk konfiramsi validasi -->
+                        <b-modal
+                        scrollable
+                        centered
+                        hide-footer
+                        id="valid-medis"
+                        title="BootstrapVue"
+                        >
+                        <template
+                        v-slot:modal-title>
+                            <!-- header modal -->
+                            Konfirmasi
+                        </template>
+                        <div>
+                            <div>
+                                Apakah anda yakin ingin?
+                            </div>
+                            <b-button-group>
+                                <b-button class="mr-3 rounded" @click="validated()">Iya</b-button>
+                                <b-button class="rounded" @click="$bvModal.hide('valid-center')">Batal</b-button>
+                            </b-button-group>
                         </div>
-                    </v-card-title>
-                    <v-card-text>
-                        <div>Nama : {{data.form.name}}</div>
-                        <div>Berat Badan        : {{data.form.berat_badan}}</div>
-                        <div>Tinggi Badan       : {{data.form.tinggi_badan}}</div>
-                        <div>Tekanan Darah      : {{data.form.tekanan_darah}}</div>
-                        <div>Buta Warna         : {{data.form.buta_warna}}</div>
-                        <div>Riwayat Penyakit   : {{data.form.riwayat_penyakit}}</div>
-                    </v-card-text>
-                </v-card>
-            </div>
+                        </b-modal>
+                    </div>
+            </v-card>
         </div>
     </v-container>
 </template>
@@ -161,6 +135,7 @@ import {mdiPencil} from '@mdi/js'
 import { SweetModal } from 'sweet-modal-vue'
 import FormTesMedis from './FormTesMedis.vue'
 import TesService from '../../../service/TesService'
+// import axios from 'axios'
 
 export default {
     name: "tes-medis",
@@ -168,10 +143,19 @@ export default {
         SweetModal,
         FormTesMedis
     },
+    props:{
+        tes_medis:{
+            type:Object,
+        },
+        id_pelamar:{
+            type:Number},
+    },
     data() {
         return{
+            tesMedis:Object,
             message:"",
             success:false,
+            pelamar:Object,
             form:{
                 berat_badan:'',
                 tinggi_badan:'',
@@ -181,9 +165,9 @@ export default {
                 isEdit:false,
             },
             isOpen : false,
-            isCreate : false,
+            isTesMedisFormOpen : false,
             isUpdate : false,
-            isSubmit:false,
+            isTesMedisSubmit:false,
             mdi : {
                 plus : 'mdi-plus',
                 check : 'mdi-check',
@@ -191,7 +175,7 @@ export default {
             icons:{
                 mdiPencil
             },
-            validasi : false,
+            isValid : false,
             dialog:false,
             
             open:false,
@@ -209,8 +193,69 @@ export default {
             new_data:[]
         }
     },
+    mounted(){
+        
+    },
 
+    // methods
     methods:{
+        openFormTesMedis(){
+            this.isTesMedisFormOpen = true;
+        },
+        cancleCreateTesMedis(){
+            this.isTesMedisFormOpen = false;
+        },
+        createTesMedis(){
+            this.isTesMedisFormOpen = false;
+            this.isTesMedisSubmit = false;
+            // Do Something to save Tes Medis
+            TesService.createTesMedis({
+                tinggiBadan:this.form.tinggi_badan,
+                beratBadan:this.form.berat_badan,
+                tekananDarah:this.form.tekanan_darah,
+                butaWarna:false,
+                riwayatPenyakit:this.form.riwayat_penyakit,
+                isEdit:this.form.isEdit,
+                pelamarTesMedis:{
+                    idPelamar:this.id_pelamar}
+                });
+            this.refreshTesMedis();
+            
+        },
+
+        refreshTesMedis(){
+            this.$emit('refreshTesMedis');
+        },
+        openModelUpdateTesMedis(){
+            this.form.tinggi_badan = this.tes_medis.tinggiBadan;
+            this.form.berat_badan = this.tes_medis.beratBadan;
+            this.form.tekanan_darah = this.tes_medis.tekananDarah;
+            this.form.buta_warna = "partial";
+            this.form.riwayat_penyakit = this.tes_medis.riwayatPenyakit;
+            this.isUpdate = true;
+        },
+        updateTesMedis(){
+            console.log(this.tes_medis.idTesMedis);
+            TesService.updateTesMedis(this.tes_medis.idTesMedis,
+            {
+                tinggiBadan:this.form.tinggi_badan,
+                beratBadan:this.form.berat_badan,
+                tekananDarah:this.form.tekanan_darah,
+                butaWarna:false,
+                riwayatPenyakit:this.form.riwayat_penyakit,
+                isEdit:true,
+                pelamarTesMedis:{
+                    idPelamar:this.id_pelamar}
+                }
+            );
+            this.refreshTesMedis();
+            this.buka();
+        },
+        validated(){
+            this.updateTesMedis();
+            this.isValid = true;
+        },
+
         create(){
             this.isOpen = true;
             this.isCreate = true;
@@ -219,8 +264,12 @@ export default {
             this.isOpen = false;
             this.isCreate = false;
         },
-        update(){
-            this.isUpdate = true;
+        
+        subdate(){
+            this.$nextTick(() => {
+                this.$bvModal.hide('tes-medis')
+            })
+            this.buka()
         },
         subsub(){
             const people = {
@@ -244,7 +293,7 @@ export default {
                     riwayatPenyakit:this.form.riwayat_penyakit,
                     isEdit:this.form.isEdit,
                     pelamarTesMedis:{
-                        idPelamar:1}
+                        idPelamar:5}
                     });
             this.new_data.push(people);
             this.isSubmit = true;
@@ -254,9 +303,7 @@ export default {
             this.$emit('tampilkan');
         },
 
-        valid(){
-            this.validasi = true;
-        },
+        
         simpan(user){
             this.person.tes.berat_badan = user.tes.berat_badan;
             this.person.tes.tinggi_badan = user.tes.tinggi_badan;

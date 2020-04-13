@@ -14,7 +14,6 @@
             <v-btn color="#C53751"><v-icon color="white">{{icons.plus}}</v-icon><b-button class="button-primary" @click="create()" size="sm">Tambah Tes Tulis</b-button></v-btn>
         </div>
         <v-card
-         
         class="mx-auto"
         max-width="600"
         >
@@ -44,7 +43,7 @@
                     v-if="!validasi"
                     >
                         <v-icon color="white">
-                            {{mdi.check}}
+                            {{icons.check}}
                         </v-icon>
                         <b-button class="button" size="sm" v-b-modal.valid-center>Selesai</b-button>
                     </v-btn>
@@ -131,7 +130,9 @@ export default {
                 nilai:"",
             },
             icons:{
-                plus:'mdi-plus'
+                plus:'mdi-plus',
+                check:'mdi-check',
+                pencil:'mdi-pencil' 
             },
             isOpen : false,
             isCreate : false,

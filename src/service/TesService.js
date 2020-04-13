@@ -7,7 +7,7 @@ class TesService {
     //TES MEDIS
     //get tes medis
     getTesMedis(idTesMedis){
-        return axios.get(URI + "/tes/medis/" + idTesMedis);
+        return axios.get(URI + "/tes/medis/get/" + idTesMedis);
     }
 
     //create tes medis
@@ -17,13 +17,13 @@ class TesService {
 
     //update tes medis
     updateTesMedis(idTesMedis, tesMedis){
-        return axios.put(URI + "tes/medis/" + idTesMedis, tesMedis)
+        return axios.put(URI + "/tes/medis/update/" + idTesMedis, tesMedis)
     }
 
     //TES TULIS
     //get tes tulis
     getTesTulis(idTesTulis){
-        return axios.get(URI + "/tes/tulis/" + idTesTulis);
+        return axios.get(URI + "/tes/tulis/get/" + idTesTulis);
     }
 
     //create tes tulis
@@ -33,13 +33,13 @@ class TesService {
     
     //update tes tulis
     updateTesTulis(idTesTulis, tesTulis){
-        return axios.put(URI + "/tes/tulis/" + idTesTulis, tesTulis);
+        return axios.put(URI + "/tes/tulis/update/" + idTesTulis, tesTulis);
     }
 
     //TES WAWANCARA
     //get tes tulis
     getTesWawancara(idTesWawancara){
-        return axios.get(URI + "/tes/wawancara/" + idTesWawancara);
+        return axios.get(URI + "/tes/wawancara/get/" + idTesWawancara);
     }
 
     //create tes tulis
@@ -49,7 +49,7 @@ class TesService {
 
     //update tes tulis
     updateTesWawancara(idTesWawancara, tesWawancara){
-        return axios.put(URI + "/tes/wawancara/" + idTesWawancara, tesWawancara);
+        return axios.put(URI + "/tes/wawancara/update/" + idTesWawancara, tesWawancara);
     }
 
 }

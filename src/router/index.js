@@ -19,6 +19,7 @@ import "vuetify/dist/vuetify.min.css";
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
 import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
 import fileLamaran from '../components/Lamaran/fileLamaran.vue'
+import DaftarPesertaTes from '../components/Tes/DaftarPesertaTes.vue'
 
 import Login from '../components/Auth/Login/Login.vue'
 
@@ -96,7 +97,12 @@ const routes = [
     component: Home
   },
   {
-    path: '/tes',
+    path:'/listPelamar',
+    name: 'Pelamar',
+    component: DaftarPesertaTes,
+  },
+  {
+    path: '/tes/:id',
     name: 'tes',
     component: TesLayout,
     // children:[
