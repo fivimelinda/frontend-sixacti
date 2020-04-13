@@ -7,9 +7,9 @@
             <b-row><label class="control-label">Cuti Mulai</label></b-row>
             <b-form-datepicker class="form-control" 
             placeholder="Pilih Tanggal Mulai cuti" 
-            v-model="form.tanggalMulai" aria-required="true"
+            v-model="form.tanggalMulai" required
             :min="min" :max="max"
-            required>
+            >
             </b-form-datepicker>
         </b-col>
         
@@ -17,9 +17,9 @@
             <b-row><label class="control-label">Cuti Sampai</label></b-row>
             <b-form-datepicker class="form-control" 
             placeholder="Pilih Tanggal Akhir cuti" 
-            v-model="form.tanggalSampai"
+            v-model="form.tanggalSampai" required
             :min="min" :max="max"
-            required></b-form-datepicker>
+            ></b-form-datepicker>
         </b-col>
     </b-row>
     <b-row>
@@ -28,8 +28,7 @@
             <b-form-select v-model="form.idKategori"
             :options="listKategori"
             text-field="namaKategori"
-            value-field="id"
-            ></b-form-select>
+            value-field="id"></b-form-select>
         </b-col>
     </b-row>
     <b-row class="form-group">
@@ -46,7 +45,7 @@
       </b-col>
     </b-row>
     <b-col sm="4" offset-sm="4">
-      <b-button block type="submit" variant="danger" id="btnCuti">Ajukan Cuti</b-button> 
+      <b-button block type="submit" variant="danger" id="btnCuti">Simpan Perubahan</b-button> 
     </b-col>   
     </b-form>
     </b-container>
@@ -73,6 +72,7 @@ import axios from 'axios'
           idKategori: null
         },
         user: '',
+        idCuti:'',
         listKategori: [],
         min: minDate,
         max: maxDate
@@ -80,7 +80,7 @@ import axios from 'axios'
     },
     methods: {
       onSubmit() {
-        axios.post('http://localhost:5000/api/cuti/ajukan', this.form);
+        axios.put('http://localhost:5000/api/cuti/update?idCuti=' + this.idCuti , this.form);
         this.$router.push({
           name:'viewCuti'
         })
@@ -88,12 +88,22 @@ import axios from 'axios'
       getListKategori(){
         axios.get('http://localhost:5000/api/kategoriCuti/get').then(response => {
           this.listKategori = response.data
-          this.listKategori.push({ namaKategori: 'Pilih Kategori Cuti', id:null})
         })
-      }
+      },
+      getCutiData(){
+          axios.get('http://localhost:5000/api/cuti/diajukan/get?karyawanId=1').then(response => {
+              this.form.tanggalMulai = response.data.tanggalMulai;
+              this.form.tanggalSampai = response.data.tanggalSampai;
+              console.log(this.form.tanggalSampai)
+              this.form.idKategori = response.data.idKategori;
+              this.form.keterangan = response.data.keterangan;
+              this.idCuti = response.data.idCuti;
+          })
+      }              
     },
-    mounted() {
-      this.getListKategori()
+    created() {
+        this.getListKategori()
+        this.getCutiData()
     }
   }
 </script>
