@@ -101,15 +101,16 @@
                     id="riwayat_penyakit"
                     >
                         <label for="input5">Riwayat Penyakit</label>
-                        <b-form-input
+                        <b-form-area
                         id="input5"
                         v-model="form.riwayat_penyakit"
                         type="text"
                         placeholder=""
                         class="bg-white input rounded">
-                        </b-form-input>
+                        </b-form-area>
                         <div v-if="$v.form.riwayat_penyakit.$error">
                             <div class="error-custom mt-1 ml-1" v-if="!$v.form.riwayat_penyakit.required">Field is required</div>
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.riwayat_penyakit.alpha">Gunakan tanda baca . dan , serta huruf alphabeth</div>
                             <div class="error-custom mt-1 ml-1" v-if="!$v.form.riwayat_penyakit.minLength">Panjang minimal character adalah 8, masukkan 'tidak ada' jika memang ingin dikosongkan.</div>
                         </div>
                     </b-form-group>
@@ -121,13 +122,16 @@
                         <b-button class="button-primary" size="sm" 
                         @click="submit()" variant="light" :disabled="submitStatus === 'PENDING'">Submit</b-button></v-btn>
 
-                    <v-btn class="ml-3" outlined color="#C53751"><b-button size="sm" @click="$bvModal.hide('tes-medis')" 
+                    <v-btn class="ml-3" outlined color="#C53751"><b-button size="sm" @click="batal()" 
                     style="background-color:white !important; border:none;color:#C53751">Batal</b-button></v-btn>
 
                 </b-form>
-                <p class="typo__p" v-if="submitStatus === 'OK'">Thanks for your submission!</p>
-                <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
-                <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
+                <div class="mt-1">
+                    <p class="typo__p" v-if="submitStatus === 'OK'" style="color:rgb(60, 233, 54)">Thanks for your submission!</p>
+                    <p class="typo__p" v-if="submitStatus === 'ERROR'" style="color:red">Please fill the form correctly.</p>
+                    <p class="typo__p" v-if="submitStatus === 'PENDING'" style="color:rgb(246, 226, 47)">Submitting...</p>
+                </div>
+                
             </b-card-text>
         </b-card>
         </v-card>
@@ -137,6 +141,9 @@
 <script>
 import {required, minLength, between} from 'vuelidate/lib/validators'
 import { validationMixin } from 'vuelidate'
+import { helpers } from 'vuelidate/lib/validators'
+
+const alpha = helpers.regex('alpha', /^[a-zA-Z.,]*$/)
 
 export default {
     name:'form-tes-medis',
@@ -169,6 +176,7 @@ export default {
             },
             riwayat_penyakit:{
                 required,
+                alpha,
                 minLength:minLength(8)
             }
         }
@@ -188,8 +196,10 @@ export default {
                 
                 this.submitStatus = 'PENDING'
                 setTimeout(() => {
-                    this.$emit('submit')
                     this.submitStatus = 'OK'
+                }, 500)
+                setTimeout(() => {
+                    this.$emit('submit')
                 }, 500)
             }
         },
@@ -237,7 +247,9 @@ label{
     border:1px solid rgb(197, 55, 81);
     background-color: rgba(197, 55, 81, 0.02) ;
 }
-
+.typo__p{
+    font-size:12px;
+}
 .input-radio{
     font-size: 14px;
 }

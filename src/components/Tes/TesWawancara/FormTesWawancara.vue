@@ -55,6 +55,7 @@
                         </b-form-textarea>
                         <div v-if="$v.form.feedback.$error">
                             <div class="error-custom mt-1 ml-1" v-if="!$v.form.feedback.required">Field is required</div>
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.feedback.alpha">Gunakan tanda baca . dan , serta huruf alphabeth</div>
                             <div class="error-custom mt-1 ml-1" v-if="!$v.form.feedback.minLength">
                                 Panjang minimal character adalah 8, masukkan 'tidak ada' jika memang ingin dikosongkan.
                             </div>
@@ -73,9 +74,12 @@
                     <v-btn class="ml-3" outlined color="#C53751"><b-button size="sm" @click="batal()" 
                     style="background-color:white !important; border:none;color:#C53751">Batal</b-button></v-btn>
                 </b-form>
-                <p class="typo__p" v-if="submitStatus === 'OK'" style="color:rgb(60, 233, 54)">Thanks for your submission!</p>
-                <p class="typo__p" v-if="submitStatus === 'ERROR'" style="color:red">* Please fill the form correctly.</p>
-                <p class="typo__p" v-if="submitStatus === 'PENDING'" style="color:rgb(246, 226, 47)">Sending...</p>
+                <div class="mt-1">
+                    <p class="typo__p" v-if="submitStatus === 'OK'" style="color:rgb(60, 233, 54)">Thanks for your submission!</p>
+                    <p class="typo__p" v-if="submitStatus === 'ERROR'" style="color:red">* Please fill the form correctly.</p>
+                    <p class="typo__p" v-if="submitStatus === 'PENDING'" style="color:rgb(246, 226, 47)">Submitting...</p>
+                </div>
+                
             </b-card-text>
         </b-card>
         </v-card>
@@ -85,6 +89,9 @@
 
 <script>
 import {required, minLength, maxLength} from 'vuelidate/lib/validators'
+import { helpers } from 'vuelidate/lib/validators'
+
+const alpha = helpers.regex('alpha', /^[a-zA-Z.,]*$/)
 
 export default {
 name:"form-tes-wawancara",
@@ -95,6 +102,7 @@ validations:{
         },
         feedback:{
             required,
+            alpha,
             minLength:minLength(8),
             maxLength:maxLength(255),
         }
@@ -125,9 +133,12 @@ methods:{
                 
                 this.submitStatus = 'PENDING'
                 setTimeout(() => {
-                    this.$emit('submit')
                     this.submitStatus = 'OK'
                 }, 500)
+                setTimeout(()=>{
+                    this.$emit('submit')
+                },800)
+                
             }
         },
         batal(){
@@ -144,7 +155,6 @@ methods:{
 }
 .typo__p{
     font-size:12px;
-    font-family: Arial, Helvetica, sans-serif;
 }
 .border{
     border:none !important;

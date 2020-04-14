@@ -3,6 +3,7 @@
         <!-- modal information -->
         <sweet-modal icon="success" ref="modal">{{message}}</sweet-modal>
         <sweet-modal icon="success" ref="failed">{{message}}</sweet-modal>
+        <sweet-modal icon="success" ref="info">{{message}}</sweet-modal>
 
         <!-- form tes -->
         <form-tes-wawancara v-if="isTesWawancaraFormOpen && !isTesWawancaraSubmit"
@@ -13,7 +14,7 @@
         <div>
         <div v-if="tes_wawancara === null && !isTesWawancaraFormOpen" class="d-flex justify-center">
             <v-btn color="#C53751"><v-icon color="white">{{icons.plus}}</v-icon>
-            <b-button class="button-primary" @click="openFormTesWawancara()" size="sm">Tambah Tes Wawancara</b-button></v-btn>
+            <b-button class="button-primary" :disabled="(tes_tulis===null)" @click="openFormTesWawancara()" size="sm">Tambah Tes Wawancara</b-button></v-btn>
         </div>
 
         <v-card
@@ -98,13 +99,16 @@
                         Konfirmasi
                     </template>
                     <div>
-                        <div>
-                            Apakah anda yakin ingin?
-                        </div>
+                        <div class="h6 mb-3">Apakah anda yakin ingin menyelesaikan data ini?</div>
+                            <div class="alert alert-danger mb-3" style="font-size:12px">
+                                *Jika anda menekan tombol "Iya", maka data dinyatakan selesai dan tidak dapat diubah.
+                            </div>
+                            <div class="d-flex justify-content-end">
                         <b-button-group>
-                            <b-button class="mr-3 rounded" @click="validatedTesWawancara()">Iya</b-button>
-                            <b-button class="rounded" @click="$bvModal.hide('valid-wawancara')">Batal</b-button>
+                            <b-button class="btn-conf-prm mr-3 rounded pr-3 pl-3" @click="validatedTesWawancara()">Iya</b-button>
+                            <b-button class="btn-conf-scn rounded" @click="$bvModal.hide('valid-wawancara')">Batal</b-button>
                         </b-button-group>
+                        </div>
                     </div>
                     <!-- <template v-slot:modal-footer> -->
                         <!-- footer modal -->
@@ -125,6 +129,7 @@ import { SweetModal } from 'sweet-modal-vue'
 import FormTesWawancara from './FormTesWawancara.vue'
 import TesService from '../../../service/TesService'
 
+
 export default {
     name:"tes-wawancara",
     components:{
@@ -133,6 +138,9 @@ export default {
     },
     props:{
         tes_wawancara:{
+            type:Object
+        },
+        tes_tulis:{
             type:Object
         },
         id_pelamar:{
@@ -213,8 +221,18 @@ export default {
             await this.refreshTesWawancara();
             this.buka();
         },
-        validated(){
-            this.updateTesWawancara();
+        async validatedTesWawancara(){
+            await TesService.updateTesWawancara(this.tes_wawancara.idTesWawancara,
+            {
+                nilai:this.tes_wawancara.nilai,
+                feedback:this.tes_wawancara.feedback,
+                isEdit:true,
+                pelamarTesWawancara:{
+                    idPelamar:this.id_pelamar}
+                }
+            );
+            await this.refreshTesWawancara();
+            this.buka();
             this.isValid = true;
         },
         buka(){
@@ -240,5 +258,17 @@ export default {
     color:white !important;
     background-color: #C53751 !important;
     border:none;
+}
+.btn-conf-prm{
+    background-color: black !important;
+    color: white;
+    font-size: 15px;
+}
+
+.btn-conf-scn{
+    border: 1px solid black ;
+    background-color: white !important;
+    color: black !important;
+    font-size: 15px;
 }
 </style>

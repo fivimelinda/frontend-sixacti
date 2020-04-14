@@ -3,6 +3,7 @@
         <!-- modal information -->
         <sweet-modal icon="success" ref="modal">{{message}}</sweet-modal>
         <sweet-modal icon="success" ref="failed">{{message}}</sweet-modal>
+        <sweet-modal icon="success" ref="info">{{message}}</sweet-modal>
         
         <!-- form tes -->
         <form-tes-tulis v-if="isTesTulisFormOpen && !isTesTulisSubmit"
@@ -13,7 +14,7 @@
         <div>
         <div v-if="tes_tulis === null && !isTesTulisFormOpen" class="d-flex justify-center">
             <v-btn color="#C53751"><v-icon color="white">{{icons.plus}}</v-icon><b-button class="button-primary"
-            @click="openFormTesTulis()" size="sm">Tambah Tes Tulis</b-button></v-btn>
+            @click="openFormTesTulis()" :disabled="(tes_medis===null)" size="sm">Tambah Tes Tulis</b-button></v-btn>
         </div>
         <v-card
         class="mx-auto background"
@@ -93,13 +94,16 @@
                         Konfirmasi
                     </template>
                     <div>
-                        <div>
-                            Apakah anda yakin ingin?
-                        </div>
+                        <div class="h6 mb-3">Apakah anda yakin ingin menyelesaikan data ini?</div>
+                            <div class="alert alert-danger mb-3" style="font-size:12px">
+                                *Jika anda menekan tombol "Iya", maka data dinyatakan selesai dan tidak dapat diubah.
+                            </div>
+                            <div class="d-flex justify-content-end">
                         <b-button-group>
-                            <b-button class="mr-3 rounded" @click="validatedTesTulis()">Iya</b-button>
-                            <b-button class="rounded" @click="$bvModal.hide('valid-tulis')">Batal</b-button>
+                            <b-button class="btn-conf-prm mr-3 rounded pr-3 pl-3" @click="validatedTesTulis()">Iya</b-button>
+                            <b-button class="btn-conf-scn rounded" @click="batal()">Batal</b-button>
                         </b-button-group>
+                        </div>
                     </div>
                     <!-- <template v-slot:modal-footer> -->
                         <!-- footer modal -->
@@ -128,6 +132,9 @@ export default {
     },
     props:{
         tes_tulis:{
+            type:Object
+        },
+        tes_medis:{
             type:Object
         },
         id_pelamar:{
@@ -178,6 +185,7 @@ export default {
                 pelamarTesTulis:{
                     idPelamar:this.id_pelamar}
                 });
+            this.buka("Tes Tulis Berhasil Disimpan!")
             await this.refreshTesTulis();
             
         },
@@ -202,11 +210,21 @@ export default {
             await this.refreshTesTulis();
             this.buka();
         },
-        validated(){
-            this.updateTesMedis();
+        async validatedTesTulis(){
+            await TesService.updateTesTulis(this.tes_tulis.idTesTulis,
+            {
+                nilai:this.tes_tulis.nilai,
+                isEdit:true,
+                pelamarTesTulis:{
+                    idPelamar:this.id_pelamar}
+                }
+            );
+            await this.refreshTesTulis();
+            this.buka();
             this.isValid = true;
         },
-        buka(){
+        buka(msg){
+            this.message = msg;
             this.$refs.modal.open();
         },
         create(){
@@ -229,5 +247,17 @@ export default {
     color:white !important;
     background-color: #C53751 !important;
     border:none;
+}
+.btn-conf-prm{
+    background-color: black !important;
+    color: white;
+    font-size: 15px;
+}
+
+.btn-conf-scn{
+    border: 1px solid black ;
+    background-color: white !important;
+    color: black !important;
+    font-size: 15px;
 }
 </style>

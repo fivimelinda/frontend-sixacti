@@ -31,12 +31,14 @@
 
                     <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" size="sm" @click="submit()" variant="light">Ubah</b-button></v-btn>
                     <v-btn v-else-if="isCreate" color="#C53751"><b-button class="button-primary" size="sm" @click="submit()" :disabled="submitStatus === 'PENDING'" variant="light">Submit</b-button></v-btn>
-                    <v-btn class="ml-3" outlined color="#C53751"><b-button size="sm" @click="$bvModal.hide('tes-tulis')"
+                    <v-btn class="ml-3" outlined color="#C53751"><b-button size="sm" @click="batal()"
                     style="background-color:white !important; border:none;color:#C53751">Batal</b-button></v-btn>
                 </b-form>
-                <p class="typo__p" v-if="submitStatus === 'OK'">Thanks for your submission!</p>
-                <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
-                <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
+                <div class="mt-1">
+                    <p class="typo__p" v-if="submitStatus === 'OK'" style="color:rgb(60, 233, 54)">Thanks for your submission!</p>
+                    <p class="typo__p" v-if="submitStatus === 'ERROR'" style="color:red">Please fill the form correctly.</p>
+                    <p class="typo__p" v-if="submitStatus === 'PENDING'" style="color:rgb(246, 226, 47)">Submitting...</p>
+                </div>
             </b-card-text>
         </b-card>
         </v-card>
@@ -77,9 +79,12 @@ export default {
                 
                 this.submitStatus = 'PENDING'
                 setTimeout(() => {
-                    this.$emit('submit')
                     this.submitStatus = 'OK'
                 }, 500)
+                setTimeout(() => {
+                    this.$emit('submit')
+                }, 800)
+                
             }
         },
         batal(){
@@ -121,7 +126,9 @@ label{
     border:1px solid #C53751;
     background-color: rgba(197, 55, 81, 0.02) !important;
 }
-
+.typo__p{
+    font-size:12px;
+}
 .input-radio{
     font-size: 14px;
 }

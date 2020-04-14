@@ -3,6 +3,7 @@
         <!-- modal information -->
         <sweet-modal icon="success" ref="modal">{{message}}</sweet-modal>
         <sweet-modal icon="success" ref="failed">{{message}}</sweet-modal>
+        <sweet-modal icon="success" ref="info">{{message}}</sweet-modal>
 
         <!-- form tes -->
         <form-tes-medis v-if="isTesMedisFormOpen && !isTesMedisSubmit"
@@ -116,13 +117,16 @@
                             Konfirmasi
                         </template>
                         <div>
-                            <div>
-                                Apakah anda yakin ingin?
+                            <div class="h6 mb-3">Apakah anda yakin ingin menyelesaikan data ini?</div>
+                            <div class="alert alert-danger mb-3" style="font-size:12px">
+                                *Jika anda menekan tombol "Iya", maka data dinyatakan selesai dan tidak dapat diubah.
                             </div>
-                            <b-button-group>
-                                <b-button class="mr-3 rounded" @click="validated()">Iya</b-button>
-                                <b-button class="rounded" @click="$bvModal.hide('valid-center')">Batal</b-button>
+                            <div class="d-flex justify-content-end">
+                            <b-button-group >
+                                <b-button class="btn-conf-prm mr-3 rounded pr-3 pl-3" @click="validatedTesMedis()">Iya</b-button>
+                                <b-button class="btn-conf-scn rounded" @click="$bvModal.hide('valid-medis')">Batal</b-button>
                             </b-button-group>
+                            </div>
                         </div>
                         </b-modal>
                     </div>
@@ -212,6 +216,7 @@ export default {
                 pelamarTesMedis:{
                     idPelamar:this.id_pelamar}
                 });
+            this.buka('Tes Medis Berhasil Disimpan!')
             await this.refreshTesMedis();
             
         },
@@ -244,10 +249,24 @@ export default {
                 }
             );
             await this.refreshTesMedis();
-            this.buka();
+            this.buka("Tes Medis Berhasil Diperbarui!");
         },
-        validated(){
-            this.updateTesMedis();
+
+        async validatedTesMedis(){
+            await TesService.updateTesMedis(this.tes_medis.idTesMedis,
+            {
+                tinggiBadan:this.tes_medis.tinggiBadan,
+                beratBadan:this.tes_medis.beratBadan,
+                tdBatasAtas : this.tes_medis.tdBatasAtas,
+                tdBatasBawah : this.tes_medis.tdBatasBawah,
+                butaWarna:this.tes_medis.butaWarna,
+                riwayatPenyakit:this.tes_medis.riwayatPenyakit,
+                isEdit:true,
+                pelamarTesMedis:{
+                    idPelamar:this.id_pelamar}
+                }
+            );
+            await this.refreshTesMedis();
             this.isValid = true;
         },
 
@@ -267,7 +286,8 @@ export default {
             this.buka()
         },
     
-        buka(){
+        buka(msg){
+            this.message=msg
             this.$refs.modal.open();
         }
     },
@@ -285,4 +305,21 @@ export default {
     background-color: #C53751 !important;
     border:none;
 }
+.btn-conf-prm{
+    background-color: black !important;
+    color: white;
+    font-size: 15px;
+}
+
+.btn-conf-scn{
+    border: 1px solid black ;
+    background-color: white !important;
+    color: black !important;
+    font-size: 15px;
+}
+
+.header-modal{
+    background-color: black !important;
+}
+
 </style>

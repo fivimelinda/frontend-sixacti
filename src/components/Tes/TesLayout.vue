@@ -1,11 +1,26 @@
 <template>
     <div class="tes text">
         <v-container>
+            <b-card class="mb-5 mt-5">
+                <b-card-text>
+                    <b-row>
+                        <b-col col md="4">
+                            <b-avatar rounded="lg" variant="dark"></b-avatar>
+                        </b-col>
+                        <b-col col md="8">a</b-col>
+                    </b-row>
+                </b-card-text>
+            </b-card>
             <div>
                 <div class="text-md-left h5" style="color:#C53751">
                     Tes Medis
                 </div>
                 <hr/>
+                <div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
                 <tes-medis
                 v-bind:tes_medis="tesMedis.data"
                 v-bind:id_pelamar="idPelamar"
@@ -18,6 +33,7 @@
                 <hr/>
                 <tes-tulis
                 v-bind:tes_tulis="tesTulis.data"
+                v-bind:tes_medis="tesMedis.data"
                 v-bind:id_pelamar="idPelamar"
                 @refreshTesTulis="loadNewTesTulis()"></tes-tulis>
             </div>
@@ -28,6 +44,7 @@
                 <hr/>
                 <tes-wawancara
                 v-bind:tes_wawancara="tesWawancara.data"
+                v-bind:tes_tulis="tesTulis.data"
                 v-bind:id_pelamar="idPelamar"
                 @refreshTesWawancara="loadNewTesWawancara()"></tes-wawancara>
             </div>
