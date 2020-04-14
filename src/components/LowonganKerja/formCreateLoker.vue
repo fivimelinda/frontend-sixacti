@@ -40,14 +40,22 @@
             <div class="col-6">
               <div class="form-group">
                 <div class="mb-2 label">Tanggal Mulai</div>
-                <input type="date" class="form-control" id="tanggalMulai" v-model="tanggalMulai" />
+                <b-form-datepicker id="datepickerStart-invalid" :state="dateStartState" class="mb-2" v-model="tanggalMulai"></b-form-datepicker>
+                
+                <b-form-invalid-feedback id="input-live-feedback-start">
+                  Tanggal yang anda masukan tidak valid
+                </b-form-invalid-feedback>
               </div>
             </div>
 
             <div class="col-6">
               <div class="form-group">
                 <div class="mb-2 label">Tanggal Berakhir</div>
-                <input type="date" class="form-control" id="tanggalBerakhir" v-model="tanggalBerakhir" />
+                <b-form-datepicker id="datepickerEnd-invalid" :state="dateEndState" class="mb-2" v-model="tanggalBerakhir"></b-form-datepicker>
+                
+                <b-form-invalid-feedback id="input-live-feedback-end">
+                  Tanggal yang anda masukan tidak valid
+                </b-form-invalid-feedback>
               </div>
             </div>
           </div>
@@ -146,7 +154,44 @@ export default {
   computed: {
         id() {
             return this.$route.params.id;
+        },
+        dateStartState(){
+          if(this.tanggalMulai == ""){
+            return null;
+          }
+          else{
+            var currentDate = moment(new Date()).format("DD MMMM YYYY");
+            var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
+            return !moment(tglMulai).isBefore(currentDate);
+          }
+          
+        },
+        dateEndState(){
+          if(this.tanggalBerakhir == ""){
+            return null;
+          }
+          else{
+            var currentDate = moment(new Date()).format("DD MMMM YYYY");
+            var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
+            var tglBerakhir = moment(this.tanggalBerakhir).format("DD MMMM YYYY");
+            if(moment(tglBerakhir).isAfter(this.dateWanted)){
+              return false;
+            }else{
+              if(moment(tglBerakhir).isBefore(tglMulai)){
+                return false;
+              }
+              else if(moment(tglBerakhir).isBefore(currentDate)){
+                return false;
+              }
+              else{
+                return true;
+              }
+            }
+            
+          }
+          
         }
+        
   },
   methods: {
         refreshLokerDetails() {
@@ -157,10 +202,34 @@ export default {
                 this.dateWanted = moment(res.data.dateWanted).format("DD MMMM YYYY");
                 
             });
+            
         },
         validateAndSubmit(e) {
             e.preventDefault();
             this.errors = [];
+            var currentDate = moment(new Date()).format("DD MMMM YYYY");
+            var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
+            var tglBerakhir = moment(this.tanggalBerakhir).format("DD MMMM YYYY");
+
+            if(moment(tglMulai).isBefore(currentDate)){
+              console.log("Tanggal mulai yang anda masukan tidak valid")
+              this.errors.push("Tanggal mulai yang anda masukan tidak valid");
+            }
+
+            if(moment(tglBerakhir).isBefore(tglMulai)){
+              console.log("Tanggal berakhir yang anda masukan tidak valid")
+              this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
+            }
+
+            if(moment(tglBerakhir).isBefore(currentDate)){
+              console.log("Tanggal berakhir yang anda masukan tidak valid")
+              this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
+            }
+
+            if(moment(tglBerakhir).isAfter(this.dateWanted)){
+              console.log("Tanggal berakhir yang anda masukan tidak valid")
+              this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
+            }
             if(!this.deskripsi){
                 this.errors.push("Enter valid values");
             }
