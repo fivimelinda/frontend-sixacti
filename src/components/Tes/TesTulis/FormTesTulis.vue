@@ -22,13 +22,21 @@
                         placeholder=""
                         class="bg-white input rounded">
                         </b-form-input>
+                        <div v-if="$v.form.nilai.$error">
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.nilai.required">Field is required</div>
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.nilai.between">Nilai yag dapat dimasukkan adalah antara 0-100</div>
+                        </div>
+
                     </b-form-group>
 
-                    <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" type="submit" size="sm" @click="submit()" variant="light">Ubah</b-button></v-btn>
-                    <v-btn v-else-if="isCreate" color="#C53751"><b-button class="button-primary" type="submit" size="sm" @click="submit()" variant="light">Submit</b-button></v-btn>
+                    <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" size="sm" @click="submit()" variant="light">Ubah</b-button></v-btn>
+                    <v-btn v-else-if="isCreate" color="#C53751"><b-button class="button-primary" size="sm" @click="submit()" :disabled="submitStatus === 'PENDING'" variant="light">Submit</b-button></v-btn>
                     <v-btn class="ml-3" outlined color="#C53751"><b-button size="sm" @click="$bvModal.hide('tes-tulis')"
                     style="background-color:white !important; border:none;color:#C53751">Batal</b-button></v-btn>
                 </b-form>
+                <p class="typo__p" v-if="submitStatus === 'OK'">Thanks for your submission!</p>
+                <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
+                <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
             </b-card-text>
         </b-card>
         </v-card>
@@ -36,6 +44,8 @@
     </v-container>    
 </template>
 <script>
+import {required, between} from 'vuelidate/lib/validators'
+
 export default {
     name:"form-tes-tulis",
     props:{
@@ -44,14 +54,33 @@ export default {
         isCreate:Boolean,
         isUpdate:Boolean
     },
+    validations:{
+        form:{
+            nilai:{
+                required,
+                between:between(0,100)
+            }
+        }
+    },
     data(){
         return{
-
+            submitStatus:null
         }
     },
     methods:{
         submit(){
-            this.$emit('submit')
+            this.$v.$touch()
+            if (this.$v.$invalid) {
+                this.submitStatus = 'ERROR'
+            } else {
+                // do your submit logic here
+                
+                this.submitStatus = 'PENDING'
+                setTimeout(() => {
+                    this.$emit('submit')
+                    this.submitStatus = 'OK'
+                }, 500)
+            }
         },
         batal(){
             this.$emit('batal')
@@ -62,6 +91,11 @@ export default {
 <style lang="scss" scoped>
 .border{
     border:none !important;
+}
+.error-custom{
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: red;
 }
 label{
     font-size: 14px;

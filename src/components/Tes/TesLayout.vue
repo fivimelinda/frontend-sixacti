@@ -80,7 +80,7 @@ export default {
             console.log(error);
         }
     },
-    async update(){
+    async mounted(){
         try{
             const URI = 'http://localhost:8081/api';
             const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json'});
@@ -92,28 +92,28 @@ export default {
         }
     },
     methods:{
-        loadNewTesMedis(){
+        async loadNewTesMedis(){
             try{
                 const URI = 'http://localhost:8081/api';
-                const getTesMedis = axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id);
+                const getTesMedis =await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id);
                 this.tesMedis = getTesMedis;
             }catch(error){
                 console.log(error);
             }
         },
-        loadNewTesTulis(){
+        async loadNewTesTulis(){
             try{
                 const URI = 'http://localhost:8081/api';
-                const getTesTulis = axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id);
+                const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id);
                 this.tesTulis = getTesTulis;
             }catch(error){
                 console.log(error);
             }
         },
-        loadNewTesWawancara(){
+        async loadNewTesWawancara(){
             try{
                 const URI = 'http://localhost:8081/api';
-                const getTesWawancara = axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id);
+                const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id);
                 this.tesWawancara = getTesWawancara;
             }catch(error){
                 console.log(error);

@@ -176,32 +176,32 @@ export default {
         cancleCreateTesWawancara(){
             this.isTesWawancaraFormOpen = false;
         },
-        createTesWawancara(){
+        async createTesWawancara(){
             this.isTesWawancaraFormOpen = false;
             this.isTesWawancaraSubmit = false;
             // Do Something to save Tes Medis
-            TesService.createTesWawancara({
+            await TesService.createTesWawancara(Number(this.id_pelamar),{
                 nilai:this.form.nilai,
                 feedback:this.form.feedback,
                 isEdit:this.form.isEdit,
                 pelamarTesWawancara:{
                     idPelamar:this.id_pelamar}
                 });
-            this.refreshTesWawancara();
+            await this.refreshTesWawancara();
             
         },
 
-        refreshTesWawancara(){
-            this.$emit('refreshTesWawancara');
+        async refreshTesWawancara(){
+            await this.$emit('refreshTesWawancara');
         },
         openModelUpdateTesWawancara(){
             this.form.nilai = this.tes_wawancara.nilai;
             this.form.feedback = this.tes_wawancara.feedback;
             this.isUpdate = true;
         },
-        updateTesWawancara(){
+        async updateTesWawancara(){
             console.log(this.tes_wawancara.idTesWawancara);
-            TesService.updateTesWawancara(this.tes_wawancara.idTesWawancara,
+            await TesService.updateTesWawancara(this.tes_wawancara.idTesWawancara,
             {
                 nilai:this.form.nilai,
                 feedback:this.form.feedback,
@@ -210,7 +210,7 @@ export default {
                     idPelamar:this.id_pelamar}
                 }
             );
-            this.refreshTesWawancara();
+            await this.refreshTesWawancara();
             this.buka();
         },
         validated(){

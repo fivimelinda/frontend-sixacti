@@ -23,7 +23,7 @@
                         >
                         </b-form-input> -->
                         <div>
-                            <b-form-select id="input1" class="bg-white input rounded mb-3" v-model="form.nilai">
+                            <b-form-select id="input1" class="bg-white input rounded" v-model="form.nilai">
                             <!-- This slot appears above the options from 'options' prop -->
                             <template v-slot:first>
                                 <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
@@ -38,6 +38,7 @@
                             <div v-if="$v.form.nilai.$error">
                                 <div class="error-custom mt-1 ml-1" v-if="!$v.form.nilai.required">Field is required</div>
                             </div>
+                            
                         </div>
                     </b-form-group>
 
@@ -63,11 +64,18 @@
                         </div>
                     </b-form-group>
 
-                    <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" size="sm" type="submit" @click="submit()" variant="light">Update</b-button></v-btn>
-                    <v-btn v-else-if="isCreate" color="#C53751"><b-button class="button-primary" size="sm" type="submit" @click="submit()" variant="light">Submit</b-button></v-btn>
+                    <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" size="sm"
+                    @click="submit()" :disabled="submitStatus === 'PENDING'" variant="light">Update</b-button></v-btn>
+                    
+                    <v-btn v-else-if="isCreate" color="#C53751"><b-button class="button-primary" size="sm" 
+                    @click="submit()" :disabled="submitStatus === 'PENDING'" variant="light">Submit</b-button></v-btn>
+                    
                     <v-btn class="ml-3" outlined color="#C53751"><b-button size="sm" @click="batal()" 
                     style="background-color:white !important; border:none;color:#C53751">Batal</b-button></v-btn>
                 </b-form>
+                <p class="typo__p" v-if="submitStatus === 'OK'" style="color:rgb(60, 233, 54)">Thanks for your submission!</p>
+                <p class="typo__p" v-if="submitStatus === 'ERROR'" style="color:red">* Please fill the form correctly.</p>
+                <p class="typo__p" v-if="submitStatus === 'PENDING'" style="color:rgb(246, 226, 47)">Sending...</p>
             </b-card-text>
         </b-card>
         </v-card>
@@ -104,12 +112,23 @@ components:{
 
 data(){
     return{
-
+        submitStatus:null,
     }
 },
 methods:{
         submit(){
-            this.$emit('submit')
+            this.$v.$touch()
+            if (this.$v.$invalid) {
+                this.submitStatus = 'ERROR'
+            } else {
+                // do your submit logic here
+                
+                this.submitStatus = 'PENDING'
+                setTimeout(() => {
+                    this.$emit('submit')
+                    this.submitStatus = 'OK'
+                }, 500)
+            }
         },
         batal(){
             this.$emit('batal')
@@ -122,6 +141,10 @@ methods:{
     font-size: 10px;
     font-family: Arial, Helvetica, sans-serif;
     color: red;
+}
+.typo__p{
+    font-size:12px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .border{
     border:none !important;

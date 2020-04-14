@@ -196,12 +196,12 @@ export default {
         cancleCreateTesMedis(){
             this.isTesMedisFormOpen = false;
         },
-        createTesMedis(){
+        async createTesMedis(){
             this.isTesMedisFormOpen = false;
             this.isTesMedisSubmit = false;
             // Do Something to save Tes Medis
             
-            TesService.createTesMedis({
+            await TesService.createTesMedis(Number(this.id_pelamar),{
                 tinggiBadan:this.form.tinggi_badan,
                 beratBadan:this.form.berat_badan,
                 tdBatasAtas : this.form.td_batas_atas,
@@ -212,12 +212,12 @@ export default {
                 pelamarTesMedis:{
                     idPelamar:this.id_pelamar}
                 });
-            this.refreshTesMedis();
+            await this.refreshTesMedis();
             
         },
 
-        refreshTesMedis(){
-            this.$emit('refreshTesMedis');
+        async refreshTesMedis(){
+            await this.$emit('refreshTesMedis');
         },
         openModelUpdateTesMedis(){
             this.form.tinggi_badan = this.tes_medis.tinggiBadan;
@@ -228,9 +228,9 @@ export default {
             this.form.riwayat_penyakit = this.tes_medis.riwayatPenyakit;
             this.isUpdate = true;
         },
-        updateTesMedis(){
+        async updateTesMedis(){
             console.log(this.tes_medis.idTesMedis);
-            TesService.updateTesMedis(this.tes_medis.idTesMedis,
+            await TesService.updateTesMedis(this.tes_medis.idTesMedis,
             {
                 tinggiBadan:this.form.tinggi_badan,
                 beratBadan:this.form.berat_badan,
@@ -243,7 +243,7 @@ export default {
                     idPelamar:this.id_pelamar}
                 }
             );
-            this.refreshTesMedis();
+            await this.refreshTesMedis();
             this.buka();
         },
         validated(){

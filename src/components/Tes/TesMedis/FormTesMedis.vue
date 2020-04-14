@@ -114,8 +114,8 @@
                         </div>
                     </b-form-group>
 
-                    <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" type="submit" size="sm" 
-                    @click="submit(form)" variant="light">Ubah</b-button></v-btn>
+                    <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" size="sm" 
+                    @click="submit()" variant="light">Ubah</b-button></v-btn>
                     
                     <v-btn v-else-if="isCreate" color="#C53751">
                         <b-button class="button-primary" size="sm" 

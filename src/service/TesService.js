@@ -11,8 +11,8 @@ class TesService {
     }
 
     //create tes medis
-    createTesMedis(tesMedis){
-        return axios.post(URI + "/tes/medis", tesMedis);
+    createTesMedis(idPelamar,tesMedis){
+        return axios.post(URI + "/tes/medis/" + idPelamar, tesMedis);
     }
 
     //update tes medis
@@ -27,8 +27,8 @@ class TesService {
     }
 
     //create tes tulis
-    createTesTulis(tesTulis){
-        return axios.post(URI + "/tes/tulis", tesTulis);
+    createTesTulis(idPelamar,tesTulis){
+        return axios.post(URI + "/tes/tulis/" + idPelamar, tesTulis);
     }
     
     //update tes tulis
@@ -43,8 +43,8 @@ class TesService {
     }
 
     //create tes tulis
-    createTesWawancara(tesWawancara){
-        return axios.post(URI + "/tes/wawancara", tesWawancara);
+    createTesWawancara(idPelamar,tesWawancara){
+        return axios.post(URI + "/tes/wawancara/" +idPelamar, tesWawancara);
     }
 
     //update tes tulis

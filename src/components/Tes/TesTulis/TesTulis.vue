@@ -168,30 +168,30 @@ export default {
         cancleCreateTesTulis(){
             this.isTesTulisFormOpen = false;
         },
-        createTesTulis(){
+        async createTesTulis(){
             this.isTesTulisFormOpen = false;
             this.isTesTulisSubmit = false;
             // Do Something to save Tes Medis
-            TesService.createTesTulis({
+            await TesService.createTesTulis(Number(this.id_pelamar),{
                 nilai:this.form.nilai,
                 isEdit:this.form.isEdit,
                 pelamarTesTulis:{
                     idPelamar:this.id_pelamar}
                 });
-            this.refreshTesTulis();
+            await this.refreshTesTulis();
             
         },
 
-        refreshTesTulis(){
-            this.$emit('refreshTesTulis');
+        async refreshTesTulis(){
+            await this.$emit('refreshTesTulis');
         },
         openModelUpdateTesTulis(){
             this.form.nilai = this.tes_tulis.nilai;
             this.isUpdate = true;
         },
-        updateTesTulis(){
+        async updateTesTulis(){
             console.log(this.tes_tulis.idTesTulis);
-            TesService.updateTesTulis(this.tes_tulis.idTesTulis,
+            await TesService.updateTesTulis(this.tes_tulis.idTesTulis,
             {
                 nilai:this.form.nilai,
                 isEdit:true,
@@ -199,7 +199,7 @@ export default {
                     idPelamar:this.id_pelamar}
                 }
             );
-            this.refreshTesTulis();
+            await this.refreshTesTulis();
             this.buka();
         },
         validated(){
