@@ -65,14 +65,14 @@
                 <div class="col-6">
                   <div class="form-group">
                     <div class="mb-2 label">Nomor Kartu BPJS Ketenagakerjaan</div>
-                    <input type="number" class="form-control" id="noBpjsKetenagakerjaan" v-model="noBpjsKetenagakerjaan" placeholder="masukkan nomor kartu BPJS ketenagakerjaan"  />
+                    <input class="form-control" id="noBpjsKetenagakerjaan" v-model="noBpjsKetenagakerjaan" placeholder="masukkan nomor kartu BPJS ketenagakerjaan"  />
                   </div>
                 </div>
 
                 <div class="col-6">
                   <div class="form-group">
                     <div class="mb-2 label">Nomor Kartu BPJS Kesehatan</div>
-                    <input type="number" class="form-control" id="noBpjsKesehatan" v-model="noBpjsKesehatan" placeholder="masukkan nomor kartu BPJS kesehatan" />
+                    <input class="form-control" id="noBpjsKesehatan" v-model="noBpjsKesehatan" placeholder="masukkan nomor kartu BPJS kesehatan" />
                   </div>
                 </div>
               </div>

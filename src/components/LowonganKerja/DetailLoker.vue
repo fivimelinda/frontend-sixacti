@@ -18,7 +18,7 @@
         </div> -->
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="d-flex justify-content-center">
-                <button class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Apply</span></button> 
+                <button class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Buat Lamaran</span></button> 
             </div>
             
         </div>
