@@ -20,7 +20,7 @@
             <form @submit ="formSubmit">
                 <div class="form-group">
                     <div class="label">Judul lowongan pekerjaan*</div>
-                    <input class="form-control" id="judul" placeholder="masukkan judul lowongan pekerjaan" v-model="judul">
+                    <input class="form-control" id="judul" placeholder="masukkan judul lowongan pekerjaan" v-model="judul" required="true">
                 </div>
                 <br>
                 <div class="form-group">
@@ -208,6 +208,25 @@
         </b-modal>
 
 
+        <b-modal size="lg" ref="error-kosong" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil" v-text="this.errMsg+' belum diisi!'">
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
+
+
     </div>
 </template>
 
@@ -232,46 +251,91 @@ export default {
             jumlah: '',
             gaji: '',
             replacement: '',
-            retStatus: ''
+            retStatus: '',
+            errMsg: '',
+            kosongCount: 0,
         }
     },
     methods: {
         formSubmit(e) {
             e.preventDefault();
             let currentObj = this;
-            this.axios.post('http://localhost:8081/request/add', {
-                "jobTitle" : this.judul,
-                "departement" : this.departemen,
-                "section" : this.section,
-                "supervisor" : this.supervisor,
-                "dateWanted" : this.tanggal,
-                "shift" : (this.shift == "true"),
-                "jumlah" : this.jumlah,
-                "gaji" : this.gaji,
-                "status" : "pending",
-                "periodeKontrak" : this.periode,
-                "addition" : (this.addition == "true"),
-                "namaReplacement" : this.replacement
-            })
-            // .then(function (response) {
-            //     currentObj.output = response.data;
-            //     console.log(currentObj.status)
-            // })
-            .then(ress => {
-                this.retStatus = ress.data
-
-                if(ress.status == 200){
-                    this.openModal()
-                }
+            if (this.kosongCount != 0){
+                this.kosongCount = 0;
+                this.errMsg = "";
+            }
+            if(!this.judul){
+                this.errMsg = this.errMsg + "Judul ," + " "; 
+                // this.kosongCount ++;
+                // this.$refs['error-kosong'].show();
+            }
+            if(!this.departemen){
+                this.errMsg = this.errMsg + "Departemen ," + " ";
+            }
+            if(!this.section){
+                this.errMsg = this.errMsg + "Section ," + " ";
+            }
+            if(!this.supervisor){
+                this.errMsg = this.errMsg + "Supervisor ," + " ";
+            }
+            if(!this.tanggal){
+                this.errMsg = this.errMsg + "Tanggal diinginkan ," + " ";
+            }
+            if(!this.shift){
+                this.errMsg = this.errMsg + "Shift ," + " ";
+            }
+            if(!this.jumlah){
+                this.errMsg = this.errMsg + "Jumlah ," + " ";
+            }
+            if(!this.gaji){
+                this.errMsg = this.errMsg + "Gaji ," + " ";
+            }
+            if(!this.periode){
+                this.errMsg = this.errMsg + "Periode kontrak ," + " ";
+            }
+            if(!this.addition){
+                this.errMsg = this.errMsg + "Addition ," + " ";
+            }
+            if(this.errMsg != ""){
+                this.kosongCount ++;
+                this.$refs['error-kosong'].show();
+            }
                 else{
+                    this.axios.post('http://localhost:8081/request/add', {
+                    "jobTitle" : this.judul,
+                    "departement" : this.departemen,
+                    "section" : this.section,
+                    "supervisor" : this.supervisor,
+                    "dateWanted" : this.tanggal,
+                    "shift" : (this.shift == "true"),
+                    "jumlah" : this.jumlah,
+                    "gaji" : this.gaji,
+                    "status" : "pending",
+                    "periodeKontrak" : this.periode,
+                    "addition" : (this.addition == "true"),
+                    "namaReplacement" : this.replacement
+                })
+                // .then(function (response) {
+                //     currentObj.output = response.data;
+                //     console.log(currentObj.status)
+                // })
+                .then(ress => {
+                    this.retStatus = ress.data
+
+                    if(ress.status == 200){
+                        this.openModal()
+                    }
+                    else{
+                        this.errorModal()
+                    }
+                })
+                .catch((err) => {
+                    currentObj.output = err;
+                    console.log(err);
                     this.errorModal()
+                })
                 }
-            })
-            .catch((err) => {
-                currentObj.output = err;
-                console.log(err);
-                this.errorModal()
-            })
+            
         },
 
          openModal() {
