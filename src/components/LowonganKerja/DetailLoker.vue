@@ -1,13 +1,21 @@
 <template>
 
-<div class="container mt-10">
+<div class="container">
+    <br>
+    <ul class="nav">
+        <li><a class="brearcrumb-a" href="/">Home</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" href="/listLoker">Daftar Lowongan Pekerjaan</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" :href="'/detailLoker/'+id">Detail {{judulLoker}}</a></li>              
+    </ul>
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-8">
-            <h1 id="judul">
+            <h2 id="judul">
                 {{judulLoker}} 
                 <a id="ubahBtn" v-on:click="updateLokerClicked()">
                 <edit-icon size="14"></edit-icon> Ubah</a>
-            </h1>
+            </h2>
         </div>
 
         <!-- <div class="col-xs-12 col-sm-6 col-md-4">
@@ -38,7 +46,7 @@
     <hr>
 
     <div id="deskripsi" class="container-fluid">
-        {{deskripsi}}
+        <div class="text-break">{{deskripsi}}</div>
     </div>
     
 
