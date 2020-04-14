@@ -75,7 +75,11 @@
             <b-textarea class="form-control" id="deskripsi" v-model="deskripsi"/>
           </div>
 
-          <button type="submit" class=" mt-5 mb-5 btn btn-danger">simpan</button>
+          <div class="btn-group">
+            <button type="submit" class="btn btn-danger mr-2">Simpan</button>
+            <button class="btn btn-light" @click="batal">Batal</button>
+          </div>
+    
 
         </form>
 
@@ -320,6 +324,10 @@ export default {
 
         errorModal(){
             this.$refs['error-modal'].show();
+        },
+
+        batal(){
+          this.$router.push("/listRequestLowongan");
         }
         
   },
