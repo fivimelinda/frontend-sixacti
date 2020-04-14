@@ -45,7 +45,37 @@
 
     <br>
     <br>
-
+<b-modal size="lg" ref="my-modal" hide-footer title="Notifikasi">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm" id="berhasil">
+                            Foto berhasil disimpan
+                        </div>
+                        <div class="col-sm">
+                            <v-img class="centang"
+                :src="require('@/assets/success.png')"
+                ></v-img>
+                        </div>
+                    </div>
+                </div>
+                
+            </b-modal>
+       <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Foto gagal disimpan
+                    </div>
+                    <div class="col-sm">
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </b-modal>
   </div>
 </template>
 
@@ -78,14 +108,21 @@ export default {
       let formData = new FormData();
       formData.append('file', this.file);
       axios.post('http://localhost:8081/api/uploadNpwp/' + this.idLamaran,
-        formData).then(function(){
-          console.log('SUCCESS!!');
-        })
-        .catch(function(){
-          console.log('FAILURE!!');
-        });
+        formData).then(ress => {
+              console.log(ress);
+              this.openModal()
+            })
+            .catch((err) => {
+                console.log(err);
+                this.errorModal()
+            })
       },
-      
+       openModal() {
+            this.$refs['my-modal'].show();
+        },
+        errorModal(){
+            this.$refs['error-modal'].show();
+        }
     
   }
 }
