@@ -1,8 +1,8 @@
 <template>
-    <div class="tes">
+    <div class="tes text">
         <v-container>
             <div>
-                <div class="text-md-left" style="color:#C53751">
+                <div class="text-md-left h5" style="color:#C53751">
                     Tes Medis
                 </div>
                 <hr/>
@@ -12,20 +12,24 @@
                 @refreshTesMedis="loadNewTesMedis()"></tes-medis>
             </div>
             <div>
-                <div class="text-md-left" style="color:#C53751">
+                <div class="text-md-left h5" style="color:#C53751">
                     Tes Tulis
                 </div>
                 <hr/>
                 <tes-tulis
-                v-bind:tes_tulis="pelamar.tesTulis"></tes-tulis>
+                v-bind:tes_tulis="tesTulis.data"
+                v-bind:id_pelamar="idPelamar"
+                @refreshTesTulis="loadNewTesTulis()"></tes-tulis>
             </div>
             <div>
-                <div class="text-md-left" style="color:#C53751">
+                <div class="text-md-left h5" style="color:#C53751">
                     Tes Wawancara
                 </div>
                 <hr/>
                 <tes-wawancara
-                v-bind:tes_wawancara="pelamar.tesWawancara"></tes-wawancara>
+                v-bind:tes_wawancara="tesWawancara.data"
+                v-bind:id_pelamar="idPelamar"
+                @refreshTesWawancara="loadNewTesWawancara()"></tes-wawancara>
             </div>
         </v-container>
     </div>
@@ -48,6 +52,8 @@ export default {
         return{
             pelamar:Object,
             tesMedis:Object,
+            tesTulis:Object,
+            tesWawancara:Object,
             idPelamar : Number,
         }
     },
@@ -57,11 +63,18 @@ export default {
         try{
             const URI = 'http://localhost:8081/api';
             this.idPelamar = Number(this.$route.params.id);
+
             const getData = await axios.get(URI + "/pelamar/get/" + this.$route.params.id, {responseType:'json'});
             this.pelamar = getData.data;
             const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json'});
             this.tesMedis = getTesMedis;
+            const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, {responseType:'json'});
+            this.tesTulis = getTesTulis;
+            const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json'});
+            this.tesWawancara = getTesWawancara;
             console.log(getTesMedis);
+            console.log(getTesTulis);
+            console.log(getTesWawancara);
             console.log(getData);
         }catch(error){
             console.log(error);
@@ -88,12 +101,32 @@ export default {
                 console.log(error);
             }
         },
+        loadNewTesTulis(){
+            try{
+                const URI = 'http://localhost:8081/api';
+                const getTesTulis = axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id);
+                this.tesTulis = getTesTulis;
+            }catch(error){
+                console.log(error);
+            }
+        },
+        loadNewTesWawancara(){
+            try{
+                const URI = 'http://localhost:8081/api';
+                const getTesWawancara = axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id);
+                this.tesWawancara = getTesWawancara;
+            }catch(error){
+                console.log(error);
+            }
+        },
     }
 }
 </script>
 
 <style lang="scss">
-
+.text{
+    font-family: 'oswald';
+}
 .button{
     border:none !important;
     color:white !important;
@@ -102,9 +135,13 @@ export default {
 .button-secondary{
     border:none !important;
     color:black !important;
-    background-color: white !important;
+    background-color: transparent !important;
 }
 hr{
     color:#C53751;
+}
+
+.background{
+    background-color: rgba(255, 227, 227, 0.637) !important;
 }
 </style>

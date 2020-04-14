@@ -15,30 +15,56 @@
                     id="nilai"
                     >
                     <label for="input1">nilai</label>
-                        <b-form-input
-                        id="input1"
+                        <!-- <b-form-input
+                        
                         v-model="form.nilai"
                         type="text"
                         placeholder=""
-                        class="bg-white input rounded">
-                        </b-form-input>
+                        >
+                        </b-form-input> -->
+                        <div>
+                            <b-form-select id="input1" class="bg-white input rounded mb-3" v-model="form.nilai">
+                            <!-- This slot appears above the options from 'options' prop -->
+                            <template v-slot:first>
+                                <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                            </template>
+
+                            <!-- These options will appear after the ones from 'options' prop -->
+                            <b-form-select-option value="kurang baik">Kurang Baik</b-form-select-option>
+                            <b-form-select-option value="cukup baik">Cukup Baik</b-form-select-option>
+                            <b-form-select-option value="baik">Baik</b-form-select-option>
+                            <b-form-select-option value="sangat baik">Sangat Baik</b-form-select-option>
+                            </b-form-select>
+                            <div v-if="$v.form.nilai.$error">
+                                <div class="error-custom mt-1 ml-1" v-if="!$v.form.nilai.required">Field is required</div>
+                            </div>
+                        </div>
                     </b-form-group>
 
                     <b-form-group
                     id="umpan_balik"
                     >
                         <label for="input2">Umpan Balik</label>
-                        <b-form-input
+                        <b-form-textarea
                         id="input2"
-                        v-model="form.umpan_balik"
+                        v-model="form.feedback"
                         type="text"
                         placeholder=""
                         class="bg-white input rounded">
-                        </b-form-input>
+                        </b-form-textarea>
+                        <div v-if="$v.form.feedback.$error">
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.feedback.required">Field is required</div>
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.feedback.minLength">
+                                Panjang minimal character adalah 8, masukkan 'tidak ada' jika memang ingin dikosongkan.
+                            </div>
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.feedback.maxLength">
+                                Panjang maksimal character yang dapat dimasukkan adalah 255
+                            </div>
+                        </div>
                     </b-form-group>
 
-                    <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" size="sm" @click="submit()" variant="light">Update</b-button></v-btn>
-                    <v-btn v-else-if="isCreate" color="#C53751"><b-button class="button-primary" size="sm" @click="submit()" variant="light">Submit</b-button></v-btn>
+                    <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" size="sm" type="submit" @click="submit()" variant="light">Update</b-button></v-btn>
+                    <v-btn v-else-if="isCreate" color="#C53751"><b-button class="button-primary" size="sm" type="submit" @click="submit()" variant="light">Submit</b-button></v-btn>
                     <v-btn class="ml-3" outlined color="#C53751"><b-button size="sm" @click="batal()" 
                     style="background-color:white !important; border:none;color:#C53751">Batal</b-button></v-btn>
                 </b-form>
@@ -50,9 +76,22 @@
 </template>
 
 <script>
+import {required, minLength, maxLength} from 'vuelidate/lib/validators'
 
 export default {
 name:"form-tes-wawancara",
+validations:{
+    form:{
+        nilai:{
+            required,
+        },
+        feedback:{
+            required,
+            minLength:minLength(8),
+            maxLength:maxLength(255),
+        }
+    }
+},
 props:{
         form:Object,
         isOpen:Boolean,
@@ -79,6 +118,11 @@ methods:{
 }
 </script>
 <style lang="scss" scoped>
+.error-custom{
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: red;
+}
 .border{
     border:none !important;
 }

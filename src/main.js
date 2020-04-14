@@ -8,11 +8,14 @@ import VModal from 'vue-js-modal'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Vuelidate from 'vuelidate'
 
 Vue.use(VueAxios, axios)
    
 Vue.config.productionTip = false
 
+// Validasi
+Vue.use(Vuelidate)
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin

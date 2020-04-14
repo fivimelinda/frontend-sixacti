@@ -7,7 +7,7 @@
         <!-- form tes -->
         <form-tes-medis v-if="isTesMedisFormOpen && !isTesMedisSubmit"
         v-bind:isCreate="isTesMedisFormOpen"
-        v-bind:form="form" @submit="createTesMedis(form)"
+        v-bind:form="form" @submit="createTesMedis()"
         @batal="cancleCreateTesMedis()"></form-tes-medis>
 
         
@@ -19,19 +19,20 @@
 
             <!-- masukkan untuk untuk tes medis yang sudah mengandung value -->
             <v-card
-            class="mx-auto mb-3"
-            max-width="600"
+            class="mx-auto mb-3 background"
+            max-width="570"
             v-else-if="!(tes_medis === null)"
             >
-                <v-card-title>
-                    <div class="subtitle-1 text-center">
+                <v-card-title class="d-flex justify-center" style="background-color:#C53751; color:white">
+                    <div class="h6 text-center">
                         Data Hasil Tes Medis
                     </div>
                 </v-card-title>
                 <!-- Isi Tes -->
                 <v-card-text>
-                    <b-row class="m-1">
-                        <b-col>Berat Badan</b-col>
+                    <b-row class="ml-2 mr-2">
+                        <b-col>Berat Badan
+                        </b-col>
                         <b-col>: {{tes_medis.beratBadan}}</b-col>
                     </b-row>
                     <b-row class="m-1">
@@ -40,7 +41,7 @@
                     </b-row>
                     <b-row class="m-1">
                         <b-col>Tekanan Darah</b-col>
-                        <b-col>: {{tes_medis.tekananDarah}}</b-col>
+                        <b-col>: {{tes_medis.tdBatasBawah}} / {{tes_medis.tdBatasAtas}}</b-col>
                     </b-row>
                     <b-row class="m-1">
                         <b-col>Buta Warna</b-col>
@@ -71,7 +72,7 @@
                         v-model="success"
                         id="tes-medis"
                         title="BootstrapVue"
-                        ref="update-modal"
+                        ref="tes-tulis"
                         >
                         <template
                         v-slot:modal-title>
@@ -159,7 +160,8 @@ export default {
             form:{
                 berat_badan:'',
                 tinggi_badan:'',
-                tekanan_darah:'',
+                td_batas_bawah:'',
+                td_batas_atas:'',
                 buta_warna:'',
                 riwayat_penyakit:'',
                 isEdit:false,
@@ -177,22 +179,11 @@ export default {
             },
             isValid : false,
             dialog:false,
-            
             open:false,
-            person:
-                {
-                name : "anang",
-                tes:{
-                    berat_badan : "90",
-                    tinggi_badan : "185",
-                    tekanan_darah : "70/120",
-                    buta_warna : "tidak",
-                    riwayat_penyakit : "tidak ada"
-                    }
-                },
-            new_data:[]
+            error:[]
         }
     },
+
     mounted(){
         
     },
@@ -209,11 +200,13 @@ export default {
             this.isTesMedisFormOpen = false;
             this.isTesMedisSubmit = false;
             // Do Something to save Tes Medis
+            
             TesService.createTesMedis({
                 tinggiBadan:this.form.tinggi_badan,
                 beratBadan:this.form.berat_badan,
-                tekananDarah:this.form.tekanan_darah,
-                butaWarna:false,
+                tdBatasAtas : this.form.td_batas_atas,
+                tdBatasBawah : this.form.td_batas_bawah,
+                butaWarna:this.form.buta_warna,
                 riwayatPenyakit:this.form.riwayat_penyakit,
                 isEdit:this.form.isEdit,
                 pelamarTesMedis:{
@@ -229,8 +222,9 @@ export default {
         openModelUpdateTesMedis(){
             this.form.tinggi_badan = this.tes_medis.tinggiBadan;
             this.form.berat_badan = this.tes_medis.beratBadan;
-            this.form.tekanan_darah = this.tes_medis.tekananDarah;
-            this.form.buta_warna = "partial";
+            this.form.td_batas_bawah = this.tes_medis.tdBatasBawah;
+            this.form.td_batas_atas = this.tes_medis.tdBatasAtas;
+            this.form.buta_warna = this.tes_medis.butaWarna;
             this.form.riwayat_penyakit = this.tes_medis.riwayatPenyakit;
             this.isUpdate = true;
         },
@@ -240,8 +234,9 @@ export default {
             {
                 tinggiBadan:this.form.tinggi_badan,
                 beratBadan:this.form.berat_badan,
-                tekananDarah:this.form.tekanan_darah,
-                butaWarna:false,
+                tdBatasAtas : this.form.td_batas_atas,
+                tdBatasBawah : this.form.td_batas_bawah,
+                butaWarna:this.form.buta_warna,
                 riwayatPenyakit:this.form.riwayat_penyakit,
                 isEdit:true,
                 pelamarTesMedis:{
@@ -271,47 +266,7 @@ export default {
             })
             this.buka()
         },
-        subsub(){
-            const people = {
-                form:{
-                    tinggi_badan:this.form.tinggi_badan,
-                    berat_badan:this.form.berat_badan,
-                    tekanan_darah:this.form.tekanan_darah,
-                    buta_warna:false,
-                    riwayat_penyakit:this.form.riwayat_penyakit,
-                    is_edit:this.form.isEdit,
-                    pelamar_tes_medis:{
-                        id_pelamar:1
-                    }
-                }                    
-            }
-            TesService.createTesMedis({
-                    tinggiBadan:this.form.tinggi_badan,
-                    beratBadan:this.form.berat_badan,
-                    tekananDarah:this.form.tekanan_darah,
-                    butaWarna:false,
-                    riwayatPenyakit:this.form.riwayat_penyakit,
-                    isEdit:this.form.isEdit,
-                    pelamarTesMedis:{
-                        idPelamar:5}
-                    });
-            this.new_data.push(people);
-            this.isSubmit = true;
-            this.buka();
-        },
-        tampilkan(){
-            this.$emit('tampilkan');
-        },
-
-        
-        simpan(user){
-            this.person.tes.berat_badan = user.tes.berat_badan;
-            this.person.tes.tinggi_badan = user.tes.tinggi_badan;
-            this.person.tes.tekanan_darah = user.tes.tekanan_darah;
-            this.person.tes.buta_warna = user.tes.buta_warna;
-            this.person.tes.riwayat_penyakit = user.tes.riwayat_penyakit;
-            this.dialog=false;
-        },
+    
         buka(){
             this.$refs.modal.open();
         }

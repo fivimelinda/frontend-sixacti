@@ -18,15 +18,15 @@
                         <b-form-input
                         id="input1"
                         v-model="form.nilai"
-                        type="text"
+                        type="number"
                         placeholder=""
                         class="bg-white input rounded">
                         </b-form-input>
                     </b-form-group>
 
-                    <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" size="sm" @click="submit()" variant="light">Update</b-button></v-btn>
-                    <v-btn v-else-if="isCreate" color="#C53751"><b-button class="button-primary" size="sm" @click="submit()" variant="light">Submit</b-button></v-btn>
-                    <v-btn class="ml-3" outlined color="#C53751"><b-button size="sm" @click="batal()" 
+                    <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" type="submit" size="sm" @click="submit()" variant="light">Ubah</b-button></v-btn>
+                    <v-btn v-else-if="isCreate" color="#C53751"><b-button class="button-primary" type="submit" size="sm" @click="submit()" variant="light">Submit</b-button></v-btn>
+                    <v-btn class="ml-3" outlined color="#C53751"><b-button size="sm" @click="$bvModal.hide('tes-tulis')"
                     style="background-color:white !important; border:none;color:#C53751">Batal</b-button></v-btn>
                 </b-form>
             </b-card-text>

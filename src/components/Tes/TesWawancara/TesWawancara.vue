@@ -5,59 +5,91 @@
         <sweet-modal icon="success" ref="failed">{{message}}</sweet-modal>
 
         <!-- form tes -->
-        <form-tes-wawancara v-if="isCreate && !isSubmit"
-        v-bind:isCreate="isCreate"
-        v-bind:form="form" @submit="subsub()" @batal="cancle()"></form-tes-wawancara>
+        <form-tes-wawancara v-if="isTesWawancaraFormOpen && !isTesWawancaraSubmit"
+        v-bind:isCreate="isTesWawancaraFormOpen"
+        v-bind:form="form" @submit="createTesWawancara()"
+        @batal="cancleCreateTesWawancara()"></form-tes-wawancara>
 
         <div>
-        <div v-if="!isCreate" class="d-flex justify-center">
-            <v-btn color="#C53751"><v-icon color="white">{{icons.plus}}</v-icon><b-button class="button-primary" @click="create()" size="sm">Tambah Tes Wawancara</b-button></v-btn>
+        <div v-if="tes_wawancara === null && !isTesWawancaraFormOpen" class="d-flex justify-center">
+            <v-btn color="#C53751"><v-icon color="white">{{icons.plus}}</v-icon>
+            <b-button class="button-primary" @click="openFormTesWawancara()" size="sm">Tambah Tes Wawancara</b-button></v-btn>
         </div>
 
         <v-card
-        class="mx-auto"
-        max-width="600"
+        class="mx-auto background"
+        max-width="570"
+        v-else-if="!(tes_wawancara === null)"
         >
-            <v-card-title>
-                <div class="subtitle-1">
-                    Tes Tulis
+            <v-card-title class="d-flex justify-center" style="background-color:#C53751; color:white">
+                <div class="h6">
+                    Data Hasil Tes Wawancara
                 </div>
             </v-card-title>
             <v-card-text>
-                <div>Nama : {{dummy.name}}</div>
                 <b-row>
                     <b-col>Nilai</b-col>
-                    <b-col>: {{dummy.nilai}}</b-col>
+                    <b-col>: {{tes_wawancara.nilai}}</b-col>
                 </b-row>
                 <b-row>
                     <b-col>Umpan Balik</b-col>
-                    <b-col>: {{dummy.umpan_balik}}</b-col>
+                    <b-col>: {{tes_wawancara.feedback}}</b-col>
                 </b-row>
             </v-card-text>
+
             <v-divider></v-divider>  
-                <div v-if="!isValid" class="d-flex justify-content-center">
+                <div v-if="!tes_wawancara.isEdit && !isValid" class="d-flex justify-content-center">
                     <v-btn color="black" class="mr-2 mb-3">
                         <v-icon color="white">
                             {{icons.pencil}}
                         </v-icon>
-                        <b-button class="button" size="sm" v-b-modal.modal-center @click="update()">Ubah</b-button>
+                        <b-button class="button" size="sm" v-b-modal.tes-wawancara @click="openModelUpdateTesWawancara()">Ubah</b-button>
                     </v-btn>
-                    <v-btn
-                    color="black"
-                    class="ml-2 mb-3 button"
-                    v-if="!validasi"
+
+                    <!-- <modal-success v-bind:success="success"></modal-success> -->
+                    <b-modal
+                    scrollable
+                    hide-footer
+                    v-model="success"
+                    id="tes-wawancara"
+                    title="BootstrapVue"
+                    ref="update-wawancara"
                     >
-                        <v-icon color="white">
+                    <template
+                    v-slot:modal-title>
+                        <!-- header modal -->
+                        Ubah Tes Medis
+                    </template>
+
+                    <form-tes-wawancara
+                    v-if="isUpdate"
+                        v-bind:isUpdate="isUpdate"
+                        v-bind:form="form" @submit="updateTesWawancara()">
+                    </form-tes-wawancara>
+                    <!-- <template v-slot:modal-footer> -->
+                        <!-- footer modal -->
+                        <!-- i'm footer!
+                    </template>
+                        <p class="my-4">Vertically centered modal!</p> -->
+                    </b-modal>
+                    
+                    <v-btn
+                    outlined
+                    color="black"
+                    class="ml-2 mb-3"
+                    v-if="!isValid"
+                    >
+                        <v-icon color="black">
                             {{icons.check}}
                         </v-icon>
-                        <b-button class="button" size="sm" v-b-modal.valid-center>Selesai</b-button>
+                        <b-button class="button-secondary" size="sm" v-b-modal.valid-wawancara>Selesai</b-button>
                     </v-btn>
 
                     <b-modal
                     scrollable
                     centered
                     hide-footer
-                    id="valid-center"
+                    id="valid-wawancara"
                     title="BootstrapVue"
                     >
                     <template
@@ -70,42 +102,10 @@
                             Apakah anda yakin ingin?
                         </div>
                         <b-button-group>
-                            <b-button class="mr-3 rounded" @click="valid()">Iya</b-button>
-                            <b-button class="rounded" @click="$bvModal.hide('valid-center')">Batal</b-button>
+                            <b-button class="mr-3 rounded" @click="validatedTesWawancara()">Iya</b-button>
+                            <b-button class="rounded" @click="$bvModal.hide('valid-wawancara')">Batal</b-button>
                         </b-button-group>
                     </div>
-                    <!-- <template v-slot:modal-footer> -->
-                        <!-- footer modal -->
-                        <!-- i'm footer!
-                    </template>
-                        <p class="my-4">Vertically centered modal!</p> -->
-                    </b-modal>
-                    
-                    <!-- <modal-success v-bind:success="success"></modal-success> -->
-                    <b-modal
-                    scrollable
-                    hide-footer
-                    v-model="success"
-                    id="modal-center"
-                    title="BootstrapVue"
-                    ref="update-modal"
-                    >
-                    <template
-                    v-slot:modal-title>
-                        <!-- header modal -->
-                        Ubah Tes Medis
-                    </template>
-                    <form-tes-medis
-                    v-if="isUpdate"
-                    v-bind:isUpdate="isUpdate"
-                    v-bind:form="{
-                        berat_badan:person.tes.berat_badan,
-                        tinggi_badan:person.tes.tinggi_badan,
-                        tekanan_darah:person.tes.tekanan_darah,
-                        buta_warna:person.tes.buta_warna,
-                        riwayat_penyakit:person.tes.riwayat_penyakit
-                    }" @submit="subsub()">
-                    </form-tes-medis>
                     <!-- <template v-slot:modal-footer> -->
                         <!-- footer modal -->
                         <!-- i'm footer!
@@ -123,17 +123,29 @@
 <script>
 import { SweetModal } from 'sweet-modal-vue'
 import FormTesWawancara from './FormTesWawancara.vue'
+import TesService from '../../../service/TesService'
+
 export default {
     name:"tes-wawancara",
     components:{
         SweetModal,
         FormTesWawancara
     },
+    props:{
+        tes_wawancara:{
+            type:Object
+        },
+        id_pelamar:{
+            type:Number
+        }
+    },
     data (){
         return{
+            tesWawancara:Object,
             form:{
                 nilai:"",
-                umpan_balik:"",
+                feedback:"",
+                isEdit:false
             },
             icons:{
                 plus:'mdi-plus',
@@ -141,18 +153,73 @@ export default {
                 pencil:'mdi-pencil'
             },
             isOpen : false,
-            isCreate : false,
+            isTesWawancaraFormOpen : false,
             isUpdate : false,
+            isTesWawancaraSubmit:false,
+            isCreate : false,
+            isValid:false,
+            success:false,
             isSubmit:false,
             message:"",
             dummy:{
                 name:"dummy",
                 nilai:"baik",
                 umpan_balik:"sudah sangat baik"
-            }
+            },
+            error:[]
         }
     },
     methods:{
+        openFormTesWawancara(){
+            this.isTesWawancaraFormOpen = true;
+        },
+        cancleCreateTesWawancara(){
+            this.isTesWawancaraFormOpen = false;
+        },
+        createTesWawancara(){
+            this.isTesWawancaraFormOpen = false;
+            this.isTesWawancaraSubmit = false;
+            // Do Something to save Tes Medis
+            TesService.createTesWawancara({
+                nilai:this.form.nilai,
+                feedback:this.form.feedback,
+                isEdit:this.form.isEdit,
+                pelamarTesWawancara:{
+                    idPelamar:this.id_pelamar}
+                });
+            this.refreshTesWawancara();
+            
+        },
+
+        refreshTesWawancara(){
+            this.$emit('refreshTesWawancara');
+        },
+        openModelUpdateTesWawancara(){
+            this.form.nilai = this.tes_wawancara.nilai;
+            this.form.feedback = this.tes_wawancara.feedback;
+            this.isUpdate = true;
+        },
+        updateTesWawancara(){
+            console.log(this.tes_wawancara.idTesWawancara);
+            TesService.updateTesWawancara(this.tes_wawancara.idTesWawancara,
+            {
+                nilai:this.form.nilai,
+                feedback:this.form.feedback,
+                isEdit:true,
+                pelamarTesWawancara:{
+                    idPelamar:this.id_pelamar}
+                }
+            );
+            this.refreshTesWawancara();
+            this.buka();
+        },
+        validated(){
+            this.updateTesWawancara();
+            this.isValid = true;
+        },
+        buka(){
+            this.$refs.modal.open();
+        },
         create(){
             this.isOpen = true;
             this.isCreate = true;

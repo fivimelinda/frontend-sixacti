@@ -12,16 +12,23 @@
                 >
                     <b-form-group
                     id="berat_badan"
+                    class="form-group"
+                    :class="{ 'form-group--error': $v.form.berat_badan.$error }"
                     >
                     <label for="input1">Berat Badan (kg)</label>
                         <b-form-input
                         id="input1"
-                        v-model="form.berat_badan"
-                        type="text"
+                        v-model.trim="form.berat_badan"
+                        type="number"
                         placeholder=""
                         class="bg-white input rounded">
                         </b-form-input>
+                        <div v-if="$v.form.berat_badan.$error">
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.berat_badan.required">Field is required</div>
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.berat_badan.between">Berat badan harus lebih dari 0</div>
+                        </div>
                     </b-form-group>
+                    
 
                     <b-form-group
                     id="tingi_badan"
@@ -30,23 +37,52 @@
                         <b-form-input
                         id="input2"
                         v-model="form.tinggi_badan"
-                        type="text"
+                        type="number"
                         placeholder=""
                         class="bg-white input rounded">
                         </b-form-input>
+                        <div v-if="$v.form.tinggi_badan.$error">
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.tinggi_badan.required">Field is required</div>
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.tinggi_badan.between">tinggi badan harus lebih dari 0 cm</div>
+                        </div>
                     </b-form-group>
 
                     <b-form-group
+                    inline
                     id="tekanan_darah"
                     >
-                        <label for="input3">Tekanan Darah</label>
+                    <b-row>
+                        <b-col>
+                            <label for="input3">Tekanan Darah (batas bawah)</label>
                         <b-form-input
                         id="input3"
-                        v-model="form.tekanan_darah"
-                        type="text"
+                        v-model="form.td_batas_bawah"
+                        type="number"
                         placeholder=""
                         class="bg-white input rounded">
                         </b-form-input>
+                        <div v-if="$v.form.td_batas_bawah.$error">
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.td_batas_bawah.required">Field is required</div>
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.td_batas_bawah.between">Batas bawah tekanan darah harus lebih dari 50 mmHg</div>
+                        </div>
+                        </b-col>
+
+                        <b-col>    
+                        <label for="input7">Tekanan Darah (batas atas)</label>
+                        <b-form-input
+                        id="input7"
+                        v-model="form.td_batas_atas"
+                        type="number"
+                        placeholder=""
+                        class="bg-white input rounded">
+                        </b-form-input>
+                        <div v-if="$v.form.td_batas_atas.$error">
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.td_batas_atas.required">Field is required</div>
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.td_batas_atas.between">Batas atas tekanan darah harus lebih dari 70 mmHg</div>
+                        </div>
+                        </b-col>
+                    </b-row>
+                        
                     </b-form-group>
                     
                     <b-form-group>
@@ -56,6 +92,9 @@
                             <b-form-radio name="radios" value="partial" class="input-radio">Partial</b-form-radio>
                             <b-form-radio name="radios" value="total" class="input-radio">Total</b-form-radio>
                         </b-form-radio-group>
+                        <div v-if="$v.form.buta_warna.$error">
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.buta_warna.required">Field is required</div>
+                        </div>
                     </b-form-group>
 
                     <b-form-group
@@ -69,13 +108,26 @@
                         placeholder=""
                         class="bg-white input rounded">
                         </b-form-input>
+                        <div v-if="$v.form.riwayat_penyakit.$error">
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.riwayat_penyakit.required">Field is required</div>
+                            <div class="error-custom mt-1 ml-1" v-if="!$v.form.riwayat_penyakit.minLength">Panjang minimal character adalah 8, masukkan 'tidak ada' jika memang ingin dikosongkan.</div>
+                        </div>
                     </b-form-group>
 
-                    <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" type="submit" size="sm" @click="submit(form)" variant="light">Ubah</b-button></v-btn>
-                    <v-btn v-else-if="isCreate" color="#C53751"><b-button class="button-primary" type="submit" size="sm" @click="submit()" variant="light">Submit</b-button></v-btn>
+                    <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" type="submit" size="sm" 
+                    @click="submit(form)" variant="light">Ubah</b-button></v-btn>
+                    
+                    <v-btn v-else-if="isCreate" color="#C53751">
+                        <b-button class="button-primary" size="sm" 
+                        @click="submit()" variant="light" :disabled="submitStatus === 'PENDING'">Submit</b-button></v-btn>
+
                     <v-btn class="ml-3" outlined color="#C53751"><b-button size="sm" @click="$bvModal.hide('tes-medis')" 
                     style="background-color:white !important; border:none;color:#C53751">Batal</b-button></v-btn>
+
                 </b-form>
+                <p class="typo__p" v-if="submitStatus === 'OK'">Thanks for your submission!</p>
+                <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
+                <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
             </b-card-text>
         </b-card>
         </v-card>
@@ -83,23 +135,63 @@
 </template>
 
 <script>
+import {required, minLength, between} from 'vuelidate/lib/validators'
+import { validationMixin } from 'vuelidate'
+
 export default {
     name:'form-tes-medis',
+    mixins: [validationMixin],
     props:{
         form:Object,
         isOpen:Boolean,
         isCreate:Boolean,
         isUpdate:Boolean
-    }
-    ,
+    },
+    validations:{
+        form:{berat_badan:{
+            required,
+            between:between(1,300)
+            },
+            tinggi_badan:{
+                required,
+                between:between(1,300)
+            },
+            td_batas_bawah:{
+                required,
+                between:between(50,150)
+            },
+            td_batas_atas:{
+                required,
+                between:between(70,250)
+            },
+            buta_warna:{
+                required,
+            },
+            riwayat_penyakit:{
+                required,
+                minLength:minLength(8)
+            }
+        }
+    },
     data(){
         return{
-
+            submitStatus:null,
         }
     },
     methods:{
-        submit(form){
-            this.$emit('submit', form)
+        submit(){
+            this.$v.$touch()
+            if (this.$v.$invalid) {
+                this.submitStatus = 'ERROR'
+            } else {
+                // do your submit logic here
+                
+                this.submitStatus = 'PENDING'
+                setTimeout(() => {
+                    this.$emit('submit')
+                    this.submitStatus = 'OK'
+                }, 500)
+            }
         },
 
         batal(){
@@ -110,9 +202,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.error-custom{
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: red;
+}
+
 .border{
     border:none !important;
 }
+
 label{
     font-size: 14px;
     color: rgb(121, 121, 121);
@@ -127,7 +226,7 @@ label{
 .input{
     font-size: 14px;
     border: 1px solid rgb(236, 236, 236);
-    background-color: rgba(248, 248, 248, 0.726) !important;
+    background-color: rgba(248, 248, 248, 0.726) ;
 }
 
 .input::placeholder{
@@ -135,8 +234,8 @@ label{
 }
 
 .input:focus{
-    border:1px solid #C53751;
-    background-color: rgba(197, 55, 81, 0.02) !important;
+    border:1px solid rgb(197, 55, 81);
+    background-color: rgba(197, 55, 81, 0.02) ;
 }
 
 .input-radio{
