@@ -99,7 +99,7 @@ export default {
       this.$router.push("/fileKis/"+this.idLamaran);
     },
     afterClicked(){
-      this.$router.push("/listLoker");
+      this.$router.push("/");
     },
     handleFileUpload(){
       this.file = this.$refs.file.files[0];

@@ -1,5 +1,6 @@
 <template>
   <div class="FormCreateLoker">
+    
     <br />
     <h1>Buat Lamaran Pekerjaan</h1>
     <br />
