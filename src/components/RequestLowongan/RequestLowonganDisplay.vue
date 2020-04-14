@@ -1,5 +1,11 @@
 <template>
 <div class="all">
+    <br>
+    <ul class="nav">
+        <li><a class="brearcrumb-a" href="/">Home</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" href="/RequestLowongan">Request Lowongan Pekerjaan</a></li>
+    </ul>
     <div>
         <br>
         <p class="title-top">Request Lowongan Pekerjaan</p>
@@ -83,7 +89,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .tambah{
     float: right;
     margin-right: 33px;
@@ -146,5 +152,34 @@ thead{
 .th-bottom:hover{
     border-left: 3px solid red;
 }
+
+.brearcrumb-a{
+    font-family: "Archivo";
+    font-size: 15px;
+    color: #848484;
+}
+
+a:link, a:active, a:hover, a:visited {
+    color: #848484 !important;
+    text-decoration: none;
+}
+
+v-application a{
+    color: #848484;
+}
+
+.nav {
+  list-style-type: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
+}
+
+.nav li {
+  display: inline-block;
+  padding: 2px;
+}
+
 
 </style>
