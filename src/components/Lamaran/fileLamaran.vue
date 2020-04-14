@@ -51,9 +51,6 @@
                             Foto berhasil disimpan
                         </div>
                         <div class="col-sm">
-                            <!-- <v-img
-                                    :src="require('../assets/success.png')"></v-img> -->
-                            <!-- <img src = "'src/assets/success.png'"> -->
                             <v-img class="centang"
                 :src="require('@/assets/success.png')"
                 ></v-img>
@@ -69,9 +66,6 @@
                         Foto gagal disimpan
                     </div>
                     <div class="col-sm">
-                        <!-- <v-img
-                                :src="require('../assets/success.png')"></v-img> -->
-                        <!-- <img src = "'src/assets/success.png'"> -->
                         <v-img class="gagal"
             :src="require('@/assets/fail.png')"
             ></v-img>
@@ -123,9 +117,6 @@ export default {
 
       openModal() {
             this.$refs['my-modal'].show();
-            // window.setTimeout(function() {
-            //     window.location.href = "/";
-            // }, 35000);
         },
         errorModal(){
             this.$refs['error-modal'].show();
