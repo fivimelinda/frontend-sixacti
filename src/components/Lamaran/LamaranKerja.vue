@@ -1,5 +1,6 @@
 <template>
   <div class="FormCreateLoker">
+    
     <br />
     <h1>Buat Lamaran Pekerjaan</h1>
     <br />
@@ -7,19 +8,13 @@
       <div class="card-header">Formulir Pembuatan Lamaran Pekerjaan</div>
       <div class="card-body">
          <form @submit.prevent="validateAndSubmit">
-          <!-- <div v-if="errors.length">
-                <div 
-                class="alert alert-warning" 
-                v-bind:key="index" 
-                v-for="(error,index) in errors">{{error}}</div>
-          </div> -->
           <div class="form-group">
             <div class="mb-2 label">Nomor Induk Kependudukan*</div>
-            <input class="form-control" id="nik" v-model="nik" placeholder="masukkan nomor induk kependudukan" required>
+            <input type="number" class="form-control" id="nik" v-model="nik" placeholder="masukkan nomor induk kependudukan" required>
           </div>
           <div class="form-group">
-            <div class="mb-2 label">Nama Ibu*</div>
-            <input class="form-control" id="namaIbu" v-model="namaIbu" placeholder="masukkan nama ibu" required>
+            <div class="mb-2 label">Nama*</div>
+            <input class="form-control" id="namaIbu" v-model="namaIbu" placeholder="masukkan nama" required>
           </div>
 
           <div class="form-group">
@@ -60,7 +55,7 @@
 
           <div class="form-group">
               <div class="mb-2 label">Telepon*</div>
-              <input class="form-control" id="telepon" v-model="telepon" placeholder="masukkan nomor telepon" required>
+              <input type="number" class="form-control" id="telepon" v-model="telepon" placeholder="masukkan nomor telepon" required>
             </div>
 
             <div class="form-group">
@@ -87,23 +82,37 @@
 
             <div class="form-group">
               <div class="mb-2 label">Nomor Kartu Indonesia Sehat</div>
-              <input class="form-control" id="noKis" v-model="noKis" placeholder="masukkan nomor Kartu Indonesia Sehat">
+              <input type="number" class="form-control" id="noKis" v-model="noKis" placeholder="masukkan nomor Kartu Indonesia Sehat">
             </div>
 
             <div class="form-group">
               <div class="mb-2 label">Nomor Pokok Wajib Pajak</div>
-              <input class="form-control" id="npwp" v-model="npwp" placeholder="masukkan nomor pokok wajib pajak">
+              <input type="number" class="form-control" id="npwp" v-model="npwp" placeholder="masukkan nomor pokok wajib pajak">
             </div>
 
-              <div class="form-group">
-                <div class="mb-2 label">Pengalaman</div>
-                <b-textarea class="form-control" id="pengalamanKerja" v-model="pengalamanKerja" placeholder="masukkan pengalaman kerja"/>
+            <div class="form-group">
+            <div class="mb-2 label">Pengalaman Kerja</div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <div class="mb-2 label">Tahun Kerja</div>
+                  <input type="number" class="form-control" id="tahunKerja" v-model="tahunKerja" placeholder="masukkan tahun kerja"  />
+                </div>
               </div>
 
+              <div class="col-6">
+                <div class="form-group">
+                  <div class="mb-2 label">Nama Pekerjaan</div>
+                  <input type="text" class="form-control" id="namaPekerjaan" v-model="namaPekerjaan" placeholder="masukkan nama pekerjaan" />
+                </div>
+              </div>
+            </div>
+          </div>
 
-
-          <button class=" mt-5 mb-5 btn btn-danger" v-on:click="nextLamaranClicked()">Next</button>
-          <button type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
+          <button class=" btn btn-light border-danger w-10" v-on:click="beforeClicked()">Kembali</button>
+          <button type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan dan Lanjutkan</button>
+          <!-- <button class="btn btn-light border-danger w-10" v-on:click="nextLamaranClicked(idLamaran)">Selanjutnya</button> -->
+         
         </form>
 
       </div>
@@ -139,6 +148,8 @@ export default {
       noBpjsKesehatan : "",
       noKis : "",
       pengalamanKerja : "",
+      tahunKerja : "",
+      namaPekerjaan : "",
     }
   },
   computed: {
@@ -147,6 +158,9 @@ export default {
     }
   },
   methods:{
+    beforeClicked(){
+      this.$router.push("/detailLoker/"+this.idLowongan);
+    },
     nextLamaranClicked(){
       this.$router.push("/fileLamaran");
     },
@@ -169,10 +183,13 @@ export default {
             noBpjsKetenagakerjaan : this.noBpjsKetenagakerjaan,
             noBpjsKesehatan : this.noBpjsKesehatan,
             noKis : this.noKis,
-            pengalamanKerja : this.pengalamanKerja
+            pengalamanKerja : this.pengalamanKerja,
+            tahunKerja : this.tahunKerja,
+            namaPekerjaan : this.namaPekerjaan
           })
-          .then(()=> {
-            this.$router.push("/fileLamaran");
+          .then((response)=> {
+            console.log(response)
+            this.$router.push("/fileLamaran/"+ response.data);
           });
         }
      }
