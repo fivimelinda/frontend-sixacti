@@ -91,7 +91,7 @@
 import {required, minLength, maxLength} from 'vuelidate/lib/validators'
 import { helpers } from 'vuelidate/lib/validators'
 
-const alpha = helpers.regex('alpha', /^[a-zA-Z.,]*$/)
+const alpha = helpers.regex('alpha', /^[a-zA-Z., ]*$/)
 
 export default {
 name:"form-tes-wawancara",

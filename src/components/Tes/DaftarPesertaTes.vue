@@ -13,7 +13,7 @@
                             <b-th>Status</b-th>
                         </b-tr>
                     </b-thead>
-                    <b-tbody class="tbody text-center" v-for="(data,index) in dummy" :key="index">
+                    <b-tbody class="tbody text-center" v-for="(data,index) in data" :key="index">
                         <b-tr id="index" class="btr" @click="rowClickedHandle(data)">
                             <b-td>{{index +1}}</b-td>
                             <b-td>{{data.nama}}</b-td>
@@ -39,78 +39,23 @@
 </template>
 
 <script>
+
 export default {
     name:"daftar-peserta-tes",
     data(){
         return{
             currentPage:1,
             perPage:10,
-            dummy:[
-                {
-                    "idPelamar":1,
-                    "nama":"Ahmad Supardi",
-                    "no_ktp":"123456789012345",
-                    "tanggal_lahir": "18-07-1995",
-                    "tempat_lahir" : "Yogyakarta",
-                    "alamat" : "jl. Suparman No. 9, Buduwan",
-                    "status":"Lolos seleksi tahap 1"
-                },
-                {
-                    "idPelamar":2,
-                    "nama":"Ahmad Supardi",
-                    "no_ktp":"123456789012345",
-                    "tanggal_lahir": "18-07-1995",
-                    "tempat_lahir" : "Yogyakarta",
-                    "alamat" : "jl. Suparman No. 9, Buduwan",
-                    "status":"Lolos seleksi tahap 1"
-                },
-                {
-                    "idPelamar":3,
-                    "nama":"Ahmad Supardi",
-                    "no_ktp":"123456789012345",
-                    "tanggal_lahir": "18-07-1995",
-                    "tempat_lahir" : "Yogyakarta",
-                    "alamat" : "jl. Suparman No. 9, Buduwan",
-                    "status":"Lolos seleksi tahap 1"
-                },
-                {
-                    "idPelamar":4,
-                    "nama":"Ahmad Supardi",
-                    "no_ktp":"123456789012345",
-                    "tanggal_lahir": "18-07-1995",
-                    "tempat_lahir" : "Yogyakarta",
-                    "alamat" : "jl. Suparman No. 9, Buduwan",
-                    "status":"Lolos seleksi tahap 1"
-                },
-                {
-                    "idPelamar":5,
-                    "nama":"Ahmad Supardi",
-                    "no_ktp":"123456789012345",
-                    "tanggal_lahir": "18-07-1995",
-                    "tempat_lahir" : "Yogyakarta",
-                    "alamat" : "jl. Suparman No. 9, Buduwan",
-                    "status":"Lolos seleksi tahap 1"
-                },
-                {
-                    "idPelamar":6,
-                    "nama":"Ahmad Supardi",
-                    "no_ktp":"123456789012345",
-                    "tanggal_lahir": "18-07-1995",
-                    "tempat_lahir" : "Yogyakarta",
-                    "alamat" : "jl. Suparman No. 9, Buduwan",
-                    "status":"Lolos seleksi tahap 1"
-                },
-                {
-                    "idPelamar":7,
-                    "nama":"Ahmad Supardi",
-                    "no_ktp":"123456789012345",
-                    "tanggal_lahir": "18-07-1995",
-                    "tempat_lahir" : "Yogyakarta",
-                    "alamat" : "jl. Suparman No. 9, Buduwan",
-                    "status":"Lolos seleksi tahap 1"
-                },
-            ]
+            user:[
+                
+            ],
+            data:'',
         }
+
+    },
+    mounted(){
+        this.data = this.$store.state.dummy;
+        console.log(this.data);
     },
     methods:{
         rowClickedHandle(data){

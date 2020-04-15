@@ -101,13 +101,13 @@
                     id="riwayat_penyakit"
                     >
                         <label for="input5">Riwayat Penyakit</label>
-                        <b-form-area
+                        <b-form-textarea
                         id="input5"
                         v-model="form.riwayat_penyakit"
                         type="text"
                         placeholder=""
                         class="bg-white input rounded">
-                        </b-form-area>
+                        </b-form-textarea>
                         <div v-if="$v.form.riwayat_penyakit.$error">
                             <div class="error-custom mt-1 ml-1" v-if="!$v.form.riwayat_penyakit.required">Field is required</div>
                             <div class="error-custom mt-1 ml-1" v-if="!$v.form.riwayat_penyakit.alpha">Gunakan tanda baca . dan , serta huruf alphabeth</div>
@@ -143,7 +143,7 @@ import {required, minLength, between} from 'vuelidate/lib/validators'
 import { validationMixin } from 'vuelidate'
 import { helpers } from 'vuelidate/lib/validators'
 
-const alpha = helpers.regex('alpha', /^[a-zA-Z.,]*$/)
+const alpha = helpers.regex('alpha', /^[a-zA-Z., ]*$/)
 
 export default {
     name:'form-tes-medis',

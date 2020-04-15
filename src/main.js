@@ -9,6 +9,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuelidate from 'vuelidate'
+import store from './store/store'
 
 Vue.use(VueAxios, axios)
    
@@ -25,6 +26,7 @@ Vue.config.productionTip = false
 
 new Vue({
   el:'#app',
+  store,
   router,
   vuetify,
   render: h => h(App)
