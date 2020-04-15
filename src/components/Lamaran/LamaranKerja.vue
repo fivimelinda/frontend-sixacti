@@ -10,11 +10,11 @@
          <form @submit.prevent="validateAndSubmit">
           <div class="form-group">
             <div class="mb-2 label">Nomor Induk Kependudukan*</div>
-            <input class="form-control" id="nik" v-model="nik" placeholder="masukkan nomor induk kependudukan" required>
+            <input type="number" class="form-control" id="nik" v-model="nik" placeholder="masukkan nomor induk kependudukan" required>
           </div>
           <div class="form-group">
-            <div class="mb-2 label">Nama Ibu*</div>
-            <input class="form-control" id="namaIbu" v-model="namaIbu" placeholder="masukkan nama ibu" required>
+            <div class="mb-2 label">Nama*</div>
+            <input class="form-control" id="namaIbu" v-model="namaIbu" placeholder="masukkan nama" required>
           </div>
 
           <div class="form-group">
@@ -55,7 +55,7 @@
 
           <div class="form-group">
               <div class="mb-2 label">Telepon*</div>
-              <input class="form-control" id="telepon" v-model="telepon" placeholder="masukkan nomor telepon" required>
+              <input type="number" class="form-control" id="telepon" v-model="telepon" placeholder="masukkan nomor telepon" required>
             </div>
 
             <div class="form-group">
@@ -66,14 +66,14 @@
                 <div class="col-6">
                   <div class="form-group">
                     <div class="mb-2 label">Nomor Kartu BPJS Ketenagakerjaan</div>
-                    <input class="form-control" id="noBpjsKetenagakerjaan" v-model="noBpjsKetenagakerjaan" placeholder="masukkan nomor kartu BPJS ketenagakerjaan"  />
+                    <input type="number" class="form-control" id="noBpjsKetenagakerjaan" v-model="noBpjsKetenagakerjaan" placeholder="masukkan nomor kartu BPJS ketenagakerjaan"  />
                   </div>
                 </div>
 
                 <div class="col-6">
                   <div class="form-group">
                     <div class="mb-2 label">Nomor Kartu BPJS Kesehatan</div>
-                    <input class="form-control" id="noBpjsKesehatan" v-model="noBpjsKesehatan" placeholder="masukkan nomor kartu BPJS kesehatan" />
+                    <input type="number" class="form-control" id="noBpjsKesehatan" v-model="noBpjsKesehatan" placeholder="masukkan nomor kartu BPJS kesehatan" />
                   </div>
                 </div>
               </div>
@@ -82,12 +82,12 @@
 
             <div class="form-group">
               <div class="mb-2 label">Nomor Kartu Indonesia Sehat</div>
-              <input class="form-control" id="noKis" v-model="noKis" placeholder="masukkan nomor Kartu Indonesia Sehat">
+              <input type="number" class="form-control" id="noKis" v-model="noKis" placeholder="masukkan nomor Kartu Indonesia Sehat">
             </div>
 
             <div class="form-group">
               <div class="mb-2 label">Nomor Pokok Wajib Pajak</div>
-              <input class="form-control" id="npwp" v-model="npwp" placeholder="masukkan nomor pokok wajib pajak">
+              <input type="number" class="form-control" id="npwp" v-model="npwp" placeholder="masukkan nomor pokok wajib pajak">
             </div>
 
             <div class="form-group">
@@ -109,7 +109,7 @@
             </div>
           </div>
 
-          
+          <button class=" btn btn-light border-danger w-10" v-on:click="beforeClicked()">Kembali</button>
           <button type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan dan Lanjutkan</button>
           <!-- <button class="btn btn-light border-danger w-10" v-on:click="nextLamaranClicked(idLamaran)">Selanjutnya</button> -->
          
@@ -158,6 +158,9 @@ export default {
     }
   },
   methods:{
+    beforeClicked(){
+      this.$router.push("/detailLoker/"+this.idLowongan);
+    },
     nextLamaranClicked(){
       this.$router.push("/fileLamaran");
     },

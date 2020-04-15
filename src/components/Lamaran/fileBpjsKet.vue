@@ -33,7 +33,7 @@
               <input class="form-control" type="file" id="resume" >
             </div> -->
 
-            <button v-on:click="submitFile()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
+            <button v-on:click="submitFile(); cekSukses()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
             <br>
             <button class=" btn btn-light border-danger w-10" v-on:click="beforeClicked()">Kembali</button>
             <button class=" mt-5 mb-5 btn btn-danger" v-on:click="afterClicked()">Selanjutnya</button>
@@ -86,7 +86,9 @@ export default {
   name:'fileLamaran',
   data(){
     return{
-      file:''
+      file:'',
+      ressData: '',
+      count: 0
     }
   },
   computed: {
@@ -109,20 +111,36 @@ export default {
       formData.append('file', this.file);
       axios.post('http://localhost:8081/api/uploadBpjsKetenagakerjaan/' + this.idLamaran,
         formData).then(ress => {
-              console.log(ress);
-              this.openModal()
+              this.ressData = ress;
             })
             .catch((err) => {
+                console.log("masuk err")
+                this.count ++;
                 console.log(err);
                 this.errorModal()
-            })
+            }) 
+        console.log("masuk submit file")
+            
       },
-       openModal() {
+
+      cekSukses(){
+        
+        if(this.count == 0){
+          console.log("masuk cek sukses")
+          this.count = 0;
+          this.openModal()
+        }
+      },
+
+      openModal() {
             this.$refs['my-modal'].show();
         },
         errorModal(){
             this.$refs['error-modal'].show();
+            this.$refs['my-modal'].hide();
         }
+      
+    
     
   }
 }

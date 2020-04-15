@@ -33,7 +33,7 @@
               <input class="form-control" type="file" id="resume" >
             </div> -->
 
-            <button v-on:click="submitFile()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
+            <button v-on:click="submitFile(); cekSukses()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
             <br>
             <button class=" mt-5 mb-5 btn btn-danger" v-on:click="afterClicked()">Selanjutnya</button>
         </form>
@@ -71,6 +71,10 @@
             ></v-img>
                     </div>
                 </div>
+                <br>
+                <br>
+                <br>
+                <br>
             </div>
             
             
@@ -80,12 +84,14 @@
 
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
 export default {
   name:'fileLamaran',
   data(){
     return{
-      file:''
+      file:'',
+      ressData: '',
+      count: 0
     }
   },
   computed: {
@@ -104,15 +110,27 @@ export default {
     submitFile(){
       let formData = new FormData();
       formData.append('file', this.file);
-      axios.post('http://localhost:8081/api/uploadKtp/' + this.idLamaran,
+      this.axios.post('http://localhost:8081/api/uploadKtp/' + this.idLamaran,
         formData).then(ress => {
-              console.log(ress);
-              this.openModal()
+              this.ressData = ress;
             })
             .catch((err) => {
+                console.log("masuk err")
+                this.count ++;
                 console.log(err);
                 this.errorModal()
-            })
+            }) 
+        console.log("masuk submit file")
+            
+      },
+
+      cekSukses(){
+        
+        if(this.count == 0){
+          console.log("masuk cek sukses")
+          this.count = 0;
+          this.openModal()
+        }
       },
 
       openModal() {
@@ -120,6 +138,7 @@ export default {
         },
         errorModal(){
             this.$refs['error-modal'].show();
+            this.$refs['my-modal'].hide();
         }
       
     
