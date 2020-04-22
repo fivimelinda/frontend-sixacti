@@ -1,6 +1,12 @@
 <template>
   <div class="container">
-    <h3 class="mt-10">Daftar Lowongan Pekerjaan</h3>
+    <br>
+    <ul class="nav">
+        <li><a class="brearcrumb-a" href="/">Home</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" href="/listLoker">Daftar Lowongan Pekerjaan</a></li>            
+    </ul>
+    <h3 class="mt-5">Daftar Lowongan Pekerjaan</h3>
     <div v-if="message" class="alert alert-success">
       {{message}}
     </div>
@@ -8,14 +14,17 @@
       
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4" v-for="loker in loker" v-bind:key="loker.idLowongan">
-          <div class="card mb-4" id="cardLoker">
+          <div v-if="!loker.isDeleted" class="card mb-4" id="cardLoker">
             <div class="card-header" id="cardHeader">
               <span id="titleCard">{{loker.judulLoker}}</span>
             </div>
             <div class="card-body">
-              <span class="mb-1" id="lokerDesc">{{loker.deskripsi}}</span>
+              <span v-if="loker.deskripsi.length < 25 " class="mb-1" id="lokerDesc">{{loker.deskripsi}}</span>
+              <span v-else  class="mb-1" id="lokerDesc">{{loker.deskripsi.substring(0,25) + " ..."}}</span>
+              <p class="mt-1 mb-5" id="deptSect">{{loker.departement}} - {{loker.section}}</p>
               <p class="mt-1 mb-5" id="deptSect">{{loker.departement}} - {{loker.section}}</p>
               <p id="periodeDesc">Periode {{loker.tanggalMulai | formatDate}} - {{loker.tanggalBerakhir | formatDate}}</p>
+               <h4>{{loker.isDeleted}}</h4>
 
             </div>
             <div class="card-footer" id="card-footer">
@@ -24,13 +33,25 @@
                   <button class="btn btn-danger w-100" v-on:click="detailLokerClicked(loker.idLowongan)">Detail</button>
                 </div>
                 <div class="col-6 mb-3">
-                  <button class="btn btn-light border-danger w-100" id="hapusBtn"  v-on:click="deleteLokerClicked(loker.idLowongan)">Hapus</button>
+                  <button v-b-modal.modal-1 class="btn btn-light border-danger w-100" id="hapusBtn"  v-on:click="saveId(loker.idLowongan)">Hapus</button>
                 </div>
               </div>
+             
               
             </div>
           </div>
         </div>
+
+        <b-modal ref="modal" id="modal-1" title="Konfirmasi Penghapusan Lowongan" v-bind:hide-footer="true">
+            <div class="detail">
+                <p class="title">Apakah anda yakin untuk menghapusnya ? </p>
+                <hr>
+                <div class="btn-group">
+                  <button type="submit" class="btn btn-danger mr-2" @click="deleteLokerClicked(idLoker)">Hapus</button>
+                  <button class="btn btn-light" @click="hideModal">Batal</button>
+                </div>
+            </div>
+        </b-modal>
         
         
       </div>
@@ -55,7 +76,9 @@ export default {
     data() {
         return{
             loker : [],
-            message : ""
+            message : "",
+            idLoker : 0,
+            msg :""
         };
     },
 
@@ -68,6 +91,7 @@ export default {
         },
         deleteLokerClicked(idLowongan){
           LowonganKerjaService.deleteLoker(idLowongan).then(() =>{
+            this.$refs['modal'].hide();
             this.message = "Delete of Loker " + idLowongan + " successful";
             this.refreshLoker();
           });
@@ -77,10 +101,16 @@ export default {
         },
         detailLokerClicked(idLowongan){
           this.$router.push("/detailLoker/"+idLowongan);
+        },
+        saveId(idLowongan){
+          this.idLoker = idLowongan;
+        },
+        hideModal(){
+          this.$refs['modal'].hide();
         }
 
 
-        
+
     },
     created(){
         this.refreshLoker();

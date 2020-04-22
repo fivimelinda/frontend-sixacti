@@ -19,9 +19,18 @@ import "vuetify/dist/vuetify.min.css";
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
 import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
 import fileLamaran from '../components/Lamaran/fileLamaran.vue'
+
 import DaftarPesertaTes from '../components/Tes/DaftarPesertaTes.vue'
 
 import Login from '../components/Auth/Login/Login.vue'
+
+import fileKk from '../components/Lamaran/fileKk'
+import fileNpwp from '../components/Lamaran/fileNpwp'
+import fileBpjsKes from '../components/Lamaran/fileBpjsKes'
+import fileBpjsKet from '../components/Lamaran/fileBpjsKet'
+import fileResume from '../components/Lamaran/fileResume'
+import fileKis from '../components/Lamaran/fileKis'
+
 
 Vue.use(Vuetify);
 Vue.use(VueRouter)
@@ -180,10 +189,41 @@ const routes = [
     component: LamaranKerja
   },
   {
-    path: '/fileLamaran',
+    path: '/fileLamaran/:idLamaran',
     name:'fileLamaran',
     component: fileLamaran
   },
+  {
+    path: '/fileKk/:idLamaran',
+    name:'fileKk',
+    component: fileKk
+  },
+  {
+    path: '/fileNpwp/:idLamaran',
+    name:'fileNpwp',
+    component: fileNpwp
+  },
+  {
+    path: '/fileBpjsKet/:idLamaran',
+    name:'fileBpjsKet',
+    component: fileBpjsKet
+  },
+  {
+    path: '/fileBpjsKes/:idLamaran',
+    name:'fileBpjsKes',
+    component: fileBpjsKes
+  },
+  {
+    path: '/fileResume/:idLamaran',
+    name:'fileResume',
+    component: fileResume
+  },
+  {
+    path: '/fileKis/:idLamaran',
+    name:'fileKis',
+    component: fileKis
+  },
+
   {
     path: '/about',
     name: 'About',
