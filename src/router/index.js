@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import Home from '../views/Home.vue'
+import AuthLayout from '../components/Auth/AuthLayout.vue'
+import TesLayout from '../components/Tes/TesLayout.vue'
 import RequestLowongan from '../components/RequestLowongan/RequestLowongan.vue'
 import RequestLowonganDisplay from '../components/RequestLowongan/RequestLowonganDisplay.vue'
 import RequestLowonganId from '../components/RequestLowongan/RequestLowonganId.vue'
@@ -16,12 +19,18 @@ import "vuetify/dist/vuetify.min.css";
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
 import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
 import fileLamaran from '../components/Lamaran/fileLamaran.vue'
+
+import DaftarPesertaTes from '../components/Tes/DaftarPesertaTes.vue'
+
+import Login from '../components/Auth/Login/Login.vue'
+
 import fileKk from '../components/Lamaran/fileKk'
 import fileNpwp from '../components/Lamaran/fileNpwp'
 import fileBpjsKes from '../components/Lamaran/fileBpjsKes'
 import fileBpjsKet from '../components/Lamaran/fileBpjsKet'
 import fileResume from '../components/Lamaran/fileResume'
 import fileKis from '../components/Lamaran/fileKis'
+
 
 Vue.use(Vuetify);
 Vue.use(VueRouter)
@@ -40,22 +49,22 @@ const routes = [
   // path untuk authentikasi 
   {
     path: '/auth',
-    component: emptyComponent,
+    component: AuthLayout,
     children :[
       {
         name:'login',
         path:'login',
-        component:emptyComponent
+        component: Login
       },
       {
         name:'signup',
         path:'signup',
-        component : emptyComponent
+        component : () => import('../components/Auth/SignUp/SignUp.vue')
       },
       {
         name: 'change-password',
         path: 'change-password',
-        component: emptyComponent
+        component: () => import('../components/Auth/RecoverPassword/RecoverPassword.vue')
       },
       {
         path: '',
@@ -74,7 +83,7 @@ const routes = [
       {
         name:'not-found',
         path:'not-found',
-        component:emptyComponent
+        component: () => import('../components/Error/404-Pages/404.vue')
       }
     ]
   },
@@ -85,7 +94,7 @@ const routes = [
       {
         name:'internal-server',
         path:'internal-server',
-        component:emptyComponent
+        component: () => import('../components/Error/502-Pages/502.vue')
       }
     ]
   },
@@ -97,6 +106,34 @@ const routes = [
     component: Home
   },
   {
+    path:'/listPelamar',
+    name: 'Pelamar',
+    component: DaftarPesertaTes,
+  },
+  {
+    path: '/tes/:id',
+    name: 'tes',
+    component: TesLayout,
+    // children:[
+    //   {
+    //     path: 'tulis',
+    //     name: 'tulis',
+    //     component: () => import('../components/Tes/TesTulis/TesTulis.vue'),
+    //   },
+    //   {
+    //     path: 'medis',
+    //     name: 'medis',
+    //     component: () => import('../components/Tes/TesMedis/TesMedis.vue'),
+    //   },
+    //   {
+    //     path: 'wawancara',
+    //     name: 'wawancara',
+    //     component: () => import('../components/Tes/TesWawancara/TesWawancara.vue')
+    //   },
+    // ]
+  },
+  {
+    //path: '/RequestLowongan',
     path: '/RequestLowongan/add',
     name: 'RequestLowongan',
     component: RequestLowongan
@@ -197,13 +234,6 @@ const routes = [
   }
 ]
 
-//<<<<<<< HEAD
-export default new VueRouter({routes, mode: 'history'})
-// =======
-// const router = new VueRouter({
-//   mode: 'history',
-//   routes
-// })
-
-// export default router
-//>>>>>>> master
+export default new VueRouter({
+  mode:'history',
+  routes})
