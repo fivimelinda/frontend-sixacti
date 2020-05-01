@@ -2,6 +2,7 @@
     <v-container>
         <b-card>
             <b-card-text>
+        
                 <b-table-simple hover @row-clicked="rowClickedHandle" caption-top responsive outlined>
                     <caption class="caption pl-5"><div class="" style="font-size:16px">Daftar Pelamar</div></caption>
                     <b-thead small class="header-table text-center">
@@ -13,13 +14,16 @@
                             <b-th>Status</b-th>
                         </b-tr>
                     </b-thead>
-                    <b-tbody class="tbody text-center" v-for="(data,index) in data" :key="index">
-                        <b-tr id="index" class="btr" @click="rowClickedHandle(data)">
+                    <b-tbody class="tbody text-center">
+                        <b-tr v-for="(daftar,index) in et" 
+                        :key="index" 
+                        class="btr"
+                        @click="rowClickedHandle(daftar)">
                             <b-td>{{index +1}}</b-td>
-                            <b-td>{{data.nama}}</b-td>
-                            <b-td>{{data.no_ktp}}</b-td>
-                            <b-td>{{data.alamat}}</b-td>
-                            <b-td>{{data.status}}</b-td>
+                            <b-td>{{daftar.pelamar.userPelamar.nama}}</b-td>
+                            <b-td>{{daftar.nik}}</b-td>
+                            <b-td>{{daftar.alamatDomisili}}</b-td>
+                            
                         </b-tr>
                     </b-tbody>
                 </b-table-simple>
@@ -39,30 +43,44 @@
 </template>
 
 <script>
+import LowonganKerjaService from '../../service/LowonganKerjaService';
 
 export default {
-    name:"daftar-peserta-tes",
+    name:"daftarPesertaTes",
     data(){
         return{
             currentPage:1,
             perPage:10,
-            user:[
-                
-            ],
-            data:'',
+            et : [],
+            judul : ""            
         }
 
     },
-    mounted(){
-        this.data = this.$store.state.dummy;
-        console.log(this.data);
-    },
-    methods:{
-        rowClickedHandle(data){
-            this.$router.push('/tes/'+data.idPelamar);
+    computed: {
+        idLowongan() {
+            return this.$route.params.idLowongan;
         }
+    },
+    methods: {
+        refreshLamaranLoker() {
+            LowonganKerjaService.getLokerById(this.idLowongan).then(res => {
+                this.et = res.data.listLamaran;
+                this.judul = res.data.judulLoker;
+            });
+
+            console.log(this.et);
+            console.log(this.judul);
+        },
+        rowClickedHandle(daftar){
+            this.$router.push('/tes/'+daftar.idPelamar);
+        }
+
+    },
+    created(){
+        this.refreshLamaranLoker();
     }
-}
+    
+};
 </script>
 
 <style lang="scss" scoped>

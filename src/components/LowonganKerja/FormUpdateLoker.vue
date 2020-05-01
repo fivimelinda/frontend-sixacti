@@ -30,16 +30,22 @@
                 <input class="form-control" v-model="judulLoker" placeholder="Masukan Judul Lowongan Pekerjaan" disabled/>
             </fieldset>
 
-            <fieldset class="form-group">
-                <div class="mb-2 label">Departement</div>
-                <input class="form-control" v-model="departement" placeholder="Masukan nama departement" disabled/>
-            </fieldset>
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <fieldset class="form-group">
+                        <div class="mb-2 label">Departement</div>
+                        <input class="form-control" v-model="departement" placeholder="Masukan nama departement" disabled/>
+                    </fieldset>
+                </div>
 
-            <fieldset class="form-group">
-                <div class="mb-2 label">Section</div>
-                <input class="form-control" v-model="section" placeholder="Masukan nama section" disabled/>
-            </fieldset>
-
+                <div class="col-sm-6 col-xs-12">
+                    <fieldset class="form-group">
+                        <div class="mb-2 label">Section</div>
+                        <input class="form-control" v-model="section" placeholder="Masukan nama section" disabled/>
+                    </fieldset>
+                </div>
+            </div>
+            
             <div class="row">
                 <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
