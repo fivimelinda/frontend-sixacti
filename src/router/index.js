@@ -106,7 +106,7 @@ const routes = [
     component: Home
   },
   {
-    path:'/listPelamar',
+    path:'/listPelamar/:idLowongan',
     name: 'Pelamar',
     component: DaftarPesertaTes,
   },
