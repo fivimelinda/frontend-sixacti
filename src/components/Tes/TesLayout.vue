@@ -1,6 +1,6 @@
 <template>
     <div class="tes text" >
-        <v-container v-if="data.status === 200 && !(data.data === null)">
+        <v-container v-if="status === 200 && !(pelamar === null)">
             <b-card class="mb-5 mt-5">
                 <b-card-text>
                     <b-row>
@@ -9,55 +9,64 @@
                         </b-col>
                         <b-col class="my-auto" col md="8" lg="8">
                             <ol style="decoration:none !important">
-                                <li class="name h4 mb-3">{{user.nama}}</li>
-                                <li class="mb-3"><v-icon color="black" class="mr-3">{{icons.card}}</v-icon>{{user.no_ktp}}</li>
-                                <li class="mb-3"><v-icon class="mr-3">{{icons.tgl}}</v-icon>{{user.tempat_lahir}}, {{user.tanggal_lahir}}</li>
-                                <li class="mb-3"><v-icon color="red" class="mr-3">{{icons.location}}</v-icon>{{user.alamat}}</li>
-                                <li class="mb-3"><v-icon color="green" class="mr-3">{{icons.phone}}</v-icon>{{user.no_hp}}</li>
+                                <li class="name h4 mb-3">{{pelamar.userPelamar.nama}}</li>
+                                <li class="mb-3"><v-icon color="black" class="mr-3">{{icons.card}}</v-icon>{{pelamar.userPelamar.nik}}</li>
+                                <li class="mb-3"><v-icon class="mr-3">{{icons.tgl}}</v-icon>{{pelamar.userPelamar.tempat_lahir}}, {{pelamar.userPelamar.tanggal_lahir | format}}</li>
+                                <li class="mb-3"><v-icon color="red" class="mr-3">{{icons.location}}</v-icon>{{pelamar.userPelamar.alamat}}</li>
+                                <li class="mb-3"><v-icon color="green" class="mr-3">{{icons.phone}}</v-icon>{{pelamar.userPelamar.telepon}}</li>
                             </ol>
                         </b-col>
                     </b-row>
                 </b-card-text>
             </b-card>
+
             <div>
                 <div class="text-md-left h5" style="color:#C53751">
-                    Tes Medis
+                    Berkas Pelamar
                 </div>
                 <hr/>
+                
+            </div>
+
+            <div>
                 <div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <div class="text-md-left h5" style="color:#C53751">
+                        Tes Medis
+                    </div>
+                    <hr/>
+                    <tes-medis
+                    v-bind:tes_medis="tesMedis.data"
+                    v-bind:id_pelamar="idPelamar"
+                    @refreshTesMedis="loadNewTesMedis()"></tes-medis>
                 </div>
-                <tes-medis
-                v-bind:tes_medis="tesMedis.data"
-                v-bind:id_pelamar="idPelamar"
-                @refreshTesMedis="loadNewTesMedis()"></tes-medis>
-            </div>
-            <div>
-                <div class="text-md-left h5" style="color:#C53751">
-                    Tes Tulis
+                <div>
+                    <div class="text-md-left h5" style="color:#C53751">
+                        Tes Tulis
+                    </div>
+                    
+                    <hr/>
+                    <tes-tulis
+                    v-bind:tes_tulis="tesTulis.data"
+                    v-bind:tes_medis="tesMedis.data"
+                    v-bind:id_pelamar="idPelamar"
+                    @refreshTesTulis="loadNewTesTulis()"></tes-tulis>
                 </div>
-                <hr/>
-                <tes-tulis
-                v-bind:tes_tulis="tesTulis.data"
-                v-bind:tes_medis="tesMedis.data"
-                v-bind:id_pelamar="idPelamar"
-                @refreshTesTulis="loadNewTesTulis()"></tes-tulis>
-            </div>
-            <div>
-                <div class="text-md-left h5" style="color:#C53751">
-                    Tes Wawancara
+                <div>
+                    <div class="text-md-left h5" style="color:#C53751">
+                        Tes Wawancara
+                    </div>
+                    <hr/>
+                    <tes-wawancara
+                    v-bind:tes_wawancara="tesWawancara.data"
+                    v-bind:tes_tulis="tesTulis.data"
+                    v-bind:id_pelamar="idPelamar"
+                    @refreshTesWawancara="loadNewTesWawancara()"></tes-wawancara>
                 </div>
-                <hr/>
-                <tes-wawancara
-                v-bind:tes_wawancara="tesWawancara.data"
-                v-bind:tes_tulis="tesTulis.data"
-                v-bind:id_pelamar="idPelamar"
-                @refreshTesWawancara="loadNewTesWawancara()"></tes-wawancara>
             </div>
+        
+           
         </v-container>
-        <b-container v-else-if="data.data === null && data.status === 200" class="my-auto" style="height:100%;width:100%">
+        <!-- <b-container v-else-if="pelamar === null && status === 200" class="my-auto" style="height:100%;width:100%">
             <b-container class="my-auto h-100 w-50 mx-auto ">
             <b-card class="my-auto">
                 <b-card-text>
@@ -70,8 +79,8 @@
                 </b-card-text>
             </b-card>
             </b-container>
-        </b-container>
-        <b-container v-else-if="!(data.status === 200)" class="my-auto" style="height:100%;width:100%">
+        </b-container> -->
+        <!-- <b-container v-else-if="!(status === 200)" class="my-auto" style="height:100%;width:100%">
             <b-container class="my-auto h-100 w-50 mx-auto ">
             <b-card class="my-auto">
                 <b-card-text>
@@ -84,16 +93,25 @@
                 </b-card-text>
             </b-card>
         </b-container>
-        </b-container>
+        </b-container> -->
     </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import moment from 'moment'
 import TesMedis from './TesMedis/TesMedis.vue'
 import TesTulis from './TesTulis/TesTulis.vue'
 import TesWawancara from './TesWawancara/TesWawancara.vue'
+import LamaranService from '../../service/LamaranService'
 import axios from 'axios'
 
+Vue.config.productionTip = false
+Vue.filter('format', function(value){
+  if(value){
+    return moment(String(value)).format('DD MMMM YYYY')
+  }
+});
 export default {
     name:"tes-layout",
     components : {
@@ -110,35 +128,44 @@ export default {
                 phone:'mdi-phone',
                 tgl:'mdi-table-large'
             },
-            data:Object,
-            user:Object,
-            pelamar:Object,
-            tesMedis:Object,
-            tesTulis:Object,
-            tesWawancara:Object,
-            idPelamar : Number,
+            idPelamar :0,
+            pelamar : Object,
+            berkas : Object,
+            ktp : Object,
+            kk : Object,
+            npwp : Object,
+            bpjsKet : Object,
+            bpjsKes : Object,
+            kis : Object,
+            tesMedis : Object,
+            tesTulis : Object,
+            tesWawancara : Object,
+            status : 0
+        
         }
     },
 
     //check error
     async created(){
         try{
-            const URI = 'http://localhost:8081/api';
-            this.idPelamar = Number(this.$route.params.id);
-            this.user = this.$store.state.dummy[this.idPelamar-1]
-            const getData = await axios.get(URI + "/pelamar/get/" + this.$route.params.id, {responseType:'json'});
-            this.data = getData;
-            this.pelamar = getData.data;
-            const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json'});
-            this.tesMedis = getTesMedis;
-            const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, {responseType:'json'});
-            this.tesTulis = getTesTulis;
-            const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json'});
-            this.tesWawancara = getTesWawancara;
-            console.log(getTesMedis);
-            console.log(getTesTulis);
-            console.log(getTesWawancara);
-            console.log(getData);
+            this.refreshDetailLamaran();
+
+            // const URI = 'http://localhost:8081/api';
+            // this.idPelamar = Number(this.$route.params.id);
+            // this.user = this.$store.state.dummy[this.idPelamar-1]
+            // const getData = await axios.get(URI + "/pelamar/get/" + this.$route.params.id, {responseType:'json'});
+            // this.data = getData;
+            // this.pelamar = getData.data;
+            // const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json'});
+            // this.tesMedis = getTesMedis;
+            // const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, {responseType:'json'});
+            // this.tesTulis = getTesTulis;
+            // const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json'});
+            // this.tesWawancara = getTesWawancara;
+            // console.log(getTesMedis);
+            // console.log(getTesTulis);
+            // console.log(getTesWawancara);
+            // console.log(getData);
         }catch(error){
             console.log(error);
         }
@@ -154,7 +181,35 @@ export default {
             console.log(error)
         }
     },
+    computed: {
+        id() {
+            return this.$route.params.id;
+        }
+    },
     methods:{
+        refreshDetailLamaran() {
+            LamaranService.getLamaranById(this.id).then(res => {
+                this.pelamar = res.data.pelamar;
+                this.berkas = res.data.berkasModel;
+                this.ktp = res.data.ktpModel;
+                this.kk = res.data.kkModel;
+                this.npwp = res.data.npwpModel;
+                this.bpjsKet = res.data.bpjsKetenagakerjaan;
+                this.bpjsKes = res.data.bpjsKesehatanModel;
+                this.kis = res.data.kisModel;
+                this.status =res.status;
+            });
+            const URI = 'http://localhost:8081/api';
+            this.idPelamar = Number(this.id);
+            const getTesMedis = axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json'});
+            this.tesMedis = getTesMedis;
+            const getTesTulis = axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, {responseType:'json'});
+            this.tesTulis = getTesTulis;
+            const getTesWawancara = axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json'});
+            this.tesWawancara = getTesWawancara;
+
+
+        },
         errorBack(){
              this.$router.push('/listPelamar');
         },

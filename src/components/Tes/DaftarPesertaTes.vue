@@ -72,7 +72,7 @@ export default {
             console.log(this.judul);
         },
         rowClickedHandle(daftar){
-            this.$router.push('/tes/'+daftar.idPelamar);
+            this.$router.push('/tes/'+daftar.id);
         }
 
     },
