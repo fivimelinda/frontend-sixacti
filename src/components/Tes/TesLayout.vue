@@ -25,7 +25,73 @@
                     Berkas Pelamar
                 </div>
                 <hr/>
-                
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="card">
+                            <div class="card-header" id="headerCardBerkas">
+                                Berkas Resume
+                            </div>
+                            <div class="card-body">
+                                {{berkas.fileName}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="card">
+                            <div class="card-header" id="headerCardBerkas">
+                                Berkas Resume
+                            </div>
+                            <div class="card-body">
+                                {{berkas.fileName}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="card">
+                            <div class="card-header" id="headerCardBerkas">
+                                Berkas Resume
+                            </div>
+                            <div class="card-body">
+                                {{berkas.fileName}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="card">
+                            <div class="card-header" id="headerCardBerkas">
+                                Berkas Resume
+                            </div>
+                            <div class="card-body">
+                                {{berkas.fileName}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="card">
+                            <div class="card-header" id="headerCardBerkas">
+                                Berkas Resume
+                            </div>
+                            <div class="card-body">
+                                {{berkas.fileName}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="card">
+                            <div class="card-header" id="headerCardBerkas">
+                                Berkas Resume
+                            </div>
+                            <div class="card-body">
+                                {{berkas.fileName}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div>
@@ -268,6 +334,20 @@ export default {
 }
 .name{
     color:#C53751;
+}
+
+#headerCardBerkas{
+    background: #C53751;
+
+    font-family: Archivo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 22px;
+    /* identical to box height */
+
+
+    color: #FFFFFF;
 }
 
 ol li{
