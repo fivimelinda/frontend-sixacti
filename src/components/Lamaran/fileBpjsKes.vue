@@ -9,8 +9,8 @@
         <form enctype="multipart/form-data">
 
             <div class="form-group">
-              <div class="mb-2 label">Foto Kartu Tanda Penduduk*</div>
-              <input class="form-control" type="file" ref="file" v-on:change="handleFileUpload()" id="file" required>
+              <div class="mb-2 label">Foto BPJS Kesehatan</div>
+              <input class="form-control" type="file" ref="file" v-on:change="handleFileUpload()" id="file">
             </div>
             <!-- <div class="form-group">
               <div class="mb-2 label">Foto Kartu Keluarga*</div>
@@ -35,6 +35,7 @@
 
             <button v-on:click="submitFile(); cekSukses()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
             <br>
+            <button class=" btn btn-light border-danger w-10" v-on:click="beforeClicked()">Kembali</button>
             <button class=" mt-5 mb-5 btn btn-danger" v-on:click="afterClicked()">Selanjutnya</button>
         </form>
 
@@ -44,7 +45,7 @@
 
     <br>
     <br>
-    <b-modal size="lg" ref="my-modal" hide-footer title="Notifikasi">
+<b-modal size="lg" ref="my-modal" hide-footer title="Notifikasi">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm" id="berhasil">
@@ -71,10 +72,6 @@
             ></v-img>
                     </div>
                 </div>
-                <br>
-                <br>
-                <br>
-                <br>
             </div>
             
             
@@ -84,7 +81,7 @@
 
 
 <script>
-// import axios from 'axios';
+import axios from 'axios';
 export default {
   name:'fileLamaran',
   data(){
@@ -100,17 +97,19 @@ export default {
     }
   },
   methods:{
+    beforeClicked(){
+      this.$router.push("/fileNpwp/"+this.idLamaran);
+    },
     afterClicked(){
-      this.$router.push("/fileKk/"+this.idLamaran);
+      this.$router.push("/fileBpjsKet/"+this.idLamaran);
     },
     handleFileUpload(){
       this.file = this.$refs.file.files[0];
     },
-
     submitFile(){
       let formData = new FormData();
       formData.append('file', this.file);
-      this.axios.post('http://localhost:8081/api/uploadKtp/' + this.idLamaran,
+      axios.post('http://localhost:8081/api/uploadBpjsKesehatan/' + this.idLamaran,
         formData).then(ress => {
               this.ressData = ress;
             })
@@ -121,9 +120,7 @@ export default {
                 this.errorModal()
             }) 
         console.log("masuk submit file")
-            
-      },
-
+      }, 
       cekSukses(){
         
         if(this.count == 0){
@@ -140,7 +137,6 @@ export default {
             this.$refs['error-modal'].show();
             this.$refs['my-modal'].hide();
         }
-      
     
   }
 }

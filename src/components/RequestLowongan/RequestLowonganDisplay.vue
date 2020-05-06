@@ -1,5 +1,11 @@
 <template>
 <div class="all">
+    <br>
+    <ul class="nav">
+        <li><a class="brearcrumb-a" href="/">Home</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" href="/RequestLowongan">Request Lowongan Pekerjaan</a></li>
+    </ul>
     <div>
         <br>
         <p class="title-top">Request Lowongan Pekerjaan</p>
@@ -34,7 +40,7 @@
         </thead>
         <tbody class="tbody">
             <tr v-for="req in requestLowongan" :key="req.id" v-on:click="click(req)"  class="content">
-                <th scope=row class="th-bottom">{{req.id}}</th>
+                <th scope=row class="th-bottom" v-text="getLast()" v-bind="add()"></th>
                 <td>{{req.jobTitle}}</td>
                 <td>{{req.jumlah}}</td>
                 <td>{{req.dateWanted}}</td>
@@ -51,7 +57,8 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            requestLowongan: []
+            requestLowongan: [],
+            counter2: 1
         }
     },
     mounted() {
@@ -69,12 +76,20 @@ export default {
         click: function (req) {
             console.log("Clicked with "+ req.id);
             window.location.href= "/RequestLowongan/"+req.id;
+        },
+
+        add(){
+            this.counter2 ++;
+        },
+
+        getLast(){
+            return this.counter2-(this.requestLowongan.length*100)
         }
     }
 }
 </script>
 
-<style>
+<style scoped>
 .tambah{
     float: right;
     margin-right: 33px;
@@ -137,5 +152,34 @@ thead{
 .th-bottom:hover{
     border-left: 3px solid red;
 }
+
+.brearcrumb-a{
+    font-family: "Archivo";
+    font-size: 15px;
+    color: #848484;
+}
+
+a:link, a:active, a:hover, a:visited {
+    color: #848484 !important;
+    text-decoration: none;
+}
+
+v-application a{
+    color: #848484;
+}
+
+.nav {
+  list-style-type: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
+}
+
+.nav li {
+  display: inline-block;
+  padding: 2px;
+}
+
 
 </style>

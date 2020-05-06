@@ -1,5 +1,15 @@
 <template>
+  
   <div class="FormCreateLoker">
+    <br>
+    <ul class="nav">
+        <li><a class="brearcrumb-a" href="/">Home</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" href="/listRequestLowongan">Daftar Request Lowongan Pekerjaan</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" :href="'/buatLoker/'+idReq">Buat Lowongan Pekerjaan</a></li>
+
+    </ul>
     <br />
     <h1>Buat Lowongan Pekerjaan</h1>
     <br />
@@ -37,17 +47,25 @@
           </div>
 
           <div class="row">
-            <div class="col-6">
+            <div class="col-sm-6 col-xs-12">
               <div class="form-group">
                 <div class="mb-2 label">Tanggal Mulai</div>
-                <input type="date" class="form-control" id="tanggalMulai" v-model="tanggalMulai" />
+                <b-form-datepicker id="datepickerStart-invalid" :state="dateStartState" class="mb-2" v-model="tanggalMulai"></b-form-datepicker>
+                
+                <b-form-invalid-feedback id="input-live-feedback-start">
+                  Tanggal yang anda masukan tidak valid
+                </b-form-invalid-feedback>
               </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-sm-6 col-xs-12">
               <div class="form-group">
-                <div class="mb-2 label">Tanggal Mulai</div>
-                <input type="date" class="form-control" id="tanggalBerakhir" v-model="tanggalBerakhir" />
+                <div class="mb-2 label">Tanggal Berakhir</div>
+                <b-form-datepicker id="datepickerEnd-invalid" :state="dateEndState" class="mb-2" v-model="tanggalBerakhir"></b-form-datepicker>
+                
+                <b-form-invalid-feedback id="input-live-feedback-end">
+                  Tanggal yang anda masukan tidak valid
+                </b-form-invalid-feedback>
               </div>
             </div>
           </div>
@@ -57,13 +75,56 @@
             <b-textarea class="form-control" id="deskripsi" v-model="deskripsi"/>
           </div>
 
-          <button type="submit" class=" mt-5 mb-5 btn btn-danger">simpan</button>
+          <div class="btn-group">
+            <button type="submit" class="btn btn-danger mr-2">Simpan</button>
+            <button class="btn btn-light" @click="batal">Batal</button>
+          </div>
+    
 
         </form>
 
       </div>
 
     </div>
+
+    <b-modal size="lg" ref="modalOk" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Lowongan Kerja berhasil dibuat
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="centang"
+            :src="require('@/assets/success.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
+
+
+        <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Lowongan Kerja gagal dibuat
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
 
     <br>
     <br>
@@ -134,40 +195,101 @@ export default {
   name : "reqLoker",
   data(){
     return{
+      idReq : "",
       jobTitle : "",
       departement :"",
       section : "",
       tanggalMulai : "",
       tanggalBerakhir : "",
       deskripsi : "",
-      errors: []
+      errors: [],
     }
   },
   computed: {
         id() {
             return this.$route.params.id;
+        },
+        dateStartState(){
+          if(this.tanggalMulai == ""){
+            return null;
+          }
+          else{
+            var currentDate = moment(new Date()).format("DD MMMM YYYY");
+            var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
+            return !moment(tglMulai).isBefore(currentDate);
+          }
+          
+        },
+        dateEndState(){
+          if(this.tanggalBerakhir == ""){
+            return null;
+          }
+          else{
+            var currentDate = moment(new Date()).format("DD MMMM YYYY");
+            var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
+            var tglBerakhir = moment(this.tanggalBerakhir).format("DD MMMM YYYY");
+            if(moment(tglBerakhir).isAfter(this.dateWanted)){
+              return false;
+            }else{
+              if(moment(tglBerakhir).isBefore(tglMulai)){
+                return false;
+              }
+              else if(moment(tglBerakhir).isBefore(currentDate)){
+                return false;
+              }
+              else{
+                return true;
+              }
+            }
+            
+          }
+          
         }
+        
   },
   methods: {
         refreshLokerDetails() {
             RequestLowonganService.getReqLokerById(this.id).then(res => {
+                this.idReq = res.data.id;
                 this.jobTitle = res.data.jobTitle;
                 this.departement = res.data.departement;
                 this.section = res.data.section;
                 this.dateWanted = moment(res.data.dateWanted).format("DD MMMM YYYY");
                 
             });
+            
         },
         validateAndSubmit(e) {
             e.preventDefault();
             this.errors = [];
+            var currentDate = moment(new Date()).format("DD MMMM YYYY");
+            var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
+            var tglBerakhir = moment(this.tanggalBerakhir).format("DD MMMM YYYY");
 
-
-            if(!this.deskripsi){
-                this.errors.push("Enter valid values");
+            if(moment(tglMulai).isBefore(currentDate)){
+              console.log("Tanggal mulai yang anda masukan tidak valid")
+              this.errors.push("Tanggal mulai yang anda masukan tidak valid");
             }
-            else if(this.deskripsi.length < 5){
-                this.errors.push("Enter at least 5 chars");
+
+            if(moment(tglBerakhir).isBefore(tglMulai)){
+              console.log("Tanggal berakhir yang anda masukan tidak valid")
+              this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
+            }
+
+            if(moment(tglBerakhir).isBefore(currentDate)){
+              console.log("Tanggal berakhir yang anda masukan tidak valid")
+              this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
+            }
+
+            if(moment(tglBerakhir).isAfter(this.dateWanted)){
+              console.log("Tanggal berakhir yang anda masukan tidak valid")
+              this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
+            }
+            if(!this.deskripsi){
+                this.errors.push("Data yang anda masukan tidak valid");
+            }
+            else if(this.deskripsi.length < 25){
+                this.errors.push("Masukan deskripsinya minimal 25 karakter");
             }
             if(this.errors.length === 0) {
               LowonganKerjaService.addLoker(this.id,{
@@ -178,14 +300,34 @@ export default {
                 tanggalBerakhir : this.tanggalBerakhir,
                 deskripsi : this.deskripsi
               })
-              .then(() => {
-                    this.$router.push('/listLoker');
-                });
+              .then(ress => {
+                    this.retStatus = ress.data
+
+                    if(ress.status == 200){
+                        this.openModal()
+                    }
+                    else{
+                        this.errorModal()
+                    }
+              });
               
-              var a = this.deskripsi;
-              console.log(a)
             }
 
+        },
+
+        openModal() {
+            this.$refs['modalOk'].show();
+            window.setTimeout(function() {
+                window.location.href = "/listLoker";
+            }, 2000);
+        },
+
+        errorModal(){
+            this.$refs['error-modal'].show();
+        },
+
+        batal(){
+          this.$router.push("/listRequestLowongan");
         }
         
   },
