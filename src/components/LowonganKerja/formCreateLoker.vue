@@ -31,14 +31,20 @@
             <input class="form-control" v-model="jobTitle" id="judul" placeholder="Masukan Judul Lowongan Pekerjaan" />
           </div>
 
-          <div class="form-group">
-            <div class="mb-2 label">Departement</div>
-            <input class="form-control" v-model="departement" id="departement" placeholder="Masukan nama departement" />
-          </div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <div class="mb-2 label">Departement</div>
+                <input class="form-control" v-model="departement" id="departement" placeholder="Masukan nama departement" />
+              </div>
+            </div>
 
-          <div class="form-group">
-            <div class="mb-2 label">Section</div>
-            <input class="form-control" v-model="section" id="section" placeholder="Masukan nama section" />
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <div class="mb-2 label">Section</div>
+                <input class="form-control" v-model="section" id="section" placeholder="Masukan nama section" />
+              </div>
+            </div>
           </div>
 
           <div class="form-group">

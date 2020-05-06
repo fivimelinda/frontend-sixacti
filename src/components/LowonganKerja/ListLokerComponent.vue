@@ -22,7 +22,6 @@
               <span v-if="loker.deskripsi.length < 25 " class="mb-1" id="lokerDesc">{{loker.deskripsi}}</span>
               <span v-else  class="mb-1" id="lokerDesc">{{loker.deskripsi.substring(0,25) + " ..."}}</span>
               <p class="mt-1 mb-5" id="deptSect">{{loker.departement}} - {{loker.section}}</p>
-              <p class="mt-1 mb-5" id="deptSect">{{loker.departement}} - {{loker.section}}</p>
               <p id="periodeDesc">Periode {{loker.tanggalMulai | formatDate}} - {{loker.tanggalBerakhir | formatDate}}</p>
                <h4>{{loker.isDeleted}}</h4>
 
@@ -88,6 +87,7 @@ export default {
             .then(response => {
                 this.loker = response.data;
             });
+            console.log(this.loker);
         },
         deleteLokerClicked(idLowongan){
           LowonganKerjaService.deleteLoker(idLowongan).then(() =>{
