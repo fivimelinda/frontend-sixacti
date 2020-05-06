@@ -196,6 +196,7 @@ export default {
                     idPelamar:this.id_pelamar}
                 });
             await this.refreshTesWawancara();
+            this.buka("Tes Wawancara Berhasil dibuat.");
             
         },
 
@@ -219,7 +220,7 @@ export default {
                 }
             );
             await this.refreshTesWawancara();
-            this.buka();
+            this.buka("Tes Wawancara Berhasil diperbarui.");
         },
         async validatedTesWawancara(){
             await TesService.updateTesWawancara(this.tes_wawancara.idTesWawancara,
@@ -232,10 +233,11 @@ export default {
                 }
             );
             await this.refreshTesWawancara();
-            this.buka();
+            this.buka("Tes Wawancara Berhasil divalidasi");
             this.isValid = true;
         },
-        buka(){
+        buka(msg){
+            this.message = msg;
             this.$refs.modal.open();
         },
         create(){

@@ -216,9 +216,8 @@ export default {
                 pelamarTesMedis:{
                     idPelamar:this.id_pelamar}
                 });
-            this.buka('Tes Medis Berhasil Disimpan!')
             await this.refreshTesMedis();
-            
+            this.buka('Tes Medis Berhasil Disimpan!')
         },
 
         async refreshTesMedis(){
@@ -267,6 +266,7 @@ export default {
                 }
             );
             await this.refreshTesMedis();
+            this.buka("Tes Medis Berhasil divalidasi");
             this.isValid = true;
         },
 

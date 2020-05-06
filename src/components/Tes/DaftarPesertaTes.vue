@@ -2,7 +2,7 @@
     <v-container>
         <b-card>
             <b-card-text>
-                <b-table-simple hover @row-clicked="rowClickedHandle" caption-top responsive outlined>
+                <b-table-simple id="daftar-pelamar" hover @row-clicked="rowClickedHandle" caption-top responsive outlined>
                     <caption class="caption pl-5"><div class="" style="font-size:16px">Daftar Pelamar</div></caption>
                     <b-thead small class="header-table text-center">
                         <b-tr style="border:none">
@@ -27,9 +27,9 @@
                 <b-pagination
                 class="mr-3"
                 v-model="currentPage"
-                
+                :total-rows="data.length"
                 :per-page="perPage"
-                aria-controls="my-table"
+                aria-controls="daftar-pelamar"
                 align="right"
                 ></b-pagination>
 
@@ -45,7 +45,7 @@ export default {
     data(){
         return{
             currentPage:1,
-            perPage:10,
+            perPage:5,
             user:[
                 
             ],

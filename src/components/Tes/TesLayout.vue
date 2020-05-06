@@ -156,7 +156,7 @@ export default {
     },
     methods:{
         errorBack(){
-             this.$router.push('/listPelamar');
+             this.$router.push('/loker/production/daftar-pelamar');
         },
         async loadNewTesMedis(){
             try{

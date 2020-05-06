@@ -185,9 +185,8 @@ export default {
                 pelamarTesTulis:{
                     idPelamar:this.id_pelamar}
                 });
-            this.buka("Tes Tulis Berhasil Disimpan!")
             await this.refreshTesTulis();
-            
+            this.buka("Tes Tulis Berhasil Disimpan!")
         },
 
         async refreshTesTulis(){
@@ -208,7 +207,7 @@ export default {
                 }
             );
             await this.refreshTesTulis();
-            this.buka();
+            this.buka("Tes Tulis Berhasil diperbarui!");
         },
         async validatedTesTulis(){
             await TesService.updateTesTulis(this.tes_tulis.idTesTulis,
@@ -220,7 +219,7 @@ export default {
                 }
             );
             await this.refreshTesTulis();
-            this.buka();
+            this.buka("Tes Tulis Berhasil divalidasi");
             this.isValid = true;
         },
         buka(msg){

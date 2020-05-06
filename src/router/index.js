@@ -97,7 +97,7 @@ const routes = [
     component: Home
   },
   {
-    path:'/listPelamar',
+    path:'/loker/production/daftar-pelamar',
     name: 'Pelamar',
     component: DaftarPesertaTes,
   },
