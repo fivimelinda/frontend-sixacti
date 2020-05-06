@@ -34,12 +34,12 @@
                 <th scope="col">No.</th>
                 <th scope="col">Judul</th>
                 <th scope="col">Jumlah</th>
-                <th scope="col">Tanggal diiginkan</th>
+                <th scope="col">Tanggal diinginkan</th>
                 <th scope="col">Status</th>
             </tr>
         </thead>
         <tbody class="tbody">
-            <tr v-for="req in requestLowongan" :key="req.id" v-on:click="click(req)"  class="content">
+            <tr v-for="req in requestLowongan.slice().reverse()" :key="req.id" v-on:click="click(req)"  class="content">
                 <th scope=row class="th-bottom" v-text="getLast()" v-bind="add()"></th>
                 <td>{{req.jobTitle}}</td>
                 <td>{{req.jumlah}}</td>

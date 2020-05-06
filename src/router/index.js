@@ -13,6 +13,8 @@ import FormUpdateLoker from '../components/LowonganKerja/FormUpdateLoker.vue'
 import listLoker from '../components/LowonganKerja/ListLokerComponent.vue'
 import formCuti from '../components/Cuti/formCuti.vue'
 import viewCuti from '../components/Cuti/viewCuti.vue'
+import GenerateSuratKontrak from '../components/GenerateSuratKontrak/GenerateSuratKontrakHome.vue'
+
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 //import { LayoutPlugin } from 'bootstrap-vue'
@@ -222,6 +224,11 @@ const routes = [
     path: '/fileKis/:idLamaran',
     name:'fileKis',
     component: fileKis
+  },
+  {
+    path: '/GenerateSuratKontrak',
+    name: 'GenerateSuratKontrak',
+    component: GenerateSuratKontrak
   },
 
   {
