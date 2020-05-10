@@ -20,7 +20,258 @@
                 </b-card-text>
             </b-card>
 
-            <div>
+            <div class="row" v-if="status !== 'lulus Seleksi Berkas'">
+                <div class="col-xs-12 col-sm-6 col-md-8" >
+                    <div class="card">
+                        <div class="card-header" id="headerCardBerkas">
+                            Data Lamaran
+                        </div>
+                        <div class="card-body">
+                            <div class="row justify-start">
+                                <div class="col col-6">
+                                <p>
+                                    <bold 
+                                    style="color:#C53751">NIK : </bold>
+                                    
+                                </p>
+                                </div>
+                                <div class="col col-6">
+                                <p>
+                                    {{nik}}
+                                </p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-start">
+                                <div class="col col-6">
+                                <p>
+                                    <bold 
+                                    style="color:#C53751">Nama Ibu : </bold>
+                                    
+                                </p>
+                                </div>
+                                <div class="col col-6">
+                                <p>
+                                    {{namaIbu}}
+                                </p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-start">
+                                <div class="col col-6">
+                                <p>
+                                    <bold 
+                                    style="color:#C53751">Alamat Domisili : </bold>
+                                    
+                                </p>
+                                </div>
+                                <div class="col col-6">
+                                <p>
+                                    {{alamatDomisili}}
+                                </p>
+                                <p>
+                                    <bold 
+                                    style="color:#C53751">RT / RW : </bold>
+                                    {{rtDomisili}} / {{rwDomisili}}
+                                </p>
+                                <p>
+                                    <bold 
+                                    style="color:#C53751">Kelurahan : </bold>
+                                    {{kelurahanDomisili}}
+                                </p>
+                                <p>
+                                    <bold 
+                                    style="color:#C53751">Kecamatan : </bold>
+                                    {{kecamatanDomisili}}
+                                </p>
+                                <p>
+                                    <bold 
+                                    style="color:#C53751">Kode Pos : </bold>
+                                    {{kodePosDomisili}}
+                                </p>
+                                </div>
+
+                            </div>
+
+                            <div class="row justify-start">
+                                <div class="col col-6">
+                                    <p>
+                                        <bold 
+                                        style="color:#C53751">No. Telepon : </bold>
+                                        
+                                    </p>
+                                </div>
+                                <div class="col col-6">
+                                    <p>
+                                        {{telepon}}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-start">
+                                <div class="col col-6">
+                                    <p>
+                                        <bold 
+                                        style="color:#C53751">Pendidikan : </bold>
+                                        
+                                    </p>
+                                </div>
+                                <div class="col col-6">
+                                    <p>
+                                        {{pendidikan}}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-start">
+                                <div class="col col-6">
+                                    <p>
+                                        <bold 
+                                        style="color:#C53751">No. BPJS Kesehatan : </bold>
+                                        
+                                    </p>
+                                </div>
+                                <div class="col col-6">
+                                    <p>
+                                        {{noBpjsKesehatan}}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-start">
+                                <div class="col col-6">
+                                    <p>
+                                        <bold 
+                                        style="color:#C53751">No. BPJS Ketenagakerjaan : </bold>
+                                        
+                                    </p>
+                                </div>
+                                <div class="col col-6">
+                                    <p>
+                                        {{noBpjsKetenagakerjaan}}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-start">
+                                <div class="col col-6">
+                                    <p>
+                                        <bold 
+                                        style="color:#C53751">No. Kartu Indonesia Sehat : </bold>
+                                        
+                                    </p>
+                                </div>
+                                <div class="col col-6">
+                                    <p>
+                                        {{noKis}}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-start">
+                                <div class="col col-6">
+                                    <p>
+                                        <bold 
+                                        style="color:#C53751">Nomor Pokok Wajib Pajak : </bold>
+                                        
+                                    </p>
+                                </div>
+                                <div class="col col-6">
+                                    <p>
+                                        {{noNpwp}}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-start">
+                                <div class="col col-6">
+                                    <p>
+                                        <bold 
+                                        style="color:#C53751">Pengalaman Kerja Terakhir : </bold>
+                                        
+                                    </p>
+                                </div>
+                                <div class="col col-6">
+                                    <p>
+                                        <bold 
+                                        style="color:#C53751">Tahun Kerja : </bold>
+                                        {{tahunKerja}}
+                                    </p>
+                                    <p>
+                                        <bold 
+                                        style="color:#C53751">Nama Pekerjaan : </bold>
+                                        {{namaPekerjaan}}
+                                    </p>
+                                </div>
+                            </div>
+
+                          
+                            
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-xs-12 col-sm-6 col-md-4" >
+                    <div class="card">
+                        <div class="card-header" id="headerCardBerkas">
+                            Berkas-Berkas Lamaran
+                        </div>
+                        <div class="card-body">
+                            <p>
+                                <bold>Resume : </bold>
+                                <a @click="downloadBerkas(berkas.fileName)">
+                                    {{berkas.fileName}}                                
+                                </a> 
+                            </p>
+                            <p>
+                                <bold>KTP : </bold>
+                                <a @click="downloadKtp(ktp.fileName)">
+                                    {{ktp.fileName}}                                
+                                </a> 
+                            </p>
+                            <p>
+                                <bold>Kartu Keluarga : </bold>
+                                <a @click="downloadKK(kk.fileName)">
+                                    {{kk.fileName}}                                
+                                </a> 
+                            </p>
+                            <p v-if="bpjsKes">
+                                <bold>BPJS Kesehatan : </bold>
+                                <a @click="downloadBpjsKes(bpjsKes.fileName)">
+                                    {{bpjsKes.fileName}}                                
+                                </a> 
+                            </p>
+                            <p v-if="bpjsKet">
+                                <bold>BPJS Ketenagakerjaan : </bold>
+                                <a @click="downloadBpjsKet(bpjsKet.fileName)">
+                                    {{bpjsKet.fileName}}                                
+                                </a> 
+                            </p>
+                            <p v-if="kis">
+                                <bold>Kartu Indonesia Sehat : </bold>
+                                <a @click="downloadKIS(kis.fileName)">
+                                    {{kis.fileName}}                                
+                                </a> 
+                            </p>
+                            <p v-if="npwp">
+                                <bold>NPWP : </bold>
+                                <a @click="downloadNPWP(npwp.fileName)">
+                                    {{npwp.fileName}}                                
+                                </a> 
+                            </p>
+                            
+                        </div>
+                    </div>
+
+                    <!-- <div class="mt-2">
+                        <form >
+                            <label>Status</label>
+                            <b-dropdown></b-dropdown>
+                        </form>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- <div>
                 <div class="text-md-left h5" style="color:#C53751">
                     Berkas Pelamar
                 </div>
@@ -32,7 +283,7 @@
                                 Berkas KTP
                             </div>
                             <div class="card-body">
-                                <a :href="downloadKtp(ktp.fileName)">
+                                <a @click="downloadKtp(ktp.fileName)">
                                     {{ktp.fileName}}                                
                                 </a> 
                             </div>
@@ -94,9 +345,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div>
+            <div v-if="status == 'Lulus Seleksi Berkas'">
                 <div>
                     <div class="text-md-left h5" style="color:#C53751">
                         Tes Medis
@@ -172,7 +423,7 @@ import TesMedis from './TesMedis/TesMedis.vue'
 import TesTulis from './TesTulis/TesTulis.vue'
 import TesWawancara from './TesWawancara/TesWawancara.vue'
 import LamaranService from '../../service/LamaranService'
-import BerkasLamaran from '../../service/BerkasLamaran'
+//import BerkasLamaran from '../../service/BerkasLamaran'
 import axios from 'axios'
 
 Vue.config.productionTip = false
@@ -209,7 +460,25 @@ export default {
             tesMedis : Object,
             tesTulis : Object,
             tesWawancara : Object,
-            status : 0
+
+            nik : "",
+            namaIbu : "",
+            alamatDomisili : "",
+            rtDomisili : "",
+            rwDomisili : "",
+            kelurahanDomisili : "",
+            kecamatanDomisili : "",
+            kodePosDomisili : "",
+            telepon : "",
+            pendidikan : "",
+            noNpwp : "",
+            noBpjsKetenagakerjaan : "",
+            noBpjsKesehatan : "",
+            noKis : "",
+            pengalamanKerja : "",
+            tahunKerja : "",
+            namaPekerjaan : "",
+            status : ""
         
         }
     },
@@ -266,6 +535,24 @@ export default {
                 this.bpjsKet = res.data.bpjsKetenagakerjaan;
                 this.bpjsKes = res.data.bpjsKesehatanModel;
                 this.kis = res.data.kisModel;
+
+                this.nik = res.data.nik;
+                this.namaIbu = res.data.namaIbu;
+                this.alamatDomisili = res.data.alamatDomisili;
+                this.rtDomisili = res.data.rtDomisili;
+                this.rwDomisili = res.data.rwDomisili;
+                this.kelurahanDomisili = res.data.kelurahanDomisili;
+                this.kecamatanDomisili = res.data.kecamatanDomisili;
+                this.kodePosDomisili = res.data.kodePosDomisili;
+                this.telepon = res.data.telepon;
+                this.pendidikan = res.data.pendidikan;
+                this.noBpjsKetenagakerjaan = res.data.noBpjsKetenagakerjaan;
+                this.noBpjsKesehatan = res.data.noBpjsKesehatan;
+                this.noKis = res.data.noKis;
+                this.noNpwp = res.data.npwp;
+                this.tahunKerja = res.data.tahunKerja;
+                this.pengalamanKerja = res.data.pengalamanKerja;
+                this.namaPekerjaan = res.data.namaPekerjaan;
                 this.status =res.status;
             });
             const URI = 'http://localhost:8081/api';
@@ -310,13 +597,141 @@ export default {
             }
         },
         downloadKtp(fileName){
-            BerkasLamaran.downloadKTP(fileName).then(() => {
-                this.refreshDetailLamaran();
+            // BerkasLamaran.downloadKTP(fileName).then(() => {
+            //     this.refreshDetailLamaran();
+            // })
+            axios({
+                url: 'http://localhost:8081/api/download/ktp/' + fileName,
+                method : 'GET',
+                responseType : 'blob',
+            }).then((response) =>  {
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                var fileLink = document.createElement('a');
+
+                fileLink.href = fileURL;
+                fileLink.setAttribute('download', fileName);
+                document.body.appendChild(fileLink);
+
+                fileLink.click();
             })
-            
+        },
+        downloadBerkas(fileName){
+            // BerkasLamaran.downloadKTP(fileName).then(() => {
+            //     this.refreshDetailLamaran();
+            // })
+            axios({
+                url: 'http://localhost:8081/api/download/resume/' + fileName,
+                method : 'GET',
+                responseType : 'blob',
+            }).then((response) =>  {
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                var fileLink = document.createElement('a');
+
+                fileLink.href = fileURL;
+                fileLink.setAttribute('download', fileName);
+                document.body.appendChild(fileLink);
+
+                fileLink.click();
+            })
+        },
+        downloadKK(fileName){
+            // BerkasLamaran.downloadKTP(fileName).then(() => {
+            //     this.refreshDetailLamaran();
+            // })
+            axios({
+                url: 'http://localhost:8081/api/download/resume/' + fileName,
+                method : 'GET',
+                responseType : 'blob',
+            }).then((response) =>  {
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                var fileLink = document.createElement('a');
+
+                fileLink.href = fileURL;
+                fileLink.setAttribute('download', fileName);
+                document.body.appendChild(fileLink);
+
+                fileLink.click();
+            })
+        },
+        downloadBpjsKes(fileName){
+            // BerkasLamaran.downloadKTP(fileName).then(() => {
+            //     this.refreshDetailLamaran();
+            // })
+            axios({
+                url: 'http://localhost:8081/api/download/bpjsKes/' + fileName,
+                method : 'GET',
+                responseType : 'blob',
+            }).then((response) =>  {
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                var fileLink = document.createElement('a');
+
+                fileLink.href = fileURL;
+                fileLink.setAttribute('download', fileName);
+                document.body.appendChild(fileLink);
+
+                fileLink.click();
+            })
+        },
+        downloadBpjsKet(fileName){
+            // BerkasLamaran.downloadKTP(fileName).then(() => {
+            //     this.refreshDetailLamaran();
+            // })
+            axios({
+                url: 'http://localhost:8081/api/download/bpjsKet/' + fileName,
+                method : 'GET',
+                responseType : 'blob',
+            }).then((response) =>  {
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                var fileLink = document.createElement('a');
+
+                fileLink.href = fileURL;
+                fileLink.setAttribute('download', fileName);
+                document.body.appendChild(fileLink);
+
+                fileLink.click();
+            })
+        },
+        downloadKIS(fileName){
+            // BerkasLamaran.downloadKTP(fileName).then(() => {
+            //     this.refreshDetailLamaran();
+            // })
+            axios({
+                url: 'http://localhost:8081/api/download/kis/' + fileName,
+                method : 'GET',
+                responseType : 'blob',
+            }).then((response) =>  {
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                var fileLink = document.createElement('a');
+
+                fileLink.href = fileURL;
+                fileLink.setAttribute('download', fileName);
+                document.body.appendChild(fileLink);
+
+                fileLink.click();
+            })
+        },
+        downloadNPWP(fileName){
+            // BerkasLamaran.downloadKTP(fileName).then(() => {
+            //     this.refreshDetailLamaran();
+            // })
+            axios({
+                url: 'http://localhost:8081/api/download/npwp/' + fileName,
+                method : 'GET',
+                responseType : 'blob',
+            }).then((response) =>  {
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                var fileLink = document.createElement('a');
+
+                fileLink.href = fileURL;
+                fileLink.setAttribute('download', fileName);
+                document.body.appendChild(fileLink);
+
+                fileLink.click();
+            })
         }
     }
 }
+
 </script>
 
 <style lang="scss">
