@@ -29,10 +29,12 @@
                     <div class="col-xs-12 col-sm-6 col-md-4">
                         <div class="card">
                             <div class="card-header" id="headerCardBerkas">
-                                Berkas Resume
+                                Berkas KTP
                             </div>
                             <div class="card-body">
-                                {{berkas.fileName}}
+                                <a :href="downloadKtp(ktp.fileName)">
+                                    {{ktp.fileName}}                                
+                                </a> 
                             </div>
                         </div>
                     </div>
@@ -170,6 +172,7 @@ import TesMedis from './TesMedis/TesMedis.vue'
 import TesTulis from './TesTulis/TesTulis.vue'
 import TesWawancara from './TesWawancara/TesWawancara.vue'
 import LamaranService from '../../service/LamaranService'
+import BerkasLamaran from '../../service/BerkasLamaran'
 import axios from 'axios'
 
 Vue.config.productionTip = false
@@ -306,6 +309,12 @@ export default {
                 console.log(error);
             }
         },
+        downloadKtp(fileName){
+            BerkasLamaran.downloadKTP(fileName).then(() => {
+                this.refreshDetailLamaran();
+            })
+            
+        }
     }
 }
 </script>

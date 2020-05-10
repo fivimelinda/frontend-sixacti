@@ -13,7 +13,7 @@
             <input type="number" class="form-control" id="nik" v-model="nik" placeholder="masukkan nomor induk kependudukan" required>
           </div>
           <div class="form-group">
-            <div class="mb-2 label">Nama*</div>
+            <div class="mb-2 label">Nama Ibu*</div>
             <input class="form-control" id="namaIbu" v-model="namaIbu" placeholder="masukkan nama" required>
           </div>
 
