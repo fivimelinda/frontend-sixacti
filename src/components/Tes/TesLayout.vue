@@ -30,8 +30,8 @@
                             <div class="row justify-start">
                                 <div class="col col-6">
                                 <p>
-                                    <bold 
-                                    style="color:#C53751">NIK : </bold>
+                                    <strong 
+                                    style="color:#C53751">NIK : </strong>
                                     
                                 </p>
                                 </div>
@@ -45,8 +45,8 @@
                             <div class="row justify-start">
                                 <div class="col col-6">
                                 <p>
-                                    <bold 
-                                    style="color:#C53751">Nama Ibu : </bold>
+                                    <strong 
+                                    style="color:#C53751">Nama Ibu : </strong>
                                     
                                 </p>
                                 </div>
@@ -60,8 +60,8 @@
                             <div class="row justify-start">
                                 <div class="col col-6">
                                 <p>
-                                    <bold 
-                                    style="color:#C53751">Alamat Domisili : </bold>
+                                    <strong 
+                                    style="color:#C53751">Alamat Domisili : </strong>
                                     
                                 </p>
                                 </div>
@@ -70,23 +70,23 @@
                                     {{alamatDomisili}}
                                 </p>
                                 <p>
-                                    <bold 
-                                    style="color:#C53751">RT / RW : </bold>
+                                    <strong 
+                                    style="color:#C53751">RT / RW : </strong>
                                     {{rtDomisili}} / {{rwDomisili}}
                                 </p>
                                 <p>
-                                    <bold 
-                                    style="color:#C53751">Kelurahan : </bold>
+                                    <strong 
+                                    style="color:#C53751">Kelurahan : </strong>
                                     {{kelurahanDomisili}}
                                 </p>
                                 <p>
-                                    <bold 
-                                    style="color:#C53751">Kecamatan : </bold>
+                                    <strong 
+                                    style="color:#C53751">Kecamatan : </strong>
                                     {{kecamatanDomisili}}
                                 </p>
                                 <p>
-                                    <bold 
-                                    style="color:#C53751">Kode Pos : </bold>
+                                    <strong 
+                                    style="color:#C53751">Kode Pos : </strong>
                                     {{kodePosDomisili}}
                                 </p>
                                 </div>
@@ -96,8 +96,8 @@
                             <div class="row justify-start">
                                 <div class="col col-6">
                                     <p>
-                                        <bold 
-                                        style="color:#C53751">No. Telepon : </bold>
+                                        <strong 
+                                        style="color:#C53751">No. Telepon : </strong>
                                         
                                     </p>
                                 </div>
@@ -111,8 +111,8 @@
                             <div class="row justify-start">
                                 <div class="col col-6">
                                     <p>
-                                        <bold 
-                                        style="color:#C53751">Pendidikan : </bold>
+                                        <strong 
+                                        style="color:#C53751">Pendidikan : </strong>
                                         
                                     </p>
                                 </div>
@@ -126,8 +126,8 @@
                             <div class="row justify-start">
                                 <div class="col col-6">
                                     <p>
-                                        <bold 
-                                        style="color:#C53751">No. BPJS Kesehatan : </bold>
+                                        <strong 
+                                        style="color:#C53751">No. BPJS Kesehatan : </strong>
                                         
                                     </p>
                                 </div>
@@ -141,8 +141,8 @@
                             <div class="row justify-start">
                                 <div class="col col-6">
                                     <p>
-                                        <bold 
-                                        style="color:#C53751">No. BPJS Ketenagakerjaan : </bold>
+                                        <strong 
+                                        style="color:#C53751">No. BPJS Ketenagakerjaan : </strong>
                                         
                                     </p>
                                 </div>
@@ -156,8 +156,8 @@
                             <div class="row justify-start">
                                 <div class="col col-6">
                                     <p>
-                                        <bold 
-                                        style="color:#C53751">No. Kartu Indonesia Sehat : </bold>
+                                        <strong 
+                                        style="color:#C53751">No. Kartu Indonesia Sehat : </strong>
                                         
                                     </p>
                                 </div>
@@ -171,8 +171,8 @@
                             <div class="row justify-start">
                                 <div class="col col-6">
                                     <p>
-                                        <bold 
-                                        style="color:#C53751">Nomor Pokok Wajib Pajak : </bold>
+                                        <strong 
+                                        style="color:#C53751">Nomor Pokok Wajib Pajak : </strong>
                                         
                                     </p>
                                 </div>
@@ -186,20 +186,20 @@
                             <div class="row justify-start">
                                 <div class="col col-6">
                                     <p>
-                                        <bold 
-                                        style="color:#C53751">Pengalaman Kerja Terakhir : </bold>
+                                        <strong 
+                                        style="color:#C53751">Pengalaman Kerja Terakhir : </strong>
                                         
                                     </p>
                                 </div>
                                 <div class="col col-6">
                                     <p>
-                                        <bold 
-                                        style="color:#C53751">Tahun Kerja : </bold>
+                                        <strong 
+                                        style="color:#C53751">Tahun Kerja : </strong>
                                         {{tahunKerja}}
                                     </p>
                                     <p>
-                                        <bold 
-                                        style="color:#C53751">Nama Pekerjaan : </bold>
+                                        <strong 
+                                        style="color:#C53751">Nama Pekerjaan : </strong>
                                         {{namaPekerjaan}}
                                     </p>
                                 </div>
@@ -217,43 +217,43 @@
                         </div>
                         <div class="card-body">
                             <p>
-                                <bold>Resume : </bold>
+                                <strong>Resume : </strong>
                                 <a @click="downloadBerkas(berkas.fileName)">
                                     {{berkas.fileName}}                                
                                 </a> 
                             </p>
                             <p>
-                                <bold>KTP : </bold>
+                                <strong>KTP : </strong>
                                 <a @click="downloadKtp(ktp.fileName)">
                                     {{ktp.fileName}}                                
                                 </a> 
                             </p>
                             <p>
-                                <bold>Kartu Keluarga : </bold>
+                                <strong>Kartu Keluarga : </strong>
                                 <a @click="downloadKK(kk.fileName)">
                                     {{kk.fileName}}                                
                                 </a> 
                             </p>
                             <p v-if="bpjsKes">
-                                <bold>BPJS Kesehatan : </bold>
+                                <strong>BPJS Kesehatan : </strong>
                                 <a @click="downloadBpjsKes(bpjsKes.fileName)">
                                     {{bpjsKes.fileName}}                                
                                 </a> 
                             </p>
                             <p v-if="bpjsKet">
-                                <bold>BPJS Ketenagakerjaan : </bold>
+                                <strong>BPJS Ketenagakerjaan : </strong>
                                 <a @click="downloadBpjsKet(bpjsKet.fileName)">
                                     {{bpjsKet.fileName}}                                
                                 </a> 
                             </p>
                             <p v-if="kis">
-                                <bold>Kartu Indonesia Sehat : </bold>
+                                <strong>Kartu Indonesia Sehat : </strong>
                                 <a @click="downloadKIS(kis.fileName)">
                                     {{kis.fileName}}                                
                                 </a> 
                             </p>
                             <p v-if="npwp">
-                                <bold>NPWP : </bold>
+                                <strong>NPWP : </strong>
                                 <a @click="downloadNPWP(npwp.fileName)">
                                     {{npwp.fileName}}                                
                                 </a> 
@@ -262,92 +262,36 @@
                         </div>
                     </div>
 
-                    <!-- <div class="mt-2">
-                        <form >
-                            <label>Status</label>
-                            <b-dropdown></b-dropdown>
-                        </form>
-                    </div> -->
+                    <div class="mt-2">
+                        <div class="mt-3">
+                            Status lamaran: 
+                            <strong v-if="statusLamaran == 'Lulus Seleksi Berkas'"
+                            style="color : #2b961f">{{ statusLamaran }}</strong>
+
+                            <strong v-else-if="statusLamaran == 'Tidak Lulus Seleksi Berkas'"
+                            style="color : #ff0000">{{ statusLamaran }}</strong>
+                        </div>
+                        <div v-if="statusLamaran == null">
+                            <b-form-select v-model="tmpStatus" :options="options"></b-form-select>
+                            <b-btn v-b-modal.modal-1 class="mt-3">Simpan</b-btn>
+                        </div>
+                        <b-modal ref="modal" id="modal-1" title="Konfirmasi Pengubahan Status Lamaran" v-bind:hide-footer="true">
+                            <div class="detail">
+                                <p class="title">Apakah anda yakin untuk mengubah statusnya ? </p>
+                                <hr>
+                                <div class="btn-group">
+                                <button type="submit" class="btn btn-danger mr-2" @click="setStatus()">Ubah</button>
+                                <button class="btn btn-light" @click="hideModal">Batal</button>
+                                </div>
+                            </div>
+                        </b-modal>
+                        
+                    </div>
                 </div>
             </div>
 
-            <!-- <div>
-                <div class="text-md-left h5" style="color:#C53751">
-                    Berkas Pelamar
-                </div>
-                <hr/>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="card">
-                            <div class="card-header" id="headerCardBerkas">
-                                Berkas KTP
-                            </div>
-                            <div class="card-body">
-                                <a @click="downloadKtp(ktp.fileName)">
-                                    {{ktp.fileName}}                                
-                                </a> 
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="card">
-                            <div class="card-header" id="headerCardBerkas">
-                                Berkas Resume
-                            </div>
-                            <div class="card-body">
-                                {{berkas.fileName}}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="card">
-                            <div class="card-header" id="headerCardBerkas">
-                                Berkas Resume
-                            </div>
-                            <div class="card-body">
-                                {{berkas.fileName}}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="card">
-                            <div class="card-header" id="headerCardBerkas">
-                                Berkas Resume
-                            </div>
-                            <div class="card-body">
-                                {{berkas.fileName}}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="card">
-                            <div class="card-header" id="headerCardBerkas">
-                                Berkas Resume
-                            </div>
-                            <div class="card-body">
-                                {{berkas.fileName}}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="card">
-                            <div class="card-header" id="headerCardBerkas">
-                                Berkas Resume
-                            </div>
-                            <div class="card-body">
-                                {{berkas.fileName}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-            <div v-if="status == 'Lulus Seleksi Berkas'">
+            <div v-if="statusLamaran == 'Lulus Seleksi Berkas'">
                 <div>
                     <div class="text-md-left h5" style="color:#C53751">
                         Tes Medis
@@ -382,6 +326,45 @@
                     @refreshTesWawancara="loadNewTesWawancara()"></tes-wawancara>
                 </div>
             </div>
+
+            <b-modal size="lg" ref="modalOk" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Status Lamaran Berhasil di Ubah
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="centang"
+            :src="require('@/assets/success.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
+
+
+        <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Status Lamaran Gagal di Ubah
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
         
            
         </v-container>
@@ -423,7 +406,6 @@ import TesMedis from './TesMedis/TesMedis.vue'
 import TesTulis from './TesTulis/TesTulis.vue'
 import TesWawancara from './TesWawancara/TesWawancara.vue'
 import LamaranService from '../../service/LamaranService'
-//import BerkasLamaran from '../../service/BerkasLamaran'
 import axios from 'axios'
 
 Vue.config.productionTip = false
@@ -478,7 +460,14 @@ export default {
             pengalamanKerja : "",
             tahunKerja : "",
             namaPekerjaan : "",
-            status : ""
+            status : "",
+            statusLamaran :'',
+            tmpStatus : '',
+            options :[
+                { text: '---', value: null, },
+                {text: 'Lulus Seleksi Berkas', value: 'Lulus Seleksi Berkas'},
+                {text: 'Tidak Lulus Seleksi Berkas', value: 'Tidak Lulus Seleksi Berkas'}
+            ]
         
         }
     },
@@ -553,6 +542,8 @@ export default {
                 this.tahunKerja = res.data.tahunKerja;
                 this.pengalamanKerja = res.data.pengalamanKerja;
                 this.namaPekerjaan = res.data.namaPekerjaan;
+                this.statusLamaran = res.data.statusLamaran;
+
                 this.status =res.status;
             });
             const URI = 'http://localhost:8081/api';
@@ -595,6 +586,39 @@ export default {
             }catch(error){
                 console.log(error);
             }
+        },
+        setStatus(){
+            try{
+                LamaranService.setStatus(this.id, {
+                    statusLamaran : this.tmpStatus
+                })
+                .then(ress => {
+                    this.retStatus = ress.data
+
+                    if(ress.status == 200){
+                        this.openModal(this.id)
+                    }
+                    else{
+                        this.errorModal()
+                    }
+                });
+                
+            }catch(error){
+                console.log(error);
+            }
+        },
+        openModal(id) {
+            this.$refs['modalOk'].show();
+            window.setTimeout(function() {
+                window.location.href = "/tes/" + id;
+            }, 2000);
+        },
+
+        errorModal(){
+            this.$refs['error-modal'].show();
+        },
+        hideModal(){
+          this.$refs['modal'].hide();
         },
         downloadKtp(fileName){
             // BerkasLamaran.downloadKTP(fileName).then(() => {

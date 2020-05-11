@@ -23,6 +23,7 @@
                             <b-td>{{daftar.pelamar.userPelamar.nama}}</b-td>
                             <b-td>{{daftar.nik}}</b-td>
                             <b-td>{{daftar.alamatDomisili}}</b-td>
+                            <b-td>{{daftar.statusLamaran}}</b-td>
                             
                         </b-tr>
                     </b-tbody>

@@ -10,6 +10,9 @@ class LamaranService {
     getLamaranById(id){
         return axios.get(URI + "/detailLamaran/" + id) ;
     }
+    setStatus(id, lamaran){
+        return axios.put(URI + "/setStatus/" + id, lamaran);
+    }
 
 }
 
