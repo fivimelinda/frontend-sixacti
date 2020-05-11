@@ -23,7 +23,7 @@ import fileLamaran from '../components/Lamaran/fileLamaran.vue'
 import DaftarPesertaTes from '../components/Tes/DaftarPesertaTes.vue'
 
 import Login from '../components/Auth/Login/Login.vue'
-
+import Atribut from '../components/Attibut/Atribut.vue'
 import fileKk from '../components/Lamaran/fileKk'
 import fileNpwp from '../components/Lamaran/fileNpwp'
 import fileBpjsKes from '../components/Lamaran/fileBpjsKes'
@@ -114,23 +114,11 @@ const routes = [
     path: '/tes/:id',
     name: 'tes',
     component: TesLayout,
-    // children:[
-    //   {
-    //     path: 'tulis',
-    //     name: 'tulis',
-    //     component: () => import('../components/Tes/TesTulis/TesTulis.vue'),
-    //   },
-    //   {
-    //     path: 'medis',
-    //     name: 'medis',
-    //     component: () => import('../components/Tes/TesMedis/TesMedis.vue'),
-    //   },
-    //   {
-    //     path: 'wawancara',
-    //     name: 'wawancara',
-    //     component: () => import('../components/Tes/TesWawancara/TesWawancara.vue')
-    //   },
-    // ]
+  },
+  {
+    path:'/atribut',
+    name:'atribut',
+    component: Atribut
   },
   {
     //path: '/RequestLowongan',
