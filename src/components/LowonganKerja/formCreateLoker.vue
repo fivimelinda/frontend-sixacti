@@ -208,6 +208,7 @@ export default {
       tanggalMulai : "",
       tanggalBerakhir : "",
       deskripsi : "",
+      dateWanted : "",
       errors: [],
     }
   },

@@ -23,6 +23,7 @@
                             <b-td>{{daftar.pelamar.userPelamar.nama}}</b-td>
                             <b-td>{{daftar.nik}}</b-td>
                             <b-td>{{daftar.alamatDomisili}}</b-td>
+                            <b-td>{{daftar.statusLamaran}}</b-td>
                             
                         </b-tr>
                     </b-tbody>
@@ -72,7 +73,7 @@ export default {
             console.log(this.judul);
         },
         rowClickedHandle(daftar){
-            this.$router.push('/tes/'+daftar.idPelamar);
+            this.$router.push('/tes/'+daftar.id);
         }
 
     },

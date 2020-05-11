@@ -224,6 +224,12 @@ const routes = [
     component: fileKis
   },
 
+  //Path Download File
+  {
+    path: '/download/ktp/:fileName',
+    
+  },
+
   {
     path: '/about',
     name: 'About',
