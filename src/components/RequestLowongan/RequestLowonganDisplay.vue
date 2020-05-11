@@ -39,8 +39,8 @@
             </tr>
         </thead>
         <tbody class="tbody">
-            <tr v-for="req in requestLowongan.slice().reverse()" :key="req.id" v-on:click="click(req)"  class="content">
-                <th scope=row class="th-bottom" v-text="getLast()" v-bind="add()"></th>
+            <tr v-for="(req,index) in requestLowongan.slice().reverse()" :key="req.id" v-on:click="click(req)"  class="content">
+                <th scope=row class="th-bottom" v-bind="add()">{{index+1}}</th>
                 <td>{{req.jobTitle}}</td>
                 <td>{{req.jumlah}}</td>
                 <td>{{req.dateWanted}}</td>
