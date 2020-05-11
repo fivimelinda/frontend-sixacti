@@ -13,8 +13,19 @@
 
         <div>
         <div v-if="tes_wawancara === null && !isTesWawancaraFormOpen" class="d-flex justify-center">
-            <v-btn color="#C53751"><v-icon color="white">{{icons.plus}}</v-icon>
-            <b-button class="button-primary" :disabled="(tes_tulis===null)" @click="openFormTesWawancara()" size="sm">Tambah Tes Wawancara</b-button></v-btn>
+             <!-- disabled button -->
+            <div v-if="tes_tulis===null">
+                <v-btn color="rgb(121, 121, 121)"
+                class="p-0"
+                ><b-button class="pl-3 pr-3" style="background-color:rgb(121, 121, 121)"
+                @click="openFormTesWawancara()" disabled size="sm"><strong class="h6 mr-1"><b-icon-plus></b-icon-plus></strong> Tambah Tes Wawancara</b-button>
+                </v-btn>
+            </div>
+            <!-- active button -->
+            <div v-else>
+                <v-btn color="#C53751" class="pa-0"><b-button class="button-primary pl-3 pr-3"
+                @click="openFormTesWawancara()" size="sm"><strong class="h6 mr-1"><b-icon-plus></b-icon-plus></strong> Tambah Tes Wawancara</b-button></v-btn>
+            </div>
         </div>
 
         <v-card
@@ -40,11 +51,10 @@
 
             <v-divider></v-divider>  
                 <div v-if="!tes_wawancara.isEdit && !isValid" class="d-flex justify-content-center">
-                    <v-btn color="black" class="mr-2 mb-3">
-                        <v-icon color="white">
-                            {{icons.pencil}}
-                        </v-icon>
-                        <b-button class="button" size="sm" v-b-modal.tes-wawancara @click="openModelUpdateTesWawancara()">Ubah</b-button>
+                    <v-btn color="black" class="mb-3 pa-0">
+                        <b-button class="button pr-5 pl-5" 
+                        size="sm" v-b-modal.tes-wawancara @click="openModelUpdateTesWawancara()">
+                        <strong class="h6 mr-3"><b-icon-pencil></b-icon-pencil></strong> Ubah</b-button>
                     </v-btn>
 
                     <!-- <modal-success v-bind:success="success"></modal-success> -->
@@ -77,13 +87,11 @@
                     <v-btn
                     outlined
                     color="black"
-                    class="ml-2 mb-3"
+                    class="mb-3 ml-2 pa-0"
                     v-if="!isValid"
                     >
-                        <v-icon color="black">
-                            {{icons.check}}
-                        </v-icon>
-                        <b-button class="button-secondary" size="sm" v-b-modal.valid-wawancara>Selesai</b-button>
+                        <b-button class="button-secondary pr-5 pl-4" size="sm" v-b-modal.valid-wawancara>
+                           <strong class="h6 mr-2"><b-icon-check></b-icon-check></strong> Lolos</b-button>
                     </v-btn>
 
                     <b-modal
@@ -128,11 +136,15 @@
 import { SweetModal } from 'sweet-modal-vue'
 import FormTesWawancara from './FormTesWawancara.vue'
 import TesService from '../../../service/TesService'
+import {BIconPlus, BIconPencil, BIconCheck} from 'bootstrap-vue'
 
 
 export default {
     name:"tes-wawancara",
     components:{
+        BIconPencil,
+        BIconCheck,
+        BIconPlus,
         SweetModal,
         FormTesWawancara
     },

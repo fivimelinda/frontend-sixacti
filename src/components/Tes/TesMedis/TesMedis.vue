@@ -15,7 +15,8 @@
         <div>
             <!-- kondisikan ketika masih tidak ada value untuk tes medis -->
             <div v-if="tes_medis === null && !isTesMedisFormOpen" class="d-flex justify-center">
-                <v-btn color="#C53751"><v-icon color="white">{{mdi.plus}}</v-icon><b-button class="button-primary" @click="openFormTesMedis()" size="sm">Tambah Tes Medis</b-button></v-btn>
+                <v-btn class="p-0" color="#C53751">
+                <b-button class="button-primary pr-5 pl-3" @click="openFormTesMedis()" size="sm"><strong class="h5 mr-2"><b-icon-plus></b-icon-plus></strong>Tambah Tes Medis</b-button></v-btn>
             </div>
 
             <!-- masukkan untuk untuk tes medis yang sudah mengandung value -->
@@ -58,11 +59,12 @@
                 <v-divider></v-divider>  
                     <div v-if="!tes_medis.isEdit && !isValid" class="d-flex justify-content-center">
                         <!-- button untuk mengubah -->
-                        <v-btn color="black" class="mr-2 mb-3">
-                            <v-icon color="white">
-                                {{icons.mdiPencil}}
-                            </v-icon>
-                            <b-button class="button" size="sm" v-b-modal.tes-medis @click="openModelUpdateTesMedis()">Ubah</b-button>
+                        <v-btn color="black" class="mb-3 pa-0">
+                            <b-button
+                            class="button pr-5 pl-5"
+                            size="sm"
+                            v-b-modal.tes-medis
+                            @click="openModelUpdateTesMedis()"><strong class="h6 mr-3"><b-icon-pencil></b-icon-pencil></strong> Ubah</b-button>
                         </v-btn>
 
                         <!-- <modal-success v-bind:success="success"></modal-success> -->
@@ -92,15 +94,13 @@
                         <v-btn
                         outlined
                         color="black"
-                        class="ml-2 mb-3"
+                        class="mb-3 ml-2 pa-0"
                         v-if="!isValid"
                         >
-                        <strong>
-                            <v-icon color="black">
-                                {{mdi.check}}
-                            </v-icon>
-                        </strong>
-                            <b-button class="button-secondary" size="sm" v-b-modal.valid-medis>Selesai</b-button>
+                            <b-button class="button-secondary pr-5 pl-4" size="sm" v-b-modal.valid-medis>
+                                <strong class="h6 mr-3">
+                                    <b-icon-check></b-icon-check></strong>
+                                 Lolos</b-button>
                         </v-btn>
 
                         <!-- Modal untuk konfiramsi validasi -->
@@ -138,6 +138,7 @@
 <script>
 import {mdiPencil} from '@mdi/js'
 import { SweetModal } from 'sweet-modal-vue'
+import {BIconPlus, BIconPencil, BIconCheck} from 'bootstrap-vue'
 import FormTesMedis from './FormTesMedis.vue'
 import TesService from '../../../service/TesService'
 // import axios from 'axios'
@@ -145,6 +146,9 @@ import TesService from '../../../service/TesService'
 export default {
     name: "tes-medis",
     components:{
+        BIconPlus,
+        BIconPencil,
+        BIconCheck,
         SweetModal,
         FormTesMedis
     },

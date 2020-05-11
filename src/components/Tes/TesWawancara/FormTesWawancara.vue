@@ -6,10 +6,16 @@
         max-width="576px"
         class="my-auto mx-auto">
         <b-card
-        class="shadow-none border">
+        class="shadow-none border"
+        header-tag="header"
+        header-variant="header">
+            <template v-slot:header>
+                <h6 class="m-0 p-0 text-center">Hasil</h6>
+            </template>
             <b-card-text
             >
                 <b-form
+                class="m-0"
                 >
                     <b-form-group
                     id="nilai"
@@ -65,14 +71,32 @@
                         </div>
                     </b-form-group>
 
-                    <v-btn v-if="isUpdate" color="#C53751"><b-button class="button-primary" size="sm"
-                    @click="submit()" :disabled="submitStatus === 'PENDING'" variant="light">Update</b-button></v-btn>
+                    <div v-if="isCreate" class="d-flex justify-content-center">
+                        <v-btn color="#C53751" style="margin:0px;padding:0px">
+                            <b-button 
+                            class="button-primary pr-5 pl-5"
+                            size="sm" 
+                            @click="submit()"
+                            :disabled="submitStatus === 'PENDING'" 
+                            variant="light">Submit</b-button></v-btn>
                     
-                    <v-btn v-else-if="isCreate" color="#C53751"><b-button class="button-primary" size="sm" 
-                    @click="submit()" :disabled="submitStatus === 'PENDING'" variant="light">Submit</b-button></v-btn>
+                        <v-btn class="ml-3" style="margin:0px;padding:0px" outlined color="#C53751">
+                            <b-button size="sm" @click="batal()"
+                            class="pr-5 pl-5" 
+                            style="background-color:white !important; border:none;color:#C53751">Batal</b-button></v-btn>
+                    </div>
+                    <div v-if="isUpdate" class="d-flex justify-content-center">
+                        <v-btn color="#C53751" style="margin:0px;padding:0px">
+                            <b-button class="button-primary pr-3 pl-3" size="sm"
+                            @click="submit()" :disabled="submitStatus === 'PENDING'" 
+                            variant="light">Ubah</b-button></v-btn>
+                        <v-btn class="ml-3" style="margin:0px;padding:0px" outlined color="#C53751">
+                            <b-button size="sm" @click="batal()"
+                            class="pr-3 pl-3"
+                            style="background-color:white !important; border:none;color:#C53751">Batal</b-button></v-btn>
+                    </div>
                     
-                    <v-btn class="ml-3" outlined color="#C53751"><b-button size="sm" @click="batal()" 
-                    style="background-color:white !important; border:none;color:#C53751">Batal</b-button></v-btn>
+                    
                 </b-form>
                 <div class="mt-1">
                     <p class="typo__p" v-if="submitStatus === 'OK'" style="color:rgb(60, 233, 54)">Thanks for your submission!</p>
@@ -193,4 +217,9 @@ label{
     background-color: #C53751 !important;
     border:none !important;
 }
+
+.card-header{
+        background-color: #C53751;
+        color:white;
+    }
 </style>
