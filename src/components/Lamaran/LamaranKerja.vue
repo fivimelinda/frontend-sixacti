@@ -40,12 +40,12 @@
 
           <div class="form-group">
             <div class="mb-2 label">Kelurahan Domisili*</div>
-            <input class="form-control" id="kelurahanDomisili" v-model="kelurahanDomisili" placeholder="masukkan kelurahan domisili" required>
+            <input class="form-control" id="kelurahanDomisili" v-model="kelurahanDomisili" placeholder="masukkan kelurahan domisili (contoh : Beiji)" required>
           </div>
 
           <div class="form-group">
             <div class="mb-2 label">Kecamatan Domisili*</div>
-            <input class="form-control" id="kecamatanDomisili" v-model="kecamatanDomisili" placeholder="masukkan kecamatan domisili" required>
+            <input class="form-control" id="kecamatanDomisili" v-model="kecamatanDomisili" placeholder="masukkan kecamatan domisili (contoh : Beiji)" required>
           </div>
 
           <div class="form-group">
