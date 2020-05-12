@@ -13,9 +13,9 @@ import FormUpdateLoker from '../components/LowonganKerja/FormUpdateLoker.vue'
 import listLoker from '../components/LowonganKerja/ListLokerComponent.vue'
 import formCuti from '../components/Cuti/formCuti.vue'
 import viewCuti from '../components/Cuti/viewCuti.vue'
+import updateCuti from '../components/Cuti/updateCuti.vue'
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
-//import { LayoutPlugin } from 'bootstrap-vue'
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
 import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
 import fileLamaran from '../components/Lamaran/fileLamaran.vue'
@@ -175,8 +175,13 @@ const routes = [
   },
   {
     path: '/cuti',
-    name: 'cuti',
+    name: 'viewCuti',
     component: viewCuti
+  },
+  {
+    path: '/updateCuti',
+    name: 'updateCuti',
+    component: updateCuti
   },
   {
     path: '/detailLoker/:idLowongan',

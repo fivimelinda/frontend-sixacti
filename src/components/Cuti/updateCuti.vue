@@ -1,19 +1,18 @@
 <template>
-    <v-container mt-sm-12>
+    <v-container class="mt-sm-12">
     <div>
-      <b-row id="title">
-        <h1> Form Pengajuan Cuti</h1>
+        <b-row id="title">
+        <h1> Form Ubah Pengajuan Cuti</h1>
       </b-row>
-    <ValidationObserver ref="observer">
+      <ValidationObserver ref="observer">
     <b-form slot-scope="{ validate }" @submit.prevent="validate().then(handleSubmit)">
-    
-    <b-row > 
-        <b-col md="6" sm="12" >
+    <b-row> 
+        <b-col md="6" sm="12">
           <ValidationProvider name="Tanggal" rules="required">
             <span slot-scope="{ valid, errors }">
             <b-row><label class="control-label">Cuti Mulai</label></b-row>
             <b-form-datepicker class="form-control" 
-            :state="errors[0] ? false : (valid ? true : null)"
+             :state="errors[0] ? false : (valid ? true : null)"
             placeholder="Pilih Tanggal Mulai cuti" 
             v-model="form.tanggalMulai"
             :min="min" :max="max"
@@ -36,15 +35,13 @@
             v-model="form.tanggalSampai"
             :min="min" :max="max"
             ></b-form-datepicker>
-             <b-form-invalid-feedback>
+            <b-form-invalid-feedback>
                   Tanggal harus dipilih
             </b-form-invalid-feedback>
             </span>
             </ValidationProvider>
-            
         </b-col>
     </b-row>
-    
     <ValidationProvider name="Kategori" rules="required">
     <b-row class="form-group" slot-scope="{ valid, errors }">
         <b-col md="6" sm="12" > 
@@ -79,8 +76,8 @@
       </b-col>
     </b-row>
     </ValidationProvider>
-    <b-col md="4" offset-sm="4">
-      <b-button block type="submit" variant="danger" id="btnCuti">Ajukan Cuti</b-button> 
+    <b-col sm="4" offset-sm="4">
+      <b-button block type="submit" variant="danger" id="btnCuti">Simpan Perubahan</b-button> 
     </b-col>   
     <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>
       Tanggal akhir cuti tidak valid!
@@ -89,14 +86,13 @@
     </ValidationObserver>
     </div> 
     </v-container>
-  
+    
 </template>
 
 <script>
 import moment from 'moment'
 import CutiService from '../../service/CutiService'
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
-
   export default {
     components:{
       ValidationObserver,
@@ -117,6 +113,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
           idKategori: null
         },
         user: '',
+        idCuti:'',
         listKategori: [],
         min: minDate,
         max: maxDate,
@@ -125,12 +122,19 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
     },
     methods: {
       handleSubmit() {
+        console.log('bbbbbbb')
         const start = moment(this.form.tanggalMulai).format("YYYY-MM-DD")
+        console.log(start)
         const end = moment(this.form.tanggalSampai).format("YYYY-MM-DD")
+        console.log('fffffff')
+        console.log(end)
         if (moment(start).isAfter(end)){
           this.showDismissibleAlert = true
         } else { 
-          CutiService.createCuti(this.form).then(response => {
+          console.log('dnsfkskfnkev')
+          CutiService.updateCuti(this.idCuti, this.form).then(response => {
+          console.log('aaaaaaaaaaaaaaaaaaaa')
+          console.log(response.status)
           if (response.status == 200){
             this.$router.push({
               name:'viewCuti'
@@ -138,16 +142,26 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
           }
           })
         }
+        
       },
       getListKategori(){
         CutiService.getListKategori().then(response => {
           this.listKategori = response.data
-          this.listKategori.push({ namaKategori: 'Pilih Kategori Cuti', id:null})
         })
-      }
+      },
+      getCutiData(){
+          CutiService.getCutiActive(1).then(response => {
+              this.form.tanggalMulai = response.data.tanggalMulai;
+              this.form.tanggalSampai = response.data.tanggalSampai;
+              this.form.idKategori = response.data.idKategori;
+              this.form.keterangan = response.data.keterangan;
+              this.idCuti = response.data.idCuti;
+          })
+      }              
     },
     created() {
-      this.getListKategori()
+        this.getListKategori()
+        this.getCutiData()
     }
   }
 </script>
@@ -191,5 +205,4 @@ select{
   border-radius: 0%;
   border-color: darkgrey;
 }
-
 </style>
