@@ -1,6 +1,15 @@
 <template>
     <div class="RequestLowongan">
         <br>
+        <ul class="nav">
+            <li><a class="brearcrumb-a" href="/">Home</a></li>
+            <li><p class="breadcrumb-a">></p></li>
+            <li><a class="brearcrumb-a" href="/RequestLowongan">Request Lowongan Pekerjaan</a></li>
+            <li><p class="breadcrumb-a">></p></li>
+            <li><a class="brearcrumb-a" href="/RequestLowongan/add">Tambah</a></li>
+            
+        </ul>
+        <br>
         <h1>Tambah Employment Requisition Baru</h1>
         <br>
         <div class="box">
@@ -11,7 +20,7 @@
             <form @submit ="formSubmit">
                 <div class="form-group">
                     <div class="label">Judul lowongan pekerjaan*</div>
-                    <input class="form-control" id="judul" placeholder="masukkan judul lowongan pekerjaan" v-model="judul">
+                    <input class="form-control" id="judul" placeholder="masukkan judul lowongan pekerjaan" v-model="judul" required="true">
                 </div>
                 <br>
                 <div class="form-group">
@@ -75,42 +84,80 @@
                 <b-button v-b-modal.modal-1 class="btn btn-danger">Simpan</b-button>
                 <br>
                 <br>
-            <b-modal id="modal-1" title="BootstrapVue" v-bind:hide-footer="true">
+            <b-modal id="modal-1" title="Rangkuman" v-bind:hide-footer="true">
                 <div class="detail">
-                    <p class="title">Judul</p>
-                    <p class="subtitle">{{ judul }}</p>
-                    <hr>
-                    <br>
-                    <p class="title">Departemen</p>
-                    <p class="subtitle">{{departemen}}</p>
-                    <hr>
-                    <p class="title">Section</p>
-                    <p class="subtitle">{{section}}</p>
-                    <hr>
-                    <p class="title">Supervisor</p>
-                    <p class="subtitle">{{supervisor}}</p>
-                    <hr>
-                    <p class="title">Tanggal</p>
-                    <p class="subtitle">{{tanggal}}</p>
-                    <hr>
-                    <p class="title">Shift</p>
-                    <p class="subtitle">{{shift}}</p>
-                    <hr>
-                    <p class="title">Periode</p>
-                    <p class="subtitle">{{periode}}</p>
-                    <hr>
-                    <p class="title">Addition</p>
-                    <p class="subtitle">{{addition}}</p>
-                    <hr>
-                    <p class="title">Jumlah</p>
-                    <p class="subtitle">{{jumlah}}</p>
-                    <hr>
-                    <p class="title">Gaji</p>
-                    <p class="subtitle">{{gaji}}</p>
-                    <hr>
-                    <p class="title">Replacement</p>
-                    <p class="subtitle">{{replacement}}</p>
-                    <hr>
+                    <div class="col-out">
+                        <p class="title">Judul</p>
+                        <p class="subtitle">{{ judul }}</p>
+                        <hr>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <p class="title">Departemen</p>
+                                <p class="subtitle">{{departemen}}</p>
+                                <hr>
+                            </div>
+                            <hr>
+                            <div class="col-sm">
+                                <p class="title">Section</p>
+                                <p class="subtitle">{{section}}</p>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <p class="title">Supervisor</p>
+                                <p class="subtitle">{{supervisor}}</p>
+                                <hr>
+                            </div>
+                            <div class="col-sm">
+                                <p class="title">Tanggal</p>
+                                <p class="subtitle">{{tanggal}}</p>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <p class="title">Shift</p>
+                                <p class="subtitle">{{shift}}</p>
+                                <hr>
+                            </div>
+                            <div class="col-sm">
+                                <p class="title">Periode</p>
+                                <p class="subtitle">{{periode}}</p>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <p class="title">Addition</p>
+                                <p class="subtitle">{{addition}}</p>
+                                <hr>
+                            </div>
+                            <div class="col-sm">
+                                <p class="title">Jumlah</p>
+                                <p class="subtitle">{{jumlah}}</p>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>     
+                    <div class="col-out">
+                        <p class="title">Gaji</p>
+                        <p class="subtitle">{{gaji}}</p>
+                        <hr class="hr-special">
+                    </div>
+                    <div class="col-out">
+                        <p class="title">Replacement</p>
+                        <p class="subtitle">{{replacement}}</p>
+                        <hr class="hr-special">
+                    </div>
                     <button type="submit" class="btn btn-danger" @click="formSubmit">Submit</button>
                 </div>
             </b-modal>
@@ -161,6 +208,25 @@
         </b-modal>
 
 
+        <b-modal size="lg" ref="error-kosong" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil" v-text="this.errMsg+' belum diisi!'">
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
+
+
     </div>
 </template>
 
@@ -185,46 +251,91 @@ export default {
             jumlah: '',
             gaji: '',
             replacement: '',
-            retStatus: ''
+            retStatus: '',
+            errMsg: '',
+            kosongCount: 0,
         }
     },
     methods: {
         formSubmit(e) {
             e.preventDefault();
             let currentObj = this;
-            this.axios.post('http://localhost:8081/request/add', {
-                "jobTitle" : this.judul,
-                "departement" : this.departemen,
-                "section" : this.section,
-                "supervisor" : this.supervisor,
-                "dateWanted" : this.tanggal,
-                "shift" : (this.shift == "true"),
-                "jumlah" : this.jumlah,
-                "gaji" : this.gaji,
-                "status" : "pending",
-                "periodeKontrak" : this.periode,
-                "addition" : (this.addition == "true"),
-                "namaReplacement" : this.replacement
-            })
-            // .then(function (response) {
-            //     currentObj.output = response.data;
-            //     console.log(currentObj.status)
-            // })
-            .then(ress => {
-                this.retStatus = ress.data
-
-                if(ress.status == 200){
-                    this.openModal()
-                }
+            if (this.kosongCount != 0){
+                this.kosongCount = 0;
+                this.errMsg = "";
+            }
+            if(!this.judul){
+                this.errMsg = this.errMsg + "Judul ," + " "; 
+                // this.kosongCount ++;
+                // this.$refs['error-kosong'].show();
+            }
+            if(!this.departemen){
+                this.errMsg = this.errMsg + "Departemen ," + " ";
+            }
+            if(!this.section){
+                this.errMsg = this.errMsg + "Section ," + " ";
+            }
+            if(!this.supervisor){
+                this.errMsg = this.errMsg + "Supervisor ," + " ";
+            }
+            if(!this.tanggal){
+                this.errMsg = this.errMsg + "Tanggal diinginkan ," + " ";
+            }
+            if(!this.shift){
+                this.errMsg = this.errMsg + "Shift ," + " ";
+            }
+            if(!this.jumlah){
+                this.errMsg = this.errMsg + "Jumlah ," + " ";
+            }
+            if(!this.gaji){
+                this.errMsg = this.errMsg + "Gaji ," + " ";
+            }
+            if(!this.periode){
+                this.errMsg = this.errMsg + "Periode kontrak ," + " ";
+            }
+            if(!this.addition){
+                this.errMsg = this.errMsg + "Addition ," + " ";
+            }
+            if(this.errMsg != ""){
+                this.kosongCount ++;
+                this.$refs['error-kosong'].show();
+            }
                 else{
+                    this.axios.post('http://localhost:8081/request/add', {
+                    "jobTitle" : this.judul,
+                    "departement" : this.departemen,
+                    "section" : this.section,
+                    "supervisor" : this.supervisor,
+                    "dateWanted" : this.tanggal,
+                    "shift" : (this.shift == "true"),
+                    "jumlah" : this.jumlah,
+                    "gaji" : this.gaji,
+                    "status" : "pending",
+                    "periodeKontrak" : this.periode,
+                    "addition" : (this.addition == "true"),
+                    "namaReplacement" : this.replacement
+                })
+                // .then(function (response) {
+                //     currentObj.output = response.data;
+                //     console.log(currentObj.status)
+                // })
+                .then(ress => {
+                    this.retStatus = ress.data
+
+                    if(ress.status == 200){
+                        this.openModal()
+                    }
+                    else{
+                        this.errorModal()
+                    }
+                })
+                .catch((err) => {
+                    currentObj.output = err;
+                    console.log(err);
                     this.errorModal()
+                })
                 }
-            })
-            .catch((err) => {
-                currentObj.output = err;
-                console.log(err);
-                this.errorModal()
-            })
+            
         },
 
          openModal() {
@@ -242,10 +353,18 @@ export default {
 </script>
 
 <style scoped>
+.col-out{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.hr-special{
+    margin-top: 1px;
+}
 
 hr{
     color: black;
-    margin-top: 0px;
+    margin-top: 0.83px;
 }
 
 .detail{
@@ -301,6 +420,17 @@ form{
     margin-right: 100px;
 }
 
+@media only screen and (max-width: 600px){
+    .box{
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+    }
+
+    h1{
+        margin-left: 10px;
+    }
+}
+
 .label{
     text-align: left;
     font-family: 'archivo';
@@ -317,5 +447,33 @@ small{
 
 form{
     font-size: 20px;
+}
+
+.brearcrumb-a{
+    font-family: "Archivo";
+    font-size: 15px;
+    color: #848484;
+}
+
+a:link, a:active, a:hover, a:visited {
+    color: #848484 !important;
+    text-decoration: none;
+}
+
+v-application a{
+    color: #848484;
+}
+
+.nav {
+  list-style-type: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
+}
+
+.nav li {
+  display: inline-block;
+  padding: 2px;
 }
 </style>

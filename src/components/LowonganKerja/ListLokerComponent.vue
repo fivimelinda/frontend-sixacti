@@ -1,6 +1,12 @@
 <template>
   <div class="container">
-    <h3 class="mt-10">Daftar Lowongan Pekerjaan</h3>
+    <br>
+    <ul class="nav">
+        <li><a class="brearcrumb-a" href="/">Home</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" href="/listLoker">Daftar Lowongan Pekerjaan</a></li>            
+    </ul>
+    <h3 class="mt-5">Daftar Lowongan Pekerjaan</h3>
     <div v-if="message" class="alert alert-success">
       {{message}}
     </div>
@@ -13,7 +19,8 @@
               <span id="titleCard">{{loker.judulLoker}}</span>
             </div>
             <div class="card-body">
-              <span class="mb-1" id="lokerDesc">{{loker.deskripsi}}</span>
+              <span v-if="loker.deskripsi.length < 25 " class="mb-1" id="lokerDesc">{{loker.deskripsi}}</span>
+              <span v-else  class="mb-1" id="lokerDesc">{{loker.deskripsi.substring(0,25) + " ..."}}</span>
               <p class="mt-1 mb-5" id="deptSect">{{loker.departement}} - {{loker.section}}</p>
               <p id="periodeDesc">Periode {{loker.tanggalMulai | formatDate}} - {{loker.tanggalBerakhir | formatDate}}</p>
                <h4>{{loker.isDeleted}}</h4>
@@ -80,6 +87,7 @@ export default {
             .then(response => {
                 this.loker = response.data;
             });
+            console.log(this.loker);
         },
         deleteLokerClicked(idLowongan){
           LowonganKerjaService.deleteLoker(idLowongan).then(() =>{

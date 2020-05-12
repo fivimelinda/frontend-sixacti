@@ -10,6 +10,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import { ValidationObserver, ValidationProvider, extend } from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
+import Vuelidate from 'vuelidate'
+import store from './store/store'
 
 // install rules
 Object.keys(rules).forEach(rule => {
@@ -17,11 +19,12 @@ Object.keys(rules).forEach(rule => {
 });
 
 
-
 Vue.use(VueAxios, axios)
    
 Vue.config.productionTip = false
 
+// Validasi
+Vue.use(Vuelidate)
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Install components globally
@@ -34,7 +37,9 @@ Vue.config.productionTip = false
 
 
 new Vue({
+  el:'#app',
+  store,
   router,
   vuetify,
   render: h => h(App)
-}).$mount('#app')
+})

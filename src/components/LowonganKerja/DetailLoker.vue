@@ -1,13 +1,21 @@
 <template>
 
-<div class="container mt-10">
+<div class="container">
+    <br>
+    <ul class="nav">
+        <li><a class="brearcrumb-a" href="/">Home</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" href="/listLoker">Daftar Lowongan Pekerjaan</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" :href="'/detailLoker/'+id">Detail {{judulLoker}}</a></li>              
+    </ul>
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-8">
-            <h1 id="judul">
+            <h2 id="judul">
                 {{judulLoker}} 
                 <a id="ubahBtn" v-on:click="updateLokerClicked()">
                 <edit-icon size="14"></edit-icon> Ubah</a>
-            </h1>
+            </h2>
         </div>
 
         <!-- <div class="col-xs-12 col-sm-6 col-md-4">
@@ -18,7 +26,7 @@
         </div> -->
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="d-flex justify-content-center">
-                <button class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Apply</span></button> 
+                <button class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Buat Lamaran</span></button> 
             </div>
             
         </div>
@@ -38,11 +46,9 @@
     <hr>
 
     <div id="deskripsi" class="container-fluid">
-        {{deskripsi}}
+        <div class="text-break">{{deskripsi}}</div>
     </div>
-    
 
-    
 
 
 </div>
@@ -134,7 +140,8 @@ export default {
             tanggalMulai: "",
             tanggalBerakhir: "",
             deskripsi: "",
-            errors: []
+            errors: [],
+            
         };
         
     },
@@ -153,6 +160,7 @@ export default {
                 this.tanggalMulai = moment(res.data.tanggalMulai).format("MMMM YYYY");
                 this.tanggalBerakhir = moment(res.data.tanggalBerakhir).format("MMMM YYYY");
                 this.deskripsi = res.data.deskripsi;
+           
             });
         },
         updateLokerClicked(){

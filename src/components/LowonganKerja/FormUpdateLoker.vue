@@ -1,5 +1,14 @@
 <template>
   <div class="FormCreateLoker">
+      <br>
+    <ul class="nav">
+        <li><a class="brearcrumb-a" href="/">Home</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" href="/listRequestLowongan">Daftar Request Lowongan Pekerjaan</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" :href="'/ubahLoker/'+idLowongan">Ubah Lowongan Pekerjaan</a></li>
+
+    </ul>
     <br />
     <h1>Ubah Lowongan Pekerjaan</h1>
     <br />
@@ -21,18 +30,24 @@
                 <input class="form-control" v-model="judulLoker" placeholder="Masukan Judul Lowongan Pekerjaan" disabled/>
             </fieldset>
 
-            <fieldset class="form-group">
-                <div class="mb-2 label">Departement</div>
-                <input class="form-control" v-model="departement" placeholder="Masukan nama departement" disabled/>
-            </fieldset>
-
-            <fieldset class="form-group">
-                <div class="mb-2 label">Section</div>
-                <input class="form-control" v-model="section" placeholder="Masukan nama section" disabled/>
-            </fieldset>
-
             <div class="row">
-                <div class="col-6">
+                <div class="col-sm-6 col-xs-12">
+                    <fieldset class="form-group">
+                        <div class="mb-2 label">Departement</div>
+                        <input class="form-control" v-model="departement" placeholder="Masukan nama departement" disabled/>
+                    </fieldset>
+                </div>
+
+                <div class="col-sm-6 col-xs-12">
+                    <fieldset class="form-group">
+                        <div class="mb-2 label">Section</div>
+                        <input class="form-control" v-model="section" placeholder="Masukan nama section" disabled/>
+                    </fieldset>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
                     <div class="mb-2 label">Tanggal Mulai</div>
                     <b-form-datepicker id="datepickerStart-invalid" :state="dateStartState" class="mb-2" v-model="tanggalMulai"></b-form-datepicker>
@@ -43,7 +58,7 @@
                 </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
                     <div class="mb-2 label">Tanggal Berakhir</div>
                     <b-form-datepicker id="datepickerEnd-invalid" :state="dateEndState" class="mb-2" v-model="tanggalBerakhir"></b-form-datepicker>
@@ -60,13 +75,56 @@
                 <b-textarea class="form-control" v-model="deskripsi"/>
             </div>
 
-            <button type="submit" class=" mt-5 mb-5 btn btn-danger">simpan</button>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-danger mr-2">Simpan</button>
+                <button class="btn btn-light" @click="batal">Batal</button>
+            </div>
+            
 
         </form>
 
       </div>
 
     </div>
+
+    <b-modal size="lg" ref="modalOk" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Lowongan Kerja berhasil diubah
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="centang"
+            :src="require('@/assets/success.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
+
+
+        <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Lowongan Kerja gagal diubah
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
 
     <br>
     <br>
@@ -217,11 +275,31 @@ export default {
                 tanggalBerakhir : this.tanggalBerakhir,
                 deskripsi : this.deskripsi
               })
-              .then(() => {
-                    this.$router.push('/listLoker');
+              .then(ress => {
+                    this.retStatus = ress.data
+
+                    if(ress.status == 200){
+                        this.openModal()
+                    }
+                    else{
+                        this.errorModal()
+                    }
                 });
             }
 
+        },
+        openModal() {
+            this.$refs['modalOk'].show();
+            window.setTimeout(function() {
+                window.location.href = "/listLoker";
+            }, 2000);
+        },
+
+        errorModal(){
+            this.$refs['error-modal'].show();
+        },
+        batal(){
+          this.$router.push(`/detailLoker/${this.idLowongan}`);
         }
     },
     created(){

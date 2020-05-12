@@ -11,6 +11,7 @@
             <div class="form-group">
               <div class="mb-2 label">Foto Kartu Indonesia Sehat</div>
               <input class="form-control" type="file" ref="file" v-on:change="handleFileUpload()" id="file" required>
+              <small class="form-text text-muted">Dalam format .jpg/.png</small>
             </div>
             <!-- <div class="form-group">
               <div class="mb-2 label">Foto Kartu Keluarga*</div>
@@ -33,7 +34,7 @@
               <input class="form-control" type="file" id="resume" >
             </div> -->
 
-            <button v-on:click="submitFile()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
+            <button v-on:click="submitFile(); cekSukses()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
             <br>
             <button class=" btn btn-light border-danger w-10" v-on:click="beforeClicked()">Kembali</button>
             <button class=" mt-5 mb-5 btn btn-danger" v-on:click="afterClicked()">Selanjutnya</button>
@@ -45,7 +46,37 @@
 
     <br>
     <br>
-
+<b-modal size="lg" ref="my-modal" hide-footer title="Notifikasi">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm" id="berhasil">
+                            Foto berhasil disimpan
+                        </div>
+                        <div class="col-sm">
+                            <v-img class="centang"
+                :src="require('@/assets/success.png')"
+                ></v-img>
+                        </div>
+                    </div>
+                </div>
+                
+            </b-modal>
+       <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Foto gagal disimpan
+                    </div>
+                    <div class="col-sm">
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </b-modal>
   </div>
 </template>
 
@@ -56,7 +87,9 @@ export default {
   name:'fileLamaran',
   data(){
     return{
-      file:''
+     file:'',
+      ressData: '',
+      count: 0
     }
   },
   computed: {
@@ -78,14 +111,35 @@ export default {
       let formData = new FormData();
       formData.append('file', this.file);
       axios.post('http://localhost:8081/api/uploadKis/' + this.idLamaran,
-        formData).then(function(){
-          console.log('SUCCESS!!');
-        })
-        .catch(function(){
-          console.log('FAILURE!!');
-        });
+        formData).then(ress => {
+              this.ressData = ress;
+            })
+            .catch((err) => {
+                console.log("masuk err")
+                this.count ++;
+                console.log(err);
+                this.errorModal()
+            }) 
+        console.log("masuk submit file")
+            
       },
-      
+
+      cekSukses(){
+        
+        if(this.count == 0){
+          console.log("masuk cek sukses")
+          this.count = 0;
+          this.openModal()
+        }
+      },
+
+      openModal() {
+            this.$refs['my-modal'].show();
+        },
+        errorModal(){
+            this.$refs['error-modal'].show();
+            this.$refs['my-modal'].hide();
+        }
     
   }
 }
