@@ -68,7 +68,7 @@
                         <v-btn
                         outlined
                         color="white"
-                        class="mb-3 mr-2 pa-0 mt-0 mb-0"
+                        class="mb-3 mr-1 pa-0 mt-0 mb-0"
                         >
                             <b-button class="pr-4 pl-3" variant="success" size="sm" v-b-modal.lolos-medis>
                                 <strong class="h6 mr-1">
@@ -96,8 +96,8 @@
                             </div>
                             <div class="d-flex justify-content-end">
                             <b-button-group >
-                                <b-button class="mr-3 rounded pr-3 pl-3" variant="success" @click="lolosTesMedis()">Iya</b-button>
-                                <b-button class="rounded" variant="outline-success" @click="$bvModal.hide('lolos-medis')">Batal</b-button>
+                                <b-button size="sm" class="mr-3 rounded pr-3 pl-3" variant="success" @click="lolosTesMedis()">Iya</b-button>
+                                <b-button size="sm" class="rounded" variant="outline-success" @click="$bvModal.hide('lolos-medis')">Batal</b-button>
                             </b-button-group>
                             </div>
                         </div>
@@ -122,8 +122,8 @@
                             </div>
                             <div class="d-flex justify-content-end">
                             <b-button-group >
-                                <b-button class="mr-3 rounded pr-3 pl-3" variant="danger" @click="gagalTesMedis()">Iya</b-button>
-                                <b-button class="rounded" variant="outline-danger" @click="$bvModal.hide('gagal-medis')">Batal</b-button>
+                                <b-button size="sm" class="mr-3 rounded pr-3 pl-3" variant="danger" @click="gagalTesMedis()">Iya</b-button>
+                                <b-button size="sm" class="rounded" variant="outline-danger" @click="$bvModal.hide('gagal-medis')">Batal</b-button>
                             </b-button-group>
                             </div>
                         </div>
@@ -338,6 +338,9 @@ export default {
                 }
             );
             await this.refreshTesMedis();
+            this.$nextTick(() => {
+                this.$bvModal.hide('gagal-medis')
+            })
         },
 
         async validatedTesMedis(){

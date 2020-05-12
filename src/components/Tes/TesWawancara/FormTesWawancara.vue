@@ -158,10 +158,10 @@ methods:{
                 this.submitStatus = 'PENDING'
                 setTimeout(() => {
                     this.submitStatus = 'OK'
-                }, 500)
+                }, 1000)
                 setTimeout(()=>{
                     this.$emit('submit')
-                },800)
+                },1500)
                 
             }
         },
