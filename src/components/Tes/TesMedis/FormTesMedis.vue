@@ -138,14 +138,14 @@
                     
                     
                     <!-- button create -->
-                    <div v-if="isCreate">
+                    <div v-if="isCreate" class="d-flex justify-content-center">
                         <v-btn color="#C53751" style="margin:0px;padding:0px">
                             <b-button
                             class="button-primary pr-5 pl-5"
                             size="sm" 
                             @click="submit()"
                             variant="light"
-                            :disabled="submitStatus === 'PENDING'">Submit</b-button>
+                            :disabled="submitStatus === 'PENDING'">Simpan</b-button>
                         </v-btn>
 
                         <v-btn class="ml-3" style="margin:0px;padding:0px" outlined color="#C53751">
@@ -181,6 +181,9 @@ const alpha = helpers.regex('alpha', /^[a-zA-Z., ]*$/)
 export default {
     name:'form-tes-medis',
     mixins: [validationMixin],
+    components:{
+        
+    },
     props:{
         form:Object,
         isOpen:Boolean,
@@ -230,10 +233,10 @@ export default {
                 this.submitStatus = 'PENDING'
                 setTimeout(() => {
                     this.submitStatus = 'OK'
-                }, 500)
+                }, 1000)
                 setTimeout(() => {
                     this.$emit('submit')
-                }, 500)
+                }, 1500)
             }
         },
 

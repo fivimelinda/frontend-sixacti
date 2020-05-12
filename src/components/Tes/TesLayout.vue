@@ -220,6 +220,6 @@ ol li{
 }
 
 .background{
-    background-color: rgba(255, 227, 227, 0.637) !important;
+    background-color: white !important;
 }
 </style>
