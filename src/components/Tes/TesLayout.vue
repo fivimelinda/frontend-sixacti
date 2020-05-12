@@ -663,7 +663,7 @@ export default {
             //     this.refreshDetailLamaran();
             // })
             axios({
-                url: 'http://localhost:8081/api/download/resume/' + fileName,
+                url: 'http://localhost:8081/api/download/kk/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
             }).then((response) =>  {
