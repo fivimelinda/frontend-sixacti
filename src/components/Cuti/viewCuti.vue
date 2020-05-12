@@ -1,7 +1,7 @@
 <template>
-    <v-container class="mt-sm-10">
+    <v-container class="mt-sm-12">
         <div class="addCuti">
-            <b-row id="title">
+            <b-row id="myTitle">
                 <h1> Pengajuan Cuti</h1>
             </b-row>
             <b-row v-if="cutiActive">
@@ -25,7 +25,7 @@
     </v-container>
 </template>
 <script>
-import axios from 'axios'
+import CutiService from '../../service/CutiService'
 const cardCuti = () => ({
     component: import('./cardCuti')
 })
@@ -47,14 +47,11 @@ export default {
             })
         },
         getCutiActive(){
-            console.log('z')
-            axios.get('http://localhost:5000/api/cuti/diajukan/get?karyawanId=1').then(response => {
+            CutiService.getCutiActive(1).then(response => {
                 if (response.data.cutiActive == "true"){
                     this.cutiData = response.data
                     this.cutiActive = true
-                    console.log('b')
                 } else if (response.data.sisaCuti == "0" ){
-                    console.log('gg')
                     this.cutiHabis = true
                 }
 
@@ -64,12 +61,14 @@ export default {
     },
     created(){
         this.getCutiActive()
-        console.log('a')
     }
 }
 </script>
 <style scoped>
-#title{
+h1{
+    margin-left: 0px;
+}
+#myTitle{
     font-family: 'oswald';
     color: black;
     text-align: left;

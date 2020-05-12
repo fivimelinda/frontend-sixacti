@@ -1,5 +1,6 @@
 <template>
-<div>
+<v-container>
+<div id="myCard">
     <v-card
         max-width="344"
         color="#FFE3E3"
@@ -47,6 +48,14 @@
                 <v-card-text class="data">{{cutiData.statusCuti}}</v-card-text>
             </v-flex>
         </v-layout>
+        <v-layout row class="detail">
+            <v-flex xs6 md6>
+                <v-card-text>Keterangan Cuti</v-card-text>
+            </v-flex>
+        </v-layout> 
+        <v-layout row class="detail">
+            <v-card-text class="data-sp">{{cutiData.keterangan}}</v-card-text>
+        </v-layout>    
         <v-card flat color="#FBC4C4" class="notify">
             <div id="attention">Perhatian!</div>
             <div id="attention-detail">Pengajuan cuti hanya dapat diubah atau dibatalkan jika status masih 'Diajukan'</div>
@@ -61,9 +70,10 @@
         </b-row>
     </v-card>
 </div>
+</v-container>
 </template>
 <script>
-import axios from 'axios'
+import CutiService from '../../service/CutiService'
 export default {
     props: ['cutiData'],
     data(){
@@ -87,13 +97,10 @@ export default {
                 }).then(value => {
                     this.delete = value
                     if(this.delete){
-                        this.deleteCuti()
+                         CutiService.deleteCuti(this.cutiData.idCuti)
+                         this.$router.go(0)
                     }
                 })
-        },
-        deleteCuti(){
-            axios.delete('http://localhost:5000/api/cuti/hapus?cutiId=' + this.cutiData.idCuti)
-            this.$router.go(0)
         },
         updateCuti(){
             this.$router.push({
@@ -112,6 +119,9 @@ export default {
 }
 </script>
 <style scoped>
+#myCard{
+    margin-left: 5px;
+}
 #title{
     font-family: 'oswald';
     background-color: #C53751;
@@ -120,6 +130,7 @@ export default {
     padding-bottom: 0;
 }
 #sub-title{
+    font-family: 'archivo';
     margin-top: 15px;
     padding-bottom: 0;
 }
@@ -137,6 +148,10 @@ export default {
 }
 .data{
     text-align:end;
+    color: black;
+    font-weight: bold;
+}
+.data-sp{
     color: black;
     font-weight: bold;
 }

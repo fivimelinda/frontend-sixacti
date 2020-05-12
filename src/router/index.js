@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import RequestLowongan from '../components/RequestLowongan/RequestLowongan.vue'
+import RequestLowonganDisplay from '../components/RequestLowongan/RequestLowonganDisplay.vue'
+import RequestLowonganId from '../components/RequestLowongan/RequestLowonganId.vue'
+import ListRequestLowongan from '../components/RequestLowongan/ListRequestLowongan.vue'
 import formCreateLoker from '../components/LowonganKerja/formCreateLoker.vue'
 import FormUpdateLoker from '../components/LowonganKerja/FormUpdateLoker.vue'
 import listLoker from '../components/LowonganKerja/ListLokerComponent.vue'
@@ -11,6 +14,14 @@ import updateCuti from '../components/Cuti/updateCuti.vue'
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
+import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
+import fileLamaran from '../components/Lamaran/fileLamaran.vue'
+import fileKk from '../components/Lamaran/fileKk'
+import fileNpwp from '../components/Lamaran/fileNpwp'
+import fileBpjsKes from '../components/Lamaran/fileBpjsKes'
+import fileBpjsKet from '../components/Lamaran/fileBpjsKet'
+import fileResume from '../components/Lamaran/fileResume'
+import fileKis from '../components/Lamaran/fileKis'
 
 Vue.use(Vuetify);
 Vue.use(VueRouter)
@@ -86,12 +97,27 @@ const routes = [
     component: Home
   },
   {
-    path: '/RequestLowongan',
+    path: '/RequestLowongan/add',
     name: 'RequestLowongan',
     component: RequestLowongan
   },
   {
-    path: '/buatLoker',
+    path: '/RequestLowongan',
+    name: 'RequestLowonganDisplay',
+    component: RequestLowonganDisplay
+  },
+  {
+    path: '/RequestLowongan/:id',
+    name: 'RequestLowonganId',
+    component: RequestLowonganId
+  },
+  {
+    path: '/ListRequestLowongan',
+    name: 'ListRequestLowongan',
+    component: ListRequestLowongan
+  },
+  {
+    path: '/buatLoker/:id',
     name: 'formCreateLoker',
     component: formCreateLoker
   },
@@ -126,6 +152,47 @@ const routes = [
     component: detailLoker
   },
   {
+    path: '/LamaranKerja/:idLowongan',
+    name:'LamaranKerja',
+    component: LamaranKerja
+  },
+  {
+    path: '/fileLamaran/:idLamaran',
+    name:'fileLamaran',
+    component: fileLamaran
+  },
+  {
+    path: '/fileKk/:idLamaran',
+    name:'fileKk',
+    component: fileKk
+  },
+  {
+    path: '/fileNpwp/:idLamaran',
+    name:'fileNpwp',
+    component: fileNpwp
+  },
+  {
+    path: '/fileBpjsKet/:idLamaran',
+    name:'fileBpjsKet',
+    component: fileBpjsKet
+  },
+  {
+    path: '/fileBpjsKes/:idLamaran',
+    name:'fileBpjsKes',
+    component: fileBpjsKes
+  },
+  {
+    path: '/fileResume/:idLamaran',
+    name:'fileResume',
+    component: fileResume
+  },
+  {
+    path: '/fileKis/:idLamaran',
+    name:'fileKis',
+    component: fileKis
+  },
+
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
@@ -136,7 +203,7 @@ const routes = [
 ]
 
 //<<<<<<< HEAD
-export default new VueRouter({routes})
+export default new VueRouter({routes, mode: 'history'})
 // =======
 // const router = new VueRouter({
 //   mode: 'history',

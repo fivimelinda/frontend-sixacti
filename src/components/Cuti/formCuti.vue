@@ -1,39 +1,69 @@
 <template>
+    <v-container mt-sm-12>
     <div>
-    <b-container class="mt-sm-10">
-    <b-form @submit.prevent="onSubmit">
-    <b-row> 
-        <b-col sm="5" class="form-group">
+      <b-row id="title">
+        <h1> Form Pengajuan Cuti</h1>
+      </b-row>
+    <ValidationObserver ref="observer">
+    <b-form slot-scope="{ validate }" @submit.prevent="validate().then(handleSubmit)">
+    
+    <b-row > 
+        <b-col md="6" sm="12" >
+          <ValidationProvider name="Tanggal" rules="required">
+            <span slot-scope="{ valid, errors }">
             <b-row><label class="control-label">Cuti Mulai</label></b-row>
             <b-form-datepicker class="form-control" 
+            :state="errors[0] ? false : (valid ? true : null)"
             placeholder="Pilih Tanggal Mulai cuti" 
-            v-model="form.tanggalMulai" aria-required="true"
+            v-model="form.tanggalMulai"
             :min="min" :max="max"
-            required>
+            >
             </b-form-datepicker>
+            <b-form-invalid-feedback>
+                Tanggal harus dipilih
+            </b-form-invalid-feedback>
+            </span>
+            </ValidationProvider>
         </b-col>
         
-        <b-col sm="5" offset-sm="1" class="form-group">
+        <b-col md="6" sm="12">
+          <ValidationProvider name="Tanggal selesai" rules="required">
+            <span slot-scope="{ valid, errors }">
             <b-row><label class="control-label">Cuti Sampai</label></b-row>
             <b-form-datepicker class="form-control" 
+            :state="errors[0] ? false : (valid ? true : null)"
             placeholder="Pilih Tanggal Akhir cuti" 
             v-model="form.tanggalSampai"
             :min="min" :max="max"
-            required></b-form-datepicker>
+            ></b-form-datepicker>
+             <b-form-invalid-feedback>
+                  Tanggal harus dipilih
+            </b-form-invalid-feedback>
+            </span>
+            </ValidationProvider>
+            
         </b-col>
     </b-row>
-    <b-row>
-        <b-col sm="5" class="form-group"> 
+    
+    <ValidationProvider name="Kategori" rules="required">
+    <b-row class="form-group" slot-scope="{ valid, errors }">
+        <b-col md="6" sm="12" > 
             <b-row><label class="control-label">Kategori Cuti</label></b-row>   
             <b-form-select v-model="form.idKategori"
             :options="listKategori"
             text-field="namaKategori"
             value-field="id"
+            :state="errors[0] ? false : (valid ? true : null)"
             ></b-form-select>
+            <b-form-invalid-feedback>
+              Kategori harus dipilih
+            </b-form-invalid-feedback>
         </b-col>
     </b-row>
-    <b-row class="form-group">
-      <b-col sm="5" lg="11">
+    </ValidationProvider>
+    <ValidationProvider name="Keterangan" rules="required">
+    <b-row class="form-group" slot-scope="{ valid, errors }">
+      <b-col md="12">
       <b-row><label class="control-label">Keterangan Cuti</label></b-row>
       <b-form-textarea
         id="textarea"
@@ -41,22 +71,36 @@
         placeholder="Tulis Keterangan Cuti..."
         rows="2"
         max-rows="6"
-        required>
+        :state="errors[0] ? false : (valid ? true : null)">
       </b-form-textarea>
+      <b-form-invalid-feedback>
+          Keterangan cuti harus diisi
+      </b-form-invalid-feedback>
       </b-col>
     </b-row>
-    <b-col sm="4" offset-sm="4">
+    </ValidationProvider>
+    <b-col md="4" offset-sm="4">
       <b-button block type="submit" variant="danger" id="btnCuti">Ajukan Cuti</b-button> 
     </b-col>   
+    <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>
+      Tanggal akhir cuti tidak valid!
+    </b-alert>
     </b-form>
-    </b-container>
+    </ValidationObserver>
     </div> 
+    </v-container>
+  
 </template>
 
 <script>
-import axios from 'axios'
+import moment from 'moment'
+import CutiService from '../../service/CutiService'
+import { ValidationObserver, ValidationProvider } from 'vee-validate';
+
   export default {
     components:{
+      ValidationObserver,
+      ValidationProvider
     },
     data() {
       const now = new Date()
@@ -75,24 +119,34 @@ import axios from 'axios'
         user: '',
         listKategori: [],
         min: minDate,
-        max: maxDate
+        max: maxDate,
+        showDismissibleAlert: false
       }
     },
     methods: {
-      onSubmit() {
-        axios.post('http://localhost:5000/api/cuti/ajukan', this.form);
-        this.$router.push({
-          name:'viewCuti'
-        })
+      handleSubmit() {
+        const start = moment(this.form.tanggalMulai).format("YYYY-MM-DD")
+        const end = moment(this.form.tanggalSampai).format("YYYY-MM-DD")
+        if (moment(start).isAfter(end)){
+          this.showDismissibleAlert = true
+        } else { 
+          CutiService.createCuti(this.form).then(response => {
+          if (response.status == 200){
+            this.$router.push({
+              name:'viewCuti'
+            })
+          }
+          })
+        }
       },
       getListKategori(){
-        axios.get('http://localhost:5000/api/kategoriCuti/get').then(response => {
+        CutiService.getListKategori().then(response => {
           this.listKategori = response.data
           this.listKategori.push({ namaKategori: 'Pilih Kategori Cuti', id:null})
         })
       }
     },
-    mounted() {
+    created() {
       this.getListKategori()
     }
   }
@@ -137,4 +191,5 @@ select{
   border-radius: 0%;
   border-color: darkgrey;
 }
+
 </style>
