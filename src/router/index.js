@@ -13,7 +13,7 @@ import FormUpdateLoker from '../components/LowonganKerja/FormUpdateLoker.vue'
 import listLoker from '../components/LowonganKerja/ListLokerComponent.vue'
 import formCuti from '../components/Cuti/formCuti.vue'
 import viewCuti from '../components/Cuti/viewCuti.vue'
-// import GenerateSuratKontrakDetail from '../components/GenerateSuratKontrak/GenerateSuratKontrakDetail.vue'
+import GenerateSuratKontrakDetail from '../components/GenerateSuratKontrak/GenerateSuratKontrakDetail.vue'
 import GenerateSuratKontrakAll from '../components/GenerateSuratKontrak/GenerateSuratKontrakAll.vue'
 
 import Vuetify from "vuetify";
@@ -230,6 +230,11 @@ const routes = [
     path: '/GenerateSuratKontrak',
     name: 'GenerateSuratKontrak',
     component: GenerateSuratKontrakAll
+  },
+  {
+    path: '/GenerateSuratKontrak/:id/:index',
+    name: 'GenerateSuratKontrak',
+    component: GenerateSuratKontrakDetail
   },
 
   {

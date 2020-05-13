@@ -27,12 +27,12 @@
                 </tr>
             </thead>
             <tbody class="tbody">
-                <tr v-for="(det,index) in detailKontrak.slice().reverse()" :key="det.id" v-on:click="click(id)" class="content" v-bind="add()">
+                <tr v-for="(det,index) in detailKontrak.slice().reverse()" :key="det.id" v-on:click="click(det,index)" class="content" v-bind="add()">
                     <th scope=row class="th-bottom">{{index+1}}</th>
                     <td>{{name[index]}}</td>
                     <td>{{det.tanggal_mulai.substring(0,10)}}</td>
                     <td>{{det.tanggal_berakhir.substring(0,10)}}</td>
-                    <td>{{counter-403}}</td>
+                    <td>{{departemen[index]}}</td>
                     <td>Status</td>
                 </tr>
             </tbody>
@@ -49,12 +49,14 @@ export default {
         return {
             detailKontrak: [],
             name: [],
+            departemen: [],
             counter: 0
         }
     },
     mounted() {
         this.load(),
-        this.loadName()
+        this.loadName(),
+        this.loadDepartemen()
     },
     methods: {
         load() {
@@ -71,10 +73,21 @@ export default {
                 console.log(err);
             })
         },
+        loadDepartemen() {
+            axios.get('http://localhost:8081/detailKontrak/getDepartemen').then(res => {
+                this.departemen = res.data
+            }).catch((err) => {
+                console.log(err);
+            })
+        },
         getLast(){},
         add(){
             this.counter ++;
-        }
+        },
+        click: function (req, name) {
+            console.log("Clicked with "+ req.noSurat);
+            window.location.href= "/GenerateSuratKontrak/"+req.noSurat+"/"+name;
+        },
     }
 }
 
