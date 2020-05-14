@@ -2,10 +2,17 @@ import axios from "axios";
 
 const URI = 'http://localhost:8081/api';
 
-class AtributService{
+class AtributService {
 
     //tambah atribut
-    createAtribut(idKaryawan,atribut){
-        return axios.post(URI + "/tambahAtribut/" + idKaryawan, atribut);
+    createAtribut(idPelamar,atribut){
+        return axios.post(URI + "/tambahAtribut/" + idPelamar, atribut);
+    }
+
+    // 
+    updateAtribut(idAtribut, atribut){
+        return axios.put(URI + "/atribut/ubah/" + idAtribut, atribut);
     }
 }
+
+export default new AtributService();

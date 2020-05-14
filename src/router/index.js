@@ -116,7 +116,7 @@ const routes = [
     component: TesLayout,
   },
   {
-    path:'/atribut',
+    path:'/atribut/:id',
     name:'atribut',
     component: Atribut
   },

@@ -14,7 +14,7 @@
         <div>
         <div v-if="tes_tulis === null && !isTesTulisFormOpen" class="d-flex justify-center">
             <!-- disabled button -->
-            <div v-if="(!tes_medis.isLolos || tes_medis === null)">
+            <div v-if="(tes_medis === null || (!tes_medis.isLolos))">
                 <v-btn color="rgb(121, 121, 121)"
                 class="p-0"
                 ><b-button class="pl-3 pr-3" style="background-color:rgb(121, 121, 121)"
