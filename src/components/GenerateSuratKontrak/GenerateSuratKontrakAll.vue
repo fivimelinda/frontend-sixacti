@@ -23,7 +23,7 @@
                     <th scope="col">Tanggal Mulai</th>
                     <th scope="col">Tanggal Berakhir</th>
                     <th scope="col">Departemen</th>
-                    <th scope="col">Surat Kontrak</th>
+                    <th scope="col">Status</th>
                 </tr>
             </thead>
             <tbody class="tbody">
@@ -33,7 +33,10 @@
                     <td>{{det.tanggal_mulai.substring(0,10)}}</td>
                     <td>{{det.tanggal_berakhir.substring(0,10)}}</td>
                     <td>{{departemen[index]}}</td>
-                    <td>Status</td>
+                    <td>
+                        <div v-if= "det.status == false">Belum digenerate</div>
+                        <div v-if= "det.status == true">Sudah digenerate</div>
+                    </td>
                 </tr>
             </tbody>
         </table>

@@ -82,6 +82,7 @@ export default {
     },
     methods : {
         generate() {
+            this.changeStatus();
             var doc = new jsPDF();
             doc.setFontSize(11);
             doc.setLineHeightFactor(1);
@@ -118,6 +119,9 @@ export default {
             }).catch((err) => {
                 console.log(err);
             })
+        },
+        changeStatus(){
+            axios.put('http://localhost:8081/detailKontrak/changeStatus/'+this.$route.params.id)
         },
         loadDetailKontrak() {
 
