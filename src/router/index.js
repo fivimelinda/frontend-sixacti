@@ -22,6 +22,8 @@ import fileBpjsKes from '../components/Lamaran/fileBpjsKes'
 import fileBpjsKet from '../components/Lamaran/fileBpjsKet'
 import fileResume from '../components/Lamaran/fileResume'
 import fileKis from '../components/Lamaran/fileKis'
+import StatusAtribut from '../components/AtributHR/StatusAtribut'
+import HasilTes from '../components/HasilTes/HasilTes'
 
 Vue.use(Vuetify);
 Vue.use(VueRouter)
@@ -186,7 +188,16 @@ const routes = [
     name:'fileKis',
     component: fileKis
   },
-
+  {
+    path: '/listAtribut',
+    name:'StatusAtribut',
+    component: StatusAtribut
+  },
+  {
+    path: '/hasilTes/:idPelamar',
+    name:'HasilTes',
+    component: HasilTes
+  },
   {
     path: '/about',
     name: 'About',
