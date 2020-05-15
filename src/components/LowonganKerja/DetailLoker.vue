@@ -48,9 +48,7 @@
     <div id="deskripsi" class="container-fluid">
         <div class="text-break">{{deskripsi}}</div>
     </div>
-    
 
-    
 
 
 </div>
@@ -142,7 +140,8 @@ export default {
             tanggalMulai: "",
             tanggalBerakhir: "",
             deskripsi: "",
-            errors: []
+            errors: [],
+            
         };
         
     },
@@ -161,6 +160,7 @@ export default {
                 this.tanggalMulai = moment(res.data.tanggalMulai).format("MMMM YYYY");
                 this.tanggalBerakhir = moment(res.data.tanggalBerakhir).format("MMMM YYYY");
                 this.deskripsi = res.data.deskripsi;
+           
             });
         },
         updateLokerClicked(){

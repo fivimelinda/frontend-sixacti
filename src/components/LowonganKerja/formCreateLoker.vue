@@ -31,14 +31,20 @@
             <input class="form-control" v-model="jobTitle" id="judul" placeholder="Masukan Judul Lowongan Pekerjaan" />
           </div>
 
-          <div class="form-group">
-            <div class="mb-2 label">Departement</div>
-            <input class="form-control" v-model="departement" id="departement" placeholder="Masukan nama departement" />
-          </div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <div class="mb-2 label">Departement</div>
+                <input class="form-control" v-model="departement" id="departement" placeholder="Masukan nama departement" />
+              </div>
+            </div>
 
-          <div class="form-group">
-            <div class="mb-2 label">Section</div>
-            <input class="form-control" v-model="section" id="section" placeholder="Masukan nama section" />
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <div class="mb-2 label">Section</div>
+                <input class="form-control" v-model="section" id="section" placeholder="Masukan nama section" />
+              </div>
+            </div>
           </div>
 
           <div class="form-group">
@@ -75,7 +81,11 @@
             <b-textarea class="form-control" id="deskripsi" v-model="deskripsi"/>
           </div>
 
-          <button type="submit" class=" mt-5 mb-5 btn btn-danger">simpan</button>
+          <div class="btn-group">
+            <button type="submit" class="btn btn-danger mr-2">Simpan</button>
+            <button class="btn btn-light" @click="batal">Batal</button>
+          </div>
+    
 
         </form>
 
@@ -198,6 +208,7 @@ export default {
       tanggalMulai : "",
       tanggalBerakhir : "",
       deskripsi : "",
+      dateWanted : "",
       errors: [],
     }
   },
@@ -320,6 +331,10 @@ export default {
 
         errorModal(){
             this.$refs['error-modal'].show();
+        },
+
+        batal(){
+          this.$router.push("/listRequestLowongan");
         }
         
   },

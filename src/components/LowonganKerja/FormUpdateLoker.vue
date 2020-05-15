@@ -30,16 +30,22 @@
                 <input class="form-control" v-model="judulLoker" placeholder="Masukan Judul Lowongan Pekerjaan" disabled/>
             </fieldset>
 
-            <fieldset class="form-group">
-                <div class="mb-2 label">Departement</div>
-                <input class="form-control" v-model="departement" placeholder="Masukan nama departement" disabled/>
-            </fieldset>
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <fieldset class="form-group">
+                        <div class="mb-2 label">Departement</div>
+                        <input class="form-control" v-model="departement" placeholder="Masukan nama departement" disabled/>
+                    </fieldset>
+                </div>
 
-            <fieldset class="form-group">
-                <div class="mb-2 label">Section</div>
-                <input class="form-control" v-model="section" placeholder="Masukan nama section" disabled/>
-            </fieldset>
-
+                <div class="col-sm-6 col-xs-12">
+                    <fieldset class="form-group">
+                        <div class="mb-2 label">Section</div>
+                        <input class="form-control" v-model="section" placeholder="Masukan nama section" disabled/>
+                    </fieldset>
+                </div>
+            </div>
+            
             <div class="row">
                 <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
@@ -69,7 +75,11 @@
                 <b-textarea class="form-control" v-model="deskripsi"/>
             </div>
 
-            <button type="submit" class=" mt-5 mb-5 btn btn-danger">simpan</button>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-danger mr-2">Simpan</button>
+                <button class="btn btn-light" @click="batal">Batal</button>
+            </div>
+            
 
         </form>
 
@@ -287,6 +297,9 @@ export default {
 
         errorModal(){
             this.$refs['error-modal'].show();
+        },
+        batal(){
+          this.$router.push(`/detailLoker/${this.idLowongan}`);
         }
     },
     created(){
