@@ -42,12 +42,36 @@
                 <v-card-text class="data">{{req.periode}}</v-card-text>
             </v-flex>
         </v-layout>
+         <v-layout row class="detail">
+            <v-flex xs6 md6>
+                <v-card-text>Gaji</v-card-text>
+            </v-flex>
+            <v-flex xs6 md6>
+                <v-card-text class="data">Rp. {{formatPrice(gaji)}}</v-card-text>
+            </v-flex>
+        </v-layout>
         <v-layout row class="detail">
             <v-flex xs6 md6>
                 <v-card-text>Nomor Kontrak</v-card-text>
             </v-flex>
             <v-flex xs6 md6>
                 <v-card-text class="data">{{req.noSurat}}</v-card-text>
+            </v-flex>
+        </v-layout>
+        <v-layout row class="detail">
+            <v-flex xs6 md6>
+                <v-card-text>Nomor Surat</v-card-text>
+            </v-flex>
+            <v-flex xs6 md6>
+                <input class="form-control" type="string" id="nomorSurat" placeholder="masukkan nomor surat" v-model="nomorSurat">
+            </v-flex>
+        </v-layout>
+        <v-layout row class="detail">
+            <v-flex xs6 md6>
+                <v-card-text>Nama penandatangan</v-card-text>
+            </v-flex>
+            <v-flex xs6 md6>
+                <input class="form-control" type="string" id="namaTtd" placeholder="masukkan nama penandatangan" v-model="namaTtd">
             </v-flex>
         </v-layout>
         <div class="button-wrapper">
@@ -71,14 +95,18 @@ export default {
             name: [],
             departemen: [],
             req: '',
-            today1: ''
+            today1: '',
+            gaji: '',
+            nomorSurat: '',
+            namaTtd: ''
         }
     },
     mounted() {
         this.loadName(),
         this.loadDepartemen(),
         this.load(),
-        this.today()
+        this.today(),
+        this.getGaji()
     },
     methods : {
         generate() {
@@ -87,7 +115,8 @@ export default {
             doc.setFontSize(11);
             doc.setLineHeightFactor(1);
             doc.setFontStyle('Times New Roman');
-            var paragraph="                                                                      SURAT KONTRAK KERJA\n\n                                                                                   "+this.req.noSurat+"\n\nYang bertanda tangan dibawah ini\n\n  Nama         : Staf HR\n\n  Jabatan       : Staf Sumber Daya Manusia\n\nDalam hal ini bertindak untuk dan atas nama PT. Xacti Indonesia yang beralamat di Jl. Raya Bogor Km. 35, Sukamaju Baru, Tapos, Depok 16455, Jawa Barat, Indonesia yang akan disebut Pihak Pertama\n\n  Nama                            :"+this.name[this.$route.params.index]+"\n\n  Tempat/Tanggal Lahir : Belum Diambil\n\n  Alamat                         : Belum diambil\n\n  Jabatan                         : Karyawan Kontrak\n\nDalam hal ini bertindak atas nama sendiri, yang disebut sebagai Pihak Kedua.\n\nPada "+this.today1+", dengan memilih tempat di PT. Xacti Indonesia Manajemen Pihak Pertama dan Pihak Kedua sepakat untuk saling terikat dalam surat kontrak kerja karyawan dengan syarat dan ketentuan diatur sebagai berikut :\n\n                                                                   PASAL 1 KETENTUAN UMUM\n\n  1.  Pihak Kedua akan taat serta tunduk pada tata tertib kerja yang berlaku, perintah langsung maupun tidak dari Pihak Pertama ataupun wakil dari PT. Xacti Indonesia.\n\n  2.  Apabila Pihak Kedua melakukan pelanggaran kerja maka Pihak Pertama berhak memberikan sanksi sesuai dengan pelangaran yang dilakukan oleh Pihak Kedua.\n\n                                                                     PASAL 2 JANGKA WAKTU\n\n  1.  Kontrak kerja ini akan berlaku selama 3 (tiga) tahun terhitung dari penandatangan, yakni pada tanggal 21 Juli 2017 sampai dengan 2 Agustus 2020.\n\n  2.  Apabila kontrak kerja ini habis masa berlakunya, maka kedua kedua belah pihak bisa melakukan perpanjangan kontrak baru dengan kesepakatan bersama.\n\n                                                                     PASAL 3 WAKTU KERJA\n\nPihak kedua akan bekerja selama 6 jam perharinya dan 5 hari perminggunya belum termasuk waktu istirahat dengan rincian sebagi berikut :\n\n  Senin-Jumat        : 08.00-16.00 WIB\n\n  Istirahat      : 11.15-13.15 WIB\n\n                                                                             PASAL 4 UPAH\n\nPihak Kedua akan menerima gaji sebesar Rp. 3.000.000,00 (tiga juta rupiah) perbulannya.\n\n                                                          PASAL 5 PEMBERHENTIAN KERJA\n\nApabila Pihak Kedua melakukan tindak kriminal yang merugikan Pihak Pertama serta juga melakukan tindakan indisipiner kerja dan sudah mendapat surat peringatan sebanyak 3 (tiga) kali maka Pihak Pertama akan langsung memberhentikan Pihak Kedua dari pekerjaannya walaupun masa kontraknya masih\n\nDepok, 21 Juli 2017\n\n                                           Pihak pertama                                                          Pihak kedua\n\n\n\n\n\n                                        Widiawati Nuraini                                                   "+this.name[this.$route.params.index]+"";
+            doc.text(this.nomorSurat, 105, 28, 'center');
+            var paragraph="                                                                      SURAT KONTRAK KERJA\n\n                                                                                   "+"\n\n"+"\n\nYang bertanda tangan dibawah ini\n\n  Nama         : Staf HR\n\n  Jabatan       : Staf Sumber Daya Manusia\n\nDalam hal ini bertindak untuk dan atas nama PT. Xacti Indonesia yang beralamat di Jl. Raya Bogor Km. 35, Sukamaju Baru, Tapos, Depok 16455, Jawa Barat, Indonesia yang akan disebut Pihak Pertama\n\n  Nama                            :"+this.name[this.$route.params.index]+"\n\n  Tempat/Tanggal Lahir : Belum Diambil\n\n  Alamat                         : Belum diambil\n\n  Jabatan                         : Karyawan Kontrak\n\nDalam hal ini bertindak atas nama sendiri, yang disebut sebagai Pihak Kedua.\n\nPada "+this.today1+", dengan memilih tempat di PT. Xacti Indonesia Manajemen Pihak Pertama dan Pihak Kedua sepakat untuk saling terikat dalam surat kontrak kerja karyawan dengan syarat dan ketentuan diatur sebagai berikut :\n\n                                                                   PASAL 1 KETENTUAN UMUM\n\n  1.  Pihak Kedua akan taat serta tunduk pada tata tertib kerja yang berlaku, perintah langsung maupun tidak dari Pihak Pertama ataupun wakil dari PT. Xacti Indonesia.\n\n  2.  Apabila Pihak Kedua melakukan pelanggaran kerja maka Pihak Pertama berhak memberikan sanksi sesuai dengan pelangaran yang dilakukan oleh Pihak Kedua.\n\n                                                                     PASAL 2 JANGKA WAKTU\n\n  1.  Kontrak kerja ini akan berlaku selama 3 (tiga) tahun terhitung dari penandatangan, yakni pada tanggal 21 Juli 2017 sampai dengan 2 Agustus 2020.\n\n  2.  Apabila kontrak kerja ini habis masa berlakunya, maka kedua kedua belah pihak bisa melakukan perpanjangan kontrak baru dengan kesepakatan bersama.\n\n                                                                     PASAL 3 WAKTU KERJA\n\nPihak kedua akan bekerja selama 6 jam perharinya dan 5 hari perminggunya belum termasuk waktu istirahat dengan rincian sebagi berikut :\n\n  Senin-Jumat        : 08.00-16.00 WIB\n\n  Istirahat      : 11.15-13.15 WIB\n\n                                                                             PASAL 4 UPAH\n\nPihak Kedua akan menerima gaji sebesar Rp. 3.000.000,00 (tiga juta rupiah) perbulannya.\n\n                                                          PASAL 5 PEMBERHENTIAN KERJA\n\nApabila Pihak Kedua melakukan tindak kriminal yang merugikan Pihak Pertama serta juga melakukan tindakan indisipiner kerja dan sudah mendapat surat peringatan sebanyak 3 (tiga) kali maka Pihak Pertama akan langsung memberhentikan Pihak Kedua dari pekerjaannya walaupun masa kontraknya masih\n\nDepok, 21 Juli 2017\n\n                                           Pihak pertama                                                          Pihak kedua\n\n\n\n\n\n                                        Widiawati Nuraini                                                   "+this.name[this.$route.params.index]+"";
             var lines =doc.splitTextToSize(paragraph, (210-15-15));
             doc.text(15,20,lines);
             doc.save(this.req.noSurat+'.pdf');
@@ -125,6 +154,17 @@ export default {
         },
         loadDetailKontrak() {
 
+        },
+        getGaji() {
+            axios.get('http://localhost:8081/detailKontrak/gaji/'+this.$route.params.id).then(res => {
+                this.gaji = res.data
+            }).catch((err) => {
+                console.log(err);
+            })
+        },
+        formatPrice(value) {
+            let val = (value/1).toFixed(2).replace('.', ',')
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         }
     }
 }
