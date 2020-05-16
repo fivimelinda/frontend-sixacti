@@ -1,13 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {auth} from './auth.module'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
     strict: true, // process.env.NODE_ENV !== 'production',
     getters:{},
-    modules: {},
+    modules: {
+        auth,
+    },
+    actions:{
+    
+    },
     state: {
+        token:null,
         dummy:[
             {
                 "idPelamar":1,
