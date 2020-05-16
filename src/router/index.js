@@ -125,11 +125,23 @@ const routes = [
         path: '/tes/:id',
         name: 'tes',
         component: TesLayout,
-      },
-      {
-        path:'/atribut/:id',
-        name:'atribut',
-        component: Atribut
+        // children:[
+        //   {
+        //     path: 'tulis',
+        //     name: 'tulis',
+        //     component: () => import('../components/Tes/TesTulis/TesTulis.vue'),
+        //   },
+        //   {
+        //     path: 'medis',
+        //     name: 'medis',
+        //     component: () => import('../components/Tes/TesMedis/TesMedis.vue'),
+        //   },
+        //   {
+        //     path: 'wawancara',
+        //     name: 'wawancara',
+        //     component: () => import('../components/Tes/TesWawancara/TesWawancara.vue')
+        //   },
+        // ]
       },
       {
         //path: '/RequestLowongan',
@@ -174,8 +186,13 @@ const routes = [
       },
       {
         path: '/cuti',
-        name: 'cuti',
+        name: 'viewCuti',
         component: viewCuti
+      },
+      {
+        path: '/updateCuti',
+        name: 'updateCuti',
+        component: updateCuti
       },
       {
         path: '/detailLoker/:idLowongan',
@@ -221,6 +238,22 @@ const routes = [
         path: '/fileKis/:idLamaran',
         name:'fileKis',
         component: fileKis
+      },
+      {
+        path: '/GenerateSuratKontrak',
+        name: 'GenerateSuratKontrak',
+        component: GenerateSuratKontrakAll
+      },
+      {
+        path: '/GenerateSuratKontrak/:id/:index',
+        name: 'GenerateSuratKontrak',
+        component: GenerateSuratKontrakDetail
+      },
+    
+      //Path Download File
+      {
+        path: '/download/ktp/:fileName',
+        
       },
     
       {
