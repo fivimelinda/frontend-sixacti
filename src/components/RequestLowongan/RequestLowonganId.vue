@@ -65,7 +65,8 @@
                 <v-card-text>Shift</v-card-text>
             </v-flex>
             <v-flex xs6 md6>
-                <v-card-text class="data">{{req.shift}}</v-card-text>
+                <v-card-text v-if= "req.shift == true" class="data">Ya</v-card-text>
+                <v-card-text v-if= "req.shift == false" class="data">Tidak</v-card-text>
             </v-flex>
         </v-layout>
         <v-layout row class="detail">
@@ -81,7 +82,8 @@
                 <v-card-text>Addition</v-card-text>
             </v-flex>
             <v-flex xs6 md6>
-                <v-card-text class="data">{{req.addition}}</v-card-text>
+                <v-card-text v-if= "req.addition == true" class="data">Ya</v-card-text>
+                <v-card-text v-if= "req.addition == false" class="data">Tidak</v-card-text>
             </v-flex>
         </v-layout>
         <v-layout row class="detail">
