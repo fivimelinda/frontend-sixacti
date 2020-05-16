@@ -18,70 +18,128 @@
             </div>
             <br>
             <form @submit ="formSubmit">
-                <div class="form-group">
-                    <div class="label">Judul lowongan pekerjaan*</div>
-                    <input class="form-control" id="judul" placeholder="masukkan judul lowongan pekerjaan" v-model="judul" required="true">
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <div class="label">Judul lowongan pekerjaan*</div>
+                                <input class="form-control" id="judul" placeholder="masukkan judul lowongan pekerjaan" v-model="judul" required="true">
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
                 <br>
-                <div class="form-group">
-                    <div class="label">Departemen*</div>
-                    <input class="form-control" id="departemen" placeholder="masukkan departemen" v-model="departemen">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Departemen*</div>
+                                <input class="form-control" id="departemen" placeholder="masukkan departemen" v-model="departemen">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Section*</div>
+                                <input class="form-control" id="section" placeholder="masukkan section" v-model="section">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <br>
-                <div class="form-group">
-                    <div class="label">Section*</div>
-                    <input class="form-control" id="section" placeholder="masukkan section" v-model="section">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Supervisor*</div>
+                                <input class="form-control" id="supervisor" placeholder="masukkan supervisor" v-model="supervisor">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Tanggal diinginkan*</div>
+                                <input class="form-control" type="date" id="tanggal-diinginkan" placeholder="pilih tanggal" v-model="tanggal">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <br>
-                <div class="form-group">
-                    <div class="label">Supervisor*</div>
-                    <input class="form-control" id="supervisor" placeholder="masukkan supervisor" v-model="supervisor">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="radio">
+                                <div class="label">Shift*</div>
+                                    <input type="radio" name="shift" v-model="shift" value=yes>Ya
+                                <br>
+                                    <input type="radio" name="shift" v-model="shift" value=no>Tidak
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="radio">
+                                <div class="label">Addition*</div>
+                                    <input type="radio" name="addition" v-model="addition" value=yes>Ya
+                                <br>
+                                    <input type="radio" name="addition" v-model="addition" value=no>Tidak
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <br>
-                <div class="form-group">
-                    <div class="label">Tanggal diinginkan*</div>
-                    <input class="form-control" type="date" id="tanggal-diinginkan" placeholder="pilih tanggal" v-model="tanggal">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Periode kontrak*</div>
+                                <input class="form-control" type="number" id="periode-kontrak" placeholder="masukkan periode kontrak" v-model="periode">
+                                <small class="form-text text-muted">Periode kontrak dalam satuan bulan</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Jumlah*</div>
+                                <input class="form-control" type="number" id="jumlah" placeholder="masukkan jumlah" v-model="jumlah">
+                            </div>
+                        </div>
+                    </div>
                 </div>
+               
+               <div class="container">
+                   <div class="row">
+                       <div class="col-sm-12">
+                           <div class="form-group">
+                                <div class="label">Gaji*</div>
+                                <input class="form-control" type="number" id="gaji" placeholder="masukkan gaji" v-model="gaji">
+                                <small class="form-text text-muted">Gaji dalam rupiah (Rp)</small>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+
+               <div class="container">
+                   <div class="row">
+                       <div class="col-sm-12">
+                           <div class="form-group">
+                            <div class="label">Nama replacement</div>
+                            <input class="form-control" id="nama-replacement" placeholder="Tuliskan nama dipisahkan dengan koma (contoh: budi, andi, didu)" v-model="replacement">
+                        </div>
+                       </div>
+                   </div>
+               </div>
+
+
+                
+            
                 <br>
-                <div class="radio">
-                    <div class="label">Shift*</div>
-                        <input type="radio" name="shift" v-model="shift" value=yes>Ya
-                    <br>
-                        <input type="radio" name="shift" v-model="shift" value=no>Tidak
-                </div>
-                <br>
-                <div class="form-group">
-                    <div class="label">Periode kontrak*</div>
-                    <input class="form-control" type="number" id="periode-kontrak" placeholder="masukkan periode kontrak" v-model="periode">
-                    <small class="form-text text-muted">Periode kontrak dalam satuan bulan</small>
-                </div>
-                <br>
-                <div class="radio">
-                    <div class="label">Addition*</div>
-                        <input type="radio" name="addition" v-model="addition" value=yes>Ya
-                    <br>
-                        <input type="radio" name="addition" v-model="addition" value=no>Tidak
-                </div>
-                <br>
-                <div class="form-group">
-                    <div class="label">Jumlah*</div>
-                    <input class="form-control" type="number" id="jumlah" placeholder="masukkan jumlah" v-model="jumlah">
-                </div>
-                <br>
-                <div class="form-group">
-                    <div class="label">Gaji*</div>
-                    <input class="form-control" type="number" id="gaji" placeholder="masukkan gaji" v-model="gaji">
-                    <small class="form-text text-muted">Gaji dalam rupiah (Rp)</small>
-                </div>
-                <br>
-                <div class="form-group">
-                    <div class="label">Nama replacement</div>
-                    <input class="form-control" id="nama-replacement" placeholder="Tuliskan nama dipisahkan dengan koma (contoh: budi, andi, didu)" v-model="replacement">
-                </div>
-                <br>
-                <br>
-                <br>
-                <b-button v-b-modal.modal-1 class="btn btn-danger">Simpan</b-button>
+
+                <div class="container">
+                   <div class="row">
+                       <div class="col-sm-12">
+                           <b-button v-b-modal.modal-1 class="btn btn-danger">Simpan</b-button>
+                       </div>
+                   </div>
+               </div>
                 <br>
                 <br>
             <b-modal id="modal-1" title="Rangkuman" v-bind:hide-footer="true">
@@ -307,12 +365,12 @@ export default {
                     "section" : this.section,
                     "supervisor" : this.supervisor,
                     "dateWanted" : this.tanggal,
-                    "shift" : (this.shift == "true"),
+                    "shift" : (this.shift == "yes"),
                     "jumlah" : this.jumlah,
                     "gaji" : this.gaji,
                     "status" : "pending",
                     "periodeKontrak" : this.periode,
-                    "addition" : (this.addition == "true"),
+                    "addition" : (this.addition == "yes"),
                     "namaReplacement" : this.replacement
                 })
                 // .then(function (response) {
@@ -391,12 +449,12 @@ hr{
 h1{
     font-family: 'oswald';
     text-align: left;
-    margin-left: 100px;
+    margin-left: 300px;
 }
 
 .box{
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 300px;
+    margin-right: 300px;
     background-color: white;
 }
 

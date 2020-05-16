@@ -13,6 +13,9 @@ import FormUpdateLoker from '../components/LowonganKerja/FormUpdateLoker.vue'
 import listLoker from '../components/LowonganKerja/ListLokerComponent.vue'
 import formCuti from '../components/Cuti/formCuti.vue'
 import viewCuti from '../components/Cuti/viewCuti.vue'
+import GenerateSuratKontrakDetail from '../components/GenerateSuratKontrak/GenerateSuratKontrakDetail.vue'
+import GenerateSuratKontrakAll from '../components/GenerateSuratKontrak/GenerateSuratKontrakAll.vue'
+
 import updateCuti from '../components/Cuti/updateCuti.vue'
 import reviewCuti from '../components/Cuti/reviewCuti.vue'
 import detailCuti from '../components/Cuti/detailCuti.vue'
@@ -245,6 +248,16 @@ const routes = [
     path: '/fileKis/:idLamaran',
     name:'fileKis',
     component: fileKis
+  },
+  {
+    path: '/GenerateSuratKontrak',
+    name: 'GenerateSuratKontrak',
+    component: GenerateSuratKontrakAll
+  },
+  {
+    path: '/GenerateSuratKontrak/:id/:index',
+    name: 'GenerateSuratKontrak',
+    component: GenerateSuratKontrakDetail
   },
 
   //Path Download File
