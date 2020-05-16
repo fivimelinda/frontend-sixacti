@@ -17,12 +17,15 @@ import GenerateSuratKontrakDetail from '../components/GenerateSuratKontrak/Gener
 import GenerateSuratKontrakAll from '../components/GenerateSuratKontrak/GenerateSuratKontrakAll.vue'
 
 import updateCuti from '../components/Cuti/updateCuti.vue'
+import reviewCuti from '../components/Cuti/reviewCuti.vue'
+import detailCuti from '../components/Cuti/detailCuti.vue'
+import lihatRiwayatCuti from '../components/Cuti/lihatRiwayatCuti.vue'
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
 import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
 import fileLamaran from '../components/Lamaran/fileLamaran.vue'
-
+import lihatProgres from '../components/RequestLowongan/LihatProgres.vue'
 import DaftarPesertaTes from '../components/Tes/DaftarPesertaTes.vue'
 
 import Login from '../components/Auth/Login/Login.vue'
@@ -187,6 +190,21 @@ const routes = [
     component: updateCuti
   },
   {
+    path:'/reviewCuti',
+    name: 'reviewCuti',
+    component: reviewCuti
+  },
+  {
+    path:'/detailCuti/:cutiId',
+    name: 'detailCuti',
+    component: detailCuti
+  },
+  {
+    path: '/lihatRiwayatCuti/:karyawanId',
+    name: 'lihatRiwayatCuti',
+    component: lihatRiwayatCuti
+  },
+  {
     path: '/detailLoker/:idLowongan',
     name: 'detailLoker',
     component: detailLoker
@@ -246,6 +264,11 @@ const routes = [
   {
     path: '/download/ktp/:fileName',
     
+  },
+  {
+    path:'/lihatProgres/:idLoker',
+    name: 'lihatProgres',
+    component: lihatProgres
   },
 
   {

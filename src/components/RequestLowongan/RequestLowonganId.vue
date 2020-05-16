@@ -125,6 +125,9 @@
         <div v-if="req.status == 'pending'" class="button-wrapper">
             <b-button v-b-modal.modal-1 class="btn btn-danger">Hapus</b-button>
         </div>
+        <v-layout row class="div-link" v-if="req.status == 'disetujui'">
+            <a v-on:click="lihatProgres" id="link">Lihat Progres Pemenuhan</a>
+        </v-layout>
     </v-card>
 
 
@@ -254,6 +257,9 @@ export default {
         },
         errorModal(){
             this.$refs['error-modal'].show();
+        },
+        lihatProgres(){
+            this.$router.push('/lihatProgres/' + this.$route.params.id)
         }
     }
 }
