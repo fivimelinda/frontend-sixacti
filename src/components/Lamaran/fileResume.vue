@@ -11,6 +11,7 @@
             <div class="form-group">
               <div class="mb-2 label">File Resume*</div>
               <input class="form-control" type="file" ref="file" v-on:change="handleFileUpload()" id="file" required>
+              <small class="form-text text-muted">Dalam format .pdf</small>
             </div>
             <!-- <div class="form-group">
               <div class="mb-2 label">Foto Kartu Keluarga*</div>
@@ -49,7 +50,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm" id="berhasil">
-                            Foto berhasil disimpan
+                            Resume berhasil disimpan
                         </div>
                         <div class="col-sm">
                             <v-img class="centang"

@@ -11,6 +11,7 @@
             <div class="form-group">
               <div class="mb-2 label">Foto BPJS Ketenagakerjaan</div>
               <input class="form-control" type="file" ref="file" v-on:change="handleFileUpload()" id="file">
+              <small class="form-text text-muted">Dalam format .jpg/.png</small>
             </div>
             <!-- <div class="form-group">
               <div class="mb-2 label">Foto Kartu Keluarga*</div>
