@@ -1,5 +1,6 @@
 <template>
-    <v-container>
+    <v-container class="">
+        <div class="jumbotron m-0" style="background-color:transparent !important">
         <div class="jumbotron" style="background-color:transparent !important">
             <v-card
             max-width="350px"
@@ -49,7 +50,7 @@
                                     ></b-form-input>
                             </b-input-group>
                         </b-form-group>
-                        <b-button size="sm" class="mb-5 btn btn-block" variant="primary" @click="handleLogin()">Submit</b-button>
+                        <b-button size="sm" class="mb-5 btn btn-block" variant="primary" @click="handleLogin()">Masuk</b-button>
                     </b-form>
                     <div>
                         <div style="font-size:12px">
@@ -65,8 +66,12 @@
                 </b-card-text>
             </b-card>
             <b-button @click="logOut()">Logout</b-button>
+            
             <div v-if="loggedIn">{{currentUser.username}}</div>
+            <div v-if="loggedIn">{{currentUser.role}}</div>
+            
             </v-card>
+        </div>
         </div>
     </v-container>
 </template>

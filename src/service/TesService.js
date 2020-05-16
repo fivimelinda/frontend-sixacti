@@ -1,4 +1,5 @@
 import axios from "axios";
+import authHeader from './AuthHeader';
 
 const URI = 'http://localhost:8081/api';
 
@@ -7,7 +8,7 @@ class TesService {
     //TES MEDIS
     //get tes medis
     getTesMedis(idTesMedis){
-        return axios.get(URI + "/tes/medis/get/" + idTesMedis);
+        return axios.get(URI + "/tes/medis/get/" + idTesMedis, { headers:authHeader() });
     }
 
     //create tes medis

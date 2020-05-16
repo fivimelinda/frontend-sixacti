@@ -93,6 +93,7 @@ import TesMedis from './TesMedis/TesMedis.vue'
 import TesTulis from './TesTulis/TesTulis.vue'
 import TesWawancara from './TesWawancara/TesWawancara.vue'
 import axios from 'axios'
+import authHeader from '../../service/AuthHeader'
 
 export default {
     name:"tes-layout",
@@ -126,14 +127,14 @@ export default {
             const URI = 'http://localhost:8081/api';
             this.idPelamar = Number(this.$route.params.id);
             this.user = this.$store.state.dummy[this.idPelamar-1]
-            const getData = await axios.get(URI + "/pelamar/get/" + this.$route.params.id, {responseType:'json'});
+            const getData = await axios.get(URI + "/pelamar/get/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
             this.data = getData;
             this.pelamar = getData.data;
-            const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json'});
+            const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
             this.tesMedis = getTesMedis;
-            const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, {responseType:'json'});
+            const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
             this.tesTulis = getTesTulis;
-            const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json'});
+            const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
             this.tesWawancara = getTesWawancara;
             console.log(getTesMedis);
             console.log(getTesTulis);

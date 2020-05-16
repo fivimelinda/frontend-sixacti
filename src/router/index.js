@@ -30,7 +30,7 @@ import fileBpjsKes from '../components/Lamaran/fileBpjsKes'
 import fileBpjsKet from '../components/Lamaran/fileBpjsKet'
 import fileResume from '../components/Lamaran/fileResume'
 import fileKis from '../components/Lamaran/fileKis'
-
+import MainLayout from '../components/MainLayout'
 
 Vue.use(Vuetify);
 Vue.use(VueRouter)
@@ -101,125 +101,133 @@ const routes = [
 
   // main path
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path:'',
+    name:'main',
+    component: MainLayout,
+    children:[
+      {
+        path: '/',
+        name: 'Home',
+        component: Home
+      },
+      {
+        path:'/listPelamar/:idLowongan',
+        name: 'Pelamar',
+        component: DaftarPesertaTes,
+      },
+      {
+        path: '/tes/:id',
+        name: 'tes',
+        component: TesLayout,
+      },
+      {
+        path:'/atribut/:id',
+        name:'atribut',
+        component: Atribut
+      },
+      {
+        //path: '/RequestLowongan',
+        path: '/RequestLowongan/add',
+        name: 'RequestLowongan',
+        component: RequestLowongan
+      },
+      {
+        path: '/RequestLowongan',
+        name: 'RequestLowonganDisplay',
+        component: RequestLowonganDisplay
+      },
+      {
+        path: '/RequestLowongan/:id',
+        name: 'RequestLowonganId',
+        component: RequestLowonganId
+      },
+      {
+        path: '/ListRequestLowongan',
+        name: 'ListRequestLowongan',
+        component: ListRequestLowongan
+      },
+      {
+        path: '/buatLoker/:id',
+        name: 'formCreateLoker',
+        component: formCreateLoker
+      },
+      {
+        path: '/ubahLoker/:idLowongan',
+        name: 'FormUpdateLoker',
+        component: FormUpdateLoker
+      },
+      {
+        path: '/listLoker',
+        name: 'listLoker',
+        component: listLoker
+      },
+      {
+        path: '/formCuti',
+        name: 'formCuti',
+        component: formCuti
+      },
+      {
+        path: '/cuti',
+        name: 'cuti',
+        component: viewCuti
+      },
+      {
+        path: '/detailLoker/:idLowongan',
+        name: 'detailLoker',
+        component: detailLoker
+      },
+      {
+        path: '/LamaranKerja/:idLowongan',
+        name:'LamaranKerja',
+        component: LamaranKerja
+      },
+      {
+        path: '/fileLamaran/:idLamaran',
+        name:'fileLamaran',
+        component: fileLamaran
+      },
+      {
+        path: '/fileKk/:idLamaran',
+        name:'fileKk',
+        component: fileKk
+      },
+      {
+        path: '/fileNpwp/:idLamaran',
+        name:'fileNpwp',
+        component: fileNpwp
+      },
+      {
+        path: '/fileBpjsKet/:idLamaran',
+        name:'fileBpjsKet',
+        component: fileBpjsKet
+      },
+      {
+        path: '/fileBpjsKes/:idLamaran',
+        name:'fileBpjsKes',
+        component: fileBpjsKes
+      },
+      {
+        path: '/fileResume/:idLamaran',
+        name:'fileResume',
+        component: fileResume
+      },
+      {
+        path: '/fileKis/:idLamaran',
+        name:'fileKis',
+        component: fileKis
+      },
+    
+      {
+        path: '/about',
+        name: 'About',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+      }
+    ]
   },
-  {
-    path:'/listPelamar/:idLowongan',
-    name: 'Pelamar',
-    component: DaftarPesertaTes,
-  },
-  {
-    path: '/tes/:id',
-    name: 'tes',
-    component: TesLayout,
-  },
-  {
-    path:'/atribut/:id',
-    name:'atribut',
-    component: Atribut
-  },
-  {
-    //path: '/RequestLowongan',
-    path: '/RequestLowongan/add',
-    name: 'RequestLowongan',
-    component: RequestLowongan
-  },
-  {
-    path: '/RequestLowongan',
-    name: 'RequestLowonganDisplay',
-    component: RequestLowonganDisplay
-  },
-  {
-    path: '/RequestLowongan/:id',
-    name: 'RequestLowonganId',
-    component: RequestLowonganId
-  },
-  {
-    path: '/ListRequestLowongan',
-    name: 'ListRequestLowongan',
-    component: ListRequestLowongan
-  },
-  {
-    path: '/buatLoker/:id',
-    name: 'formCreateLoker',
-    component: formCreateLoker
-  },
-  {
-    path: '/ubahLoker/:idLowongan',
-    name: 'FormUpdateLoker',
-    component: FormUpdateLoker
-  },
-  {
-    path: '/listLoker',
-    name: 'listLoker',
-    component: listLoker
-  },
-  {
-    path: '/formCuti',
-    name: 'formCuti',
-    component: formCuti
-  },
-  {
-    path: '/cuti',
-    name: 'cuti',
-    component: viewCuti
-  },
-  {
-    path: '/detailLoker/:idLowongan',
-    name: 'detailLoker',
-    component: detailLoker
-  },
-  {
-    path: '/LamaranKerja/:idLowongan',
-    name:'LamaranKerja',
-    component: LamaranKerja
-  },
-  {
-    path: '/fileLamaran/:idLamaran',
-    name:'fileLamaran',
-    component: fileLamaran
-  },
-  {
-    path: '/fileKk/:idLamaran',
-    name:'fileKk',
-    component: fileKk
-  },
-  {
-    path: '/fileNpwp/:idLamaran',
-    name:'fileNpwp',
-    component: fileNpwp
-  },
-  {
-    path: '/fileBpjsKet/:idLamaran',
-    name:'fileBpjsKet',
-    component: fileBpjsKet
-  },
-  {
-    path: '/fileBpjsKes/:idLamaran',
-    name:'fileBpjsKes',
-    component: fileBpjsKes
-  },
-  {
-    path: '/fileResume/:idLamaran',
-    name:'fileResume',
-    component: fileResume
-  },
-  {
-    path: '/fileKis/:idLamaran',
-    name:'fileKis',
-    component: fileKis
-  },
-
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  
 ]
 
 export default new VueRouter({
