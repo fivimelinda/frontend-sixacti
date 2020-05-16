@@ -8,8 +8,16 @@ import VModal from 'vue-js-modal'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import { ValidationObserver, ValidationProvider, extend } from 'vee-validate';
+import * as rules from 'vee-validate/dist/rules';
 import Vuelidate from 'vuelidate'
 import store from './store/store'
+
+// install rules
+Object.keys(rules).forEach(rule => {
+  extend(rule, rules[rule]);
+});
+
 
 Vue.use(VueAxios, axios)
    
@@ -19,10 +27,14 @@ Vue.config.productionTip = false
 Vue.use(Vuelidate)
 // Install BootstrapVue
 Vue.use(BootstrapVue)
+// Install components globally
+Vue.component('ValidationObserver', ValidationObserver);
+Vue.component('ValidationProvider', ValidationProvider);
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 Vue.use(VModal)
 Vue.config.productionTip = false
+
 
 new Vue({
   el:'#app',

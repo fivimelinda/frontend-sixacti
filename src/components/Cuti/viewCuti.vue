@@ -1,30 +1,74 @@
 <template>
-    <v-container class="mt-sm-10">
+    <v-container class="mt-sm-12">
         <div class="addCuti">
-            <b-row id="title">
+            <b-row id="myTitle">
                 <h1> Pengajuan Cuti</h1>
             </b-row>
-            <b-row id="sub-title">
-                <h4>Anda tidak memiliki pengajuan cuti</h4><!--IF CUTI ON PROCESS FALSE , SISA CUTI HABIS-->
+            <b-row v-if="cutiActive">
+                <cardCuti v-bind:cutiData="cutiData"/>
+            </b-row>
+            <b-row id="sub-title" v-else-if="cutiHabis" v-show="!cutiActive">
+                <h4>Sisa cuti anda sudah habis, anda tidak dapat mengajukan cuti</h4>
+            </b-row>
+            <span v-if="!cutiActive" v-show="!cutiHabis">
+            <b-row id="sub-title" >
+                <h4>Anda tidak memiliki pengajuan cuti</h4>
             </b-row>
             <b-row id="btnCuti">
-                <v-btn color="#C53751" class="white--text" router :to="{path: '/formCuti'}">
+                <v-btn color="#C53751" class="white--text" v-on:click="move">
                     <v-icon left class="white--text">mdi-plus-circle</v-icon>
                     Buat Pengajuan Cuti
                 </v-btn>
             </b-row>
+            </span>
         </div>
-        <cardCuti/>
     </v-container>
 </template>
 <script>
-import cardCuti from './cardCuti'
+import CutiService from '../../service/CutiService'
+const cardCuti = () => ({
+    component: import('./cardCuti')
+})
 export default {
-    components:{ cardCuti }
+    components:{ 
+        cardCuti,
+    },
+    data(){
+        return{
+            cutiHabis: false,
+            cutiActive: false,
+            cutiData: null
+        }
+    },
+    methods:{
+        move(){
+            this.$router.push({
+                name: 'formCuti'
+            })
+        },
+        getCutiActive(){
+            CutiService.getCutiActive(1).then(response => {
+                if (response.data.cutiActive == "true"){
+                    this.cutiData = response.data
+                    this.cutiActive = true
+                } else if (response.data.sisaCuti == "0" ){
+                    this.cutiHabis = true
+                }
+
+            })
+        }
+
+    },
+    created(){
+        this.getCutiActive()
+    }
 }
 </script>
 <style scoped>
-#title{
+h1{
+    margin-left: 0px;
+}
+#myTitle{
     font-family: 'oswald';
     color: black;
     text-align: left;

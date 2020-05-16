@@ -16,9 +16,9 @@ import viewCuti from '../components/Cuti/viewCuti.vue'
 import GenerateSuratKontrakDetail from '../components/GenerateSuratKontrak/GenerateSuratKontrakDetail.vue'
 import GenerateSuratKontrakAll from '../components/GenerateSuratKontrak/GenerateSuratKontrakAll.vue'
 
+import updateCuti from '../components/Cuti/updateCuti.vue'
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
-//import { LayoutPlugin } from 'bootstrap-vue'
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
 import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
 import fileLamaran from '../components/Lamaran/fileLamaran.vue'
@@ -178,8 +178,13 @@ const routes = [
   },
   {
     path: '/cuti',
-    name: 'cuti',
+    name: 'viewCuti',
     component: viewCuti
+  },
+  {
+    path: '/updateCuti',
+    name: 'updateCuti',
+    component: updateCuti
   },
   {
     path: '/detailLoker/:idLowongan',
@@ -235,6 +240,12 @@ const routes = [
     path: '/GenerateSuratKontrak/:id/:index',
     name: 'GenerateSuratKontrak',
     component: GenerateSuratKontrakDetail
+  },
+
+  //Path Download File
+  {
+    path: '/download/ktp/:fileName',
+    
   },
 
   {

@@ -29,10 +29,10 @@
             <tbody class="tbody">
                 <tr v-for="(det,index) in detailKontrak.slice().reverse()" :key="det.id" v-on:click="click(det,index)" class="content" v-bind="add()">
                     <th scope=row class="th-bottom">{{index+1}}</th>
-                    <td>{{det.name}}</td>
+                    <td>{{name[index]}}</td>
                     <td>{{det.tanggal_mulai.substring(0,10)}}</td>
                     <td>{{det.tanggal_berakhir.substring(0,10)}}</td>
-                    <td>{{det.departemen}}</td>
+                    <td>{{departemen[index]}}</td>
                     <td>
                         <div v-if= "det.status == false">Belum digenerate</div>
                         <div v-if= "det.status == true">Sudah digenerate</div>
