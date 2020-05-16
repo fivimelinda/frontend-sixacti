@@ -112,6 +112,11 @@ const routes = [
     component: MainLayout,
     children:[
       {
+        path:'/atribut/:id',
+        name:'atribut',
+        component:Atribut,
+      },
+      {
         path: '/',
         name: 'Home',
         component: Home
@@ -195,6 +200,21 @@ const routes = [
         component: updateCuti
       },
       {
+        path:'/reviewCuti',
+        name: 'reviewCuti',
+        component: reviewCuti
+      },
+      {
+        path:'/detailCuti/:cutiId',
+        name: 'detailCuti',
+        component: detailCuti
+      },
+      {
+        path: '/lihatRiwayatCuti/:karyawanId',
+        name: 'lihatRiwayatCuti',
+        component: lihatRiwayatCuti
+      },
+      {
         path: '/detailLoker/:idLowongan',
         name: 'detailLoker',
         component: detailLoker
@@ -254,6 +274,11 @@ const routes = [
       {
         path: '/download/ktp/:fileName',
         
+      },
+      {
+        path:'/lihatProgres/:idLoker',
+        name: 'lihatProgres',
+        component: lihatProgres
       },
     
       {
