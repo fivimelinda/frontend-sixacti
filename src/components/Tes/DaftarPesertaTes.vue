@@ -2,7 +2,12 @@
     <v-container>
         <b-card>
             <b-card-text>
-        
+                <div class="container justify-end">
+                    <p>
+                        <strong>Jumlah Pelamar yang Dibutuhkan :</strong>
+                        {{maksimalPeserta}}
+                    </p>
+                </div>
                 <b-table-simple hover @row-clicked="rowClickedHandle" caption-top responsive outlined>
                     <caption class="caption pl-5"><div class="" style="font-size:16px">Daftar Pelamar</div></caption>
                     <b-thead small class="header-table text-center">
@@ -53,7 +58,7 @@ export default {
             currentPage:1,
             perPage:10,
             et : [],
-            judul : ""            
+            maksimalPeserta : ""            
         }
 
     },
@@ -66,7 +71,7 @@ export default {
         refreshLamaranLoker() {
             LowonganKerjaService.getLokerById(this.idLowongan).then(res => {
                 this.et = res.data.listLamaran;
-                this.judul = res.data.judulLoker;
+                this.maksimalPeserta = res.data.requestLowongan.jumlah;
             });
 
             console.log(this.et);
