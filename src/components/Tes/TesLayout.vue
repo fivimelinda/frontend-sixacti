@@ -407,6 +407,7 @@ import TesTulis from './TesTulis/TesTulis.vue'
 import TesWawancara from './TesWawancara/TesWawancara.vue'
 import LamaranService from '../../service/LamaranService'
 import axios from 'axios'
+import authHeader from '../../service/AuthHeader'
 
 Vue.config.productionTip = false
 Vue.filter('format', function(value){
@@ -475,24 +476,24 @@ export default {
     //check error
     async created(){
         try{
-            this.refreshDetailLamaran();
+            const URI = 'http://localhost:8081/api';
+            this.idPelamar = Number(this.$route.params.id);
+            this.user = this.$store.state.dummy[this.idPelamar-1]
+            const getData = await axios.get(URI + "/pelamar/get/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
+            this.data = getData;
+            this.pelamar = getData.data;
+            const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
+            this.tesMedis = getTesMedis;
+            const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
+            this.tesTulis = getTesTulis;
+            const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
+            this.tesWawancara = getTesWawancara;
+            console.log(getTesMedis);
+            console.log(getTesTulis);
+            console.log(getTesWawancara);
+            console.log(getData);
 
-            // const URI = 'http://localhost:8081/api';
-            // this.idPelamar = Number(this.$route.params.id);
-            // this.user = this.$store.state.dummy[this.idPelamar-1]
-            // const getData = await axios.get(URI + "/pelamar/get/" + this.$route.params.id, {responseType:'json'});
-            // this.data = getData;
-            // this.pelamar = getData.data;
-            // const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json'});
-            // this.tesMedis = getTesMedis;
-            // const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, {responseType:'json'});
-            // this.tesTulis = getTesTulis;
-            // const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json'});
-            // this.tesWawancara = getTesWawancara;
-            // console.log(getTesMedis);
-            // console.log(getTesTulis);
-            // console.log(getTesWawancara);
-            // console.log(getData);
+            this.refreshDetailLamaran();
         }catch(error){
             console.log(error);
         }
@@ -803,6 +804,6 @@ ol li{
 }
 
 .background{
-    background-color: rgba(255, 227, 227, 0.637) !important;
+    background-color: white !important;
 }
 </style>
