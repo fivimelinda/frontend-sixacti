@@ -88,6 +88,12 @@ export default {
         }        
     },
     computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        },
         cutiId() {
             return this.$route.params.cutiId;
         },
@@ -147,7 +153,9 @@ export default {
         },
     },
     created(){
-        this.getDetailCuti()
+        if (this.loggedIn) {
+            this.getDetailCuti()
+        }
     }
 }
 </script>

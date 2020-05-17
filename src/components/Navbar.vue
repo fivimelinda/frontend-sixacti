@@ -69,13 +69,20 @@ export default {
             drawer: false,
             links:[
                 { 
-                    icon: 'mdi-home-outline',
-                    text: 'Beranda',
-                    route:'/'},
+                  icon: 'mdi-home-outline',
+                  text: 'Beranda',
+                  route:'/'
+                },
                 { 
-                    icon: 'mdi-account-multiple-outline', 
-                    text: 'Cuti', 
-                    route:'/cuti'}
+                  icon: 'mdi-account-multiple-outline', 
+                  text: 'Cuti', 
+                  route:'/cuti'
+                },
+                {
+                  icon: '',
+                  text: 'Review Cuti',
+                  route: '/reviewCuti'
+                }
             ]
                 
         }

@@ -2,7 +2,10 @@
     <v-container class="mt-sm-12">
         <div class="addCuti">
             <b-row id="myTitle">
-                <h1> Pengajuan Cuti</h1>
+                <h3> Pengajuan Cuti</h3>
+            </b-row>
+            <b-row>
+            <a v-on:click="lihatRiwayat" id="link">Lihat Riwayat Cuti</a>
             </b-row>
             <b-row v-if="cutiActive">
                 <cardCuti v-bind:cutiData="cutiData"/>
@@ -40,14 +43,23 @@ export default {
             cutiData: null
         }
     },
+    computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        },
+        karyawanId() {
+            return '4';
+        }
+    },
     methods:{
         move(){
-            this.$router.push({
-                name: 'formCuti'
-            })
+            this.$router.push('/formCuti/' + this.karyawanId)
         },
         getCutiActive(){
-            CutiService.getCutiActive(1).then(response => {
+            CutiService.getCutiActive(this.karyawanId).then(response => {
                 if (response.data.cutiActive == "true"){
                     this.cutiData = response.data
                     this.cutiActive = true
@@ -56,11 +68,16 @@ export default {
                 }
 
             })
+        },
+        lihatRiwayat(){
+            this.$router.push('/lihatRiwayatCuti/'+ this.karyawanId);
         }
 
     },
     created(){
-        this.getCutiActive()
+        if (this.loggedIn) {
+            this.getCutiActive()
+        }
     }
 }
 </script>
@@ -72,7 +89,7 @@ h1{
     font-family: 'oswald';
     color: black;
     text-align: left;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     margin-left: 5px;
 }
 #sub-title{
@@ -84,5 +101,12 @@ h1{
 }
 #btnCuti{
     margin-left: 5px;
+}
+#link{
+    margin-top: 5px;
+    margin-bottom: 20px;
+    color: #7D0022;
+    margin-left: 15px;
+
 }
 </style>

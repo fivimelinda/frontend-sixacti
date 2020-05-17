@@ -1,5 +1,4 @@
 <template>
-<v-container>
 <div id="myCard">
     <v-card
         max-width="344"
@@ -70,7 +69,6 @@
         </b-row>
     </v-card>
 </div>
-</v-container>
 </template>
 <script>
 import CutiService from '../../service/CutiService'
@@ -81,6 +79,14 @@ export default {
             status: false,
             delete: false,
         }        
+    },
+    computed:{
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
     },
     methods:{
         showConfirm(){
@@ -103,9 +109,7 @@ export default {
                 })
         },
         updateCuti(){
-            this.$router.push({
-                name:'updateCuti'
-            })
+            this.$router.push('/updateCuti/' + this.cutiData.idKaryawan)
         },
         checkStatus(){
             if (this.cutiData.statusCuti == "Diajukan"){
@@ -114,7 +118,9 @@ export default {
         }
     },
     created(){
-        this.checkStatus()
+        if (this.loggedIn) {
+            this.checkStatus()
+        }
     }
 }
 </script>
