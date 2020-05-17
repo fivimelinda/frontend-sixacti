@@ -501,7 +501,7 @@ export default {
     async mounted(){
         try{
             const URI = 'http://localhost:8081/api';
-            const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json'});
+            const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
             this.tesMedis = getTesMedis;
             console.log(getTesMedis);
             // console.log(getData);
@@ -549,22 +549,22 @@ export default {
             });
             const URI = 'http://localhost:8081/api';
             this.idPelamar = Number(this.id);
-            const getTesMedis = axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json'});
+            const getTesMedis = axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
             this.tesMedis = getTesMedis;
-            const getTesTulis = axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, {responseType:'json'});
+            const getTesTulis = axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
             this.tesTulis = getTesTulis;
-            const getTesWawancara = axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json'});
+            const getTesWawancara = axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
             this.tesWawancara = getTesWawancara;
 
 
         },
         errorBack(){
-             this.$router.push('/listPelamar');
+             this.$router.push('/listPelamar', { headers:authHeader() });
         },
         async loadNewTesMedis(){
             try{
                 const URI = 'http://localhost:8081/api';
-                const getTesMedis =await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id);
+                const getTesMedis =await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, { headers:authHeader() });
                 this.tesMedis = getTesMedis;
             }catch(error){
                 console.log(error);
@@ -573,7 +573,7 @@ export default {
         async loadNewTesTulis(){
             try{
                 const URI = 'http://localhost:8081/api';
-                const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id);
+                const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, { headers:authHeader() });
                 this.tesTulis = getTesTulis;
             }catch(error){
                 console.log(error);
@@ -582,7 +582,7 @@ export default {
         async loadNewTesWawancara(){
             try{
                 const URI = 'http://localhost:8081/api';
-                const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id);
+                const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, { headers:authHeader() });
                 this.tesWawancara = getTesWawancara;
             }catch(error){
                 console.log(error);

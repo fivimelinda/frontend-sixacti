@@ -1,14 +1,15 @@
 import axios from "axios";
+import authHeader from './AuthHeader';
 
 const URI = 'http://localhost:8081/api';
 
 class LowonganKerjaService {
     getLokerById(idLowongan){
-        return axios.get(URI + "/detailLoker/" + idLowongan) ;
+        return axios.get(URI + "/detailLoker/" + idLowongan, { headers:authHeader() }) ;
     }
     
     retrieveAllLoker() {
-        return axios.get(URI+"/listLoker");
+        return axios.get(URI+"/listLoker", { headers:authHeader() });
     }
 
     // deleteLoker(idLowongan, loker){
@@ -16,15 +17,15 @@ class LowonganKerjaService {
     // }
 
     deleteLoker(idLowongan){
-        return axios.delete(`${URI}/hapusLoker/${idLowongan}`);
+        return axios.delete(`${URI}/hapusLoker/${idLowongan}`, { headers:authHeader() });
     }
 
     updateLoker(idLowongan, loker){
-        return axios.put(`${URI}/ubahLoker/${idLowongan}`, loker);
+        return axios.put(`${URI}/ubahLoker/${idLowongan}`, loker, { headers:authHeader() });
     }
 
     addLoker(idReqLowongan, loker){
-        return axios.post(URI + "/addLoker/" + idReqLowongan, loker);
+        return axios.post(URI + "/addLoker/" + idReqLowongan, loker, { headers:authHeader() });
     }
 }
 

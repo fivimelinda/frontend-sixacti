@@ -1,12 +1,12 @@
 <template>
     <v-container mt-sm-12>
     <div>
-      <b-row id="title">
-        <h1> Form Pengajuan Cuti</h1>
+      <b-row id="myTitle">
+        <h3> Form Pengajuan Cuti</h3>
       </b-row>
     <ValidationObserver ref="observer">
     <b-form slot-scope="{ validate }" @submit.prevent="validate().then(handleSubmit)">
-    
+
     <b-row > 
         <b-col md="6" sm="12" >
           <ValidationProvider name="Tanggal" rules="required">
@@ -83,7 +83,7 @@
       <b-button block type="submit" variant="danger" id="btnCuti">Ajukan Cuti</b-button> 
     </b-col>   
     <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>
-      Tanggal akhir cuti tidak valid!
+      {{errorStatus}}
     </b-alert>
     </b-form>
     </ValidationObserver>
@@ -110,7 +110,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
 
       return {
         form: {
-          idKaryawan: 1,
+          idKaryawan: '',
           tanggalMulai: '',
           tanggalSampai: '',
           keterangan: '',
@@ -120,16 +120,36 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
         listKategori: [],
         min: minDate,
         max: maxDate,
-        showDismissibleAlert: false
+        showDismissibleAlert: false,
+        sisaCuti: 0,
+        errorStatus: 'Tanggal Akhir Cuti tidak valid'
       }
+    },
+    computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        },
+        karyawanId() {
+            return this.$route.params.karyawanId;
+        }
     },
     methods: {
       handleSubmit() {
-        const start = moment(this.form.tanggalMulai).format("YYYY-MM-DD")
-        const end = moment(this.form.tanggalSampai).format("YYYY-MM-DD")
+        var start = moment(this.form.tanggalMulai).format("YYYY-MM-DD")
+        var end = moment(this.form.tanggalSampai).format("YYYY-MM-DD")
+        var value = moment(end).diff(moment(start), 'days') + 1;
         if (moment(start).isAfter(end)){
           this.showDismissibleAlert = true
+          this.errorStatus = 'Tanggal Akhir Cuti tidak valid'
+        } else if (value > this.sisaCuti){
+          this.showDismissibleAlert = true
+          this.errorStatus = 'Jumlah hari cuti melebihi sisa cuti. Sisa cuti Anda ' + this.sisaCuti + ' hari'
+        
         } else { 
+          this.idKaryawan = this.karyawanId
           CutiService.createCuti(this.form).then(response => {
           if (response.status == 200){
             this.$router.push({
@@ -144,10 +164,20 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
           this.listKategori = response.data
           this.listKategori.push({ namaKategori: 'Pilih Kategori Cuti', id:null})
         })
+      },
+      getSisaCuti(){
+        CutiService.getSisaCuti(this.karyawanId).then(res =>{
+          this.sisaCuti = res.data
+          console.log(res.data)
+          console.log(this.sisaCuti)
+        })
       }
     },
     created() {
-      this.getListKategori()
+      if (this.loggedIn) {
+        this.getListKategori()
+        this.getSisaCuti()
+      }
     }
   }
 </script>
@@ -156,7 +186,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
 body{
   font-family: 'archivo' ;
 }
-#title{
+#myTitle{
     font-family: 'oswald';
     color: black;
     text-align: left;

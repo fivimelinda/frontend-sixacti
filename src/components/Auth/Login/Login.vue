@@ -102,7 +102,7 @@ export default {
         }
     },
     created(){
-        if (this.loggedIn) {
+        if (!this.loggedIn) {
             this.$router.push('/auth/login');
         }
     },
@@ -126,7 +126,8 @@ export default {
                         error.toString();
                     }
                 );
-                }
+            }
+            
         }
     }
 }
