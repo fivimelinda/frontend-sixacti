@@ -67,6 +67,8 @@
 
 <script>
 import axios from 'axios'
+import authHeader from '../../service/AuthHeader'
+
 export default {
     data(){
         return {
@@ -82,21 +84,21 @@ export default {
     },
     methods: {
         loadMedis() {
-            axios.get('http://localhost:8081/api/tes/medis/pelamar/'+this.$route.params.idPelamar).then(res => {
+            axios.get('http://localhost:8081/api/tes/medis/pelamar/'+this.$route.params.idPelamar,{ headers:authHeader() }).then(res => {
                 this.tesMedis = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         loadWawancara() {
-            axios.get('http://localhost:8081/api/tes/wawancara/pelamar/'+this.$route.params.idPelamar).then(res => {
+            axios.get('http://localhost:8081/api/tes/wawancara/pelamar/'+this.$route.params.idPelamar,{ headers:authHeader() }).then(res => {
                 this.tesWawancara = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         loadTulis() {
-            axios.get('http://localhost:8081/api/tes/tulis/pelamar/'+this.$route.params.idPelamar).then(res => {
+            axios.get('http://localhost:8081/api/tes/tulis/pelamar/'+this.$route.params.idPelamar,{ headers:authHeader() }).then(res => {
                 this.tesTulis = res.data
             }).catch((err) => {
                 console.log(err);
