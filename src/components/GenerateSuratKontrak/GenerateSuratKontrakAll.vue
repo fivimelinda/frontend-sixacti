@@ -64,6 +64,7 @@
 
 <script>
 import axios from 'axios'
+import authHeader from '../../service/AuthHeader'
 
 export default {
     data() {
@@ -96,11 +97,23 @@ export default {
     computed: {
       rows() {
         return this.items.length
-      }
+        
+      },
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
+    created(){
+        if (!this.loggedIn) {
+            this.$router.push('/auth/login');
+        }
     },
     methods: {
         load() {
-            axios.get('http://localhost:8081/detailKontrak/all').then(res => {
+            axios.get('http://localhost:8081/detailKontrak/all',{ headers:authHeader() }).then(res => {
                 for(var i = 0; i < res.data.length ; i++){
                     res.data[i]["name"] = this.name[i]
                     res.data[i]["departemen"] = this.departemen[i]
@@ -112,14 +125,14 @@ export default {
             })
         },
         loadName() {
-            axios.get('http://localhost:8081/detailKontrak/getName').then(res => {
+            axios.get('http://localhost:8081/detailKontrak/getName', { headers:authHeader() }).then(res => {
                 this.name = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         loadDepartemen() {
-            axios.get('http://localhost:8081/detailKontrak/getDepartemen').then(res => {
+            axios.get('http://localhost:8081/detailKontrak/getDepartemen', { headers:authHeader() }).then(res => {
                 this.departemen = res.data
             }).catch((err) => {
                 console.log(err);
