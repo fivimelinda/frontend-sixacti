@@ -13,29 +13,43 @@ import FormUpdateLoker from '../components/LowonganKerja/FormUpdateLoker.vue'
 import listLoker from '../components/LowonganKerja/ListLokerComponent.vue'
 import formCuti from '../components/Cuti/formCuti.vue'
 import viewCuti from '../components/Cuti/viewCuti.vue'
+import GenerateSuratKontrakDetail from '../components/GenerateSuratKontrak/GenerateSuratKontrakDetail.vue'
+import GenerateSuratKontrakAll from '../components/GenerateSuratKontrak/GenerateSuratKontrakAll.vue'
+
 import updateCuti from '../components/Cuti/updateCuti.vue'
+import reviewCuti from '../components/Cuti/reviewCuti.vue'
+import detailCuti from '../components/Cuti/detailCuti.vue'
+import lihatRiwayatCuti from '../components/Cuti/lihatRiwayatCuti.vue'
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import detailLoker from '../components/LowonganKerja/DetailLoker.vue'
 import LamaranKerja from '../components/Lamaran/LamaranKerja.vue'
 import fileLamaran from '../components/Lamaran/fileLamaran.vue'
-
+import lihatProgres from '../components/RequestLowongan/LihatProgres.vue'
 import DaftarPesertaTes from '../components/Tes/DaftarPesertaTes.vue'
 
 import Login from '../components/Auth/Login/Login.vue'
+<<<<<<< HEAD
 import error404 from '../components/Error/404-Pages/404'
 import error403 from '../components/Error/403-Pages/403'
 import error502 from '../components/Error/502-Pages/502'
+=======
+import Atribut from '../components/Attibut/Atribut.vue'
+>>>>>>> master
 import fileKk from '../components/Lamaran/fileKk'
 import fileNpwp from '../components/Lamaran/fileNpwp'
 import fileBpjsKes from '../components/Lamaran/fileBpjsKes'
 import fileBpjsKet from '../components/Lamaran/fileBpjsKet'
 import fileResume from '../components/Lamaran/fileResume'
 import fileKis from '../components/Lamaran/fileKis'
+<<<<<<< HEAD
 import StatusAtribut from '../components/AtributHR/StatusAtribut'
 import HasilTes from '../components/HasilTes/HasilTes'
 
 
+=======
+import MainLayout from '../components/MainLayout'
+>>>>>>> master
 
 Vue.use(Vuetify);
 Vue.use(VueRouter)
@@ -103,6 +117,7 @@ const routes = [
 
   // main path
   {
+<<<<<<< HEAD
     path: '/',
     name: 'Home',
     component: Home
@@ -244,17 +259,193 @@ const routes = [
   //Path Download File
   {
     path: '/download/ktp/:fileName',
+=======
+    path:'',
+    name:'main',
+    component: MainLayout,
+    children:[
+      {
+        path:'/atribut/:id',
+        name:'atribut',
+        component:Atribut,
+      },
+      {
+        path: '/',
+        name: 'Home',
+        component: Home
+      },
+      {
+        path:'/listPelamar/:idLowongan',
+        name: 'Pelamar',
+        component: DaftarPesertaTes,
+      },
+      {
+        path: '/tes/:id',
+        name: 'tes',
+        component: TesLayout,
+        // children:[
+        //   {
+        //     path: 'tulis',
+        //     name: 'tulis',
+        //     component: () => import('../components/Tes/TesTulis/TesTulis.vue'),
+        //   },
+        //   {
+        //     path: 'medis',
+        //     name: 'medis',
+        //     component: () => import('../components/Tes/TesMedis/TesMedis.vue'),
+        //   },
+        //   {
+        //     path: 'wawancara',
+        //     name: 'wawancara',
+        //     component: () => import('../components/Tes/TesWawancara/TesWawancara.vue')
+        //   },
+        // ]
+      },
+      {
+        //path: '/RequestLowongan',
+        path: '/RequestLowongan/add',
+        name: 'RequestLowongan',
+        component: RequestLowongan
+      },
+      {
+        path: '/RequestLowongan',
+        name: 'RequestLowonganDisplay',
+        component: RequestLowonganDisplay
+      },
+      {
+        path: '/RequestLowongan/:id',
+        name: 'RequestLowonganId',
+        component: RequestLowonganId
+      },
+      {
+        path: '/ListRequestLowongan',
+        name: 'ListRequestLowongan',
+        component: ListRequestLowongan
+      },
+      {
+        path: '/buatLoker/:id',
+        name: 'formCreateLoker',
+        component: formCreateLoker
+      },
+      {
+        path: '/ubahLoker/:idLowongan',
+        name: 'FormUpdateLoker',
+        component: FormUpdateLoker
+      },
+      {
+        path: '/listLoker',
+        name: 'listLoker',
+        component: listLoker
+      },
+      {
+        path: '/formCuti',
+        name: 'formCuti',
+        component: formCuti
+      },
+      {
+        path: '/cuti',
+        name: 'viewCuti',
+        component: viewCuti
+      },
+      {
+        path: '/updateCuti',
+        name: 'updateCuti',
+        component: updateCuti
+      },
+      {
+        path:'/reviewCuti',
+        name: 'reviewCuti',
+        component: reviewCuti
+      },
+      {
+        path:'/detailCuti/:cutiId',
+        name: 'detailCuti',
+        component: detailCuti
+      },
+      {
+        path: '/lihatRiwayatCuti/:karyawanId',
+        name: 'lihatRiwayatCuti',
+        component: lihatRiwayatCuti
+      },
+      {
+        path: '/detailLoker/:idLowongan',
+        name: 'detailLoker',
+        component: detailLoker
+      },
+      {
+        path: '/LamaranKerja/:idLowongan',
+        name:'LamaranKerja',
+        component: LamaranKerja
+      },
+      {
+        path: '/fileLamaran/:idLamaran',
+        name:'fileLamaran',
+        component: fileLamaran
+      },
+      {
+        path: '/fileKk/:idLamaran',
+        name:'fileKk',
+        component: fileKk
+      },
+      {
+        path: '/fileNpwp/:idLamaran',
+        name:'fileNpwp',
+        component: fileNpwp
+      },
+      {
+        path: '/fileBpjsKet/:idLamaran',
+        name:'fileBpjsKet',
+        component: fileBpjsKet
+      },
+      {
+        path: '/fileBpjsKes/:idLamaran',
+        name:'fileBpjsKes',
+        component: fileBpjsKes
+      },
+      {
+        path: '/fileResume/:idLamaran',
+        name:'fileResume',
+        component: fileResume
+      },
+      {
+        path: '/fileKis/:idLamaran',
+        name:'fileKis',
+        component: fileKis
+      },
+      {
+        path: '/GenerateSuratKontrak',
+        name: 'GenerateSuratKontrak',
+        component: GenerateSuratKontrakAll
+      },
+      {
+        path: '/GenerateSuratKontrak/:id/:index',
+        name: 'GenerateSuratKontrak',
+        component: GenerateSuratKontrakDetail
+      },
     
+      //Path Download File
+      {
+        path: '/download/ktp/:fileName',
+        
+      },
+      {
+        path:'/lihatProgres/:idLoker',
+        name: 'lihatProgres',
+        component: lihatProgres
+      },
+>>>>>>> master
+    
+      {
+        path: '/about',
+        name: 'About',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+      }
+    ]
   },
-
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  
 ]
 
 export default new VueRouter({

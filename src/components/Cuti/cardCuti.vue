@@ -150,6 +150,7 @@ export default {
     text-align:end;
     color: black;
     font-weight: bold;
+    font-size: 14px !important;
 }
 .data-sp{
     color: black;

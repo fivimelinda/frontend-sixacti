@@ -65,7 +65,8 @@
                 <v-card-text>Shift</v-card-text>
             </v-flex>
             <v-flex xs6 md6>
-                <v-card-text class="data">{{req.shift}}</v-card-text>
+                <v-card-text v-if= "req.shift == true" class="data">Ya</v-card-text>
+                <v-card-text v-if= "req.shift == false" class="data">Tidak</v-card-text>
             </v-flex>
         </v-layout>
         <v-layout row class="detail">
@@ -81,7 +82,8 @@
                 <v-card-text>Addition</v-card-text>
             </v-flex>
             <v-flex xs6 md6>
-                <v-card-text class="data">{{req.addition}}</v-card-text>
+                <v-card-text v-if= "req.addition == true" class="data">Ya</v-card-text>
+                <v-card-text v-if= "req.addition == false" class="data">Tidak</v-card-text>
             </v-flex>
         </v-layout>
         <v-layout row class="detail">
@@ -123,6 +125,9 @@
         <div v-if="req.status == 'pending'" class="button-wrapper">
             <b-button v-b-modal.modal-1 class="btn btn-danger">Hapus</b-button>
         </div>
+        <v-layout row class="div-link" v-if="req.status == 'disetujui'">
+            <a v-on:click="lihatProgres" id="link">Lihat Progres Pemenuhan</a>
+        </v-layout>
     </v-card>
 
 
@@ -252,6 +257,9 @@ export default {
         },
         errorModal(){
             this.$refs['error-modal'].show();
+        },
+        lihatProgres(){
+            this.$router.push('/lihatProgres/' + this.$route.params.id)
         }
     }
 }

@@ -6,6 +6,16 @@ class AtributService{
 
     updateStatus(id_atribut, atribut){
         return axios.put(`${URI}/ubahStatusAtribut/${id_atribut}`, atribut);
+class AtributService {
+
+    //tambah atribut
+    createAtribut(idPelamar,atribut){
+        return axios.post(URI + "/tambahAtribut/" + idPelamar, atribut);
+    }
+
+    // 
+    updateAtribut(idAtribut, atribut){
+        return axios.put(URI + "/atribut/ubah/" + idAtribut, atribut);
     }
 }
 
