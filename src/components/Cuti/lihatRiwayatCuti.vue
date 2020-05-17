@@ -64,6 +64,12 @@ export default {
         }
     },
     computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        },
         karyawanId() {
             return this.$route.params.karyawanId;
         }
@@ -80,7 +86,9 @@ export default {
 
     },
     created(){
-        this.historyCuti();
+        if (this.loggedIn) {
+            this.historyCuti();
+        }
     }
     
 };

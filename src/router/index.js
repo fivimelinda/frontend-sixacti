@@ -74,6 +74,11 @@ const routes = [
         component: () => import('../components/Auth/RecoverPassword/RecoverPassword.vue')
       },
       {
+        name:'signup-admin',
+        path:'signup-admin',
+        component : () => import('../components/Auth/SignUp/SignUpAdmin.vue')
+      },
+      {
         path: '',
         redirect: {
           name:'login'
@@ -191,7 +196,7 @@ const routes = [
         component: listLoker
       },
       {
-        path: '/formCuti',
+        path: '/formCuti/:karyawanId',
         name: 'formCuti',
         component: formCuti
       },
@@ -300,6 +305,20 @@ const routes = [
   
 ]
 
-export default new VueRouter({
+const router =  new VueRouter({
   mode:'history',
-  routes})
+  routes});
+
+  // router.beforeEach((to, from, next) => {
+  //   const loggedIn = localStorage.getItem('user');
+  
+  //   // trying to access a restricted page + not logged in
+  //   // redirect to login page
+  //   if (!loggedIn) {
+  //     next('/auth/login');
+  //   } else {
+  //     next();
+  //   }
+  // });
+
+  export default router;

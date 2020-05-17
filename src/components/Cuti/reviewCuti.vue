@@ -61,9 +61,20 @@ export default {
         }
 
     },
+    computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        },
+        karyawanId() {
+            return '2';
+        }
+    },
     methods: {
         reviewCuti() {
-            CutiService.getUnreviewedCuti(2).then(response => {
+            CutiService.getUnreviewedCuti(this.karyawanId).then(response => {
                 this.listCuti = response.data;
             });
         },
@@ -73,7 +84,9 @@ export default {
 
     },
     created(){
-        this.reviewCuti();
+        if (this.loggedIn) {
+            this.reviewCuti();
+        }
     }
     
 };
