@@ -15,6 +15,7 @@ import formCuti from '../components/Cuti/formCuti.vue'
 import viewCuti from '../components/Cuti/viewCuti.vue'
 import GenerateSuratKontrakDetail from '../components/GenerateSuratKontrak/GenerateSuratKontrakDetail.vue'
 import GenerateSuratKontrakAll from '../components/GenerateSuratKontrak/GenerateSuratKontrakAll.vue'
+import Profil from '../components/Profil/Profil.vue'
 
 import updateCuti from '../components/Cuti/updateCuti.vue'
 import reviewCuti from '../components/Cuti/reviewCuti.vue'
@@ -111,6 +112,11 @@ const routes = [
     name:'main',
     component: MainLayout,
     children:[
+      {
+        path: '/profil',
+        name: 'profil',
+        component: Profil
+      },
       {
         path:'/atribut/:id',
         name:'atribut',
