@@ -289,7 +289,7 @@
 </template>
 
 <script>
-
+import authHeader from '../../service/AuthHeader'
 
 export default {
     name:'Test',
@@ -312,6 +312,19 @@ export default {
             retStatus: '',
             errMsg: '',
             kosongCount: 0,
+        }
+    },
+    computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
+    created(){
+        if (!this.loggedIn) {
+            this.$router.push('/auth/login');
         }
     },
     methods: {
@@ -372,7 +385,7 @@ export default {
                     "periodeKontrak" : this.periode,
                     "addition" : (this.addition == "yes"),
                     "namaReplacement" : this.replacement
-                })
+                } ,{ headers:authHeader() })
                 // .then(function (response) {
                 //     currentObj.output = response.data;
                 //     console.log(currentObj.status)

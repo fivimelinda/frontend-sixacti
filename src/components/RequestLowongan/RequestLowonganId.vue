@@ -198,6 +198,7 @@
 
 <script>
 import axios from 'axios'
+import authHeader from '../../service/AuthHeader'
 
 export default {
     name:'Test',
@@ -224,16 +225,29 @@ export default {
     mounted() {
         this.load()
     },
+    computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
+    created(){
+        if (!this.loggedIn) {
+            this.$router.push('/auth/login');
+        }
+    },
     methods: {
          load() {
-            axios.get('http://localhost:8081/request/get/'+this.$route.params.id).then(res => {
+            axios.get('http://localhost:8081/request/get/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
                 this.req = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         deleteData() {
-            axios.delete('http://localhost:8081/request/delete/'+this.$route.params.id).then(ress => {
+            axios.delete('http://localhost:8081/request/delete/'+this.$route.params.id,{ headers:authHeader() }).then(ress => {
                 this.deleteStatus = ress.data
                 
                 if(ress.status == 200){
