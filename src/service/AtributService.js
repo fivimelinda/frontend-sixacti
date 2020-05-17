@@ -2,11 +2,12 @@ import axios from "axios";
 
 const URI = 'http://localhost:8081/api';
 
-class AtributService{
+
+class AtributService {
 
     updateStatus(id_atribut, atribut){
         return axios.put(`${URI}/ubahStatusAtribut/${id_atribut}`, atribut);
-class AtributService {
+    }
 
     //tambah atribut
     createAtribut(idPelamar,atribut){
