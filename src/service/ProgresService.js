@@ -1,15 +1,15 @@
 import axios from "axios";
-
-const URI = 'http://localhost:5000/api';
+import authHeader from './AuthHeader';
+const URI = 'http://localhost:8081/api';
 
 class ProgresService{
 
     getListProgres(idLoker){
-        return axios.get(URI + '/fulfillment/get?reqLokerId=' +idLoker)
+        return axios.get(URI + '/fulfillment/get?reqLokerId=' +idLoker, { headers:authHeader() })
     }
 
     getDetailLoker(idLoker){
-        return axios.get(URI + '/detailReq?reqLokerId=' +idLoker)
+        return axios.get(URI + '/detailReq?reqLokerId=' +idLoker, { headers:authHeader() })
     }
 
 }

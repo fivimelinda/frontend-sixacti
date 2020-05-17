@@ -190,7 +190,7 @@ const routes = [
         component: listLoker
       },
       {
-        path: '/formCuti',
+        path: '/formCuti/:karyawanId',
         name: 'formCuti',
         component: formCuti
       },
