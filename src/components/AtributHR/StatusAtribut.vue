@@ -18,6 +18,8 @@
                 <th scope="col">Ukuran Helm</th>
                 <th scope="col">Ukuran Sepatu</th>
                 <th scope="col">Status</th>
+
+
                 <!-- <th scope="col">Action</th> -->
             </tr>
         </thead>
@@ -163,13 +165,7 @@ export default {
 
 
 <style scoped>
-/* .tambah{
-    float: right;
-    margin-right: 33px;
-    background-color: #C53751;
-    color: white;
-    padding: 10px;
-} */
+
 
 .button-wrapper{
     text-align: justify;

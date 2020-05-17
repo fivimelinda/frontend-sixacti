@@ -22,38 +22,43 @@
                 <td> 1 </td>
                 <td> Tes Tulis </td>
                 <td>
-                    <div v-if="tesTulis.status == true">
+                    <div v-if="tesTulis.isLolos == true">
                         Lulus Tes Tulis
                     </div>
-                    <div v-if="tesTulis.status == false">
+                    <div v-if="tesTulis.isGagal == true">
                         Tidak Lulus Tes Tulis
                     </div>
                 </td>
             </tr>
-            <tr class="content">
-                <td> 2 </td>
-                <td> Tes Medis </td>
-                <td>
-                    <div v-if="tesMedis.status == true">
-                        Lulus Tes Medis
-                    </div>
-                    <div v-if="tesMedis.status == false">
-                        Tidak Lulus Tes Medis
-                    </div>
-                </td>
-            </tr>
-            <tr class="content">
-                <td> 3 </td>
-                <td> Tes Wawancara </td>
-                <td>
-                    <div v-if="tesWawancara.status == true">
-                        Lulus Tes Wawancara
-                    </div>
-                    <div v-if="tesWawancara.status == false">
-                        Tidak Lulus Tes Wawancara
-                    </div>
-                </td>
-            </tr>
+
+                <tr class="content">
+                    <td> 2 </td>
+                    <td> Tes Medis </td>
+                    <td>
+                        <div v-if="tesMedis.isLolos == true">
+                            Lulus Tes Medis
+                        </div>
+                        <div v-if="tesMedis.isGagal == true">
+                            Tidak Lulus Tes Medis
+                        </div>
+                    </td>
+                </tr>
+
+
+            
+                <tr class="content">
+                    <td> 3 </td>
+                    <td> Tes Wawancara </td>
+                    <td>
+                        <div v-if="tesWawancara.isLolos == true">
+                            Lulus Tes Wawancara
+                        </div>
+                        <div v-if="tesWawancara.isGagal == true">
+                            Tidak Lulus Tes Wawancara
+                        </div>
+                    </td>
+                </tr>
+
         </tbody>
 
     </table>
