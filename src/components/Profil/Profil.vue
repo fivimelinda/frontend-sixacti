@@ -55,9 +55,9 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="label">Jenis Kelamin*</div>
-                                <input type="radio" name="jenis_kelamin" v-model="jenis_kelamin" value=yes>Laki-laki
+                                <input type="radio" name="jenis_kelamin" v-model="jenis_kelamin" value=true>Laki-laki
                                 <br>
-                                <input type="radio" name="jenis_kelamin" v-model="jenis_kelamin" value=no>Perempuan
+                                <input type="radio" name="jenis_kelamin" v-model="jenis_kelamin" value=false>Perempuan
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="label">Tempat lahir*</div>
-                                <input type="date" class="form-control" id="tempat_lahir" placeholder="masukkan tempat lahir" v-model="tempat_lahir">
+                                <input class="form-control" id="tempat_lahir" placeholder="masukkan tempat lahir" v-model="tempat_lahir">
                             </div>
                         </div>
                         <hr>
@@ -206,6 +206,7 @@
 </style>
 
 <script>
+import authHeader from '../../service/AuthHeader'
 
 export default{
     mounted(){
@@ -231,6 +232,7 @@ export default{
             retStatus: '',
             errMsg: '',
             kosongCount: 0,
+            userModel: '',
         }
     },
     methods: {
@@ -238,13 +240,21 @@ export default{
             console.log(this.$store.state.auth.user);
         },
         checkProfil(){
-            if(this.$store.state.auth.user.user == null){
-                this.$refs['create'].show();
-            }
+            // if(this.$store.state.auth.user.user == null){
+            //     this.$refs['create'].show();
+            // }
+            // if(
+                this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
+                    this.userModel = res.data
+                })
+                if(this.userModel.user === null){
+                    this.$refs['create'].show();
+                }
+            // )
         },
         formSubmit(e){
             e.preventDefault();
-            // let currentObj = this;
+            let currentObj = this;
             if (this.kosongCount != 0){
                 this.kosongCount = 0;
                 this.errMsg = "";
@@ -295,6 +305,33 @@ export default{
                 this.kosongCount ++;
                 this.$refs['error-kosong'].show();
             }
+            else{
+                this.axios.put('http://localhost:8081/profil/setUser/'+this.$store.state.auth.user.id, {
+                    "nik" :this.nik,
+                    "nama" : this.nama,
+                    "tanggal_lahir" :this.tanggal_lahir,
+                    "jenis_kelamin" : this.jenis_kelamin,
+                    "tempat_lahir" : this.tempat_lahir,
+                    "alamat" : this.alamat,
+                    "rt" : this.rt,
+                    "rw" : this.rw,
+                    "kelurahan" : this.kelurahan,
+                    "kecamatan" : this.kecamatan,
+                    "kodePos" : this.kodepos,
+                    "telepon" : this.telepon,
+                    "email" : this.email,
+                    "npwp" :this.npwp
+                    }, { headers:authHeader() })
+                    .then (ress => {
+                        this.retStatus = ress.data
+                    })
+                    .catch((err) => {
+                        currentObj.output = err;
+                        console.log(err);
+                    })
+                }
+            
+         
             
 
 
@@ -302,4 +339,5 @@ export default{
         }
     }
 }
+
 </script>
