@@ -210,8 +210,9 @@ import authHeader from '../../service/AuthHeader'
 
 export default{
     mounted(){
-        this.getProfil();
         this.checkProfil();
+        this.getProfil();
+        
     },
     data(){
         return {
@@ -232,12 +233,11 @@ export default{
             retStatus: '',
             errMsg: '',
             kosongCount: 0,
-            userModel: '',
         }
     },
     methods: {
         getProfil(){
-            console.log(this.$store.state.auth.user);
+            // console.log(this.$store.state.auth.user);
         },
         checkProfil(){
             // if(this.$store.state.auth.user.user == null){
@@ -245,11 +245,12 @@ export default{
             // }
             // if(
                 this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
-                    this.userModel = res.data
-                })
-                if(this.userModel.user === null){
+                    // console.log(res.data)
+                    if(res.data.user === null){
+                    // console.log(res.data.user)
                     this.$refs['create'].show();
                 }
+                })
             // )
         },
         formSubmit(e){
