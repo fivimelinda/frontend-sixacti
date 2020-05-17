@@ -50,6 +50,7 @@
 
 <script>
 import LowonganKerjaService from '../../service/LowonganKerjaService';
+import authHeader from '../../service/AuthHeader'
 
 export default {
     name:"daftarPesertaTes",
@@ -78,7 +79,7 @@ export default {
             console.log(this.judul);
         },
         rowClickedHandle(daftar){
-            this.$router.push('/tes/'+daftar.id);
+            this.$router.push('/tes/'+daftar.id, { headers:authHeader() });
         }
 
     },
