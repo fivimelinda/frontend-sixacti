@@ -150,6 +150,8 @@ export default {
       pengalamanKerja : "",
       tahunKerja : "",
       namaPekerjaan : "",
+      lolos :"",
+      idPelamar : 1
     }
   },
   computed: {
@@ -171,6 +173,7 @@ export default {
           LamaranService.addLamaran(this.idLowongan,{
             nik : this.nik,
             namaIbu : this.namaIbu,
+            idPelamar : this.idPelamar,
             alamatDomisili : this.alamatDomisili,
             rtDomisili : this.rtDomisili,
             rwDomisili : this.rwDomisili,
@@ -185,7 +188,8 @@ export default {
             noKis : this.noKis,
             pengalamanKerja : this.pengalamanKerja,
             tahunKerja : this.tahunKerja,
-            namaPekerjaan : this.namaPekerjaan
+            namaPekerjaan : this.namaPekerjaan,
+            lolos : (this.lolos = false)
           })
           .then((response)=> {
             console.log(response)
