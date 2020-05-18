@@ -20,7 +20,10 @@ class CutiService {
     updateCuti(idCuti, form){
         return axios.put(URI + "/cuti/update?idCuti=" + idCuti, form, { headers:authHeader() })
     }
-    getUnreviewedCuti(reviewerId){
+    getUnreviewedCuti(deptmgrId){
+        return axios.get(URI + '/listCuti/reviewed?deptmgrId=' + deptmgrId, { headers:authHeader() })
+    }
+    getUnreviewedCutiFirst(reviewerId){
         return axios.get(URI + '/listCuti/unreviewed?reviewerId=' + reviewerId, { headers:authHeader() })
     }
     getHistoryCuti(karyawanId){

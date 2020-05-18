@@ -175,8 +175,14 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
     },
     created() {
       if (this.loggedIn) {
-        this.getListKategori()
-        this.getSisaCuti()
+        if (this.currentUser.role[0] === "ROLE_KARYAWANTETAP"){
+          this.getListKategori()
+          this.getSisaCuti()
+        } else{
+          this.$router.push('/403')
+        }
+      } else{
+        this.$router.push('/auth/login');
       }
     }
   }

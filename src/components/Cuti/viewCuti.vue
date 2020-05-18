@@ -50,25 +50,14 @@ export default {
         },
         currentUser() {
             return this.$store.state.auth.user;
-        }
-    },
-    computed: {
-        loggedIn(){
-            return this.$store.state.auth.status.loggedIn;
         },
-        currentUser() {
-            return this.$store.state.auth.user;
-        },
-        karyawanId() {
-            return '4';
-        }
     },
     methods:{
         move(){
             this.$router.push('/formCuti/' + this.karyawanId)
         },
         getCutiActive(){
-            CutiService.getCutiActive(this.currentUser.nik).then(response => {
+            CutiService.getCutiActive(this.currentUser.user.nik).then(response => {
                 if (response.data.cutiActive == "true"){
                     this.cutiData = response.data
                     this.cutiActive = true
@@ -87,7 +76,13 @@ export default {
     },
     created(){
         if (this.loggedIn) {
-            this.getCutiActive()
+            if (this.currentUser.role[0] === "ROLE_KARYAWANTETAP"){
+                this.getCutiActive()
+            } else{
+                this.$router.push('/403')
+            }
+        } else{
+            this.$router.push('/auth/login');
         }
     }
 }

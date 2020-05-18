@@ -209,7 +209,7 @@ export default {
         successful: false,
         message: '',
         value: null,
-        options: ['karyawan tetap', 'karyawan kontrak', 'admin', 'manager', 'assistant', 'section', 'departement'],
+        options: ['karyawan tetap', 'karyawan kontrak', 'admin', 'assistant manager', 'section manager', 'departement manager'],
         };
     },
     computed: {
