@@ -32,6 +32,10 @@
                                     placeholder="Username">
                                     </b-form-input>
                                 </b-input-group>
+                                <div v-if="$v.username.$error">
+                                  <div class="error-custom mt-1 ml-1" v-if="!$v.username.required">Field is required</div>
+                                  <div class="error-custom mt-1 ml-1" v-if="!$v.username.minLength">Username harus memiliki minimal 3 character.</div>
+                                </div>
                             </b-form-group>
                             <b-form-group>
                                 <b-input-group size="sm">
@@ -52,6 +56,9 @@
                                         </template>
                                     </b-form-select>
                                 </b-input-group>
+                                <div v-if="$v.value.$error">
+                                  <div class="error-custom mt-1 ml-1" v-if="!$v.value.required">Field is required</div>
+                                </div>
                             </b-form-group>
                             <b-form-group>
                                 <b-input-group size="sm">
@@ -68,6 +75,10 @@
                                     placeholder="password">
                                 </b-form-input>
                                 </b-input-group>
+                                <div v-if="$v.password.$error">
+                                  <div class="error-custom mt-1 ml-1" v-if="!$v.password.required">Field is required</div>
+                                  <div class="error-custom mt-1 ml-1" v-if="!$v.password.minLength">Password harus memiliki minimal 6 character.</div>
+                                </div>
                             </b-form-group>
                             <b-form-group>
                                 <b-input-group size="sm">
@@ -77,13 +88,17 @@
                                     <b-form-input
                                     class="input"
                                     size="sm"
-                                    id="password"
+                                    id="confirm_password"
                                     v-model="confirm_password"
                                     type="password"
                                     required
                                     placeholder="konfirmasi password">
                                 </b-form-input>
                                 </b-input-group>
+                                <div v-if="$v.confirm_password.$error">
+                                  <div class="error-custom mt-1 ml-1" v-if="!$v.confirm_password.required">Field is required</div>
+                                  <div class="error-custom mt-1 ml-1" v-else-if="!$v.confirm_password.sameAsPassword">Passwords must be identical.</div>
+                                </div>
                             </b-form-group>
                             <!-- <b-form-group>
                                 <b-form-tags style="" v-model="value" size="sm" add-on-change no-outer-focus class="mb-2">
@@ -135,6 +150,12 @@
                             Dengan mendaftar, saya menetujui <a href="">Syarat dan Ketentuan</a>
                             serta <a href="">Kebijakan Privasi.</a>
                         </div>
+                        <div
+                            v-if="message"
+                            class="alert"
+                            :class="successful ? 'alert-success' : 'alert-danger'"
+                        >{{message}}</div>
+                   
                     </b-card-text>
                 </b-card>
             </v-card>
@@ -167,6 +188,9 @@ export default {
         confirm_password:{
             required,
             sameAsPassword:sameAs('password')
+        },
+        value:{
+            required,
         }
     },
     data() {
@@ -176,6 +200,7 @@ export default {
             password:'',
             role:[]
         },
+        submitStatus:null,
         username:"",
         password:"",
         confirm_password:"",
@@ -203,23 +228,37 @@ export default {
         handleRegister() {
         this.message = '';
         this.submitted = true;
-        this.object.username = this.user.username;
-        this.object.password = this.user.password;
+        this.object.username = this.username;
+        this.object.password = this.password;
         this.object.role.push(this.value);
         console.log(this.object);
-        this.$store.dispatch('auth/register', this.object).then(
-                data => {
-                this.message = data.message;
-                this.successful = true;
-                },
-                error => {
-                this.message =
-                    (error.response && error.response.data) ||
-                    error.message ||
-                    error.toString();
-                this.successful = false;
-                }
-            );
+        this.$v.$touch()
+      if (this.$v.$invalid) {
+          this.submitStatus = 'ERROR'}
+      else if (!(this.password === this.confirm_password)) {
+          this.submitStatus = 'ERROR'
+      } else {
+        this.submitStatus = 'PENDING'
+        this.object.username = this.username;
+        this.object.password = this.password;
+          setTimeout(() => {
+            this.$store.dispatch('auth/register', this.object).then(
+            data => {
+              this.message = data.message;
+              this.successful = true;
+              this.submitStatus = 'OK'
+            },
+            error => {
+              this.message =
+                (error.response && error.response.data) ||
+                error.message ||
+                error.toString();
+              this.successful = false;
+              this.submitStatus = 'FAILED';
+            }
+          );
+                }, 500)
+      }
         }
     }
     }
