@@ -54,9 +54,18 @@
                         <v-list-item-title class="black--text">{{ link.text }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+                <v-list-item>
+                  <v-list-item-action>
+                    <b-btn v-if="loggedIn" @click="logOut()">Logout</b-btn>
+                  </v-list-item-action>
+                  
+                  <v-list-item-content>Logout</v-list-item-content>
+                </v-list-item>
                 </v-list-item-group>
             </v-list>
-
+            <div>
+              
+            </div>
         </v-navigation-drawer>
 
     </nav>
@@ -86,7 +95,18 @@ export default {
             ]
                 
         }
-    }
+    },
+    methods:{
+      logOut() {
+            this.$store.dispatch('auth/logout');
+            this.$router.push('/auth/login');
+        },
+    },
+    computed: {
+        loggedIn() {
+        return this.$store.state.auth.status.loggedIn;
+        },
+    },
     
 }
 </script>

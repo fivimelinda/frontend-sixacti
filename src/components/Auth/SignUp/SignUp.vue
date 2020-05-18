@@ -13,9 +13,10 @@
                     <div class="h5 m-0 primary-color">
                         Daftar Sekarang
                     </div>
-                    <div class="mb-5 secondary-color" style="font-size:12px">
+                    <div class="mb-4 secondary-color" style="font-size:12px">
                         Sudah punya akun PT. Xacti? <strong class="primary-color"><a class="primary-color" href="/auth/login">Masuk</a></strong>
                     </div>
+                    <hr/>
                         <b-form
                         class="m-0">
                             <b-form-group>
@@ -153,7 +154,7 @@ export default {
   },
   mounted() {
     if (this.loggedIn) {
-      this.$router.push('/auth/signup');
+      this.$router.push('/');
     }
   },
   methods: {

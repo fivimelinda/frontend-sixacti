@@ -12,9 +12,10 @@
                         <div class="h5 m-0 primary-color">
                             Daftar Sekarang
                         </div>
-                        <div class="mb-5 secondary-color" style="font-size:12px">
+                        <div class="mb-4 secondary-color" style="font-size:12px">
                             Sudah punya akun PT. Xacti? <strong><a class="primary-color" href="/auth/login">Masuk</a></strong>
                         </div>
+                        <hr/>
                         <b-form
                         class="m-0">
                             <b-form-group>
@@ -217,11 +218,19 @@ export default {
         },
         availableOptions() {
             return this.options.filter(opt => this.value.indexOf(opt) === -1)
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
         }
     },
+    created(){
+        
+    },
     mounted() {
-        if (this.loggedIn) {
-        this.$router.push('/auth/signup-admin');
+        if (!this.loggedIn) {
+            this.$router.push('/auth/login');
+        }else if(!(this.currentUser.role[0] === "ROLE_ADMIN")){
+            this.$router.push('/');
         }
     },
     methods: {

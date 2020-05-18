@@ -17,9 +17,10 @@
                     <div class="h5 m-0 primary-color">
                         Masuk Ke Dalam Web
                     </div>
-                    <div class="mb-5 secondary-color" style="font-size:12px">
+                    <div class="mb-4 secondary-color" style="font-size:12px">
                         Gunakan username untuk masuk
                     </div>
+                    <hr/>
                     <b-form style="margin:0">
                         <b-form-group
                         id="input-group-1"
@@ -83,7 +84,6 @@
                     </div>
                 </b-card-text>
             </b-card>
-            <!-- <b-button @click="logOut()">Logout</b-button> -->
 
             <!-- <div v-if="loggedIn">{{currentUser.username}}</div>
             <div v-if="loggedIn">{{currentUser.role}}</div> -->
@@ -135,9 +135,9 @@ export default {
             return this.$store.state.auth.user;
         }
     },
-    created(){
-        if (!this.loggedIn) {
-            this.$router.push('/auth/login');
+    mounted(){
+        if (this.loggedIn) {
+            this.$router.push('/');
         }
     },
     methods:{
