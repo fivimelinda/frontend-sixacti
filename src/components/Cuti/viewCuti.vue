@@ -40,7 +40,8 @@ export default {
         return{
             cutiHabis: false,
             cutiActive: false,
-            cutiData: null
+            cutiData: null,
+            karyawanId:''
         }
     },
     computed: {
@@ -49,9 +50,6 @@ export default {
         },
         currentUser() {
             return this.$store.state.auth.user;
-        },
-        karyawanId() {
-            return '4';
         }
     },
     methods:{
@@ -59,12 +57,14 @@ export default {
             this.$router.push('/formCuti/' + this.karyawanId)
         },
         getCutiActive(){
-            CutiService.getCutiActive(this.karyawanId).then(response => {
+            CutiService.getCutiActive(this.currentUser.nik).then(response => {
                 if (response.data.cutiActive == "true"){
                     this.cutiData = response.data
                     this.cutiActive = true
+                    this.karyawanId = response.data.idKaryawan
                 } else if (response.data.sisaCuti == "0" ){
                     this.cutiHabis = true
+                    this.karyawanId = response.data.idKaryawan
                 }
 
             })
