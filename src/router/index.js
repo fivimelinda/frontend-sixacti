@@ -30,6 +30,9 @@ import lihatProgres from '../components/RequestLowongan/LihatProgres.vue'
 import DaftarPesertaTes from '../components/Tes/DaftarPesertaTes.vue'
 
 import Login from '../components/Auth/Login/Login.vue'
+// import error404 from '../components/Error/404-Pages/404'
+// import error403 from '../components/Error/403-Pages/403'
+// import error502 from '../components/Error/502-Pages/502'
 import Atribut from '../components/Attibut/Atribut.vue'
 import fileKk from '../components/Lamaran/fileKk'
 import fileNpwp from '../components/Lamaran/fileNpwp'
@@ -37,14 +40,18 @@ import fileBpjsKes from '../components/Lamaran/fileBpjsKes'
 import fileBpjsKet from '../components/Lamaran/fileBpjsKet'
 import fileResume from '../components/Lamaran/fileResume'
 import fileKis from '../components/Lamaran/fileKis'
+import StatusAtribut from '../components/AtributHR/StatusAtribut'
+import HasilTes from '../components/HasilTes/HasilTes'
+
+
 import MainLayout from '../components/MainLayout'
 
 Vue.use(Vuetify);
 Vue.use(VueRouter)
 
-const emptyComponent = {
-  template : '<router-view><router-view>'
-}
+// const emptyComponent = {
+//   template : '<router-view><router-view>'
+// }
 
 const routes = [
   // home path
@@ -88,28 +95,25 @@ const routes = [
   },
 
   // path for error
-  {
-    path : '/404',
-    component: emptyComponent,
-    children :[
-      {
-        name:'not-found',
-        path:'not-found',
-        component: () => import('../components/Error/404-Pages/404.vue')
-      }
-    ]
-  },
-  {
-    path:'/502',
-    component:emptyComponent,
-    children:[
-      {
-        name:'internal-server',
-        path:'internal-server',
-        component: () => import('../components/Error/502-Pages/502.vue')
-      }
-    ]
-  },
+  // {
+  //   path:'/404',
+  //   name:error404,
+  //   component: error404
+
+  // },
+  // {
+  //   path:'/403',
+  //   name:error403,
+  //   component: error403
+
+  // },
+  // {
+  //   path:'/502',
+  //   name:error502,
+  //   component: error502
+
+  // },
+
 
   // main path
   {
@@ -280,7 +284,17 @@ const routes = [
         name: 'GenerateSuratKontrak',
         component: GenerateSuratKontrakDetail
       },
-    
+      
+      {
+        path: '/listAtribut',
+        name:'StatusAtribut',
+        component: StatusAtribut
+      },
+      {
+        path: '/hasilTes/:idPelamar',
+        name:'HasilTes',
+        component: HasilTes
+      },
       //Path Download File
       {
         path: '/download/ktp/:fileName',

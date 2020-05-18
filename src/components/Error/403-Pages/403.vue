@@ -2,8 +2,8 @@
     
     <div>
         <br>
-        <p class="title-top">502 Error</p>
-        <p class="title-top1">Internal Server Error</p>
+        <p class="title-top">403 Error</p>
+        <p class="title-top1">Forbidden Access</p>
     </div>
 
 </template>
@@ -28,7 +28,7 @@ export default {
     font-family: "oswald";
     color : #C53751;
     font-size: 50px;
-    margin-left: 520px;
+    margin-left: 500px;
 }
 .title-top1{
     font-family: "oswald";
