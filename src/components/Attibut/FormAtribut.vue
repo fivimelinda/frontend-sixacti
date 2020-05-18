@@ -3,12 +3,7 @@
         <b-form
         style="margin:0">
         <b-form-group>
-            <label for="sepatu" class="h6">Ukuran Sepatu <strong v-b-modal.modal-sepatu><b-icon-box-arrow-up-right></b-icon-box-arrow-up-right></strong></label>
-            <b-modal id="modal-sepatu" hide-footer size="sm" centered title="Daftar Ukuran">
-                <div>
-                    <b-img src="'../../assets/Size-Chart-Shoes.jpg'"></b-img>
-                </div>
-            </b-modal>
+            <label for="sepatu" class="h6">Ukuran Sepatu</label>
             <b-form-select id="sepatu" size="sm" class="bg-white input rounded" v-model="form.ukuran_sepatu">
                 <!-- This slot appears above the options from 'options' prop -->
                 <template v-slot:first>
@@ -34,8 +29,18 @@
             
         <b-form-group>
             <label for="baju" class="h6">Ukuran Baju Seragam <strong v-b-modal.modal-baju><b-icon-box-arrow-up-right></b-icon-box-arrow-up-right></strong></label>
-            <b-modal id="modal-baju" hide-footer size="sm" centered title="Daftar Ukuran">
-                <b-img src="'../../assets/Size-Chart-Shoes.jpg'"></b-img>
+            <b-modal id="modal-baju" hide-footer centered title="Daftar Ukuran">
+                <b-card>
+                    <b-card-text class="m-0">
+                        <div><strong>SM</strong> : Lebar 42, Tinggi 66, Panjang Lengan 62, Lebar lengan 14</div>
+                        <div><strong>S</strong> : Lebar 46, Tinggi 66, Panjang Lengan 62, Lebar lengan 15</div>
+                        <div><strong>M</strong> : Lebar 50, Tinggi 67, Panjang Lengan 62, Lebar lengan 16</div>
+                        <div><strong>L</strong> : Lebar 52, Tinggi 67, Panjang Lengan 62, Lebar lengan 17</div>
+                        <div><strong>XL</strong> : Lebar 54, Tinggi 67, Panjang Lengan 62, Lebar lengan 17.5</div>
+                        <div><strong>XXL</strong> : Lebar 60, Tinggi 67, Panjang Lengan 62, Lebar lengan 18</div>
+                        <div><strong>XXXL</strong> : Lebar 66, Tinggi 67, Panjang Lengan 62, Lebar lengan 19.5</div>
+                    </b-card-text>
+                </b-card>
             </b-modal>
             <b-form-select id="baju" size="sm" class="bg-white input rounded" v-model="form.ukuran_baju">
                 <!-- This slot appears above the options from 'options' prop -->
@@ -58,8 +63,18 @@
             
         <b-form-group>
             <label for="jasLab" class="h6">Ukuran Jas Lab <strong v-b-modal.modal-jas><b-icon-box-arrow-up-right></b-icon-box-arrow-up-right></strong></label>
-            <b-modal id="modal-jas" hide-footer size="sm" centered title="Daftar Ukuran">
-                <b-img src="'../../assets/Size-Chart-Shoes.jpg'"></b-img>
+            <b-modal id="modal-jas" hide-footer centered title="Daftar Ukuran">
+                <b-card>
+                    <b-card-text class="m-0">
+                        <div><strong>SM</strong> : Lebar 42, Tinggi 66, Panjang Lengan 62, Lebar lengan 14</div>
+                        <div><strong>S</strong> : Lebar 46, Tinggi 66, Panjang Lengan 62, Lebar lengan 15</div>
+                        <div><strong>M</strong> : Lebar 50, Tinggi 67, Panjang Lengan 62, Lebar lengan 16</div>
+                        <div><strong>L</strong> : Lebar 52, Tinggi 67, Panjang Lengan 62, Lebar lengan 17</div>
+                        <div><strong>XL</strong> : Lebar 54, Tinggi 67, Panjang Lengan 62, Lebar lengan 17.5</div>
+                        <div><strong>XXL</strong> : Lebar 60, Tinggi 67, Panjang Lengan 62, Lebar lengan 18</div>
+                        <div><strong>XXXL</strong> : Lebar 66, Tinggi 67, Panjang Lengan 62, Lebar lengan 19.5</div>
+                    </b-card-text>
+                </b-card>
             </b-modal>
             <b-form-select id="jasLab" size="sm" class="bg-white input rounded" v-model="form.ukuran_jas_lab">
                 <!-- This slot appears above the options from 'options' prop -->
@@ -83,7 +98,16 @@
         <b-form-group>
             <label for="helm" class="h6">Ukuran Helm <strong v-b-modal.modal-helm><b-icon-box-arrow-up-right></b-icon-box-arrow-up-right></strong></label>
             <b-modal id="modal-helm" hide-footer size="sm" centered title="Daftar Ukuran">
-                <b-img src="'../../assets/Size-Chart-Shoes.jpg'"></b-img>
+                <b-card>
+                    <b-card-text class="m-0">
+                        <div>XS : 53-54 centimeters</div>
+                        <div>S : 55-56 centimeters</div>
+                        <div>M : 57-58 centimeters</div>
+                        <div>L : 59-60 centimeters</div>
+                        <div>XL : 61-62 centimeters</div>
+                        <div>XXL : 63-64 centimeters</div>
+                    </b-card-text>
+                </b-card>
             </b-modal>
             <b-form-select id="helm" size="sm" class="bg-white input rounded" v-model="form.ukuran_helm">
                 <!-- This slot appears above the options from 'options' prop -->
@@ -97,7 +121,6 @@
                 <b-form-select-option value="Large (L)">Large (L)</b-form-select-option>
                 <b-form-select-option value="Extra Large (XL)">Extra Large (XL)</b-form-select-option>
                 <b-form-select-option value="Double X-L(XXL)">Double X-L(XXL)</b-form-select-option>
-                <b-form-select-option value="Triple X-L (XXXL)">Triple X-L (XXXL)</b-form-select-option>
             </b-form-select>
             <div v-if="$v.form.ukuran_helm.$error">
                 <div class="error-custom mt-1 ml-1" v-if="!$v.form.ukuran_helm.required">Field is required</div>
