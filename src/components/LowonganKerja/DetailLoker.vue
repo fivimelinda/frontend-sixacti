@@ -26,7 +26,8 @@
         </div> -->
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="d-flex justify-content-center">
-                <button class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Buat Lamaran</span></button> 
+                <button v-if="currentUser.role == 'ROLE_ADMIN'" class="btn btn-lg btn-danger" v-on:click="viewPelamar()" id="viewPelamar"><span id="daftarPelamar">Lihat Pelamar</span></button>
+                <button v-if="currentUser.role == 'ROLE_PELAMAR'" class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Buat Lamaran</span></button> 
             </div>
             
         </div>
@@ -148,6 +149,9 @@ export default {
     computed: {
         idLowongan() {
             return this.$route.params.idLowongan;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
         }
     },
     methods: {
@@ -172,6 +176,11 @@ export default {
         lamaranClicked(){
             var idLowongan = this.idLowongan;
             var apply = "/LamaranKerja/" + idLowongan;
+            this.$router.push(apply);
+        },
+        viewPelamar(){
+            var idLowongan = this.idLowongan;
+            var apply = "/listPelamar/" + idLowongan;
             this.$router.push(apply);
         }
     },

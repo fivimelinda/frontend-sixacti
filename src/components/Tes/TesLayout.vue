@@ -271,7 +271,7 @@
                             <strong v-else-if="statusLamaran == 'Tidak Lulus Seleksi Berkas'"
                             style="color : #ff0000">{{ statusLamaran }}</strong>
                         </div>
-                        <div v-if="statusLamaran == null">
+                        <div v-if="statusLamaran == null && currentUser.role == 'ROLE_ADMIN'">
                             <b-form-select v-model="tmpStatus" :options="options"></b-form-select>
                             <b-btn v-b-modal.modal-1 class="mt-3">Simpan</b-btn>
                         </div>
@@ -512,6 +512,9 @@ export default {
     computed: {
         id() {
             return this.$route.params.id;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
         }
     },
     methods:{
