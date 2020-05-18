@@ -157,8 +157,19 @@ export default {
   computed: {
     idLowongan(){
       return this.$route.params.idLowongan;
+    },
+    loggedIn(){
+        return this.$store.state.auth.status.loggedIn;
+    },
+    currentUser() {
+        return this.$store.state.auth.user;
     }
   },
+  created(){
+    if (!this.loggedIn) {
+        this.$router.push('/auth/login');
+    }
+},
   methods:{
     beforeClicked(){
       this.$router.push("/detailLoker/"+this.idLowongan);
@@ -170,7 +181,7 @@ export default {
         e.preventDefault();
         this.errors = [];
         if(this.errors.length === 0) {
-          LamaranService.addLamaran(this.idLowongan,{
+          LamaranService.addLamaran(this.idLowongan, this.currentUser.nik,{
             nik : this.nik,
             namaIbu : this.namaIbu,
             idPelamar : this.idPelamar,
