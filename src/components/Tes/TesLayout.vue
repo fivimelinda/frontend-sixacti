@@ -1,6 +1,7 @@
 <template>
     <div class="tes text" >
-        <v-container v-if="status === 200 && !(pelamar === null)">
+        <v-container >
+            <div v-if="status === 200 && !(pelamar === null)">
             <b-card class="mb-5 mt-5">
                 <b-card-text>
                     <b-row>
@@ -289,25 +290,28 @@
                     </div>
                 </div>
             </div>
+            </div>
 
 
             <div v-if="statusLamaran == 'Lulus Seleksi Berkas'">
+                <hr/>
                 <div>
                     <div class="text-md-left h5" style="color:#C53751">
                         Tes Medis
                     </div>
-                    <hr/>
+                    <hr style="border:2px solid #C53751"/>
                     <tes-medis
                     v-bind:tes_medis="tesMedis.data"
                     v-bind:id_pelamar="idPelamar"
                     @refreshTesMedis="loadNewTesMedis()"></tes-medis>
                 </div>
                 <div>
+                    
                     <div class="text-md-left h5" style="color:#C53751">
                         Tes Tulis
                     </div>
                     
-                    <hr/>
+                    <hr style="border:2px solid #C53751"/>
                     <tes-tulis
                     v-bind:tes_tulis="tesTulis.data"
                     v-bind:tes_medis="tesMedis.data"
@@ -315,10 +319,11 @@
                     @refreshTesTulis="loadNewTesTulis()"></tes-tulis>
                 </div>
                 <div>
+                    
                     <div class="text-md-left h5" style="color:#C53751">
                         Tes Wawancara
-                    </div>
-                    <hr/>
+                    </div >
+                    <hr style="border:2px solid #C53751"/>
                     <tes-wawancara
                     v-bind:tes_wawancara="tesWawancara.data"
                     v-bind:tes_tulis="tesTulis.data"
@@ -461,7 +466,7 @@ export default {
             pengalamanKerja : "",
             tahunKerja : "",
             namaPekerjaan : "",
-            status : "",
+            status : true,
             statusLamaran :'',
             tmpStatus : '',
             options :[
@@ -488,12 +493,12 @@ export default {
             this.tesTulis = getTesTulis;
             const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
             this.tesWawancara = getTesWawancara;
-            console.log(getTesMedis);
-            console.log(getTesTulis);
-            console.log(getTesWawancara);
-            console.log(getData);
+            // console.log(getTesMedis);
+            // console.log(getTesTulis);
+            // console.log(getTesWawancara);
+            // console.log(this.pelamar);
 
-            this.refreshDetailLamaran();
+            // this.refreshDetailLamaran();
         }catch(error){
             console.log(error);
         }
@@ -629,6 +634,7 @@ export default {
                 url: 'http://localhost:8081/api/download/ktp/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
+                headers:authHeader(),
             }).then((response) =>  {
                 var fileURL = window.URL.createObjectURL(new Blob([response.data]));
                 var fileLink = document.createElement('a');
@@ -648,6 +654,7 @@ export default {
                 url: 'http://localhost:8081/api/download/resume/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
+                headers:authHeader(),
             }).then((response) =>  {
                 var fileURL = window.URL.createObjectURL(new Blob([response.data]));
                 var fileLink = document.createElement('a');
@@ -667,6 +674,7 @@ export default {
                 url: 'http://localhost:8081/api/download/kk/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
+                headers:authHeader(),
             }).then((response) =>  {
                 var fileURL = window.URL.createObjectURL(new Blob([response.data]));
                 var fileLink = document.createElement('a');
@@ -686,6 +694,7 @@ export default {
                 url: 'http://localhost:8081/api/download/bpjsKes/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
+                headers:authHeader(),
             }).then((response) =>  {
                 var fileURL = window.URL.createObjectURL(new Blob([response.data]));
                 var fileLink = document.createElement('a');
@@ -705,6 +714,7 @@ export default {
                 url: 'http://localhost:8081/api/download/bpjsKet/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
+                headers:authHeader(),
             }).then((response) =>  {
                 var fileURL = window.URL.createObjectURL(new Blob([response.data]));
                 var fileLink = document.createElement('a');
@@ -724,6 +734,7 @@ export default {
                 url: 'http://localhost:8081/api/download/kis/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
+                headers:authHeader(),
             }).then((response) =>  {
                 var fileURL = window.URL.createObjectURL(new Blob([response.data]));
                 var fileLink = document.createElement('a');
@@ -743,6 +754,7 @@ export default {
                 url: 'http://localhost:8081/api/download/npwp/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
+                headers:authHeader(),
             }).then((response) =>  {
                 var fileURL = window.URL.createObjectURL(new Blob([response.data]));
                 var fileLink = document.createElement('a');
