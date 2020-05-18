@@ -83,6 +83,7 @@
 
 <script>
 import axios from 'axios';
+import authHeader from '../../service/AuthHeader'
 export default {
   name:'fileLamaran',
   data(){
@@ -111,7 +112,7 @@ export default {
       let formData = new FormData();
       formData.append('file', this.file);
       axios.post('http://localhost:8081/api/uploadFile/' + this.idLamaran,
-        formData).then(ress => {
+        formData,{ headers:authHeader() }).then(ress => {
               this.ressData = ress;
             })
             .catch((err) => {

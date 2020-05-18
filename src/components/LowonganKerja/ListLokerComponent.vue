@@ -31,9 +31,9 @@
                 <div class="col-6 mb-3">
                   <button class="btn btn-danger w-100" v-on:click="detailLokerClicked(loker.idLowongan)">Detail</button>
                 </div>
-                <div class="col-6 mb-3">
+                <!-- <div class="col-6 mb-3">
                   <button v-b-modal.modal-1 class="btn btn-light border-danger w-100" id="hapusBtn"  v-on:click="saveId(loker.idLowongan)">Hapus</button>
-                </div>
+                </div> -->
               </div>
              
               

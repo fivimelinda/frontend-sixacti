@@ -52,6 +52,17 @@ export default {
             return this.$store.state.auth.user;
         }
     },
+    computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        },
+        karyawanId() {
+            return '4';
+        }
+    },
     methods:{
         move(){
             this.$router.push('/formCuti/' + this.karyawanId)

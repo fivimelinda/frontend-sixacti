@@ -53,6 +53,7 @@
 
 <script>
 import axios from 'axios'
+import authHeader from '../../service/AuthHeader'
 
 export default {
     data() {
@@ -64,9 +65,22 @@ export default {
     mounted() {
         this.load()
     },
+    computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
+    created(){
+        if (!this.loggedIn) {
+            this.$router.push('/auth/login');
+        }
+    },
     methods: {
         load() {
-            axios.get('http://localhost:8081/request/all').then(res => {
+            axios.get('http://localhost:8081/request/all',{ headers:authHeader() }).then(res => {
                 this.requestLowongan = res.data
             }).catch((err) => {
                 console.log(err);

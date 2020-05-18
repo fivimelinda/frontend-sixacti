@@ -99,6 +99,7 @@ import jsPDF from 'jspdf';
 import axios from 'axios';
 import moment from 'moment';
 import 'moment/locale/id';
+import authHeader from '../../service/AuthHeader'
 
 export default {
     data() {
@@ -124,6 +125,10 @@ export default {
             if(this.nomorSurat === ''){
                 this.nomorSurat = this.req.noSurat.toString()
             }
+            if(this.namaTtd === ''){
+                this.namaTtd = this.$store.state.auth.user.username
+                console.log(this.$store.state.auth.user)
+            }
             this.changeStatus();
             var doc = new jsPDF();
             doc.setFontSize(11);
@@ -137,6 +142,19 @@ export default {
             doc.text(15,20,lines);
             doc.save(this.req.noSurat+'.pdf');
         },
+        computed: {
+            loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+            },
+            currentUser() {
+                return this.$store.state.auth.user;
+            }
+        },
+         created(){
+            if (!this.loggedIn) {
+                this.$router.push('/auth/login');
+            }
+        },
         batal() {
             window.location.href = "/GenerateSuratKontrak"
         },
@@ -145,34 +163,36 @@ export default {
             this.today1 = moment().format('MMMM Do YYYY');
         },
         load() {
-            axios.get('http://localhost:8081/detailKontrak/get/'+this.$route.params.id).then(res => {
+            axios.get('http://localhost:8081/detailKontrak/get/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
                 this.req = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         loadName() {
-            axios.get('http://localhost:8081/detailKontrak/getName').then(res => {
+            axios.get('http://localhost:8081/detailKontrak/getName',{ headers:authHeader() }).then(res => {
                 this.name = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         loadDepartemen() {
-            axios.get('http://localhost:8081/detailKontrak/getDepartemen').then(res => {
+            axios.get('http://localhost:8081/detailKontrak/getDepartemen',{ headers:authHeader() }).then(res => {
                 this.departemen = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         changeStatus(){
-            axios.put('http://localhost:8081/detailKontrak/changeStatus/'+this.$route.params.id)
+            axios.put('http://localhost:8081/detailKontrak/changeStatus/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
+                console.log(res)
+            })
         },
         loadDetailKontrak() {
 
         },
         getGaji() {
-            axios.get('http://localhost:8081/detailKontrak/gaji/'+this.$route.params.id).then(res => {
+            axios.get('http://localhost:8081/detailKontrak/gaji/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
                 this.gaji = res.data
             }).catch((err) => {
                 console.log(err);
