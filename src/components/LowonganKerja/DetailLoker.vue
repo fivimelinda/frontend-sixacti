@@ -13,7 +13,7 @@
         <div class="col-xs-12 col-sm-6 col-md-8">
             <h2 id="judul">
                 {{judulLoker}} 
-                <a id="ubahBtn" v-on:click="updateLokerClicked()">
+                <a v-if="currentUser.role == 'ROLE_ADMIN'" id="ubahBtn" v-on:click="updateLokerClicked()">
                 <edit-icon size="14"></edit-icon> Ubah</a>
             </h2>
         </div>
