@@ -1,122 +1,172 @@
 <template>
   <div class="FormCreateLoker">
-    
-    <br />
-    <h1>Buat Lamaran Pekerjaan</h1>
-    <br />
-    <div class="card">
-      <div class="card-header">Formulir Pembuatan Lamaran Pekerjaan</div>
-      <div class="card-body">
-         <form @submit.prevent="validateAndSubmit">
-          <div class="form-group">
-            <div class="mb-2 label">Nomor Induk Kependudukan*</div>
-            <input type="number" class="form-control" id="nik" v-model="nik" placeholder="masukkan nomor induk kependudukan" required>
-          </div>
-          <div class="form-group">
-            <div class="mb-2 label">Nama Ibu*</div>
-            <input class="form-control" id="namaIbu" v-model="namaIbu" placeholder="masukkan nama" required>
-          </div>
 
-          <div class="form-group">
-            <div class="mb-2 label">Alamat Domisili*</div>
-            <input class="form-control" id="alamatDomisili" v-model="alamatDomisili" placeholder="masukkan alamat domisili" required>
-          </div>
+    <div v-if="this.usersData.user == null">
+      <br>
+      <br>
+      <div class="title-top">
+        <h5>Untuk membuat lamaran, silakan lengkapi profil</h5>
+        <button class=" btn btn-light border-danger w-10" v-on:click="profil()">Lengkapi Profil</button>
+      </div>
 
-          <div class="row">
-            <div class="col-6">
-              <div class="form-group">
-                <div class="mb-2 label">RT Domisili*</div>
-                <input type="number" class="form-control" id="rtDomisili" v-model="rtDomisili" placeholder="masukkan rt domisili"  />
-              </div>
-            </div>
-
-            <div class="col-6">
-              <div class="form-group">
-                <div class="mb-2 label">RW Domisili*</div>
-                <input type="number" class="form-control" id="rwDomisili" v-model="rwDomisili" placeholder="masukkan rw domisili" />
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="mb-2 label">Kelurahan Domisili*</div>
-            <input class="form-control" id="kelurahanDomisili" v-model="kelurahanDomisili" placeholder="masukkan kelurahan domisili (contoh : Beiji)" required>
-          </div>
-
-          <div class="form-group">
-            <div class="mb-2 label">Kecamatan Domisili*</div>
-            <input class="form-control" id="kecamatanDomisili" v-model="kecamatanDomisili" placeholder="masukkan kecamatan domisili (contoh : Beiji)" required>
-          </div>
-
-          <div class="form-group">
-            <div class="mb-2 label">Kode Pos Domisili*</div>
-            <input class="form-control" id="kodePosDomisili" v-model="kodePosDomisili" type="number" placeholder="masukkan kode pos" required>
-          </div>
-
-          <div class="form-group">
-              <div class="mb-2 label">Telepon*</div>
-              <input type="number" class="form-control" id="telepon" v-model="telepon" placeholder="masukkan nomor telepon" required>
-            </div>
-
-            <div class="form-group">
-               <div class="mb-2 label">Pendidikan*</div>
-               <input class="form-control" id="pendidikan" v-model="pendidikan" placeholder="masukkan pendidikan" required>
-             </div>
-              <div class="row">
-                <div class="col-6">
-                  <div class="form-group">
-                    <div class="mb-2 label">Nomor Kartu BPJS Ketenagakerjaan</div>
-                    <input type="number" class="form-control" id="noBpjsKetenagakerjaan" v-model="noBpjsKetenagakerjaan" placeholder="masukkan nomor kartu BPJS ketenagakerjaan"  />
-                  </div>
-                </div>
-
-                <div class="col-6">
-                  <div class="form-group">
-                    <div class="mb-2 label">Nomor Kartu BPJS Kesehatan</div>
-                    <input type="number" class="form-control" id="noBpjsKesehatan" v-model="noBpjsKesehatan" placeholder="masukkan nomor kartu BPJS kesehatan" />
-                  </div>
-                </div>
-              </div>
-
-
-
-            <div class="form-group">
-              <div class="mb-2 label">Nomor Kartu Indonesia Sehat</div>
-              <input type="number" class="form-control" id="noKis" v-model="noKis" placeholder="masukkan nomor Kartu Indonesia Sehat">
-            </div>
-
-            <div class="form-group">
-              <div class="mb-2 label">Nomor Pokok Wajib Pajak</div>
-              <input type="number" class="form-control" id="npwp" v-model="npwp" placeholder="masukkan nomor pokok wajib pajak">
-            </div>
-
-            <div class="form-group">
-            <div class="mb-2 label">Pengalaman Kerja</div>
+    </div>
+      <!-- <div this.openModal()>
+      </div>
+    </div> -->
+    <div v-if="this.usersData.user != null">
+      <br />
+      <h1>Buat Lamaran Pekerjaan</h1>
+      <br />
+      <div class="card">
+        <div class="card-header">Formulir Pembuatan Lamaran Pekerjaan</div>
+        <div class="card-body">
+          <form @submit.prevent="validateAndSubmit">
             <div class="row">
               <div class="col-6">
                 <div class="form-group">
-                  <div class="mb-2 label">Tahun Kerja</div>
-                  <input type="number" class="form-control" id="tahunKerja" v-model="tahunKerja" placeholder="masukkan tahun kerja"  />
+                  <div class="mb-2 label">Nomor Induk Kependudukan*</div>
+                  <input type="number" class="form-control" id="nik" v-model="nik" placeholder="masukkan nomor induk kependudukan" required>
                 </div>
               </div>
 
               <div class="col-6">
                 <div class="form-group">
-                  <div class="mb-2 label">Nama Pekerjaan</div>
-                  <input type="text" class="form-control" id="namaPekerjaan" v-model="namaPekerjaan" placeholder="masukkan nama pekerjaan" />
+                  <div class="mb-2 label">Pendidikan Terakhir*</div>
+                  <input class="form-control" id="pendidikan" v-model="pendidikan" placeholder="masukkan pendidikan" required>
+                  <!-- <small class="form-text text-muted">Masukkan pendidikan terakhir</small> -->
                 </div>
               </div>
             </div>
-          </div>
 
-          <button class=" btn btn-light border-danger w-10" v-on:click="beforeClicked()">Kembali</button>
-          <button type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan dan Lanjutkan</button>
-          <!-- <button class="btn btn-light border-danger w-10" v-on:click="nextLamaranClicked(idLamaran)">Selanjutnya</button> -->
-         
-        </form>
+            <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="mb-2 label">Nama Ibu*</div>
+                    <input class="form-control" id="namaIbu" v-model="namaIbu" placeholder="masukkan nama" required>
+                  </div>
+                </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <div class="mb-2 label">Alamat Domisili*</div>
+                  <input class="form-control" id="alamatDomisili" v-model="alamatDomisili" placeholder="masukkan alamat domisili" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <div class="mb-2 label">RT Domisili*</div>
+                  <input type="number" class="form-control" id="rtDomisili" v-model="rtDomisili" placeholder="masukkan rt domisili"  />
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="form-group">
+                  <div class="mb-2 label">RW Domisili*</div>
+                  <input type="number" class="form-control" id="rwDomisili" v-model="rwDomisili" placeholder="masukkan rw domisili" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <div class="mb-2 label">Kelurahan Domisili*</div>
+                  <input class="form-control" id="kelurahanDomisili" v-model="kelurahanDomisili" placeholder="masukkan kelurahan domisili (contoh : Beiji)" required>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="form-group">
+                  <div class="mb-2 label">Kecamatan Domisili*</div>
+                  <input class="form-control" id="kecamatanDomisili" v-model="kecamatanDomisili" placeholder="masukkan kecamatan domisili (contoh : Beiji)" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <div class="mb-2 label">Kode Pos Domisili*</div>
+                  <input class="form-control" id="kodePosDomisili" v-model="kodePosDomisili" type="number" placeholder="masukkan kode pos" required>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="form-group">
+                    <div class="mb-2 label">Telepon*</div>
+                    <input type="number" class="form-control" id="telepon" v-model="telepon" placeholder="masukkan nomor telepon" required>
+                </div>
+              </div>
+            </div>
+
+
+
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <div class="mb-2 label">Nomor Kartu BPJS Ketenagakerjaan</div>
+                      <input type="number" class="form-control" id="noBpjsKetenagakerjaan" v-model="noBpjsKetenagakerjaan" placeholder="masukkan nomor kartu BPJS ketenagakerjaan"  />
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <div class="mb-2 label">Nomor Kartu BPJS Kesehatan</div>
+                      <input type="number" class="form-control" id="noBpjsKesehatan" v-model="noBpjsKesehatan" placeholder="masukkan nomor kartu BPJS kesehatan" />
+                    </div>
+                  </div>
+                </div>
+
+
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="mb-2 label">Nomor Kartu Indonesia Sehat</div>
+                    <input type="number" class="form-control" id="noKis" v-model="noKis" placeholder="masukkan nomor Kartu Indonesia Sehat">
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="mb-2 label">Nomor Pokok Wajib Pajak</div>
+                    <input type="number" class="form-control" id="npwp" v-model="npwp" placeholder="masukkan nomor pokok wajib pajak">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+              <div class="mb-2 label">Pengalaman Kerja</div>
+            
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="mb-2 label">Tahun Kerja</div>
+                    <input type="number" class="form-control" id="tahunKerja" v-model="tahunKerja" placeholder="masukkan tahun kerja"  />
+                    <small class="form-text text-muted">Pengalaman kerja terakhir</small>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="mb-2 label">Nama Pekerjaan</div>
+                    <input type="text" class="form-control" id="namaPekerjaan" v-model="namaPekerjaan" placeholder="masukkan nama pekerjaan" />
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            <button class=" btn btn-light border-danger w-10" v-on:click="beforeClicked()">Kembali</button>
+            <button type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
+            <!-- <button class="btn btn-light border-danger w-10" v-on:click="nextLamaranClicked(idLamaran)">Selanjutnya</button> -->
+
+          </form>
+
+        </div>
 
       </div>
-
     </div>
 
     <br>
@@ -128,6 +178,7 @@
 
 <script>
 import LamaranService from '../../service/LamaranService'
+import authHeader from '../../service/AuthHeader'
 
 export default {
   name : "LamaranKerja",
@@ -151,26 +202,46 @@ export default {
       tahunKerja : "",
       namaPekerjaan : "",
       lolos :"",
-      idPelamar : 1
+      usersData: '',
+      
     }
   },
   computed: {
     idLowongan(){
       return this.$route.params.idLowongan;
+    },
+    loggedIn(){
+        return this.$store.state.auth.status.loggedIn;
+    },
+    currentUser() {
+        return this.$store.state.auth.user;
     }
   },
+  mounted(){
+    this.checkProfil();
+        
+  },
+  created(){
+    if (!this.loggedIn) {
+        this.$router.push('/auth/login');
+    }
+},
   methods:{
     beforeClicked(){
       this.$router.push("/detailLoker/"+this.idLowongan);
     },
+    profil(){
+      this.$router.push("/profil");
+    },
     nextLamaranClicked(){
       this.$router.push("/fileLamaran");
     },
+
      validateAndSubmit(e) {
         e.preventDefault();
         this.errors = [];
         if(this.errors.length === 0) {
-          LamaranService.addLamaran(this.idLowongan,{
+          LamaranService.addLamaran(this.idLowongan, this.nik,{
             nik : this.nik,
             namaIbu : this.namaIbu,
             idPelamar : this.idPelamar,
@@ -196,13 +267,25 @@ export default {
             this.$router.push("/fileLamaran/"+ response.data);
           });
         }
-     }
+     },
+        checkProfil(){
+          this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
+              this.usersData = res.data;
+                })
+            // )
+        },
   }
 }
 </script>
 <style scoped>
 .FormCreateLoker {
   background-color: #F6EDF0;
+}
+
+.title-top{
+    font-family: "oswald";
+    font-size: 50px;
+    margin-left: 500px;
 }
 
 h1{

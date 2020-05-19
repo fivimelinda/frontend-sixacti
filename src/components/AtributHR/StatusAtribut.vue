@@ -114,6 +114,19 @@ export default {
     mounted() {
         this.load()
     },
+    computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
+    created(){
+        if (!this.loggedIn) {
+            this.$router.push('/auth/login');
+        }
+    },
     methods: {
         load() {
             axios.get('http://localhost:8081/api/listAtribut',{ headers:authHeader() }).then(res => {

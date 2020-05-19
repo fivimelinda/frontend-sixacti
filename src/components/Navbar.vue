@@ -54,12 +54,15 @@
                         <v-list-item-title class="black--text">{{ link.text }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item>
+                <hr/>
+                <v-list-item style="border:1px solid red;" v-if="loggedIn" @click="logOut()">
                   <v-list-item-action>
-                    <b-btn v-if="loggedIn" @click="logOut()">Logout</b-btn>
+                    <v-icon class="black-text">{{power}}</v-icon>
                   </v-list-item-action>
                   
-                  <v-list-item-content>Logout</v-list-item-content>
+                  <v-list-item-content>
+                        <v-list-item-title class="black--text" style="">Logout</v-list-item-title>
+                    </v-list-item-content>
                 </v-list-item>
                 </v-list-item-group>
             </v-list>
@@ -92,7 +95,8 @@ export default {
                   text: 'Review Cuti',
                   route: '/reviewCuti'
                 }
-            ]
+            ],
+            power:'mdi-power',
                 
         }
     },

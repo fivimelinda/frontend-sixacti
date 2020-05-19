@@ -10,15 +10,197 @@
                     <div class="col-1">
 
                     </div>
-                    <div class="col-11">
-                        <div class="name">{{this.$store.state.auth.user.username}}</div>
-                        <div class="role"></div>
+                    <div class="col-11" v-if="this.usersData.user != null">
+                        <div class="name" >{{this.usersData.user.nama}}</div>
+                        <div class="role" v-if="this.usersData.roles.length != 0" >{{this.usersData.roles[0].roleName}}</div>
                     </div>
                     
                 </div>
             </div>
         </div>
-        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-1">
+
+                </div>
+                <div class="col-5">
+                    <b-button v-b-modal.create-modal v-if="this.usersData.user == null">Buat profil</b-button>
+                    <b-button v-b-modal.edit-modal v-if="this.usersData.user != null">Edit profil</b-button>
+                </div>
+                <div class="col-4">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="container" v-if="this.usersData.user != null">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>Nomor Induk Kependudukan</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.usersData.user.nik}}</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>Username</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.usersData.username}}</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>Nama</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.usersData.user.nama}}</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>Tanggal lahir</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.tanggal}}</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>Tempat lahir</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.usersData.user.tempat_lahir}}</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>Jenis kelamin</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content" v-if="this.usersData.user.jenis_kelamin == true ">Laki-laki</div>
+                    <div class="content" v-if="this.usersData.user.jenis_kelamin == false ">Perempuan</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>Alamat</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.usersData.user.alamat}}</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>RT</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.usersData.user.rt}}</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>RW</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.usersData.user.rw}}</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>Kelurahan</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.usersData.user.kelurahan}}</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>Kecamatan</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.usersData.user.kecamatan}}</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>Kode pos</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.usersData.user.kode_pos}}</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>Telepon</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.usersData.user.telepon}}</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>Email</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.usersData.user.email}}</div>
+                </div>
+            </div>
+            <hr class="spacer">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-5">
+                    <div class="identifier"><b>Nomor pokok wajib pajak</b></div>
+                </div>
+                <div class="col-4">
+                    <div class="content">{{this.usersData.user.npwp}}</div>
+                </div>
+            </div>
+        </div>
+
+        
         <b-modal size="lg" hide-footer title="Buat profil" id="create-modal" ref="create">
             <form @submit ="formSubmit">
                 <div class="container">
@@ -164,7 +346,156 @@
 
             </form>
         </b-modal>
-        <b-button v-b-modal.create-modal v-if="this.$store.state.auth.user.user == null">Show Modal</b-button>
+
+
+        <b-modal size="lg" hide-footer title="Edit profil" id="edit-modal" ref="edit" v-if="this.usersData.user != null">
+            <form @submit ="formEdit">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <div class="label">Nomor Induk Kependudukan*</div>
+                                <input class="form-control" type="number" id="nik" :placeholder="[[this.usersData.user.nik]]" v-model="nik" required="true" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <div class="label">Nama*</div>
+                                <input class="form-control" id="nama" :placeholder="[[this.usersData.user.nama]]" v-model="nama">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Tanggal lahir*</div>
+                                <input class="form-control" type="date" id="tanggal_lahir" :placeholder="[[this.usersData.user.tanggal_lahir]]" v-model="tanggal_lahir">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Jenis Kelamin*</div>
+                                <input type="radio" name="jenis_kelamin" v-model="jenis_kelamin" value=true>Laki-laki
+                                <br>
+                                <input type="radio" name="jenis_kelamin" v-model="jenis_kelamin" value=false>Perempuan
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Tempat lahir*</div>
+                                <input class="form-control" id="tempat_lahir" :placeholder="[[this.usersData.user.tempat_lahir]]" v-model="tempat_lahir">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Alamat*</div>
+                                <input class="form-control" id="alamat" :placeholder="[[this.usersData.user.alamat]]" v-model="alamat">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">RT*</div>
+                                <input class="form-control" type="number" id="rt" :placeholder="[[this.usersData.user.rt]]" v-model="rt">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">RW*</div>
+                                <input class="form-control" type="number" id="rw" :placeholder="[[this.usersData.user.rw]]" v-model="rw">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Kelurahan*</div>
+                                <input class="form-control" id="kelurahan" :placeholder="[[this.usersData.user.kelurahan]]" v-model="kelurahan">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Kecamatan*</div>
+                                <input class="form-control" id="kecamatan" :placeholder="[[this.usersData.user.kecamatan]]" v-model="kecamatan">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Kode pos*</div>
+                                <input class="form-control" type="number" id="kode_pos" :placeholder="[[this.usersData.user.kode_pos]]" v-model="kodepos">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Telepon*</div>
+                                <input class="form-control" id="telepon" :placeholder="[[this.usersData.user.telepon]]" v-model="telepon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Email*</div>
+                                <input class="form-control" id="email" :placeholder="[[this.usersData.user.email]]" v-model="email">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label">Nomor pokok wajib pajak (NPWP)*</div>
+                                <input class="form-control" id="npwp" :placeholder="[[this.usersData.user.npwp]]" v-model="npwp">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="container">
+                   <div class="row">
+                       <div class="col-sm-12">
+                           <button type="submit" class="btn btn-danger" @click="formEdit">Submit</button>
+                       </div>
+                   </div>
+               </div>
+                
+
+            </form>
+        </b-modal>
+
+
+
 
         <b-modal size="lg" ref="error-kosong" hide-footer title="Notifikasi">
             <div class="container">
@@ -172,9 +503,75 @@
                     <div class="col-sm" id="berhasil" v-text="this.errMsg+' belum diisi!'">
                     </div>
                     <div class="col-sm">
-                        <!-- <v-img
-                                :src="require('../assets/success.png')"></v-img> -->
-                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
+
+
+        <b-modal size="lg" ref="my-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Profil berhasil diedit
+                    </div>
+                    <div class="col-sm">
+                       
+                        <v-img class="centang"
+            :src="require('@/assets/success.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
+
+        <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Profil gagal diedit
+                    </div>
+                    <div class="col-sm">
+                        
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
+
+        <b-modal size="lg" ref="my-modal2" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Profil berhasil dibuat
+                    </div>
+                    <div class="col-sm">
+                        
+                        <v-img class="centang"
+            :src="require('@/assets/success.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
+
+        <b-modal size="lg" ref="error-modal2" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        Profil gagal dibuat
+                    </div>
+                    <div class="col-sm">
+                       
                         <v-img class="gagal"
             :src="require('@/assets/fail.png')"
             ></v-img>
@@ -189,6 +586,28 @@
 </template>
 
 <style>
+.row{
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+.spacer{
+    margin-left: 93px;
+}
+.identifier{
+    font-family: 'archivo';
+    color: 'black';
+    font-size: 18px;
+}
+.content{
+    font-family: 'archivo';
+    color: #454545;
+    font-size: 18px;
+}
+.role{
+    font-family: 'archivo';
+    font-size: 16px;
+    color: white;
+}
 .label{
     text-align: left;
     font-family: 'archivo';
@@ -198,7 +617,7 @@
 .name{
     font-family: "oswald";
     color: white;
-    font-size: 25px;
+    font-size: 35px;
 }
 .red-top{
     background-color: #C53751;
@@ -207,11 +626,12 @@
 
 <script>
 import authHeader from '../../service/AuthHeader'
+import moment from 'moment';
+import 'moment/locale/id';
 
 export default{
     mounted(){
         this.checkProfil();
-        this.getProfil();
         
     },
     data(){
@@ -233,25 +653,124 @@ export default{
             retStatus: '',
             errMsg: '',
             kosongCount: 0,
+            usersData: '',
+            tanggal:''
+        }
+    },
+    computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
+    created(){
+        if (!this.loggedIn) {
+            this.$router.push('/auth/login');
         }
     },
     methods: {
-        getProfil(){
-            // console.log(this.$store.state.auth.user);
-        },
         checkProfil(){
             // if(this.$store.state.auth.user.user == null){
             //     this.$refs['create'].show();
             // }
             // if(
+                console.log(this.$store.state.auth.user)
                 this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
-                    // console.log(res.data)
+                    
+                    this.usersData = res.data;
+                    console.log(this.usersData)
+                    
                     if(res.data.user === null){
-                    // console.log(res.data.user)
-                    this.$refs['create'].show();
-                }
+                        this.$refs['create'].show();
+                        this.createModal();
+                    }
+                    else{
+                        this.tanggal = res.data.user.tanggal_lahir;
+                        console.log(this.tanggal)
+                        moment.locale('id')
+                        this.tanggal = new Date(this.tanggal)
+                        this.tanggal = moment(this.tanggal).format('MMMM Do YYYY')
+                        console.log(this.tanggal)
+                    }
                 })
             // )
+        },
+        formEdit(e){
+            e.preventDefault();
+            let currentObj = this;
+            if(!this.nik){
+                this.nik = this.usersData.user.nik;
+            }
+            if(!this.nama){
+                this.nama = this.usersData.user.nama; 
+            }
+            if(!this.tanggal_lahir){
+                this.tanggal_lahir = this.usersData.user.tanggal_lahir; 
+            }
+            if(!this.jenis_kelamin){
+                this.jenis_kelamin = this.usersData.user.jenis_kelamin; 
+            }
+            if(!this.tempat_lahir){
+                this.tempat_lahir = this.usersData.user.tempat_lahir; 
+            }
+            if(!this.alamat){
+                this.alamat = this.usersData.user.alamat; 
+            }
+            if(!this.rt){
+                this.rt = this.usersData.user.rt; 
+            }
+            if(!this.rw){
+                this.rw = this.usersData.user.rw; 
+            }
+            if(!this.kelurahan){
+                this.kelurahan = this.usersData.user.kelurahan; 
+            }
+            if(!this.kecamatan){
+                this.kecamatan = this.usersData.user.kecamatan; 
+            }
+            if(!this.kodepos){
+                this.kodepos = this.usersData.user.kode_pos; 
+            }
+            if(!this.telepon){
+                this.telepon = this.usersData.user.telepon; 
+            }
+            if(!this.email){
+                this.email = this.usersData.user.email; 
+            }
+            if(!this.npwp){
+                this.npwp = this.usersData.user.npwp; 
+            }
+            this.axios.put('http://localhost:8081/profil/editUser/'+this.$store.state.auth.user.id, {
+                "nik" :this.nik,
+                "nama" : this.nama,
+                "tanggal_lahir" :this.tanggal_lahir,
+                "jenis_kelamin" : this.jenis_kelamin,
+                "tempat_lahir" : this.tempat_lahir,
+                "alamat" : this.alamat,
+                "rt" : this.rt,
+                "rw" : this.rw,
+                "kelurahan" : this.kelurahan,
+                "kecamatan" : this.kecamatan,
+                "kodePos" : this.kodepos,
+                "telepon" : this.telepon,
+                "email" : this.email,
+                "npwp" :this.npwp
+            }, {headers:authHeader()})
+            .then (ress => {
+                    this.retStatus = ress.data
+                    if(ress.status == 200){
+                        this.openModal()
+                    }
+                    else{
+                        this.errorModal()
+                    }
+                })
+                .catch((err) => {
+                    currentObj.output = err;
+                    console.log(err);
+                })
         },
         formSubmit(e){
             e.preventDefault();
@@ -325,18 +844,39 @@ export default{
                     }, { headers:authHeader() })
                     .then (ress => {
                         this.retStatus = ress.data
+                        if(ress.status == 200){
+                            this.openModal2()
+                        }
+                        else{
+                            this.errorModal2()
+                        }
                     })
                     .catch((err) => {
                         currentObj.output = err;
                         console.log(err);
                     })
                 }
-            
-         
-            
-
-
-
+        },
+        openModal() {
+            this.$refs['my-modal'].show();
+            window.setTimeout(function() {
+                window.location.href = "/profil";
+            }, 2000);
+        },
+        errorModal(){
+            this.$refs['error-modal'].show();
+        },
+        openModal2() {
+            this.$refs['my-modal2'].show();
+            window.setTimeout(function() {
+                window.location.href = "/profil";
+            }, 2000);
+        },
+        errorModal2(){
+            this.$refs['error-modal2'].show();
+        },
+        createModal(){
+            this.$refs['create'].show();
         }
     }
 }
