@@ -1,25 +1,27 @@
 <template>
-    <div class="tes text" >
-        <v-container >
+    <div>
+        <v-container class=" text">
+            
+            <div>
             <div v-if="status === 200 && !(pelamar === null)">
-            <b-card class="mb-5 mt-5">
-                <b-card-text>
-                    <b-row>
-                        <b-col class="mx-auto my-auto" col md="4" lg="4">
-                            <b-avatar class="ml-5" rounded="lg" variant="dark" size="16vw"></b-avatar>
-                        </b-col>
-                        <b-col class="my-auto" col md="8" lg="8">
-                            <ol style="decoration:none !important">
-                                <li class="name h4 mb-3">{{pelamar.userPelamar.nama}}</li>
-                                <li class="mb-3"><v-icon color="black" class="mr-3">{{icons.card}}</v-icon>{{pelamar.userPelamar.nik}}</li>
-                                <li class="mb-3"><v-icon class="mr-3">{{icons.tgl}}</v-icon>{{pelamar.userPelamar.tempat_lahir}}, {{pelamar.userPelamar.tanggal_lahir | format}}</li>
-                                <li class="mb-3"><v-icon color="red" class="mr-3">{{icons.location}}</v-icon>{{pelamar.userPelamar.alamat}}</li>
-                                <li class="mb-3"><v-icon color="green" class="mr-3">{{icons.phone}}</v-icon>{{pelamar.userPelamar.telepon}}</li>
-                            </ol>
-                        </b-col>
-                    </b-row>
-                </b-card-text>
-            </b-card>
+                <b-card class="mb-5 mt-5">
+                    <b-card-text>
+                        <b-row>
+                            <b-col class="mx-auto my-auto" col md="4" lg="4">
+                                <b-avatar class="ml-5" rounded="lg" variant="dark" size="16vw"></b-avatar>
+                            </b-col>
+                            <b-col class="my-auto" col md="8" lg="8">
+                                <ol style="decoration:none !important">
+                                    <li class="name h4 mb-3">{{pelamar.userPelamar.nama}}</li>
+                                    <li class="mb-3"><v-icon color="black" class="mr-3">{{icons.card}}</v-icon>{{pelamar.userPelamar.nik}}</li>
+                                    <li class="mb-3"><v-icon class="mr-3">{{icons.tgl}}</v-icon>{{pelamar.userPelamar.tempat_lahir}}, {{pelamar.userPelamar.tanggal_lahir | format}}</li>
+                                    <li class="mb-3"><v-icon color="red" class="mr-3">{{icons.location}}</v-icon>{{pelamar.userPelamar.alamat}}</li>
+                                    <li class="mb-3"><v-icon color="green" class="mr-3">{{icons.phone}}</v-icon>{{pelamar.userPelamar.telepon}}</li>
+                                </ol>
+                            </b-col>
+                        </b-row>
+                    </b-card-text>
+                </b-card>
 
             <div class="row" v-if="status !== 'lulus Seleksi Berkas'">
                 <div class="col-xs-12 col-sm-6 col-md-8" >
@@ -290,9 +292,9 @@
                     </div>
                 </div>
             </div>
+            
+                
             </div>
-
-
             <div v-if="statusLamaran == 'Lulus Seleksi Berkas'">
                 <hr/>
                 <div>
@@ -349,10 +351,10 @@
                 </div>
             </div>
             
-        </b-modal>
+            </b-modal>
 
 
-        <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
             <div class="container">
                 <div class="row">
                     <div class="col-sm" id="berhasil">
@@ -369,10 +371,10 @@
                 </div>
             </div>
             
-        </b-modal>
-        
-           
+            </b-modal>
+        </div>
         </v-container>
+        
         <!-- <b-container v-else-if="pelamar === null && status === 200" class="my-auto" style="height:100%;width:100%">
             <b-container class="my-auto h-100 w-50 mx-auto ">
             <b-card class="my-auto">
@@ -445,9 +447,9 @@ export default {
             bpjsKet : Object,
             bpjsKes : Object,
             kis : Object,
-            tesMedis : Object,
-            tesTulis : Object,
-            tesWawancara : Object,
+            tesMedis : null,
+            tesTulis : null,
+            tesWawancara : null,
 
             nik : "",
             namaIbu : "",
@@ -493,12 +495,12 @@ export default {
             this.tesTulis = getTesTulis;
             const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
             this.tesWawancara = getTesWawancara;
-            // console.log(getTesMedis);
-            // console.log(getTesTulis);
-            // console.log(getTesWawancara);
-            // console.log(this.pelamar);
+            console.log(getTesMedis);
+            console.log(getTesTulis);
+            console.log(getTesWawancara);
+            console.log(this.pelamar);
 
-            // this.refreshDetailLamaran();
+            this.refreshDetailLamaran();
         }catch(error){
             console.log(error);
         }
@@ -555,14 +557,7 @@ export default {
 
                 this.status =res.status;
             });
-            const URI = 'http://localhost:8081/api';
-            this.idPelamar = Number(this.id);
-            const getTesMedis = axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
-            this.tesMedis = getTesMedis;
-            const getTesTulis = axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
-            this.tesTulis = getTesTulis;
-            const getTesWawancara = axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
-            this.tesWawancara = getTesWawancara;
+            
 
 
         },
