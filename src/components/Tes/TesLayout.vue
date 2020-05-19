@@ -498,7 +498,7 @@ export default {
             // console.log(getTesWawancara);
             // console.log(this.pelamar);
 
-            // this.refreshDetailLamaran();
+            this.refreshDetailLamaran();
         }catch(error){
             console.log(error);
         }
