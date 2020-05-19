@@ -7,7 +7,7 @@
             :src="require('../assets/xacti.png')"
             ></v-img></span>
             <v-spacer></v-spacer>
-            <v-btn text color="grey">
+            <v-btn text color="grey">{{name}}
                 <v-icon right large>mdi-account-circle</v-icon>
             </v-btn>
         </v-app-bar>
@@ -23,20 +23,20 @@
         >
             <v-list
             dense
-            nav style="padding:0" class="p-1">
+            nav class="p-1">
             <v-list-item>
                 <!-- <v-list-item-avatar
                     class="align-self-center"
                     color="white"
                     >
                 </v-list-item-avatar> -->
-                <v-list-item-content>
+               
                     <v-list-item-title
-                    class="display-1"
+                    class="title"
                     >
                     SIXACTI
                     </v-list-item-title>
-                </v-list-item-content>
+               
             </v-list-item>
             </v-list>
 
@@ -97,6 +97,7 @@ export default {
                 }
             ],
             power:'mdi-power',
+            name:''
                 
         }
     },
@@ -104,13 +105,24 @@ export default {
       logOut() {
             this.$store.dispatch('auth/logout');
             this.$router.push('/auth/login');
-        },
+      },
+      setUser(){
+        this.name= this.currentUser.username
+      }
     },
     computed: {
         loggedIn() {
-        return this.$store.state.auth.status.loggedIn;
+          return this.$store.state.auth.status.loggedIn;
         },
+        currentUser() {
+          return this.$store.state.auth.user;
+        }
     },
+    created(){
+      if (this.loggedIn){
+        this.setUser()
+      }
+    }
     
 }
 </script>

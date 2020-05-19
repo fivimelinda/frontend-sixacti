@@ -30,10 +30,10 @@ class CutiService {
         return axios.get(URI + '/cuti/riwayat?karyawanId=' +karyawanId, { headers:authHeader() })
     }
     approveCuti(cutiId){
-        return axios.put(URI + '/cuti/approve?cutiId=' + cutiId, { headers:authHeader() })
+        return axios.get(URI + '/cuti/approve?cutiId=' + cutiId, { headers:authHeader() })
     }
     rejectCuti(cutiId){
-        return axios.put(URI + '/cuti/reject?cutiId=' + cutiId, { headers:authHeader() })
+        return axios.get(URI + '/cuti/reject?cutiId=' + cutiId, { headers:authHeader() })
     }
     getCutiById(cutiId){
         return axios.get(URI + '/cuti/get?cutiId=' + cutiId, { headers:authHeader() })
