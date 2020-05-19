@@ -42,6 +42,7 @@ import fileResume from '../components/Lamaran/fileResume'
 import fileKis from '../components/Lamaran/fileKis'
 import StatusAtribut from '../components/AtributHR/StatusAtribut'
 import HasilTes from '../components/HasilTes/HasilTes'
+import ListLamaran from '../components/HasilTes/ListLamaran'
 
 
 import MainLayout from '../components/MainLayout'
@@ -304,6 +305,11 @@ const routes = [
         path:'/lihatProgres/:idLoker',
         name: 'lihatProgres',
         component: lihatProgres
+      },
+      {
+        path:'/lowonganLamaran',
+        name:'ListLamaran',
+        component: ListLamaran,
       },
     
       {
