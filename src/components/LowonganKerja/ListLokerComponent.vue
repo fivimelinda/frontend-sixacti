@@ -23,7 +23,6 @@
               <span v-else  class="mb-1" id="lokerDesc">{{loker.deskripsi.substring(0,25) + " ..."}}</span>
               <p class="mt-1 mb-5" id="deptSect">{{loker.departement}} - {{loker.section}}</p>
               <p id="periodeDesc">Periode {{loker.tanggalMulai | formatDate}} - {{loker.tanggalBerakhir | formatDate}}</p>
-               <h4>{{loker.isDeleted}}</h4>
 
             </div>
             <div class="card-footer" id="card-footer">
@@ -31,9 +30,9 @@
                 <div class="col-6 mb-3">
                   <button class="btn btn-danger w-100" v-on:click="detailLokerClicked(loker.idLowongan)">Detail</button>
                 </div>
-                <!-- <div class="col-6 mb-3">
-                  <button v-b-modal.modal-1 class="btn btn-light border-danger w-100" id="hapusBtn"  v-on:click="saveId(loker.idLowongan)">Hapus</button>
-                </div> -->
+                <div class="col-6 mb-3">
+                  <button v-if="currentUser.role == 'ROLE_ADMIN'" v-b-modal.modal-1 class="btn btn-light border-danger w-100" id="hapusBtn"  v-on:click="saveId(loker.idLowongan)">Hapus</button>
+                </div>
               </div>
              
               
@@ -80,7 +79,11 @@ export default {
             msg :""
         };
     },
-
+    computed: {
+      currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
     methods:{
         refreshLoker(){
             LowonganKerjaService.retrieveAllLoker()

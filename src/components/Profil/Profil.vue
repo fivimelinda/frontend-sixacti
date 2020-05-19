@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-11" v-if="this.usersData.user != null">
                         <div class="name" >{{this.usersData.user.nama}}</div>
-                        <div class="role" >{{this.usersData.roles[0].roleName}}</div>
+                        <div class="role" v-if="this.usersData.roles.length != 0" >{{this.usersData.roles[0].roleName}}</div>
                     </div>
                     
                 </div>
@@ -657,12 +657,26 @@ export default{
             tanggal:''
         }
     },
+    computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
+    created(){
+        if (!this.loggedIn) {
+            this.$router.push('/auth/login');
+        }
+    },
     methods: {
         checkProfil(){
             // if(this.$store.state.auth.user.user == null){
             //     this.$refs['create'].show();
             // }
             // if(
+                console.log(this.$store.state.auth.user)
                 this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
                     
                     this.usersData = res.data;
