@@ -149,7 +149,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
           this.errorStatus = 'Jumlah hari cuti melebihi sisa cuti. Sisa cuti Anda ' + this.sisaCuti + ' hari'
         
         } else { 
-          this.idKaryawan = this.karyawanId
+          this.form.idKaryawan = this.karyawanId
           CutiService.createCuti(this.form).then(response => {
           if (response.status == 200){
             this.$router.push({

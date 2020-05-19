@@ -210,7 +210,7 @@ const routes = [
         component: viewCuti
       },
       {
-        path: '/updateCuti',
+        path: '/updateCuti/:karyawanId',
         name: 'updateCuti',
         component: updateCuti
       },

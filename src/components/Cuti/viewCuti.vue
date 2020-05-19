@@ -4,9 +4,9 @@
             <b-row id="myTitle">
                 <h3> Pengajuan Cuti</h3>
             </b-row>
-            <b-row>
+            <!-- <b-row>
             <a v-on:click="lihatRiwayat" id="link">Lihat Riwayat Cuti</a>
-            </b-row>
+            </b-row> -->
             <b-row v-if="cutiActive">
                 <cardCuti v-bind:cutiData="cutiData"/>
             </b-row>
@@ -51,27 +51,32 @@ export default {
         currentUser() {
             return this.$store.state.auth.user;
         },
+        nik(){
+            return this.$store.state.auth.user.user.nik;
+        }
     },
     methods:{
         move(){
+            console.log(this.karyawanId)
             this.$router.push('/formCuti/' + this.karyawanId)
         },
         getCutiActive(){
-            CutiService.getCutiActive(this.currentUser.user.nik).then(response => {
+            console.log('CCCCC')
+            CutiService.getCutiActive(this.nik).then(response => {
                 if (response.data.cutiActive == "true"){
+                    console.log('BBBB')
                     this.cutiData = response.data
                     this.cutiActive = true
-                    this.karyawanId = response.data.idKaryawan
                 } else if (response.data.sisaCuti == "0" ){
                     this.cutiHabis = true
-                    this.karyawanId = response.data.idKaryawan
                 }
+                this.karyawanId = response.data.idKaryawan
 
             })
         },
-        lihatRiwayat(){
-            this.$router.push('/lihatRiwayatCuti/'+ this.karyawanId);
-        }
+        // lihatRiwayat(){
+        //     this.$router.push('/lihatRiwayatCuti/'+ this.karyawanId);
+        // }
 
     },
     created(){
