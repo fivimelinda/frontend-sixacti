@@ -143,7 +143,7 @@ export default {
       object:{
         username:'',
         password:'',
-        role:[]
+        role:["pelamar"]
       },
     };
   },
