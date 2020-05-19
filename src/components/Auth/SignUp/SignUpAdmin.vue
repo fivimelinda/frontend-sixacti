@@ -163,6 +163,7 @@
         </div>
         </div>
     </v-container>
+    <div>{{object.role}}</div>
     </div>
 </template>
 <script>
@@ -209,7 +210,7 @@ export default {
         successful: false,
         message: '',
         value: null,
-        options: ['karyawan tetap', 'karyawan kontrak', 'admin', 'manager', 'assistant', 'section', 'departement'],
+        options: ['karyawan tetap', 'karyawan kontrak', 'admin', 'assistant manager', 'section manager', 'department manager'],
         };
     },
     computed: {
@@ -227,9 +228,9 @@ export default {
         
     },
     mounted() {
-        if (!this.loggedIn) {
-            this.$router.push('/auth/login');
-        }
+
+        // if (!this.loggedIn) {
+        //     this.$router.push('/auth/login');
         // }// else if(!(this.currentUser.role[0] === "ROLE_ADMIN")){
         //     this.$router.push('/');
         // }
@@ -240,6 +241,7 @@ export default {
         this.submitted = true;
         this.object.username = this.username;
         this.object.password = this.password;
+        this.object.role = [];
         this.object.role.push(this.value);
         console.log(this.object);
         this.$v.$touch()

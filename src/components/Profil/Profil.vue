@@ -1,10 +1,15 @@
 <template>
+<v-container>
+    <div>
+        
+    </div>
     <div class="all">
         <div class="red-top">
             <br>
             <br>
             <br>
-            <br>
+            <div>
+            </div>
             <div class="container">
                 <div class="row">
                     <div class="col-1">
@@ -348,7 +353,7 @@
         </b-modal>
 
 
-        <b-modal size="lg" hide-footer title="Edit profil" id="edit-modal" ref="edit" v-if="this.usersData.user != null">
+        <b-modal size="lg" hide-footer title="Edit profil" id="edit-modal" ref="edit" v-if="this.usersData.user !== null">
             <form @submit ="formEdit">
                 <div class="container">
                     <div class="row">
@@ -580,9 +585,8 @@
             </div>
             
         </b-modal>
-
-
     </div>
+    </v-container>
 </template>
 
 <style>

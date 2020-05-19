@@ -7,7 +7,7 @@
             :src="require('../assets/xacti.png')"
             ></v-img></span>
             <v-spacer></v-spacer>
-            <v-btn text color="grey">
+            <v-btn text color="grey">{{name}}
                 <v-icon right large>mdi-account-circle</v-icon>
             </v-btn>
         </v-app-bar>
@@ -23,20 +23,20 @@
         >
             <v-list
             dense
-            nav style="padding:0" class="p-1">
+            nav class="p-1">
             <v-list-item>
                 <!-- <v-list-item-avatar
                     class="align-self-center"
                     color="white"
                     >
                 </v-list-item-avatar> -->
-                <v-list-item-content>
+               
                     <v-list-item-title
-                    class="display-1"
+                    class="title"
                     >
                     SIXACTI
                     </v-list-item-title>
-                </v-list-item-content>
+               
             </v-list-item>
             </v-list>
 
@@ -45,8 +45,8 @@
             <v-list
             expand
             nav>
-                <v-list-item-group color="#C53751">
-                <v-list-item style="text-decoration:none !important" v-for="link in links" :key="link.text" router :to="link.route">
+                <v-list-item-group  color="#C53751" v-for="link in links" :key="link.text">
+                <v-list-item v-if="link.role==='ROLE_PELAMAR'" style="text-decoration:none !important" router :to="link.route">
                     <v-list-item-action>
                         <v-icon class="black--text">{{ link.icon }}</v-icon>
                     </v-list-item-action>
@@ -54,8 +54,10 @@
                         <v-list-item-title class="black--text">{{ link.text }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+                </v-list-item-group>
                 <hr/>
-                <v-list-item style="border:1px solid red;" v-if="loggedIn" @click="logOut()">
+                <v-list-item-group>
+                  <v-list-item style="border:1px solid red;" v-if="loggedIn" @click="logOut()">
                   <v-list-item-action>
                     <v-icon class="black-text">{{power}}</v-icon>
                   </v-list-item-action>
@@ -83,20 +85,36 @@ export default {
                 { 
                   icon: 'mdi-home-outline',
                   text: 'Beranda',
-                  route:'/'
+                  route:'/',
+                  role:"ROLE_PELAMAR"
                 },
                 { 
                   icon: 'mdi-account-multiple-outline', 
                   text: 'Cuti', 
-                  route:'/cuti'
+                  route:'/cuti',
+                  role:""
                 },
                 {
                   icon: '',
                   text: 'Review Cuti',
-                  route: '/reviewCuti'
+                  route: '/reviewCuti',
+                  role:""
+                },
+                {
+                  icon: '',
+                  text: 'Daftar Lowongan',
+                  route: '/daftar-lowongan',
+                  role:"ROLE_PELAMAR"
+                },
+                {
+                  icon: '',
+                  text: 'Applicants',
+                  route: '/applicantions',
+                  role:"ROLE_PELAMAR"
                 }
             ],
             power:'mdi-power',
+            name:''
                 
         }
     },
@@ -104,13 +122,24 @@ export default {
       logOut() {
             this.$store.dispatch('auth/logout');
             this.$router.push('/auth/login');
-        },
+      },
+      setUser(){
+        this.name= this.currentUser.username
+      }
     },
     computed: {
         loggedIn() {
-        return this.$store.state.auth.status.loggedIn;
+          return this.$store.state.auth.status.loggedIn;
         },
+        currentUser() {
+          return this.$store.state.auth.user;
+        }
     },
+    created(){
+      if (this.loggedIn){
+        this.setUser()
+      }
+    }
     
 }
 </script>

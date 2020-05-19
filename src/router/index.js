@@ -196,7 +196,7 @@ const routes = [
         component: FormUpdateLoker
       },
       {
-        path: '/listLoker',
+        path: '/daftar-lowongan',
         name: 'listLoker',
         component: listLoker
       },
@@ -211,7 +211,7 @@ const routes = [
         component: viewCuti
       },
       {
-        path: '/updateCuti',
+        path: '/updateCuti/:karyawanId',
         name: 'updateCuti',
         component: updateCuti
       },
