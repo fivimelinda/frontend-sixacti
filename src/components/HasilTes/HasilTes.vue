@@ -30,7 +30,7 @@
                     </div>
                 </td>
             </tr>
-
+            <div v-if="tesMedis.isLolos != null">
                 <tr class="content">
                     <td> 2 </td>
                     <td> Tes Medis </td>
@@ -43,9 +43,9 @@
                         </div>
                     </td>
                 </tr>
+            </div>
 
-
-            
+            <div v-if="tesWawancara.isLolos != null">
                 <tr class="content">
                     <td> 3 </td>
                     <td> Tes Wawancara </td>
@@ -58,6 +58,7 @@
                         </div>
                     </td>
                 </tr>
+            </div>
 
         </tbody>
 
@@ -81,6 +82,19 @@ export default {
         this.loadMedis(),
         this.loadWawancara(),
         this.loadTulis()
+    },
+    computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
+    created(){
+        if (!this.loggedIn) {
+            this.$router.push('/auth/login');
+        }
     },
     methods: {
         loadMedis() {
