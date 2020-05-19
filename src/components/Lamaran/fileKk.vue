@@ -36,8 +36,8 @@
 
             <button v-on:click="submitFile(); cekSukses()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
             <br>
-            <button class=" btn btn-light border-danger w-10" v-on:click="beforeClicked()">Kembali</button>
-            <button class=" mt-5 mb-5 btn btn-danger" v-on:click="afterClicked()">Selanjutnya</button>
+            <button class=" btn btn-light border-dark w-10" v-on:click="beforeClicked()">Kembali</button>
+            <button class=" mt-5 mb-5 btn btn-dark" v-on:click="afterClicked()">Selanjutnya</button>
         </form>
 
       </div>
