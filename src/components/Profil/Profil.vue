@@ -24,18 +24,6 @@
             </div>
         </div>
         <div class="container">
-            <div class="row">
-                <div class="col-1">
-
-                </div>
-                <div class="col-5">
-                    <b-button v-b-modal.create-modal v-if="this.usersData.user == null">Buat profil</b-button>
-                    <b-button v-b-modal.edit-modal v-if="this.usersData.user != null">Edit profil</b-button>
-                </div>
-                <div class="col-4">
-                    
-                </div>
-            </div>
         </div>
         <div class="container" v-if="this.usersData.user != null">
             <div class="row">
@@ -202,10 +190,16 @@
                 <div class="col-4">
                     <div class="content">{{this.usersData.user.npwp}}</div>
                 </div>
+                
             </div>
+            <hr class="spacer"/>
+            
         </div>
 
-        
+        <div class="mt-3 d-flex justify-content-center">
+                    <b-button class="btn-primer" v-b-modal.create-modal v-if="this.usersData.user == null">Buat profil</b-button>
+                    <b-button class="btn-primer" v-b-modal.edit-modal v-if="this.usersData.user != null">Edit profil</b-button>
+                </div>
         <b-modal size="lg" hide-footer title="Buat profil" id="create-modal" ref="create">
             <form @submit ="formSubmit">
                 <div class="container">
@@ -625,6 +619,14 @@
 }
 .red-top{
     background-color: #C53751;
+}
+.btn-primer{
+    background-color: #C53751 !important;
+    border:1px solid #C53751 !important;
+}
+.btn-primer:hover{
+    background-color: rgba(197, 55, 81, 0.883) !important;
+    border:1px solid rgba(197, 55, 81, 0.904) !important;
 }
 </style>
 

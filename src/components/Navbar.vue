@@ -45,7 +45,7 @@
             <v-list
             expand
             nav>
-                <v-list-item-group  color="#C53751" v-for="link in links" :key="link.text">
+                <v-list-item-group class="mt-3" color="#C53751" v-for="link in links" :key="link.text">
                 <v-list-item v-if="link.role==='ROLE_PELAMAR'" style="text-decoration:none !important" router :to="link.route">
                     <v-list-item-action>
                         <v-icon class="black--text">{{ link.icon }}</v-icon>
