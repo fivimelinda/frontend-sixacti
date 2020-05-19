@@ -83,6 +83,19 @@ export default {
         this.loadWawancara(),
         this.loadTulis()
     },
+    computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
+    created(){
+        if (!this.loggedIn) {
+            this.$router.push('/auth/login');
+        }
+    },
     methods: {
         loadMedis() {
             axios.get('http://localhost:8081/api/tes/medis/pelamar/'+this.$route.params.idPelamar,{ headers:authHeader() }).then(res => {
