@@ -25,12 +25,12 @@
                         <b-form-group
                         id="input-group-1"
                         >
-                            <b-input-group size="sm">
+                            <b-input-group size="">
                                 <b-input-group-prepend is-text>
                                     <b-icon-person-fill></b-icon-person-fill>
                                 </b-input-group-prepend>
                                 <b-form-input
-                                size="sm"
+                                size=""
                                 class="input"
                                 id="input-1"
                                 v-model="user.username"
@@ -47,14 +47,14 @@
 
                         <b-form-group
                         id="input-group-2">
-                            <b-input-group  size="sm">
+                            <b-input-group  size="">
                                 <b-input-group-prepend class="input" is-text>
                                     <b-icon-lock-fill></b-icon-lock-fill>
                                 </b-input-group-prepend>
                                 <b-form-input
                                     class="input"
                                     id="input-2"
-                                    size="sm"
+                                    size=""
                                     v-model="user.password"
                                     type="password"
                                     required
@@ -137,7 +137,7 @@ export default {
     },
     mounted(){
         if (this.loggedIn) {
-            this.$router.push('/');
+            this.$router.push('/profil');
         }
     },
     methods:{
@@ -160,7 +160,7 @@ export default {
                     () => {
                     this.submitStatus ='OK';
                     setTimeout(() => {
-                        this.$router.push('/');
+                        this.$router.push('/profil');
                     },500);
                     },
                     error => {
