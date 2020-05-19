@@ -209,7 +209,7 @@ export default {
         successful: false,
         message: '',
         value: null,
-        options: ['karyawan tetap', 'karyawan kontrak', 'admin', 'manager', 'assistant', 'section', 'departement'],
+        options: ['karyawan tetap', 'karyawan kontrak', 'admin', 'assistant manager', 'section manager', 'department manager'],
         };
     },
     computed: {
@@ -229,10 +229,9 @@ export default {
     mounted() {
         if (!this.loggedIn) {
             this.$router.push('/auth/login');
+        }  else if(!(this.currentUser.role[0] === "ROLE_ADMIN")){
+            this.$router.push('/');
         }
-        // }// else if(!(this.currentUser.role[0] === "ROLE_ADMIN")){
-        //     this.$router.push('/');
-        // }
     },
     methods: {
         handleRegister() {

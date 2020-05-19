@@ -149,7 +149,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
           this.errorStatus = 'Jumlah hari cuti melebihi sisa cuti. Sisa cuti Anda ' + this.sisaCuti + ' hari'
         
         } else { 
-          this.idKaryawan = this.karyawanId
+          this.form.idKaryawan = this.karyawanId
           CutiService.createCuti(this.form).then(response => {
           if (response.status == 200){
             this.$router.push({
@@ -175,8 +175,14 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
     },
     created() {
       if (this.loggedIn) {
-        this.getListKategori()
-        this.getSisaCuti()
+        if (this.currentUser.role[0] === "ROLE_KARYAWANTETAP"){
+          this.getListKategori()
+          this.getSisaCuti()
+        } else{
+          this.$router.push('/403')
+        }
+      } else{
+        this.$router.push('/auth/login');
       }
     }
   }

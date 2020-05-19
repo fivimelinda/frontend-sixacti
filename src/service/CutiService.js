@@ -5,8 +5,8 @@ const URI = 'http://localhost:8081/api';
 
 class CutiService {
 
-    getCutiActive(idKaryawan){
-        return axios.get( URI + "/cuti/diajukan/get?karyawanId=" + idKaryawan, { headers:authHeader() })
+    getCutiActive(id){
+        return axios.get( URI + "/cuti/diajukan/get?id=" + id, { headers:authHeader() })
     }
     getListKategori(){
         return axios.get(URI + "/kategoriCuti/get", { headers:authHeader() })
@@ -20,7 +20,10 @@ class CutiService {
     updateCuti(idCuti, form){
         return axios.put(URI + "/cuti/update?idCuti=" + idCuti, form, { headers:authHeader() })
     }
-    getUnreviewedCuti(reviewerId){
+    getUnreviewedCuti(deptmgrId){
+        return axios.get(URI + '/listCuti/reviewed?deptmgrId=' + deptmgrId, { headers:authHeader() })
+    }
+    getUnreviewedCutiFirst(reviewerId){
         return axios.get(URI + '/listCuti/unreviewed?reviewerId=' + reviewerId, { headers:authHeader() })
     }
     getHistoryCuti(karyawanId){
