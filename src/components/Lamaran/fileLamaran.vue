@@ -112,6 +112,7 @@ export default {
 
     submitFile(){
       let formData = new FormData();
+      console.log(this.idLamaran);
       formData.append('file', this.file);
       this.axios.post('http://localhost:8081/api/uploadKtp/' + this.idLamaran,
         formData,{ headers:authHeader() }).then(ress => {

@@ -195,7 +195,7 @@ const routes = [
         component: FormUpdateLoker
       },
       {
-        path: '/listLoker',
+        path: '/daftar-lowongan',
         name: 'listLoker',
         component: listLoker
       },

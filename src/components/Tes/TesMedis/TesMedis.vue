@@ -11,7 +11,6 @@
         v-bind:form="form" @submit="createTesMedis()"
         @batal="cancleCreateTesMedis()"></form-tes-medis>
 
-        
         <div>
             <!-- kondisikan ketika masih tidak ada value untuk tes medis -->
             <div v-if="tes_medis === null && !isTesMedisFormOpen" class="d-flex justify-center">
@@ -227,7 +226,7 @@ export default {
             isValid : false,
             dialog:false,
             open:false,
-            error:[]
+            error:[],
         }
     },
 
