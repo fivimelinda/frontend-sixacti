@@ -1,15 +1,18 @@
 <template>
 
-<div class="container">
+<div class="container pt-0">
     <br>
-    <ul class="nav">
+    <ul class="nav p-0 m-0">
         <li><a class="brearcrumb-a" href="/">Home</a></li>
         <li><p class="breadcrumb-a">></p></li>
         <li><a class="brearcrumb-a" href="/listLoker">Daftar Lowongan Pekerjaan</a></li>
         <li><p class="breadcrumb-a">></p></li>
         <li><a class="brearcrumb-a" :href="'/detailLoker/'+id">Detail {{judulLoker}}</a></li>              
     </ul>
-    <div class="row">
+    <v-card>
+        <b-card>
+            <b-card-text>
+                <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-8">
             <h2 id="judul">
                 {{judulLoker}} 
@@ -49,6 +52,10 @@
     <div id="deskripsi" class="container-fluid">
         <div class="text-break">{{deskripsi}}</div>
     </div>
+            </b-card-text>
+        </b-card>
+    </v-card>
+    
 
 
 

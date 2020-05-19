@@ -22,14 +22,14 @@
         <div class="card-body">
           <form @submit.prevent="validateAndSubmit">
             <div class="row">
-              <div class="col-6">
+              <div class="col-md-6">
                 <div class="form-group">
                   <div class="mb-2 label">Nomor Induk Kependudukan*</div>
-                  <input type="number" class="form-control" id="nik" v-model="nik" placeholder="masukkan nomor induk kependudukan" required>
+                  <input type="number" class="form-control" id="nik" v-model="nik" placeholder="masukkan nomor induk kependudukan" disabled required>
                 </div>
               </div>
 
-              <div class="col-6">
+              <div class="col-md-6">
                 <div class="form-group">
                   <div class="mb-2 label">Pendidikan Terakhir*</div>
                   <input class="form-control" id="pendidikan" v-model="pendidikan" placeholder="masukkan pendidikan" required>
@@ -39,13 +39,13 @@
             </div>
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-md-6">
                   <div class="form-group">
                     <div class="mb-2 label">Nama Ibu*</div>
                     <input class="form-control" id="namaIbu" v-model="namaIbu" placeholder="masukkan nama" required>
                   </div>
                 </div>
-              <div class="col-6">
+              <div class="col-md-6">
                 <div class="form-group">
                   <div class="mb-2 label">Alamat Domisili*</div>
                   <input class="form-control" id="alamatDomisili" v-model="alamatDomisili" placeholder="masukkan alamat domisili" required>
@@ -54,14 +54,14 @@
             </div>
 
             <div class="row">
-              <div class="col-6">
+              <div class="col-md-6">
                 <div class="form-group">
                   <div class="mb-2 label">RT Domisili*</div>
                   <input type="number" class="form-control" id="rtDomisili" v-model="rtDomisili" placeholder="masukkan rt domisili"  />
                 </div>
               </div>
 
-              <div class="col-6">
+              <div class="col-md-6">
                 <div class="form-group">
                   <div class="mb-2 label">RW Domisili*</div>
                   <input type="number" class="form-control" id="rwDomisili" v-model="rwDomisili" placeholder="masukkan rw domisili" />
@@ -70,14 +70,14 @@
             </div>
 
             <div class="row">
-              <div class="col-6">
+              <div class="col-md-6">
                 <div class="form-group">
                   <div class="mb-2 label">Kelurahan Domisili*</div>
                   <input class="form-control" id="kelurahanDomisili" v-model="kelurahanDomisili" placeholder="masukkan kelurahan domisili (contoh : Beiji)" required>
                 </div>
               </div>
 
-              <div class="col-6">
+              <div class="col-md-6">
                 <div class="form-group">
                   <div class="mb-2 label">Kecamatan Domisili*</div>
                   <input class="form-control" id="kecamatanDomisili" v-model="kecamatanDomisili" placeholder="masukkan kecamatan domisili (contoh : Beiji)" required>
@@ -86,14 +86,14 @@
             </div>
 
             <div class="row">
-              <div class="col-6">
+              <div class="col-md-6">
                 <div class="form-group">
                   <div class="mb-2 label">Kode Pos Domisili*</div>
                   <input class="form-control" id="kodePosDomisili" v-model="kodePosDomisili" type="number" placeholder="masukkan kode pos" required>
                 </div>
               </div>
 
-              <div class="col-6">
+              <div class="col-md-6">
                 <div class="form-group">
                     <div class="mb-2 label">Telepon*</div>
                     <input type="number" class="form-control" id="telepon" v-model="telepon" placeholder="masukkan nomor telepon" required>
@@ -104,14 +104,14 @@
 
 
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <div class="mb-2 label">Nomor Kartu BPJS Ketenagakerjaan</div>
                       <input type="number" class="form-control" id="noBpjsKetenagakerjaan" v-model="noBpjsKetenagakerjaan" placeholder="masukkan nomor kartu BPJS ketenagakerjaan"  />
                     </div>
                   </div>
 
-                  <div class="col-6">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <div class="mb-2 label">Nomor Kartu BPJS Kesehatan</div>
                       <input type="number" class="form-control" id="noBpjsKesehatan" v-model="noBpjsKesehatan" placeholder="masukkan nomor kartu BPJS kesehatan" />
@@ -121,14 +121,14 @@
 
 
               <div class="row">
-                <div class="col-6">
+                <div class="col-md-6">
                   <div class="form-group">
                     <div class="mb-2 label">Nomor Kartu Indonesia Sehat</div>
                     <input type="number" class="form-control" id="noKis" v-model="noKis" placeholder="masukkan nomor Kartu Indonesia Sehat">
                   </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-md-6">
                   <div class="form-group">
                     <div class="mb-2 label">Nomor Pokok Wajib Pajak</div>
                     <input type="number" class="form-control" id="npwp" v-model="npwp" placeholder="masukkan nomor pokok wajib pajak">
@@ -140,7 +140,7 @@
               <div class="mb-2 label">Pengalaman Kerja</div>
             
               <div class="row">
-                <div class="col-6">
+                <div class="col-md-6">
                   <div class="form-group">
                     <div class="mb-2 label">Tahun Kerja</div>
                     <input type="number" class="form-control" id="tahunKerja" v-model="tahunKerja" placeholder="masukkan tahun kerja"  />
@@ -148,7 +148,7 @@
                   </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-md-6">
                   <div class="form-group">
                     <div class="mb-2 label">Nama Pekerjaan</div>
                     <input type="text" class="form-control" id="namaPekerjaan" v-model="namaPekerjaan" placeholder="masukkan nama pekerjaan" />
@@ -219,7 +219,6 @@ export default {
   },
   mounted(){
     this.checkProfil();
-        
   },
   created(){
     if (!this.loggedIn) {
@@ -271,6 +270,7 @@ export default {
         checkProfil(){
           this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
               this.usersData = res.data;
+              this.nik = res.data.user.nik;
                 })
             // )
         },

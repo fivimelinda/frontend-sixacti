@@ -1,7 +1,6 @@
 <template>
     <div>
-        <v-container class=" text">
-            
+        <v-container class="tes text">
             <div>
             <div v-if="status === 200 && !(pelamar === null)">
                 <b-card class="mb-5 mt-5">
