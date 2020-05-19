@@ -8,9 +8,21 @@
       <div class="card-header">Formulir Pembuatan Lamaran Pekerjaan</div>
       <div class="card-body">
          <form @submit.prevent="validateAndSubmit">
-          <div class="form-group">
-            <div class="mb-2 label">Nomor Induk Kependudukan*</div>
-            <input type="number" class="form-control" id="nik" v-model="nik" placeholder="masukkan nomor induk kependudukan" required>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <div class="mb-2 label">Nomor Induk Kependudukan*</div>
+                <input type="number" class="form-control" id="nik" v-model="nik" placeholder="masukkan nomor induk kependudukan" required>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="form-group">
+                <div class="mb-2 label">Pendidikan Terakhir*</div>
+                <input class="form-control" id="pendidikan" v-model="pendidikan" placeholder="masukkan pendidikan" required>
+                <!-- <small class="form-text text-muted">Masukkan pendidikan terakhir</small> -->
+              </div>
+            </div>
           </div>
 
           <div class="row">
@@ -77,11 +89,7 @@
           </div>
 
 
-            <div class="form-group">
-               <div class="mb-2 label">Pendidikan Terakhir*</div>
-               <input class="form-control" id="pendidikan" v-model="pendidikan" placeholder="masukkan pendidikan" required>
-               <!-- <small class="form-text text-muted">Masukkan pendidikan terakhir</small> -->
-             </div>
+
               <div class="row">
                 <div class="col-6">
                   <div class="form-group">
