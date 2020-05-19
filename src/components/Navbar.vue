@@ -82,6 +82,14 @@
                         <v-list-item-title class="black--text">Daftar Lowongan</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+                <v-list-item v-if="isAdmin" style="text-decoration:none !important" router :to="'/ListRequestLowongan'">
+                    <v-list-item-action>
+                        <v-icon class="black--text">mdi-message-text-clock-outline</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title class="black--text">Request Lowongan</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
                 <!-- <v-list-item style="text-decoration:none !important" router :to="'/applications'">
                     <v-list-item-action>
                         <v-icon class="black--text"></v-icon>
