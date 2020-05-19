@@ -1,4 +1,8 @@
 <template>
+<v-container>
+    <div>
+        
+    </div>
     <div class="all">
         <div class="red-top">
             <br>
@@ -580,9 +584,8 @@
             </div>
             
         </b-modal>
-
-
     </div>
+    </v-container>
 </template>
 
 <style>

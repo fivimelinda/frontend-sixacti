@@ -256,6 +256,7 @@ export default {
               this.message = data.message;
               this.successful = true;
               this.submitStatus = 'OK'
+              this.role = [];
             },
             error => {
               this.message =
