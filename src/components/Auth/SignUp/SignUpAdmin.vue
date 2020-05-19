@@ -163,6 +163,7 @@
         </div>
         </div>
     </v-container>
+    <div>{{object.role}}</div>
     </div>
 </template>
 <script>
@@ -227,11 +228,12 @@ export default {
         
     },
     mounted() {
-        if (!this.loggedIn) {
-            this.$router.push('/auth/login');
-        }  else if(!(this.currentUser.role[0] === "ROLE_ADMIN")){
-            this.$router.push('/');
-        }
+
+        // if (!this.loggedIn) {
+        //     this.$router.push('/auth/login');
+        // }// else if(!(this.currentUser.role[0] === "ROLE_ADMIN")){
+        //     this.$router.push('/');
+        // }
     },
     methods: {
         handleRegister() {
@@ -239,6 +241,7 @@ export default {
         this.submitted = true;
         this.object.username = this.username;
         this.object.password = this.password;
+        this.object.role = [];
         this.object.role.push(this.value);
         console.log(this.object);
         this.$v.$touch()
