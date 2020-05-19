@@ -1,16 +1,17 @@
 <template>
-  <div class="container">
+  <div class="container pt-0">
     <br>
-    <ul class="nav">
+    <ul class="nav p-0 m-0">
         <li><a class="brearcrumb-a" href="/">Home</a></li>
         <li><p class="breadcrumb-a">></p></li>
-        <li><a class="brearcrumb-a" href="/listLoker">Daftar Lowongan Pekerjaan</a></li>            
+        <li><a class="brearcrumb-a" href="/daftar-lowongan">Daftar Lowongan Pekerjaan</a></li>            
     </ul>
     <h3 class="mt-5">Daftar Lowongan Pekerjaan</h3>
+    <hr/>
     <div v-if="message" class="alert alert-success">
       {{message}}
     </div>
-    <div class="container-fluid">
+    <div class="container">
       
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4" v-for="loker in loker" v-bind:key="loker.idLowongan">
