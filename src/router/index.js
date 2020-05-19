@@ -30,9 +30,9 @@ import lihatProgres from '../components/RequestLowongan/LihatProgres.vue'
 import DaftarPesertaTes from '../components/Tes/DaftarPesertaTes.vue'
 
 import Login from '../components/Auth/Login/Login.vue'
-// import error404 from '../components/Error/404-Pages/404'
-// import error403 from '../components/Error/403-Pages/403'
-// import error502 from '../components/Error/502-Pages/502'
+import error404 from '../components/Error/404-Pages/404'
+import error403 from '../components/Error/403-Pages/403'
+import error502 from '../components/Error/502-Pages/502'
 import Atribut from '../components/Attibut/Atribut.vue'
 import fileKk from '../components/Lamaran/fileKk'
 import fileNpwp from '../components/Lamaran/fileNpwp'
@@ -95,24 +95,24 @@ const routes = [
   },
 
   // path for error
-  // {
-  //   path:'/404',
-  //   name:error404,
-  //   component: error404
+  {
+    path:'/404',
+    name:error404,
+    component: error404
 
-  // },
-  // {
-  //   path:'/403',
-  //   name:error403,
-  //   component: error403
+  },
+  {
+    path:'/403',
+    name:error403,
+    component: error403
 
-  // },
-  // {
-  //   path:'/502',
-  //   name:error502,
-  //   component: error502
+  },
+  {
+    path:'/502',
+    name:error502,
+    component: error502
 
-  // },
+  },
 
 
   // main path
