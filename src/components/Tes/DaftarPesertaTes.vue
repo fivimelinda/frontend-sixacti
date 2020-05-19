@@ -66,6 +66,12 @@ export default {
     computed: {
         idLowongan() {
             return this.$route.params.idLowongan;
+        },
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
         }
     },
     methods: {
@@ -84,7 +90,20 @@ export default {
 
     },
     created(){
-        this.refreshLamaranLoker();
+        if (this.loggedIn) {
+            if (this.currentUser.role[0] === "ROLE_DEPARTMENTMANAGER" ||
+            this.currentUser.role[0] === "ROLE_SECTIONMANAGER" ||
+            this.currentUser.role[0] === "ROLE_ASSISTANTMANAGER" ||
+            this.currentUser.role[0] === "ROLE_ADMIN"){
+                this.refreshLamaranLoker();
+                console.log('A')
+            } else{
+                this.$router.push('/403')
+            }
+        } else{
+            this.$router.push('/auth/login');
+        }
+        
     }
     
 };
