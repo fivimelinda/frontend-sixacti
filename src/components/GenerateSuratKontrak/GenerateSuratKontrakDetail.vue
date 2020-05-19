@@ -93,13 +93,14 @@
 
 
 </template>
-
+<script src="js/jspdf.customfonts.min.js"></script>
+<script src ="arial-normal.js" type="module"></script>
 <script>
 import jsPDF from 'jspdf';
 import axios from 'axios';
 import moment from 'moment';
 import 'moment/locale/id';
-import authHeader from '../../service/AuthHeader'
+import authHeader from '../../service/AuthHeader';
 
 export default {
     data() {
@@ -131,15 +132,27 @@ export default {
             }
             this.changeStatus();
             var doc = new jsPDF();
-            doc.setFontSize(11);
+            doc.setFontSize(13);
             doc.setLineHeightFactor(1);
-            doc.setFontStyle('Times New Roman');
-            doc.text(this.nomorSurat, 105, 28, 'center');
-            var paragraph="                                                                      SURAT KONTRAK KERJA\n\n                                                                                   "+"\n\n"+"\n\nYang bertanda tangan dibawah ini\n\n  Nama         : "+this.namaTtd+"\n\n  Jabatan       : Staf Sumber Daya Manusia\n\nDalam hal ini bertindak untuk dan atas nama PT. Xacti Indonesia yang beralamat di Jl. Raya Bogor Km. 35, Sukamaju Baru, Tapos, Depok 16455, Jawa Barat, Indonesia yang akan disebut Pihak Pertama\n\n  Nama                            : "+this.name[this.$route.params.index]+"\n\n  Jabatan                         : Karyawan Kontrak\n\nDalam hal ini bertindak atas nama sendiri, yang disebut sebagai Pihak Kedua.\n\nPada "+this.today1+", dengan memilih tempat di PT. Xacti Indonesia Manajemen Pihak Pertama dan Pihak Kedua sepakat untuk saling terikat dalam surat kontrak kerja karyawan dengan syarat dan ketentuan diatur sebagai berikut :\n\n                                                                   PASAL 1 KETENTUAN UMUM\n\n  1.  Pihak Kedua akan taat serta tunduk pada tata tertib kerja yang berlaku, perintah langsung maupun tidak dari Pihak Pertama ataupun wakil dari PT. Xacti Indonesia.\n\n  2.  Apabila Pihak Kedua melakukan pelanggaran kerja maka Pihak Pertama berhak memberikan sanksi sesuai dengan pelangaran yang dilakukan oleh Pihak Kedua.\n\n                                                                     PASAL 2 JANGKA WAKTU\n\n  1.  Kontrak kerja ini akan berlaku selama 3 (tiga) tahun terhitung dari penandatangan, yakni pada tanggal 21 Juli 2017 sampai dengan 2 Agustus 2020.\n\n  2.  Apabila kontrak kerja ini habis masa berlakunya, maka kedua kedua belah pihak bisa melakukan perpanjangan kontrak baru dengan kesepakatan bersama.\n\n                                                                     PASAL 3 WAKTU KERJA\n\nPihak kedua akan bekerja selama 6 jam perharinya dan 5 hari perminggunya belum termasuk waktu istirahat dengan rincian sebagi berikut :\n\n  Senin-Jumat        : 08.00-16.00 WIB\n\n  Istirahat      : 11.15-13.15 WIB\n\n                                                                             PASAL 4 UPAH\n\nPihak Kedua akan menerima gaji sebesar Rp. 3.000.000,00 (tiga juta rupiah) perbulannya.\n\n                                                          PASAL 5 PEMBERHENTIAN KERJA\n\nApabila Pihak Kedua melakukan tindak kriminal yang merugikan Pihak Pertama serta juga melakukan tindakan indisipiner kerja dan sudah mendapat surat peringatan sebanyak 3 (tiga) kali maka Pihak Pertama akan langsung memberhentikan Pihak Kedua dari pekerjaannya walaupun masa kontraknya masih\n\nDepok, 21 Juli 2017\n\n                                           Pihak pertama                                                          Pihak kedua\n\n";
-            doc.text(this.namaTtd, 68, 287, 'center')
-            doc.text(this.name[this.$route.params.index], 146, 287, 'center')
+            doc.setFont('helvetica');
+            doc.setFontType('bold');
+            doc.text('PERJANJIAN KERJA PARUH WAKTU', 105, 10, 'center');
+            doc.setFontType('normal');
+            // var paragraph="                                                                      SURAT KONTRAK KERJA\n\n                                                                                   "+"\n\n"+"\n\nYang bertanda tangan dibawah ini\n\n  Nama         : "+this.namaTtd+"\n\n  Jabatan       : Staf Sumber Daya Manusia\n\nDalam hal ini bertindak untuk dan atas nama PT. Xacti Indonesia yang beralamat di Jl. Raya Bogor Km. 35, Sukamaju Baru, Tapos, Depok 16455, Jawa Barat, Indonesia yang akan disebut Pihak Pertama\n\n  Nama                            : "+this.name[this.$route.params.index]+"\n\n  Jabatan                         : Karyawan Kontrak\n\nDalam hal ini bertindak atas nama sendiri, yang disebut sebagai Pihak Kedua.\n\nPada "+this.today1+", dengan memilih tempat di PT. Xacti Indonesia Manajemen Pihak Pertama dan Pihak Kedua sepakat untuk saling terikat dalam surat kontrak kerja karyawan dengan syarat dan ketentuan diatur sebagai berikut :\n\n                                                                   PASAL 1 KETENTUAN UMUM\n\n  1.  Pihak Kedua akan taat serta tunduk pada tata tertib kerja yang berlaku, perintah langsung maupun tidak dari Pihak Pertama ataupun wakil dari PT. Xacti Indonesia.\n\n  2.  Apabila Pihak Kedua melakukan pelanggaran kerja maka Pihak Pertama berhak memberikan sanksi sesuai dengan pelangaran yang dilakukan oleh Pihak Kedua.\n\n                                                                     PASAL 2 JANGKA WAKTU\n\n  1.  Kontrak kerja ini akan berlaku selama 3 (tiga) tahun terhitung dari penandatangan, yakni pada tanggal 21 Juli 2017 sampai dengan 2 Agustus 2020.\n\n  2.  Apabila kontrak kerja ini habis masa berlakunya, maka kedua kedua belah pihak bisa melakukan perpanjangan kontrak baru dengan kesepakatan bersama.\n\n                                                                     PASAL 3 WAKTU KERJA\n\nPihak kedua akan bekerja selama 6 jam perharinya dan 5 hari perminggunya belum termasuk waktu istirahat dengan rincian sebagi berikut :\n\n  Senin-Jumat        : 08.00-16.00 WIB\n\n  Istirahat      : 11.15-13.15 WIB\n\n                                                                             PASAL 4 UPAH\n\nPihak Kedua akan menerima gaji sebesar Rp. 3.000.000,00 (tiga juta rupiah) perbulannya.\n\n                                                          PASAL 5 PEMBERHENTIAN KERJA\n\nApabila Pihak Kedua melakukan tindak kriminal yang merugikan Pihak Pertama serta juga melakukan tindakan indisipiner kerja dan sudah mendapat surat peringatan sebanyak 3 (tiga) kali maka Pihak Pertama akan langsung memberhentikan Pihak Kedua dari pekerjaannya walaupun masa kontraknya masih\n\nDepok, 21 Juli 2017\n\n                                           Pihak pertama                                                          Pihak kedua\n\n";
+            doc.setFontSize(9);
+            var paragraph = 'PERJANJIAN KERJA WAKTU TERTENTU ( “Perjanjian” ) ini dibuat dan ditandatangani di Depok, Jawa Barat, pada '+this.today1+' oleh dan antara :'
+            var par2 = 'PT Xacti Indonesia suatu perusahaan yang didirikan berdasarkan hukum Negara Republik Indonesia, bergerak dalam bidang Pembuatan Peralatan Elektronika dan Komponen serta Suku Cadang untuk Barang dan Peralatan Elektronika, beralamat di Jl. Raya Jakarta Bogor Km. 35, Tapos, Depok, Jawa Barat, dalam hal ini diwakili oleh '+this.namaTtd+'., selaku Section Manajer HRD\n\n(selanjutnya disebut "PIHAK PERTAMA")'
+            // doc.text(this.namaTtd, 68, 287, 'center')
+            // doc.text(this.name[this.$route.params.index], 146, 287, 'center')
             var lines =doc.splitTextToSize(paragraph, (210-15-15));
+            var lines2 =doc.splitTextToSize(par2, (210-15-15));
             doc.text(15,20,lines);
+            doc.text(15,30,'1.');
+            doc.text(20,30,lines2);
+            doc.text(15,50,'2.');
+            doc.text(20,50,'a. Nama                                              :\n\nb. No. Kartu Tanda Penduduk (KTP)  :\n\nc. Alamat                                             :')
+            doc.addPage();
+            doc.text(20,20,'halo2');
             doc.save(this.req.noSurat+'.pdf');
         },
         computed: {
@@ -160,7 +173,7 @@ export default {
         },
         today() {
             moment.locale('id');
-            this.today1 = moment().format('MMMM Do YYYY');
+            this.today1 = moment().format('Do MMMM YYYY');
         },
         load() {
             axios.get('http://localhost:8081/detailKontrak/get/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
