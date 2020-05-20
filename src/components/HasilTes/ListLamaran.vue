@@ -20,6 +20,7 @@
                     <div class="col-6 mb-3">
                         <!-- <div v-for="j in i.listLamaran" v-bind:key="j.id">
                             <div v-if="j.pelamar.userPelamar.nik == this.nik"> -->
+                            {{getId(i.idLowongan)}}
                             <button class=" mt-5 mb-5 btn btn-danger" v-on:click="hasilTes()">Lihat Hasil Tes</button>
                             <!-- </div>
                          </div> -->
@@ -74,16 +75,27 @@ export default {
         load() {
             axios.get('http://localhost:8081/api/lowonganPelamar/' + this.nik,{ headers:authHeader() }).then(res => {
                 this.daftarLowongan = res.data;
-                this.daftarLamaran = res.data.listLamaran;
-                this.idPelamar = res.data.listLamaran.pelamar.userPelamar.idPelamar;
-                console.log(res.data.listLamaran);
+                // this.daftarLamaran = res.data.listLamaran;
+                // this.idPelamar = res.data.listLamaran.pelamar.userPelamar.idPelamar;
+                // console.log(res.data.listLamaran);
             }).catch((err) => {
                 console.log(err);
             })
         },
-        hasilTes(idPelamar){
-            this.$router.push("/hasilTes/"+ idPelamar);
+        hasilTes(){
+            this.$router.push("/hasilTes/"+ this.idPelamar);
         },
+
+        getId(idLowongan){
+            axios.get('http://localhost:8081/api/getIdPelamar/'+idLowongan+'/' + this.nik,{ headers:authHeader() }).then(res => {
+                this.idPelamar = res.data;
+                // this.daftarLamaran = res.data.listLamaran;
+                // this.idPelamar = res.data.listLamaran.pelamar.userPelamar.idPelamar;
+                console.log(res.data);
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
         // checkProfil(){
         //   this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
         //       this.usersData = res.data;
