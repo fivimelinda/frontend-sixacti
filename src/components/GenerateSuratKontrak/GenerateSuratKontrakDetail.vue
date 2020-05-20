@@ -68,10 +68,10 @@
         </v-layout>
         <v-layout row class="detail">
             <v-flex xs6 md6>
-                <v-card-text>Nama penandatangan</v-card-text>
+                <v-card-text>Nama perwakilan PT Xacti</v-card-text>
             </v-flex>
             <v-flex xs6 md6>
-                <input class="form-control" type="string" id="namaTtd" placeholder="masukkan nama penandatangan" v-model="namaTtd">
+                <input class="form-control" type="string" id="namaTtd" placeholder="masukkan nama perwakilan" v-model="namaTtd">
             </v-flex>
         </v-layout>
         <v-layout row class="detail">
@@ -318,7 +318,7 @@ export default {
             // var lines = doc.splitTextToSize(par, (210-15-15));
             
 
-            doc.save(this.req.noSurat+this.name[this.$route.params.index]+'.pdf');
+            doc.save(this.req.noSurat+'-'+this.name[this.$route.params.index]+'.pdf');
         },
         computed: {
             loggedIn(){
@@ -331,6 +331,16 @@ export default {
          created(){
             if (!this.loggedIn) {
                 this.$router.push('/auth/login');
+            }
+            if(this.loggedIn){
+                if(this.currentUser.role[0] === "ROLE_DEPARTMENTMANAGER" || 
+                    this.currentUser.role[0] === "ROLE_PELAMAR" ||
+                    this.currentUser.role[0] === "ROLE_KARYAWANTETAP"||
+                    this.currentUser.role[0] === "ROLE_ASSISTANTMANAGER"||
+                    this.currentUser.role[0] === "ROLE_SECTIONMANAGER"||
+                    this.currentUser.role[0] === "ROLE_KARYAWANKONTRAK"){
+                        this.$router.push('/403')
+                    }
             }
         },
         batal() {
