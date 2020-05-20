@@ -7,8 +7,11 @@
             :src="require('../assets/xacti.png')"
             ></v-img></span>
             <v-spacer></v-spacer>
-            <v-btn text color="grey">{{name}}
+            <v-btn text color="grey" v-if="this.loggedIn">{{name}}
                 <v-icon right large>mdi-account-circle</v-icon>
+            </v-btn>
+            <v-btn text color="grey" v-if="!this.loggedIn" router :to="'/auth/login'">Login
+                <v-icon right large>mdi-login-variant</v-icon>
             </v-btn>
         </v-app-bar>
 
@@ -45,21 +48,62 @@
             <v-list
             expand
             nav>
-                <v-list-item-group  color="#C53751" v-for="link in links" :key="link.text">
-                <v-list-item v-if="link.role==='ROLE_PELAMAR'" style="text-decoration:none !important" router :to="link.route">
+
+                <v-list-item-group  color="#C53751">
+                <v-list-item style="text-decoration:none !important" router :to="'/'">
                     <v-list-item-action>
-                        <v-icon class="black--text">{{ link.icon }}</v-icon>
+                        <v-icon class="black--text">mdi-home-outline</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>
-                        <v-list-item-title class="black--text">{{ link.text }}</v-list-item-title>
+                        <v-list-item-title class="black--text">Beranda</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+                <v-list-item v-if="isKaryawanTetap" style="text-decoration:none !important" router :to="'/cuti'">
+                    <v-list-item-action>
+                        <v-icon class="black--text">mdi-account-multiple-outline</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title class="black--text">Cuti</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item v-if="isManager" style="text-decoration:none !important" router :to="'/reviewCuti'">
+                    <v-list-item-action>
+                        <v-icon class="black--text">mdi-clipboard-check-multiple-outline</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title class="black--text">Review Cuti</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item style="text-decoration:none !important" router :to="'/daftar-lowongan'">
+                    <v-list-item-action>
+                        <v-icon class="black--text">mdi-account-search-outline</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title class="black--text">Daftar Lowongan</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item v-if="isAdmin" style="text-decoration:none !important" router :to="'/ListRequestLowongan'">
+                    <v-list-item-action>
+                        <v-icon class="black--text">mdi-message-text-clock-outline</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title class="black--text">Request Lowongan</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <!-- <v-list-item style="text-decoration:none !important" router :to="'/applications'">
+                    <v-list-item-action>
+                        <v-icon class="black--text"></v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title class="black--text">Applicants</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item> -->
                 </v-list-item-group>
                 <hr/>
                 <v-list-item-group>
                   <v-list-item style="border:1px solid red;" v-if="loggedIn" @click="logOut()">
                   <v-list-item-action>
-                    <v-icon class="black-text">{{power}}</v-icon>
+                    <v-icon class="black-text">mdi-power</v-icon>
                   </v-list-item-action>
                   
                   <v-list-item-content>
@@ -68,9 +112,6 @@
                 </v-list-item>
                 </v-list-item-group>
             </v-list>
-            <div>
-              
-            </div>
         </v-navigation-drawer>
 
     </nav>
@@ -81,40 +122,11 @@ export default {
         return{
             responsive:false,
             drawer: false,
-            links:[
-                { 
-                  icon: 'mdi-home-outline',
-                  text: 'Beranda',
-                  route:'/',
-                  role:"ROLE_PELAMAR"
-                },
-                { 
-                  icon: 'mdi-account-multiple-outline', 
-                  text: 'Cuti', 
-                  route:'/cuti',
-                  role:""
-                },
-                {
-                  icon: '',
-                  text: 'Review Cuti',
-                  route: '/reviewCuti',
-                  role:""
-                },
-                {
-                  icon: '',
-                  text: 'Daftar Lowongan',
-                  route: '/daftar-lowongan',
-                  role:"ROLE_PELAMAR"
-                },
-                {
-                  icon: '',
-                  text: 'Applicants',
-                  route: '/applicantions',
-                  role:"ROLE_PELAMAR"
-                }
-            ],
-            power:'mdi-power',
-            name:''
+            isAdmin: false,
+            isManager: false,
+            isPelamar: false,
+            isKaryawanTetap: false,
+            isKaryawanKontrak: false
                 
         }
     },
@@ -124,8 +136,20 @@ export default {
             this.$router.push('/auth/login');
       },
       setUser(){
-        this.name= this.currentUser.username
+        this.name = this.currentUser.username
+        if(this.currentUser.role[0] === "ROLE_KARYAWANTETAP"){
+          this.isKaryawanTetap = true
+        } else if(this.currentUser.role[0] === "ROLE_KARYAWANKONTRAK"){
+          this.isKaryawanKontrak = true
+        } else if(this.currentUser.role[0] === "ROLE_PELAMAR"){
+          this.isPelamar = true
+        } else if(this.currentUser.role[0] === "ROLE_ADMIN"){
+          this.isAdmin = true
+        } else{
+          this.isManager = true
+        }
       }
+
     },
     computed: {
         loggedIn() {
