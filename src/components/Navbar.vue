@@ -10,7 +10,7 @@
             <v-btn text color="grey" v-if="this.loggedIn">{{name}}
                 <v-icon right large>mdi-account-circle</v-icon>
             </v-btn>
-            <v-btn text color="grey" v-if="!this.loggedIn" router :to="'/auth/login'">Login
+            <v-btn text color="black" v-if="!this.loggedIn" router :to="'/auth/login'">Login
                 <v-icon right large>mdi-login-variant</v-icon>
             </v-btn>
         </v-app-bar>

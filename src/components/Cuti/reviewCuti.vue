@@ -40,6 +40,24 @@
 
             </b-card-text>
         </b-card>
+        <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        {{errormessage}}
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
     </v-container>
 </template>
 
@@ -57,7 +75,8 @@ export default {
         return{
             currentPage:1,
             perPage:10,
-            listCuti : [],         
+            listCuti : [],   
+            errormessage:''      
         }
 
     },
@@ -74,11 +93,17 @@ export default {
             if( this.currentUser.role[0] === "ROLE_DEPARTMENTMANAGER"){
                 CutiService.getUnreviewedCuti(this.currentUser.user.nik).then(response => {
                 this.listCuti = response.data;
-                });
+                }).catch((err) => {
+                    this.errormessage = err.message
+                    this.errorModal()
+                })
             } else {
                 CutiService.getUnreviewedCutiFirst(this.currentUser.user.nik).then(response => {
                 this.listCuti = response.data;
-                });
+                }).catch((err) => {
+                    this.errormessage = err.message
+                    this.errorModal()
+                })
             }
             
         },

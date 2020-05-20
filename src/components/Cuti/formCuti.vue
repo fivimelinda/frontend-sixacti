@@ -87,7 +87,25 @@
     </b-alert>
     </b-form>
     </ValidationObserver>
-    </div> 
+    </div>
+    <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        {{errormessage}}
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
     </v-container>
   
 </template>
@@ -122,7 +140,8 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
         max: maxDate,
         showDismissibleAlert: false,
         sisaCuti: 0,
-        errorStatus: 'Tanggal Akhir Cuti tidak valid'
+        errorStatus: 'Tanggal Akhir Cuti tidak valid',
+        errormessage:''
       }
     },
     computed: {
@@ -151,13 +170,20 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
         } else { 
           this.form.idKaryawan = this.karyawanId
           CutiService.createCuti(this.form).then(response => {
-          if (response.status == 200){
-            this.$router.push({
-              name:'viewCuti'
-            })
-          }
+            if (response.status == 200){
+              this.$router.push({
+                name:'viewCuti'
+              })
+            }
+          })
+          .catch((err) => {
+            this.errormessage = err.message
+            this.errorModal()
           })
         }
+      },
+      errorModal(){
+            this.$refs['error-modal'].show();
       },
       getListKategori(){
         CutiService.getListKategori().then(response => {
@@ -168,8 +194,6 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
       getSisaCuti(){
         CutiService.getSisaCuti(this.karyawanId).then(res =>{
           this.sisaCuti = res.data
-          console.log(res.data)
-          console.log(this.sisaCuti)
         })
       }
     },
