@@ -106,6 +106,14 @@
                         <v-list-item-title class="black--text">Buat Request Lowongan</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+                <v-list-item v-if="isAdmin" style="text-decoration:none !important" router :to="'/listAtribut'">
+                    <v-list-item-action>
+                        <v-icon class="black--text">mdi-tshirt-v-outline</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title class="black--text">Atribut Karyawan</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
                 <!-- <v-list-item style="text-decoration:none !important" router :to="'/applications'">
                     <v-list-item-action>
                         <v-icon class="black--text"></v-icon>
