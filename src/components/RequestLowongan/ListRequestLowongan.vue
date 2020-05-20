@@ -18,7 +18,7 @@
 
             </div>
             <div class="card-footer" id="card-footer">
-              <div class="row" > 
+              <div v-if="reqLoker.status != 'Diterima' && currentUser.role == 'ROLE_ADMIN'" class="row" > 
                 <div class="col-6 mb-3">
                   <button class="btn btn-danger w-100" v-on:click="buatLokerClicked(reqLoker.id)"><plus-circle-icon class="mr-3"></plus-circle-icon>Buat</button>
                 </div>
@@ -30,7 +30,7 @@
             </div>
           </div>
         </div>
-        <!-- v-if="reqLoker.status != 'Diterima'" -->
+        <!--  -->
         
       </div>
       
@@ -61,7 +61,14 @@ export default {
             message : ""
         };
     },
-
+    computed: {
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
     methods:{
         refreshLoker(){
             RequestLowonganService.getAllRequest()
@@ -72,13 +79,22 @@ export default {
         buatLokerClicked(idReqLowongan){
           this.$router.push("/buatLoker/"+idReqLowongan);
         }
-        
-
-
-        
+  
     },
     created(){
-        this.refreshLoker();
+      if (this.loggedIn) {
+            if (this.currentUser.role[0] === "ROLE_DEPARTMENTMANAGER" ||
+            this.currentUser.role[0] === "ROLE_SECTIONMANAGER" ||
+            this.currentUser.role[0] === "ROLE_ASSISTANTMANAGER" ||
+            this.currentUser.role[0] === "ROLE_ADMIN"){
+                this.refreshLoker();
+                console.log('A')
+            } else{
+                this.$router.push('/403')
+            }
+        } else{
+            this.$router.push('/auth/login');
+        }
     }
 };
 </script>

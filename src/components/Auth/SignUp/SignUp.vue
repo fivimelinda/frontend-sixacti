@@ -20,13 +20,13 @@
                         <b-form
                         class="m-0">
                             <b-form-group>
-                                <b-input-group size="sm">
+                                <b-input-group size="">
                                     <b-input-group-prepend is-text>
                                         <b-icon-person-fill></b-icon-person-fill>
                                     </b-input-group-prepend>
                                     <b-form-input
                                     class="input"
-                                    size="sm"
+                                    size=""
                                     id="username"
                                     v-model="username"
                                     type="text"
@@ -40,13 +40,13 @@
                                 </div>
                             </b-form-group>
                             <b-form-group>
-                                <b-input-group size="sm">
+                                <b-input-group size="">
                                     <b-input-group-prepend is-text>
                                         <b-icon-lock-fill></b-icon-lock-fill>
                                     </b-input-group-prepend>
                                     <b-form-input
                                     class="input"
-                                    size="sm"
+                                    size=""
                                     id="password"
                                     v-model="password"
                                     type="password"
@@ -61,13 +61,13 @@
                             </b-form-group>
 
                             <b-form-group>
-                                <b-input-group size="sm">
+                                <b-input-group size="">
                                     <b-input-group-prepend is-text>
                                         <b-icon-lock-fill></b-icon-lock-fill>
                                     </b-input-group-prepend>
                                     <b-form-input
                                     class="input"
-                                    size="sm"
+                                    size=""
                                     id="password"
                                     v-model="confirm_password"
                                     type="password"
@@ -143,7 +143,7 @@ export default {
       object:{
         username:'',
         password:'',
-        role:[]
+        role:["pelamar"]
       },
     };
   },

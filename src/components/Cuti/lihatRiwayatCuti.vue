@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <b-row id="myTitle">
-                <h3> Riwayat Cuti Karyawan : {{namaKaryawan}}</h3>
+                <h3> Riwayat Pengajuan Cuti Karyawan : {{namaKaryawan}}</h3>
         </b-row>
         <b-card>
             <b-card-text>
@@ -88,6 +88,8 @@ export default {
     created(){
         if (this.loggedIn) {
             this.historyCuti();
+        } else{
+            this.$router.push('/auth/login');
         }
     }
     

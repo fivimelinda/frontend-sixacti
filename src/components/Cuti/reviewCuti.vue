@@ -67,16 +67,20 @@ export default {
         },
         currentUser() {
             return this.$store.state.auth.user;
-        },
-        karyawanId() {
-            return '2';
         }
     },
     methods: {
         reviewCuti() {
-            CutiService.getUnreviewedCuti(this.karyawanId).then(response => {
+            if( this.currentUser.role[0] === "ROLE_DEPARTMENTMANAGER"){
+                CutiService.getUnreviewedCuti(this.currentUser.user.nik).then(response => {
                 this.listCuti = response.data;
-            });
+                });
+            } else {
+                CutiService.getUnreviewedCutiFirst(this.currentUser.user.nik).then(response => {
+                this.listCuti = response.data;
+                });
+            }
+            
         },
         rowClickedHandle(cuti){
             this.$router.push('/detailCuti/'+cuti.id);
@@ -85,7 +89,16 @@ export default {
     },
     created(){
         if (this.loggedIn) {
-            this.reviewCuti();
+            if (this.currentUser.role[0] === "ROLE_DEPARTMENTMANAGER" ||
+            this.currentUser.role[0] === "ROLE_SECTIONMANAGER" ||
+            this.currentUser.role[0] === "ROLE_ASSISTANTMANAGER"){
+                this.reviewCuti();
+                console.log('A')
+            } else{
+                this.$router.push('/403')
+            }
+        } else{
+            this.$router.push('/auth/login');
         }
     }
     

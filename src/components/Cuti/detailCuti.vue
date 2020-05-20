@@ -154,7 +154,15 @@ export default {
     },
     created(){
         if (this.loggedIn) {
-            this.getDetailCuti()
+            if (this.currentUser.role[0] === "ROLE_DEPARTMENTMANAGER" ||
+            this.currentUser.role[0] === "ROLE_SECTIONMANAGER" ||
+            this.currentUser.role[0] === "ROLE_ASSISTANTMANAGER"){
+                this.getDetailCuti()
+            } else{
+                this.$router.push('/403')
+            }
+        } else{
+            this.$router.push('/auth/login');
         }
     }
 }

@@ -118,9 +118,7 @@ export default {
         }
     },
     created(){
-        if (this.loggedIn) {
-            this.checkStatus()
-        }
+        this.checkStatus()
     }
 }
 </script>
