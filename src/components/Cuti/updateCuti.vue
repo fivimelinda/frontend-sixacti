@@ -85,6 +85,24 @@
     </b-form>
     </ValidationObserver>
     </div> 
+    <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        {{errormessage}}
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
     </v-container>
     
 </template>
@@ -119,7 +137,8 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
         max: maxDate,
         showDismissibleAlert: false,
         sisaCuti: 0,
-        errorStatus: 'Tanggal Akhir Cuti tidak valid'
+        errorStatus: 'Tanggal Akhir Cuti tidak valid',
+        errormessage:''
       }
     },
     computed: {
@@ -152,6 +171,10 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
               name:'viewCuti'
             })
           }
+          })
+          .catch((err) => {
+            this.errormessage = err.message
+            this.errorModal()
           })
         }
         

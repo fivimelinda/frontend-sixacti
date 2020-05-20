@@ -4,9 +4,17 @@
             <b-row id="myTitle">
                 <h3> Pengajuan Cuti</h3>
             </b-row>
-            <!-- <b-row>
-            <a v-on:click="lihatRiwayat" id="link">Lihat Riwayat Cuti</a>
-            </b-row> -->
+            <b-row>
+                <b-col>
+                    <v-icon color="yellow">mdi-information</v-icon>
+                   <span> Sisa Cuti: {{sisa}} </span>
+                </b-col>
+                <v-spacer></v-spacer>
+                <b-col>
+                    <a v-on:click="lihatRiwayat" id="link">Lihat Riwayat Cuti</a>
+                </b-col>
+            </b-row>
+            <v-divider id="line" style="margin-bottom:15px"></v-divider>
             <b-row v-if="cutiActive">
                 <cardCuti v-bind:cutiData="cutiData"/>
             </b-row>
@@ -25,6 +33,24 @@
             </b-row>
             </span>
         </div>
+        <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        {{errormessage}}
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
     </v-container>
 </template>
 <script>
@@ -41,7 +67,9 @@ export default {
             cutiHabis: false,
             cutiActive: false,
             cutiData: null,
-            karyawanId:''
+            karyawanId:'',
+            errormessage:'',
+            sisa:''
         }
     },
     computed: {
@@ -61,28 +89,34 @@ export default {
             this.$router.push('/formCuti/' + this.karyawanId)
         },
         getCutiActive(){
-            console.log('CCCCC')
             CutiService.getCutiActive(this.nik).then(response => {
                 if (response.data.cutiActive == "true"){
-                    console.log('BBBB')
                     this.cutiData = response.data
                     this.cutiActive = true
                 } else if (response.data.sisaCuti == "0" ){
                     this.cutiHabis = true
                 }
                 this.karyawanId = response.data.idKaryawan
-
+                this.sisa = response.data.sisaCuti
+            })
+            .catch((err) => {
+                this.errormessage = err.message
+                this.errorModal()
             })
         },
-        // lihatRiwayat(){
-        //     this.$router.push('/lihatRiwayatCuti/'+ this.karyawanId);
-        // }
+        lihatRiwayat(){
+            this.$router.push('/lihatRiwayatCuti/'+ this.karyawanId);
+        }
 
     },
     created(){
         if (this.loggedIn) {
             if (this.currentUser.role[0] === "ROLE_KARYAWANTETAP"){
-                this.getCutiActive()
+                if(this.currentUser.user === null){
+                    this.$router.push('/profil')
+                } else{
+                    this.getCutiActive()
+                }
             } else{
                 this.$router.push('/403')
             }
