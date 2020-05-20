@@ -11,31 +11,16 @@
             <div class="form-group">
               
               <div class="mb-2 label">Foto Kartu Tanda Penduduk*</div>
+              <!-- <b-form-file
+              size=""
+              v-model="file"
+              placeholder="Choose a file or drop it here...">
+              </b-form-file> -->
               <input class="form-control" type="file" ref="file" v-on:change="handleFileUpload()" id="file" required>
               <small class="form-text text-muted">Dalam format .jpg/.png</small>
             </div>
-            <!-- <div class="form-group">
-              <div class="mb-2 label">Foto Kartu Keluarga*</div>
-              <input class="form-control" type="file" id="fotoKk">
-            </div>
-             <div class="form-group">
-               <div class="mb-2 label">Foto Nomor Pokok Wajib Pajak</div>
-               <input class="form-control" type="file" id="fotoNpwp">
-             </div>
-              <div class="form-group">
-                <div class="mb-2 label">Foto Kartu BPJS Kesehatan</div>
-                <input class="form-control" type="file" id="fotoBpjsKesehatan">
-              </div>
-            <div class="form-group">
-              <div class="mb-2 label">Foto Kartu BPJS Ketenagakerjaan</div>
-              <input class="form-control" type="file" id="fotoBpjsKetenagakerjaan">
-            </div>
-            <div class="form-group">
-              <div class="mb-2 label">Resume*</div>
-              <input class="form-control" type="file" id="resume" >
-            </div> -->
 
-            <button v-on:click="submitFile(); cekSukses()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
+            <button v-on:click="submitFile(); cekSukses()" type="" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
             <br>
             <button class=" mt-5 mb-5 btn btn-dark" v-on:click="afterClicked()">Selanjutnya</button>
         </form>
@@ -92,7 +77,7 @@ export default {
   name:'fileLamaran',
   data(){
     return{
-      file:'',
+      file:null,
       ressData: '',
       count: 0
     }
@@ -112,8 +97,9 @@ export default {
 
     submitFile(){
       let formData = new FormData();
-      console.log(this.idLamaran);
       formData.append('file', this.file);
+      console.log(formData.getAll('file'));
+
       this.axios.post('http://localhost:8081/api/uploadKtp/' + this.idLamaran,
         formData,{ headers:authHeader() }).then(ress => {
               this.ressData = ress;

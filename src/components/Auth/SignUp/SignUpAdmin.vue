@@ -19,13 +19,13 @@
                         <b-form
                         class="m-0">
                             <b-form-group>
-                                <b-input-group size="sm">
+                                <b-input-group size="">
                                     <b-input-group-prepend is-text>
                                         <b-icon-person-fill></b-icon-person-fill>
                                     </b-input-group-prepend>
                                     <b-form-input
                                     class="input"
-                                    size="sm"
+                                    size=""
                                     id="username"
                                     v-model="username"
                                     type="text"
@@ -39,14 +39,14 @@
                                 </div>
                             </b-form-group>
                             <b-form-group>
-                                <b-input-group size="sm">
+                                <b-input-group size="">
                                     <b-input-group-prepend is-text>
                                         <b-icon-briefcase-fill></b-icon-briefcase-fill>
                                     </b-input-group-prepend>
                                     <template>
 
                                     </template>
-                                    <b-form-select size="sm"
+                                    <b-form-select size=""
                                         class="input"
                                         v-model='value'
                                         :options="options"
@@ -62,13 +62,13 @@
                                 </div>
                             </b-form-group>
                             <b-form-group>
-                                <b-input-group size="sm">
+                                <b-input-group size="">
                                     <b-input-group-prepend is-text>
                                         <b-icon-lock-fill></b-icon-lock-fill>
                                     </b-input-group-prepend>
                                     <b-form-input
                                     class="input"
-                                    size="sm"
+                                    size=""
                                     id="password"
                                     v-model="password"
                                     type="password"
@@ -82,13 +82,13 @@
                                 </div>
                             </b-form-group>
                             <b-form-group>
-                                <b-input-group size="sm">
+                                <b-input-group size="">
                                     <b-input-group-prepend is-text>
                                         <b-icon-lock-fill></b-icon-lock-fill>
                                     </b-input-group-prepend>
                                     <b-form-input
                                     class="input"
-                                    size="sm"
+                                    size=""
                                     id="confirm_password"
                                     v-model="confirm_password"
                                     type="password"
@@ -100,45 +100,7 @@
                                   <div class="error-custom mt-1 ml-1" v-if="!$v.confirm_password.required">Field is required</div>
                                   <div class="error-custom mt-1 ml-1" v-else-if="!$v.confirm_password.sameAsPassword">Passwords must be identical.</div>
                                 </div>
-                            </b-form-group>
-                            <!-- <b-form-group>
-                                <b-form-tags style="" v-model="value" size="sm" add-on-change no-outer-focus class="mb-2">
-                                    <template v-slot="{ tags, inputAttrs, inputHandlers, disabled, removeTag }">
-                                    <b-input-group size="sm">
-                                        <b-input-group-prepend is-text>
-                                            <b-icon-briefcase-fill>
-
-                                            </b-icon-briefcase-fill>
-                                        </b-input-group-prepend>
-                                        <b-form-select size="sm"
-                                            v-bind="inputAttrs"
-                                            v-on="inputHandlers"
-                                            :disabled="disabled || availableOptions.length === 0"
-                                            :options="availableOptions"
-                                        >
-                                            <template v-slot:first>
-                                           
-                                            <option disabled value="">Choose a role...</option>
-                                            </template>
-                                        </b-form-select>
-                                    </b-input-group>
-                                    
-                                    <ul v-if="tags.length > 0" class="list-inline d-inline-block m-0 mt-2">
-                                        <li v-for="tag in tags" :key="tag" class="list-inline-item">
-                                        <b-form-tag
-                                            v-model="value"
-                                            @remove="removeTag(tag)"
-                                            :title="tag"
-                                            :disabled="disabled"
-                                            variant="info"
-                                        >{{ tag }}</b-form-tag>
-                                        </li>
-                                    </ul>
-                                    </template>
-                                </b-form-tags>
-                            </b-form-group> -->
-
-                            
+                            </b-form-group>                
                                 <b-button size="sm" class="btn btn-block button-primary" @click="handleRegister()">Daftar</b-button>
                                 <div class="mt-1">
                                     <p class="typo__p" v-if="submitStatus === 'OK'" style="color:rgb(60, 233, 54)">Sign Up Success!</p>
