@@ -8,7 +8,10 @@
     </ul>
     <h3 class="mt-5">Daftar Lowongan Pekerjaan</h3>
     <hr/>
-    <div v-if="message" class="alert alert-success">
+    <div v-if="message && valMSG" class="alert alert-success">
+      {{message}}
+    </div>
+    <div v-if="message && !valMSG" class="alert alert-danger">
       {{message}}
     </div>
     <div class="container">
@@ -32,7 +35,7 @@
                   <button class="btn btn-danger w-100" v-on:click="detailLokerClicked(loker.idLowongan)">Detail</button>
                 </div>
                 <div class="col-6 mb-3">
-                  <button v-if="currentUser.role == 'ROLE_ADMIN'" v-b-modal.modal-1 class="btn btn-light border-danger w-100" id="hapusBtn"  v-on:click="saveId(loker.idLowongan)">Hapus</button>
+                  <button v-if="currentUser.role == 'ROLE_ADMIN'" v-b-modal.modal-1 class="btn btn-light border-danger w-100" id="hapusBtn"  v-on:click="saveId(loker.idLowongan, loker.judulLoker, (loker.listLamaran).length)">Hapus</button>
                 </div>
               </div>
              
@@ -46,7 +49,7 @@
                 <p class="title">Apakah anda yakin untuk menghapusnya ? </p>
                 <hr>
                 <div class="btn-group">
-                  <button type="submit" class="btn btn-danger mr-2" @click="deleteLokerClicked(idLoker)">Hapus</button>
+                  <button type="submit" class="btn btn-danger mr-2" @click="deleteLokerClicked(idLoker, judulLoker)">Hapus</button>
                   <button class="btn btn-light" @click="hideModal">Batal</button>
                 </div>
             </div>
@@ -76,7 +79,10 @@ export default {
             loker : [],
             message : "",
             idLoker : 0,
-            msg :""
+            msg :"",
+            valMSG :false,
+            judulLoker : "",
+            listLmaran : 0
         };
     },
     computed: {
@@ -92,10 +98,18 @@ export default {
             });
             console.log(this.loker);
         },
-        deleteLokerClicked(idLowongan){
+        deleteLokerClicked(idLowongan, judulLoker){
+          var tmp = judulLoker;
           LowonganKerjaService.deleteLoker(idLowongan).then(() =>{
             this.$refs['modal'].hide();
-            this.message = "Delete of Loker " + idLowongan + " successful";
+            if(this.listLmaran != 0){
+              this.message = "Lowongan Kerja " + tmp + " Gagal Dihapus";
+            }
+            else{
+              this.message = "Lowongan Kerja " + tmp + " Berhasil Dihapus";
+              this.valMSG = true;
+            }
+            
             this.refreshLoker();
           });
         },
@@ -105,8 +119,10 @@ export default {
         detailLokerClicked(idLowongan){
           this.$router.push("/detailLoker/"+idLowongan);
         },
-        saveId(idLowongan){
+        saveId(idLowongan, judulLoker, jumlahLamaran){
           this.idLoker = idLowongan;
+          this.judulLoker = judulLoker;
+          this.listLmaran = jumlahLamaran;
         },
         hideModal(){
           this.$refs['modal'].hide();
