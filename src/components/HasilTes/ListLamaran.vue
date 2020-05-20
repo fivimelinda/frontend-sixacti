@@ -1,31 +1,37 @@
 <template>
+    <div class="container pt-0">
     <div class="hasilTes">
-    <div>
-        <br>
-        <p class="title-top">Daftar Lowongan</p>
+    <h3 class="mt-5">Daftar Lamaran Pekerjaan</h3>
+        <div class="container">
+      
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4" v-for="i in daftarLowongan" v-bind:key="i.idLowongan">
+            <div  class="card mb-4" id="cardLoker">
+                <div class="card-header" id="cardHeader">
+                <span id="titleCard">{{i.judulLoker}}</span>
+                </div>
+                <div class="card-body">
+                <span v-if="i.deskripsi.length < 25 " class="mb-1" id="lokerDesc">{{i.deskripsi}}</span>
+                <span v-else  class="mb-1" id="lokerDesc">{{i.deskripsi.substring(0,25) + " ..."}}</span>
+                <p class="mt-1 mb-5" id="deptSect">{{i.departement}} - {{i.section}}</p>
+                </div>
+                <div class="card-footer" id="card-footer">
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <!-- <div v-for="j in i.listLamaran" v-bind:key="j.id">
+                            <div v-if="j.pelamar.userPelamar.nik == this.nik"> --> -->
+                            <button class=" mt-5 mb-5 btn btn-danger" v-on:click="hasilTes()">Lihat Hasil Tes</button>
+                            <!-- </div>
+                         </div> -->
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            </div>
+         </div>
+         </div>
     </div>
-    <div class="box-up">
-        <p class="box-text">Daftar Lowongan</p>
-    </div>
-    <table class="table table-hover">
-        <thead class="table-borderless">
-            <tr class="tr-top">
-                <!-- <th scope="col">No.</th> -->
-                <th scope="col">Nama Lowongan </th>
-                <th scope="col">Action</th>
-                <!-- <th scope="col">Action</th> -->
-            </tr>
-        </thead>
-        <tbody class="tbody">
-            <tr v-for="i in daftarLowongan" :key="i.idLowongan" class="content">
-                <td>{{i.judulLoker}}</td>
-                <td>
-                    <button class=" mt-5 mb-5 btn btn-dark" v-on:click="hasilTes(i.listLamaran.idPelamar)">Lihat Hasil Tes</button>
-                </td>
-
-            </tr>
-        </tbody>
-    </table>
     </div>
 </template>
 
@@ -39,6 +45,9 @@ export default {
     data() {
         return {
             daftarLowongan: "",
+            daftarLamaran: "",
+            idPelamar:""
+            
         }
     },
     mounted() {
@@ -51,26 +60,37 @@ export default {
         currentUser() {
             return this.$store.state.auth.user;
         },
-        idPelamar(){
-            return this.$route.params.idPelamar;
+
+        nik(){
+            return this.$store.state.auth.user.user.nik;
         }
     },
     created(){
         if (!this.loggedIn) {
             this.$router.push('/auth/login');
-        }
+        } 
     },
     methods: {
         load() {
-            axios.get('http://localhost:8081/api/lowonganPelamar/' + this.currentUser.user.nik,{ headers:authHeader() }).then(res => {
-                this.daftarLowongan = res.data
+            axios.get('http://localhost:8081/api/lowonganPelamar/' + this.nik,{ headers:authHeader() }).then(res => {
+                this.daftarLowongan = res.data;
+                this.daftarLamaran = res.data.listLamaran;
+                this.idPelamar = res.data.listLamaran.pelamar.userPelamar.idPelamar;
+                console.log(res.data.listLamaran);
             }).catch((err) => {
                 console.log(err);
             })
         },
-        hasilTes(){
-            this.$router.push("/hasilTes/"+ this.idPelamar);
-        }
+        hasilTes(idPelamar){
+            this.$router.push("/hasilTes/"+ idPelamar);
+        },
+        // checkProfil(){
+        //   this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
+        //       this.usersData = res.data;
+        //       this.nik = res.data.user.nik;
+        //         })
+        //     // )
+        // },
     }
 
 }
@@ -78,95 +98,65 @@ export default {
 
 <style scoped>
 
-.button-wrapper{
-    text-align: justify;
+#cardLoker{
+  /* height: 300px; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: left;
+  min-height: 200px;
 }
 
-.tbody{
-    box-shadow: 1px 1px 1px #999;
+#cardHeader{
+  border-style: none;
+  background-color: white;
 }
 
-.table-borderless{
-    font-family: "archivo";
+#card-footer{
+  border-top-style: none ;
+  border-bottom-style: solid;
+  border-bottom-width: 10px;
+  border-bottom-color: #C53751;
+  background-color: white;
+
 }
 
-.title-top{
-    font-family: "oswald";
-    font-size: 30px;
-    margin-left: 20px;
+#titleCard{
+  color: #C53751;
+  font-weight: bold;
+  font-size: 32px;
+
 }
 
-.atribut{
-    background-color: #F6EDF0;
-    height:100%;
+#lokerDesc{
+  font-family: Archivo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 15px;
+
+  color: #736B6B;
 }
 
-.content{
-    background-color: white;
-    border: 0.5 px solid black;
+#periodeDesc{
+  font-family: Archivo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 15px;
+
+  color: #7D0022;
 }
 
-.table {
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 97% !important;
-}
+#deptSect{
+  font-family: Archivo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 13px;
+  /* identical to box height */
 
-thead{
-    color: #8F8F8F;
-}
 
-.box-up{
-    background-color: #C53751;
-    margin-left: 20px;
-    /* margin-right: 34px; */
-    width: 97% !important;
-}
+  color: #9B9B9B;
 
-.box-text{
-    color: white;
-    margin-left: 15px;
-    padding: 10px;
-}
-
-.table-hover tbody tr:hover td, .table-hover tbody tr:hover th{
-    background-color: white;
-}
-
-.th-bottom:hover{
-    border-left: 3px solid red;
-}
-
-.brearcrumb-a{
-    font-family: "Archivo";
-    font-size: 15px;
-    color: #848484;
-}
-
-a:link, a:active, a:hover, a:visited {
-    color: #848484 !important;
-    text-decoration: none;
-}
-
-v-application a{
-    color: #848484;
-}
-
-.nav {
-  list-style-type: none;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  margin-left: 20px;
-}
-
-.nav li {
-  display: inline-block;
-  padding: 2px;
-}
-
-#close-me{
-    width: 80px;
 }
 
 </style>

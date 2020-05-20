@@ -111,10 +111,7 @@ export default {
         },
         hideModal(){
           this.$refs['modal'].hide();
-        }
-
-
-
+        },
     },
     created(){
         this.refreshLoker();
