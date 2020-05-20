@@ -326,6 +326,16 @@ export default {
         if (!this.loggedIn) {
             this.$router.push('/auth/login');
         }
+        if(this.loggedIn){
+            if(this.currentUser.role[0] === "ROLE_DEPARTMENTMANAGER" || 
+                this.currentUser.role[0] === "ROLE_PELAMAR" ||
+                this.currentUser.role[0] === "ROLE_KARYAWANTETAP"||
+                this.currentUser.role[0] === "ROLE_ASSISTANTMANAGER"||
+                this.currentUser.role[0] === "ROLE_ADMIN"||
+                this.currentUser.role[0] === "ROLE_KARYAWANKONTRAK"){
+                    this.$router.push('/403')
+                }
+        }
     },
     methods: {
         formSubmit(e) {
