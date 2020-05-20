@@ -60,7 +60,7 @@
         </v-layout>
         <v-layout row class="detail">
             <v-flex xs6 md6>
-                <v-card-text>Nomor Surat</v-card-text>
+                <v-card-text>NIK</v-card-text>
             </v-flex>
             <v-flex xs6 md6>
                 <input class="form-control" type="string" id="nomorSurat" placeholder="masukkan nomor surat" v-model="nomorSurat">
@@ -72,6 +72,14 @@
             </v-flex>
             <v-flex xs6 md6>
                 <input class="form-control" type="string" id="namaTtd" placeholder="masukkan nama penandatangan" v-model="namaTtd">
+            </v-flex>
+        </v-layout>
+        <v-layout row class="detail">
+            <v-flex xs6 md6>
+                <v-card-text>Jabatan karyawan</v-card-text>
+            </v-flex>
+            <v-flex xs6 md6>
+                <input class="form-control" type="string" id="jabatan" placeholder="masukkan jabatan karyawan" v-model="jabatan">
             </v-flex>
         </v-layout>
         <v-card flat color="#FBC4C4" class="notify">
@@ -111,7 +119,10 @@ export default {
             today1: '',
             gaji: '',
             nomorSurat: '',
-            namaTtd: ''
+            namaTtd: '',
+            user: '',
+            section: '',
+            jabatan: ''
         }
     },
     mounted() {
@@ -119,7 +130,9 @@ export default {
         this.loadDepartemen(),
         this.load(),
         this.today(),
-        this.getGaji()
+        this.getGaji(),
+        this.getUser(),
+        this.getSection()
     },
     methods : {
         generate() {
@@ -150,7 +163,43 @@ export default {
             doc.text(15,30,'1.');
             doc.text(20,30,lines2);
             doc.text(15,50,'2.');
-            doc.text(20,50,'a. Nama                                              :\n\nb. No. Kartu Tanda Penduduk (KTP)  :\n\nc. Alamat                                             :')
+            doc.text(20,50,'a. Nama                                              :\n\nb. No. Kartu Tanda Penduduk (KTP)  :                                                                                       NIK :\n\nc. Alamat                                             :\n\n\nd. Tempat / Tanggal lahir / Umur         :\n\ne. Jenis kelamin                                   :                                                           Section : \n\n(selanjutnya disebut "PIHAK KEDUA").')
+            doc.setFontSize(10);
+            doc.setFontType('bold');
+            doc.text(this.name[this.$route.params.index].toUpperCase(),76, 50)
+            doc.setFontType('normal');
+            doc.text(this.user.nik.toUpperCase(),76, 56.7)
+            doc.setFontSize(14);
+            doc.text(this.nomorSurat,160, 56.6)
+            doc.setFontSize(10);
+            doc.text(this.user.alamat.toUpperCase()+", "+this.user.kelurahan.toUpperCase()+", "+this.user.kecamatan.toUpperCase(), 76, 63.2)
+            var umur = new Date(this.user.tanggal_lahir);
+            var umur2 = moment().diff(umur, 'years');
+            doc.text(this.user.tempat_lahir.toUpperCase()+"   /   "+this.user.tanggal_lahir.substring(0,10).toUpperCase()+"   /   "+umur2+" TAHUN", 76, 72)
+            var kelamin;
+            if(this.user.jenis_kelamin == true){
+                kelamin = "LAKI-LAKI"
+            }else{
+                kelamin = "WANITA"
+            }
+            doc.text(kelamin,76, 78.8)
+            doc.text(this.departemen[this.$route.params.index].toUpperCase()+" / "+this.section.toUpperCase(), 140, 78.8)
+            doc.setFontSize(9);
+            
+            doc.setFontType('bold');
+            doc.text('Pasal 1', 105, 90.5, 'center');
+            doc.setFontType('normal');
+            doc.text(15,95,'1.1');
+            var par3 = 'PIHAK PERTAMA menerima dan mempekerjakan PIHAK KEDUA, dalam hubungan kerja waktu tertentu, dengan lokasi kerja di alamat PIHAK PERTAMA sebagaimana disebutkan di atas, dengan ketentuan sebagai berikut:'
+            var lines3 = doc.splitTextToSize(par3, (210-15-15));
+            doc.text(21, 95, lines3)
+            doc.setFontSize(10.2);
+            doc.text(21, 103, 'Sejak Tanggal/Bulan/Tahun                  : '+this.req.tanggal_mulai.substring(0,10)+'\n\nSampai dengan Tanggal/Bulan/Tahun  : '+this.req.tanggal_berakhir.substring(0,10)+'\n\nJabatan                                                  : '+this.jabatan+'\n\nKewajiban melapor kepada                    : Atasan\n\nUpah Pokok                                            : Rp. '+this.formatPrice(this.gaji)+'\n\nBantuan Transport per bulan                 : Rp.210.000\n\nTotal Jam Kerja Normal Per Minggu      : 40 jam / minggu\n\nMakan                                                    :  1 x sehari yang diberikan secara cuma-cuma oleh PIHAK PERTAMA')
+            doc.setFontSize(9);
+            var par4 = 'Tugas-tugas PIHAK KEDUA sesuai dengan yang diperlukan dalam jabatannya pada PIHAK PERTAMA serta tugas- tugas lainnya sebagaimana dan pada saat diberikan oleh atasannya. PIHAK KEDUA setuju untuk menggunakan usaha terbaiknya dalam melaksanakan tugasnya dengan tunduk pada peraturan perundang-undangan yang berlaku serta ketentuan, peraturan dan kebijakan di PIHAK PERTAMA.\n\nPIHAK PERTAMA dapat sewaktu-waktu mengubah jabatan PIHAK KEDUA, sebagaimana dimaksud di dalam Perjanjian ini, serta mengubah perincian tugas dan tanggung jawab PIHAK KEDUA sesuai dengan situasi dan kondisi serta kebutuhan PIHAK PERTAMA, dengan pemberitahuan tertulis kepada PIHAK KEDUA.'
+            var lines4 = doc.splitTextToSize(par4, (210-15-15));
+            doc.text(21,160,lines4)
+
             doc.addPage();
             doc.text(20,20,'halo2');
             doc.save(this.req.noSurat+'.pdf');
@@ -207,6 +256,22 @@ export default {
         getGaji() {
             axios.get('http://localhost:8081/detailKontrak/gaji/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
                 this.gaji = res.data
+            }).catch((err) => {
+                console.log(err);
+            })
+        },
+        getUser() {
+            axios.get('http://localhost:8081/detailKontrak/user/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
+                this.user = res.data
+                console.log(this.user);
+            }).catch((err) => {
+                console.log(err);
+            })
+        },
+        getSection() {
+            axios.get('http://localhost:8081/detailKontrak/section/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
+                this.section = res.data
+                console.log(this.section);
             }).catch((err) => {
                 console.log(err);
             })
