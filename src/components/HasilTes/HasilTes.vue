@@ -28,9 +28,13 @@
                     <div v-if="tesTulis.isGagal == true">
                         Tidak Lulus Tes Tulis
                     </div>
+                    <!-- <div v-if="tesTulis.id_tes_tulis = null">
+                        Belum mengikuti tes
+                    </div> -->
+                    
                 </td>
             </tr>
-            <div v-if="tesMedis.isLolos != null">
+            <!-- <div v-if="tesMedis.isLolos != null"> -->
                 <tr class="content">
                     <td> 2 </td>
                     <td> Tes Medis </td>
@@ -41,11 +45,15 @@
                         <div v-if="tesMedis.isGagal == true">
                             Tidak Lulus Tes Medis
                         </div>
+                        <!-- <div v-if="tesMedis.nilai != null">
+                            Belum mengikuti tes
+                        </div> -->
+    
                     </td>
                 </tr>
-            </div>
+            <!-- </div> -->
 
-            <div v-if="tesWawancara.isLolos != null">
+            <!-- <div v-if="tesWawancara.isLolos != null"> -->
                 <tr class="content">
                     <td> 3 </td>
                     <td> Tes Wawancara </td>
@@ -56,9 +64,13 @@
                         <div v-if="tesWawancara.isGagal == true">
                             Tidak Lulus Tes Wawancara
                         </div>
+                        <!-- <div v-if="tesWawancara.nilai != null">
+                            Belum mengikuti tes
+                        </div> -->
+                        
                     </td>
                 </tr>
-            </div>
+            <!-- </div> -->
 
         </tbody>
 
