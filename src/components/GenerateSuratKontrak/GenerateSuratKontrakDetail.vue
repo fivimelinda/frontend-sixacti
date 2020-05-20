@@ -351,28 +351,28 @@ export default {
             this.today1 = moment().format('Do MMMM YYYY');
         },
         load() {
-            axios.get('http://localhost:8081/detailKontrak/get/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
+            axios.get('http://sixacti-api.herokuapp.com/detailKontrak/get/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
                 this.req = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         loadName() {
-            axios.get('http://localhost:8081/detailKontrak/getName',{ headers:authHeader() }).then(res => {
+            axios.get('http://sixacti-api.herokuapp.com/detailKontrak/getName',{ headers:authHeader() }).then(res => {
                 this.name = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         loadDepartemen() {
-            axios.get('http://localhost:8081/detailKontrak/getDepartemen',{ headers:authHeader() }).then(res => {
+            axios.get('http://sixacti-api.herokuapp.com/detailKontrak/getDepartemen',{ headers:authHeader() }).then(res => {
                 this.departemen = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         changeStatus(){
-            axios.put('http://localhost:8081/detailKontrak/changeStatus/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
+            axios.put('http://sixacti-api.herokuapp.com/detailKontrak/changeStatus/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
                 console.log(res)
             })
         },
@@ -380,14 +380,14 @@ export default {
 
         },
         getGaji() {
-            axios.get('http://localhost:8081/detailKontrak/gaji/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
+            axios.get('http://sixacti-api.herokuapp.com/detailKontrak/gaji/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
                 this.gaji = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         getUser() {
-            axios.get('http://localhost:8081/detailKontrak/user/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
+            axios.get('http://sixacti-api.herokuapp.com/detailKontrak/user/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
                 this.user = res.data
                 console.log(this.user);
             }).catch((err) => {
@@ -395,7 +395,7 @@ export default {
             })
         },
         getSection() {
-            axios.get('http://localhost:8081/detailKontrak/section/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
+            axios.get('http://sixacti-api.herokuapp.com/detailKontrak/section/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
                 this.section = res.data
                 console.log(this.section);
             }).catch((err) => {
