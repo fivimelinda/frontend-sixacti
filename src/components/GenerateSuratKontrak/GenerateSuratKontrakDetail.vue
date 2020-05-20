@@ -196,9 +196,32 @@ export default {
             doc.setFontSize(10.2);
             doc.text(21, 103, 'Sejak Tanggal/Bulan/Tahun                  : '+this.req.tanggal_mulai.substring(0,10)+'\n\nSampai dengan Tanggal/Bulan/Tahun  : '+this.req.tanggal_berakhir.substring(0,10)+'\n\nJabatan                                                  : '+this.jabatan+'\n\nKewajiban melapor kepada                    : Atasan\n\nUpah Pokok                                            : Rp. '+this.formatPrice(this.gaji)+'\n\nBantuan Transport per bulan                 : Rp.210.000\n\nTotal Jam Kerja Normal Per Minggu      : 40 jam / minggu\n\nMakan                                                    :  1 x sehari yang diberikan secara cuma-cuma oleh PIHAK PERTAMA')
             doc.setFontSize(9);
-            var par4 = 'Tugas-tugas PIHAK KEDUA sesuai dengan yang diperlukan dalam jabatannya pada PIHAK PERTAMA serta tugas- tugas lainnya sebagaimana dan pada saat diberikan oleh atasannya. PIHAK KEDUA setuju untuk menggunakan usaha terbaiknya dalam melaksanakan tugasnya dengan tunduk pada peraturan perundang-undangan yang berlaku serta ketentuan, peraturan dan kebijakan di PIHAK PERTAMA.\n\nPIHAK PERTAMA dapat sewaktu-waktu mengubah jabatan PIHAK KEDUA, sebagaimana dimaksud di dalam Perjanjian ini, serta mengubah perincian tugas dan tanggung jawab PIHAK KEDUA sesuai dengan situasi dan kondisi serta kebutuhan PIHAK PERTAMA, dengan pemberitahuan tertulis kepada PIHAK KEDUA.'
+            var par4 = 'Tugas-tugas PIHAK KEDUA sesuai dengan yang diperlukan dalam jabatannya pada PIHAK PERTAMA serta tugas- tugas lainnya sebagaimana dan pada saat diberikan oleh atasannya. PIHAK KEDUA setuju untuk menggunakan usaha terbaiknya dalam melaksanakan tugasnya dengan tunduk pada peraturan perundang-undangan yang berlaku serta ketentuan, peraturan dan kebijakan di PIHAK PERTAMA.\n\nPIHAK PERTAMA dapat sewaktu-waktu mengubah jabatan PIHAK KEDUA, sebagaimana dimaksud di dalam Perjanjian ini, serta mengubah perincian tugas dan tanggung jawab PIHAK KEDUA sesuai dengan situasi dan kondisi serta kebutuhan PIHAK PERTAMA, dengan pemberitahuan tertulis kepada PIHAK KEDUA.\n\nPIHAK PERTAMA dan PIHAK KEDUA dengan ini setuju bahwa apabila ternyata jangka waktu berlakunya Perjanjian ini perlu diubah, maka perubahan atas jangka waktu berlakunya perjanjian tersebut bukan merupakan perpanjangan ataupun pembaharuan jangka waktu berlakunya perjanjian sepanjang :'
             var lines4 = doc.splitTextToSize(par4, (210-15-15));
             doc.text(21,160,lines4)
+            doc.text(15,188.4,'1.2')
+            doc.text(22,199, '(i).')
+            doc.text(22,205.2, '(ii).')
+            var par5 = 'perubahan tersebut telah disepakati oleh PIHAK PERTAMA dan PIHAK KEDUA secara tertulis dalam bentuk suatu perjanjian perubahan terhadap Perjanjian ini; dan\nperubahan tersebut serta perjanjian perubahan sebagaimana dimaksud dalam butir (i) di atas diadakan 1 ( satu ) bulan sebelum ( dan dalam keadaan apapun lebih dari 7 ( tujuh ) hari kerja ) sebelum berakhirnya jangka waktu berlakunya Perjanjian'
+            var lines5 = doc.splitTextToSize(par5, (198-15-15));
+            doc.text(29, 199, lines5)
+            doc.text(15,216,'1.3')
+            var par6 = 'Azas yang dianut dalam pembayaran imbalan jasa adalah berdasarkan azas ”NO WORK NO PAY” sesuai dengan UU no. 13 tahun 2003 pasal 93 ayat 1'
+            var lines6 = doc.splitTextToSize(par6, (210-15-15));
+            doc.text(21, 216, lines6)
+            doc.setFontType('bold');
+            doc.text('Pasal 2', 105, 223, 'center');
+            doc.setFontType('normal');
+            var par7 = 'Hak cuti sebanyak 12 ( dua belas ) hari baru timbul dan dapat diberikan kepada PIHAK KEDUA setelah menjalani masa kerja 12 ( dua belas ) bulan di PIHAK PERTAMA. Apabila PIHAK KEDUA belum mencapai masa kerja 12 ( dua belas ) bulan tersebut, hak cuti belum dapat diambil.\n\nHak cuti yang belum diambil, akan diganti oleh PIHAK PERTAMA apabila PIHAK KEDUA telah selesai menjalankan masa kontrak kerja dengan PIHAK PERTAMA\n\nApabila PIHAK KEDUA diperpanjang masa kontrak kerjanya setelah masa kontrak kerja pertamanya selama 12 (dua belas) bulan selesai, maka hak cuti 12 (dua belas) harinya berlaku otomatis.\n\nApabila PIHAK KEDUA sebagaimana disebut pada butir 3 ( tiga ) dan telah mengambil cuti pada masa perpanjangan kontrak kerja keduanya, maka PIHAK PERTAMA hanya membayar sisa hak cuti yang timbul saat menjalani kontrak kerja pertama dikurangi dengan hari cuti yang telah dipergunakannya\n\nPergantian sisa cuti PIHAK KEDUA dibayarkan berdasarkan atas perhitungan nilai upah saat hak cutinya timbul\n\nBagi PIHAK KEDUA yang hak cutinya telah diganti oleh PIHAK PERTAMA, maka PIHAK KEDUA dianggap telah mempergunakan hak cutinya.'
+            var lines7 = doc.splitTextToSize(par7, (210-15-15));
+            doc.text(21, 227, lines7)
+            doc.text(15,227,'2.1')
+            doc.text(15,240,'2.2')
+            doc.text(15,249.8,'2.3')
+            doc.text(15,259,'2.4')
+            doc.text(15,270.3,'2.5')
+            doc.text(15,277.4,'2.6')
+            doc.text('- 1 / 2 -', 105, 288, 'center');
 
             doc.addPage();
             doc.text(20,20,'halo2');
