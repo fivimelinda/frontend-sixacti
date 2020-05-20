@@ -232,7 +232,14 @@ export default {
                 }
             }
             
+        },
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
         }
+
     },
     methods: {
         refreshLokerDetails() {
@@ -303,7 +310,17 @@ export default {
         }
     },
     created(){
-        this.refreshLokerDetails();
+        if (this.loggedIn) {
+            if (this.currentUser.role[0] === "ROLE_ADMIN"){
+                this.refreshLokerDetails();
+                console.log('A')
+            } else{
+                this.$router.push('/403')
+            }
+        } else{
+            this.$router.push('/auth/login');
+        }
+        
     }
     
 };

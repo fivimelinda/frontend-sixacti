@@ -14,8 +14,8 @@
         ></v-img>
       </v-flex> -->
 
-      <v-flex>
-        <h1 class="display-2 text-white font-weight-bold" id="main-title">
+      <v-flex xs12 sm12 xl12 lg12>
+        <h1 class="display-2 text-white font-weight-bold" id="main-title" >
           Selamat datang di SIXACTI
         </h1>
       </v-flex>
