@@ -224,8 +224,101 @@ export default {
             doc.text('- 1 / 2 -', 105, 288, 'center');
 
             doc.addPage();
-            doc.text(20,20,'halo2');
-            doc.save(this.req.noSurat+'.pdf');
+            doc.setFontType('bold');
+            doc.text('Pasal 3', 105, 10, 'center');
+            doc.setFontType('normal');
+            var par8 = 'Dalam hal Keselamatan dan Kesehatan Kerja, PIHAK PERTAMA dan PIHAK KEDUA akan menjalani kewajiban masing-masing sesuai Peraturan Perusahaan yang berlaku.\n\nApabila PIHAK KEDUA sengaja atau karena kelalaiannya menghilangkan / merusakkan alat-alat keselamatan kerja dan atau fasilitas kerja sehingga tidak dapat dipergunakan oleh PIHAK PERTAMA, PIHAK KEDUA sepakat membayar ganti rugi sesuai harga alat / barang yang rusak atau hilang.\n\nGanti rugi dimaksud dalam ayat 2, besarnya dalam bentuk Rupiah dan pelaksanaannya dilakukan oleh PIHAK PERTAMA melalui pemotongan gaji per bulan yang tidak melebihi 25 % dari upah pokok PIHAK KEDUA, kecuali hubungan kerja PIHAK PERTAMA dan PIHAK KEDUA berakhir atau tidak diperpanjang lagi, maka PIHAK KEDUA berkewajiban untuk melunasi sekaligus.\n\nPIHAK PERTAMA akan melaksanakan ketentuan-ketentuan yang telah ditetapkan dalam Undang-Undang No. 1 Tahun 1970 Keselamatan Kerja apabila terjadi kecelakaan kerja, melalui Asuransi Sosial Tenaga Kerja.'
+            var lines8 = doc.splitTextToSize(par8, (210-15-15));
+            doc.text(21,14 , lines8)
+            doc.text(15,14,'3.1')
+            doc.text(15,23.8,'3.2')
+            doc.text(15,36,'3.3')
+            doc.text(15,52,'3.4')
+
+            doc.setFontType('bold');
+            doc.text('Pasal 4', 105, 60, 'center');
+            doc.setFontType('normal');
+            var par9 = 'Perjanjian Kerja berakhir sesuai Peraturan Perusahaan yang berlaku. tanpa syarat bagi PIHAK PERTAMA untuk memberikan uang pesangon, uang penghargaan masa kerja, uang penggantian hak, uang pisah maupun pembayaran lainnya kepada PIHAK KEDUA'
+            var lines9 = doc.splitTextToSize(par9, (210-15-15));
+            doc.text(15, 64, lines9)
+
+            doc.setFontType('bold');
+            doc.text('Pasal 5', 105, 74, 'center');
+            doc.setFontType('normal');
+            var par10 = 'Dalam hal PIHAK PERTAMA masih membutuhkan jasa PIHAK KEDUA, maka dalam waktu selambat-lambatnya 7 ( tujuh ) hari sebelum Perjanjian Kerja ini berakhir akan diberitahukan kepada PIHAK KEDUA mengenai kemungkinan dilakukannya perpanjangan Perjanjian Kerja ini.\n\nDengan berakhirnya Perjanjian Kerja ini maka perpanjangan tidak berlaku dengan sendirinya, dan untuk setiap perpanjangan Perjanjian Kerja yang merupakan Addendum dari Perjanjian Kerja ini.'
+            var lines10 = doc.splitTextToSize(par10, (210-15-15));
+            doc.text(21, 78, lines10)
+            doc.text(15,78,'5.1')
+            doc.text(15,91,'5.2')
+
+            doc.setFontType('bold');
+            doc.text('Pasal 6', 105, 99, 'center');
+            doc.setFontType('normal');
+            var par11 = 'Selain yang telah ditetapkan dalam Perjanjian Kerja ini, PIHAK KEDUA tidak berhak atas pembayaran tunjangan ataupun fasilitas lainnya, kecuali ditentukan lain oleh PIHAK PERTAMA.'
+            var lines11 = doc.splitTextToSize(par11, (210-15-15));
+            doc.text(15, 103, lines11)
+
+            doc.setFontType('bold');
+            doc.text('Pasal 7', 105, 112, 'center');
+            doc.setFontType('normal');
+            var par12 = 'Hak dan kewajiban PIHAK KEDUA sebagai karyawan waktu tertentu yang tidak diatur dalam perjanjian ini tercantum di dalam Peraturan Perusahaan ("PP") kecuali hak-hak yang terkait langsung, timbul karena masa kerja.'
+            var lines12 = doc.splitTextToSize(par12, (210-15-15));
+            doc.text(15, 116, lines12)
+
+            doc.setFontType('bold');
+            doc.text('Pasal 8', 105, 125, 'center');
+            doc.setFontType('normal');
+            var par13 = 'Jika terdapat kekeliruan dan atau kekurangan dalam Perjanjian Kerja ini maka dapat diadakan perbaikan dan atau perubahan sebagaimana mestinya \nPerjanjian Kerja ini ditanda-tangani oleh kedua belah pihak dengan kesadaran dan tanpa paksaan, dimana masing-masing pihak telah mengetahui dan memahami isinya.'
+            var lines13 = doc.splitTextToSize(par13, (210-15-15));
+            doc.text(15, 129, lines13)
+
+            doc.setFontType('bold');
+            doc.text('Pasal 9', 105, 142, 'center');
+            doc.setFontType('normal');
+            var par14 = 'Tidak berlakunya salah satu atau lebih dari ketentuan-ketentuan Perjanjian ini tidak akan mempengaruhi keabsahan Perjanjian ini secara keseluruhan, dan dalam hal ketidakberlakuan tersebut, Perjanjian ini akan dianggap tidak mengandung ketentuan yang tidak sah tersebut.'
+            var lines14 = doc.splitTextToSize(par14, (210-15-15));
+            doc.text(15, 146, lines14)
+
+            doc.setFontType('bold');
+            doc.text('Pasal 10', 105, 156, 'center');
+            doc.setFontType('normal');
+            var par15 = 'Perjanjian ini merupakan kesepakatan final dan menyeluruh antara Para Pihak serta membatalkan dan menggantikan seluruh kesepakatan atau pehamanan sebelumnya, baik secara lisan maupun tertulis.'
+            var lines15 = doc.splitTextToSize(par15, (210-15-15));
+            doc.text(15, 160, lines15)
+
+            doc.setFontType('bold');
+            doc.text('Pasal 11', 105, 170, 'center');
+            doc.setFontType('normal');
+            var par16 = 'Perjanjian ini tunduk kepada ketentuan peraturan perundang-undangan yang berlaku di Indonesia'
+            var lines16 = doc.splitTextToSize(par16, (210-15-15));
+            doc.text(15, 174, lines16)
+
+            doc.setFontType('bold');
+            doc.text('Pasal 12', 105, 180, 'center');
+            doc.setFontType('normal');
+            var par17 = 'Perjanjian ini dibuat dalam Bahasa Indonesia.'
+            var lines17 = doc.splitTextToSize(par17, (210-15-15));
+            doc.text(15, 184, lines17)
+
+            doc.setFontType('bold');
+            doc.text('Pasal 13', 105, 190, 'center');
+            doc.setFontType('normal');
+            var par18 = 'Apabila dalam pelaksanaan Perjanjian ini timbul sengketa maka baik PIHAK PERTAMA maupun PIHAK KEDUA akan berusaha untuk menyelesaikan perselisihan yang timbul dengan musyawarah.\n\nApabila perselisihan tersebut tidak dapat diselesaikan secara musyawarah dan mufakat, PIHAK PERTAMA dan PIHAK KEDUA sepakat bahwa perselisihan tersebut akan diselesaikan menurut mekanisme penyelesaian perselisihan hubungan industrial menurut peraturan perundang-undangan yang berlaku\n\nDemikian Perjanjian Kerja ini dibuat dalam rangkap 3 (tiga) dengan ketentuan hukum yang sama dan masing-masing untuk Pekerja, Pengusaha dan Kantor Dinas Tenaga Kerja setempat untuk dicatat.\n\n\n\n\nDepok, '+this.today1+'\n\nPIHAK PERTAMA:                                                                                                    PIHAK KEDUA:\n\nPT Xacti Indonesia\n\n\n\n\n\n\n\n\n'+this.namaTtd.toUpperCase()
+            var lines18 = doc.splitTextToSize(par18, (210-15-15));
+            doc.text(15, 194, lines18)
+            doc.text(this.name[this.$route.params.index].toUpperCase(),155, 277, 'center')
+            doc.text('------------------------------------------------------',15,279)
+            doc.text('------------------------------------------------------',130,279)
+            doc.text(this.nomorSurat, 130, 282)
+            doc.text('- 2 / 2 -', 105, 288, 'center');
+            // doc.setFontType('bold');
+            // doc.text('Pasal', 105, 96, 'center');
+            // doc.setFontType('normal');
+            // var par = ''
+            // var lines = doc.splitTextToSize(par, (210-15-15));
+            
+
+            doc.save(this.req.noSurat+this.name[this.$route.params.index]+'.pdf');
         },
         computed: {
             loggedIn(){
