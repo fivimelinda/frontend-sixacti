@@ -117,8 +117,11 @@ export default {
             if (this.currentUser.role[0] === "ROLE_DEPARTMENTMANAGER" ||
             this.currentUser.role[0] === "ROLE_SECTIONMANAGER" ||
             this.currentUser.role[0] === "ROLE_ASSISTANTMANAGER"){
-                this.reviewCuti();
-                console.log('A')
+                if(this.currentUser.user === null){
+                    this.$router.push('/profil')
+                } else{
+                    this.reviewCuti();
+                }
             } else{
                 this.$router.push('/403')
             }

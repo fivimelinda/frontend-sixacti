@@ -112,7 +112,11 @@ export default {
     created(){
         if (this.loggedIn) {
             if (this.currentUser.role[0] === "ROLE_KARYAWANTETAP"){
-                this.getCutiActive()
+                if(this.currentUser.user === null){
+                    this.$router.push('/profil')
+                } else{
+                    this.getCutiActive()
+                }
             } else{
                 this.$router.push('/403')
             }
