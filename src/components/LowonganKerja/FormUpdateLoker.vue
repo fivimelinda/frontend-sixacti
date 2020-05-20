@@ -226,7 +226,7 @@ export default {
                     console.log('Tanggal berakhir sebelum tanggal skrng');
                     return false;
                 }
-                else if(moment(this.tanggalBerakhir).isSame(this.tanggalMulai)){
+                else if(moment(this.tanggalBerakhir).isSame(moment(this.tanggalMulai))){
                     console.log("hi");
                     return true;
                 }
@@ -303,7 +303,7 @@ export default {
         openModal() {
             this.$refs['modalOk'].show();
             window.setTimeout(function() {
-                window.location.href = "/listLoker";
+                window.location.href = "/daftar-lowongan";
             }, 2000);
         },
 

@@ -209,6 +209,7 @@ export default {
       tanggalBerakhir : "",
       deskripsi : "",
       dateWanted : "",
+      tanggalDibutuhkan: "",
       errors: [],
     }
   },
@@ -221,9 +222,11 @@ export default {
             return null;
           }
           else{
-            var currentDate = moment(new Date()).format("DD MMMM YYYY");
-            var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
-            return !moment(tglMulai).isBefore(currentDate);
+            var currentDate = moment();
+            if(moment(this.tanggalMulai).isAfter(moment(this.tanggalDibutuhkan))){
+              return false;
+            }
+            return !moment(this.tanggalMulai).isBefore(currentDate);
           }
           
         },
@@ -232,16 +235,14 @@ export default {
             return null;
           }
           else{
-            var currentDate = moment(new Date()).format("DD MMMM YYYY");
-            var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
-            var tglBerakhir = moment(this.tanggalBerakhir).format("DD MMMM YYYY");
-            if(moment(tglBerakhir).isAfter(this.dateWanted)){
+            var currentDate = moment();
+            if(moment(this.tanggalBerakhir).isAfter(moment(this.tanggalDibutuhkan))){
               return false;
             }else{
-              if(moment(tglBerakhir).isBefore(tglMulai)){
+              if(moment(this.tanggalBerakhir).isBefore(moment(this.tanggalMulai))){
                 return false;
               }
-              else if(moment(tglBerakhir).isBefore(currentDate)){
+              else if(moment(this.tanggalBerakhir).isBefore(currentDate)){
                 return false;
               }
               else{
@@ -268,6 +269,7 @@ export default {
                 this.departement = res.data.departement;
                 this.section = res.data.section;
                 this.dateWanted = moment(res.data.dateWanted).format("DD MMMM YYYY");
+                this.tanggalDibutuhkan = moment(res.data.dateWanted);
                 
             });
             
@@ -275,26 +277,29 @@ export default {
         validateAndSubmit(e) {
             e.preventDefault();
             this.errors = [];
-            var currentDate = moment(new Date()).format("DD MMMM YYYY");
-            var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
-            var tglBerakhir = moment(this.tanggalBerakhir).format("DD MMMM YYYY");
+            var currentDate = moment();
 
-            if(moment(tglMulai).isBefore(currentDate)){
+            if(moment(this.tanggalMulai).isBefore(currentDate)){
               console.log("Tanggal mulai yang anda masukan tidak valid")
               this.errors.push("Tanggal mulai yang anda masukan tidak valid");
             }
 
-            if(moment(tglBerakhir).isBefore(tglMulai)){
+            if(moment(this.tanggalMulai).isAfter(moment(this.tanggalDibutuhkan))){
+              console.log("Tanggal mulai yang anda masukan tidak valid")
+              this.errors.push("Tanggal mulai yang anda masukan tidak valid");
+            }
+
+            if(moment(this.tanggalBerakhir).isBefore(moment(this.tanggalMulai))){
               console.log("Tanggal berakhir yang anda masukan tidak valid")
               this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
             }
 
-            if(moment(tglBerakhir).isBefore(currentDate)){
+            if(moment(this.tanggalBerakhir).isBefore(currentDate)){
               console.log("Tanggal berakhir yang anda masukan tidak valid")
               this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
             }
 
-            if(moment(tglBerakhir).isAfter(this.dateWanted)){
+            if(moment(this.tanggalBerakhir).isAfter(moment(this.tanggalDibutuhkan))){
               console.log("Tanggal berakhir yang anda masukan tidak valid")
               this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
             }
@@ -331,7 +336,7 @@ export default {
         openModal() {
             this.$refs['modalOk'].show();
             window.setTimeout(function() {
-                window.location.href = "/listLoker";
+                window.location.href = "/daftar-lowongan";
             }, 2000);
         },
 

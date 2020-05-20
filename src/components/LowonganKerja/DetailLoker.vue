@@ -5,7 +5,7 @@
     <ul class="nav p-0 m-0">
         <li><a class="brearcrumb-a" href="/">Home</a></li>
         <li><p class="breadcrumb-a">></p></li>
-        <li><a class="brearcrumb-a" href="/listLoker">Daftar Lowongan Pekerjaan</a></li>
+        <li><a class="brearcrumb-a" href="/daftar-lowongan">Daftar Lowongan Pekerjaan</a></li>
         <li><p class="breadcrumb-a">></p></li>
         <li><a class="brearcrumb-a" :href="'/detailLoker/'+id">Detail {{judulLoker}}</a></li>              
     </ul>
