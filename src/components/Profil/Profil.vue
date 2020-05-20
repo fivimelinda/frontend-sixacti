@@ -15,7 +15,7 @@
                     <div class="col-1">
 
                     </div>
-                    <div class="col-11" v-if="this.usersData.user != null">
+                    <div class="col -11" v-if="this.usersData.user != null">
                         <div class="name" >{{this.usersData.user.nama}}</div>
                         <div class="role" v-if="this.usersData.roles.length != 0" >{{this.usersData.roles[0].roleName}}</div>
                     </div>
