@@ -217,24 +217,16 @@ export default {
                 return null;
             }
             else{
-                var currentDate = moment(new Date()).format("DD MMMM YYYY");
-                var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
-                var tglBerakhir = moment(this.tanggalBerakhir).format("DD MMMM YYYY");
-                console.log(currentDate);
-                console.log(tglMulai);
-                console.log(tglBerakhir);
-
-                if(tglMulai > tglBerakhir){
+                var currentDate = moment();
+                if(moment(this.tanggalBerakhir).isBefore(moment(this.tanggalMulai))){
                     console.log('Tanggal berakhir sebelum tanggal mulai');
-                    console.log(moment(tglBerakhir).isBefore(tglMulai));
-                    return moment(tglBerakhir).isBefore(tglMulai);
-                }
-                else if(currentDate > tglBerakhir){
-                    console.log('Tanggal berakhir sebelum tanggal skrng');
-                    console.log(moment(tglBerakhir).isBefore(tglMulai));
                     return false;
                 }
-                else if(moment(tglBerakhir).isSame(tglMulai)){
+                else if(moment(this.tanggalBerakhir).isBefore(currentDate)){
+                    console.log('Tanggal berakhir sebelum tanggal skrng');
+                    return false;
+                }
+                else if(moment(this.tanggalBerakhir).isSame(this.tanggalMulai)){
                     console.log("hi");
                     return true;
                 }
@@ -267,16 +259,18 @@ export default {
             e.preventDefault();
             this.errors = [];
 
-            var currentDate = moment(new Date()).format("DD MMMM YYYY");
-            var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
-            var tglBerakhir = moment(this.tanggalBerakhir).format("DD MMMM YYYY");
+            var currentDate = moment();
 
-            if(moment(tglMulai).isBefore(currentDate)){
-              console.log("Tanggal mulai yang anda masukan tidak valid")
-              this.errors.push("Tanggal mulai yang anda masukan tidak valid");
+            // if(moment(this.tanggalMulai).isBefore(currentDate)){
+            //   console.log("Tanggal mulai yang anda masukan tidak valid")
+            //   this.errors.push("Tanggal mulai yang anda masukan tidak valid");
+            // }
+
+            if(moment(this.tanggalBerakhir).isBefore(moment(this.tanggalMulai))){
+              console.log("Tanggal berakhir yang anda masukan tidak valid")
+              this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
             }
-
-            if(moment(tglBerakhir).isBefore(tglMulai)){
+            if(moment(this.tanggalBerakhir).isBefore(currentDate)){
               console.log("Tanggal berakhir yang anda masukan tidak valid")
               this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
             }
