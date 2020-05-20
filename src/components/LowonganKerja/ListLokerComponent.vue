@@ -8,7 +8,10 @@
     </ul>
     <h3 class="mt-5">Daftar Lowongan Pekerjaan</h3>
     <hr/>
-    <div v-if="message" class="alert alert-success">
+    <div v-if="message && valMSG" class="alert alert-success">
+      {{message}}
+    </div>
+    <div v-if="message && !valMSG" class="alert alert-danger">
       {{message}}
     </div>
     <div class="container">
@@ -77,7 +80,8 @@ export default {
             loker : [],
             message : "",
             idLoker : 0,
-            msg :""
+            msg :"",
+            valMSG :false,
         };
     },
     computed: {
@@ -94,9 +98,17 @@ export default {
             console.log(this.loker);
         },
         deleteLokerClicked(idLowongan){
+          var tmp = LowonganKerjaService.getLokerById(idLowongan);
           LowonganKerjaService.deleteLoker(idLowongan).then(() =>{
             this.$refs['modal'].hide();
-            this.message = "Delete of Loker " + idLowongan + " successful";
+            if(!this.tmp){
+              this.message = "Lowongan Kerja " + tmp.judulLoker + " Gagal Dihapus";
+            }
+            else{
+              this.message = "Lowongan Kerja " + tmp.judulLoker + " Berhasil Dihapus";
+              this.valMSG = true;
+            }
+            
             this.refreshLoker();
           });
         },

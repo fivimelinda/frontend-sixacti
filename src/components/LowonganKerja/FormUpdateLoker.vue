@@ -205,7 +205,10 @@ export default {
             else{
                 var currentDate = moment(new Date()).format("DD MMMM YYYY");
                 var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
+                console.log('Tanggal Mulai sebelum tanggal hari ini');
+                console.log(moment(tglMulai).isBefore(currentDate));
                 return !moment(tglMulai).isBefore(currentDate);
+               
             }
           
         },
@@ -217,10 +220,18 @@ export default {
                 var currentDate = moment(new Date()).format("DD MMMM YYYY");
                 var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
                 var tglBerakhir = moment(this.tanggalBerakhir).format("DD MMMM YYYY");
-                if(moment(tglBerakhir).isBefore(tglMulai)){
-                    return false;
+                console.log(currentDate);
+                console.log(tglMulai);
+                console.log(tglBerakhir);
+
+                if(tglMulai > tglBerakhir){
+                    console.log('Tanggal berakhir sebelum tanggal mulai');
+                    console.log(moment(tglBerakhir).isBefore(tglMulai));
+                    return moment(tglBerakhir).isBefore(tglMulai);
                 }
-                else if(moment(tglBerakhir).isBefore(currentDate)){
+                else if(currentDate > tglBerakhir){
+                    console.log('Tanggal berakhir sebelum tanggal skrng');
+                    console.log(moment(tglBerakhir).isBefore(tglMulai));
                     return false;
                 }
                 else if(moment(tglBerakhir).isSame(tglMulai)){
