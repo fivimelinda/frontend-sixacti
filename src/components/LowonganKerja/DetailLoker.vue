@@ -34,15 +34,20 @@
                 <div v-if="this.nik == null"> -->
                     <!-- <button v-if="currentUser.role == 'ROLE_PELAMAR'" class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Buat Lamaran</span></button>  -->
                 <!-- </div> -->
-                <!-- <div v-if="this.nik != null">
-                    <div v-if="this.daftarLowongan == null"> -->
-                        <button v-if="currentUser.role == 'ROLE_PELAMAR'" class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Buat Lamaran</span></button> 
-                    <!-- </div>
 
-                    <div v-if="this.daftarLowongan == null">
+                    <!-- <div v-if="this.daftarLowongan == 'gagal'">  -->
+                        <button v-if="currentUser.role == 'ROLE_PELAMAR'" class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Buat Lamaran</span></button> 
+                     <!-- </div> -->
+
+                    <!-- <div v-if="this.daftarLowongan == this.$store.state.auth.user.user.nik">
                         <h3 id="tulis"> Lamaran telah dibuat </h3> 
                     </div> 
-                </div> -->
+
+                    <div v-if="this.daftarLowongan != 'gagal' && this.daftarLowongan!=this.$store.state.auth.user.user.nik"> 
+                        <button v-if="currentUser.role == 'ROLE_PELAMAR'" class="btn btn-lg btn-link" v-on:click="profil()" id="viewPelamar"><span id="daftarPelamar">Lengkapi Profil Sebelum Melamar</span></button> 
+                     </div> -->
+
+
             </div>
             
         </div>
@@ -69,7 +74,7 @@
     </v-card>
     
 
-
+    
 
 </div>
     
@@ -218,24 +223,32 @@ export default {
             var apply = "/listPelamar/" + idLowongan;
             this.$router.push(apply);
         },
+        profil(){
+            this.$router.push("/profil");
+        },
         cekPelamar(){
-            axios.get("http://localhost:8081/api/cekPelamar/" + this.idLowongan + "/" + this.$store.state.auth.user.user.nik,{ headers:authHeader() }).then(res => {
+            if ( this.$store.state.auth.user.user.nik != null) {
+                axios.get("http://localhost:8081/api/cekPelamar/" + this.idLowongan + "/" + this.$store.state.auth.user.user.nik,{ headers:authHeader() }).then(res => {
                 this.daftarLowongan = res.data
                 console.log(res.data)
-            }).catch((err) => {
-                console.log(err);
-            })
-        },
-        checkProfil(){
-          this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
-              this.usersData = res.data;
-              this.nik = res.data.user.nik;
+                }).catch((err) => {
+                    console.log(err);
                 })
-            // )
-        },
+            } else {
+                this.daftarLowongan = '1';
+                console.log("masuk");
+            }
+        }
+        // checkProfil(){
+        //   this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
+        //       this.usersData = res.data;
+        //       this.nik = res.data.user.nik;
+        //         })
+        //     // )
+        // },
 
     },
-    mounted(){
+    created(){
         this.refreshLokerDetails();
         // this.checkProfil();
         // this.cekPelamar();

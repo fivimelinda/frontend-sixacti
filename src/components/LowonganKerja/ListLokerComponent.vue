@@ -63,7 +63,6 @@
 import Vue from 'vue'
 import moment from 'moment'
 import LowonganKerjaService from '../../service/LowonganKerjaService';
-
 Vue.config.productionTip = false
 Vue.filter('formatDate', function(value){
   if(value){
@@ -111,7 +110,7 @@ export default {
         },
         hideModal(){
           this.$refs['modal'].hide();
-        },
+        }
     },
     created(){
         this.refreshLoker();
@@ -120,55 +119,44 @@ export default {
 </script>
 
 <style>
-
 #cardLoker{
   /* height: 300px; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: left;
   min-height: 312px;
 }
-
 #cardHeader{
   border-style: none;
   background-color: white;
 }
-
 #card-footer{
   border-top-style: none ;
   border-bottom-style: solid;
   border-bottom-width: 10px;
   border-bottom-color: #C53751;
   background-color: white;
-
 }
-
 #titleCard{
   color: #C53751;
   font-weight: bold;
   font-size: 32px;
-
 }
-
 #lokerDesc{
   font-family: Archivo;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 15px;
-
   color: #736B6B;
 }
-
 #periodeDesc{
   font-family: Archivo;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
   line-height: 15px;
-
   color: #7D0022;
 }
-
 #deptSect{
   font-family: Archivo;
   font-style: normal;
@@ -176,12 +164,8 @@ export default {
   font-size: 12px;
   line-height: 13px;
   /* identical to box height */
-
-
   color: #9B9B9B;
-
 }
-
 #hapusBtn{
   color: #C53751;
 }

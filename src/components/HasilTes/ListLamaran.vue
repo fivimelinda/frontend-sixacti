@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-6 mb-3">
                         <!-- <div v-for="j in i.listLamaran" v-bind:key="j.id">
-                            <div v-if="j.pelamar.userPelamar.nik == this.nik"> --> -->
+                            <div v-if="j.pelamar.userPelamar.nik == this.nik"> -->
                             <button class=" mt-5 mb-5 btn btn-danger" v-on:click="hasilTes()">Lihat Hasil Tes</button>
                             <!-- </div>
                          </div> -->

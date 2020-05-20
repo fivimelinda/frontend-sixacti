@@ -45,6 +45,7 @@ import HasilTes from '../components/HasilTes/HasilTes'
 import ListLamaran from '../components/HasilTes/ListLamaran'
 
 
+
 import MainLayout from '../components/MainLayout'
 
 Vue.use(Vuetify);
@@ -235,6 +236,9 @@ const routes = [
         name: 'detailLoker',
         component: detailLoker
       },
+
+
+    
       {
         path: '/LamaranKerja/:idLowongan',
         name:'LamaranKerja',
