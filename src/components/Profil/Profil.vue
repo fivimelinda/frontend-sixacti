@@ -192,7 +192,57 @@
                 </div>
                 
             </div>
-            <hr class="spacer"/>
+            <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')">
+                <hr class="spacer"/>
+                <div class="row">
+                    <div class="col-1">
+                    </div>
+                    <div class="col-5">
+                        <div class="identifier"><b>Gaji</b></div>
+                    </div>
+                    <div class="col-4">
+                        <div class="content">{{this.karyawan.gaji}}</div>
+                    </div>
+                    
+                </div>
+                    <hr class="spacer"/>
+                <div class="row">
+                    <div class="col-1">
+                    </div>
+                    <div class="col-5">
+                        <div class="identifier"><b>Sisa Cuti</b></div>
+                    </div>
+                    <div class="col-4">
+                        <div class="content">{{this.karyawan.sisaCuti}}</div>
+                    </div>
+                    
+                </div>
+                <hr class="spacer"/>
+                <div class="row">
+                    <div class="col-1">
+                    </div>
+                    <div class="col-5">
+                        <div class="identifier"><b>Departemen</b></div>
+                    </div>
+                    <div class="col-4">
+                        <div class="content">{{this.karyawan.departemen.namaDepartemen}}</div>
+                    </div>
+                    
+                </div>
+                <hr class="spacer"/>
+                <div class="row">
+                    <div class="col-1">
+                    </div>
+                    <div class="col-5">
+                        <div class="identifier"><b>Section</b></div>
+                    </div>
+                    <div class="col-4">
+                        <div class="content">{{this.karyawan.section.namaSection}}</div>
+                    </div>
+                    
+                </div>
+            </div>
+
             
         </div>
 
@@ -329,6 +379,42 @@
                             <div class="form-group">
                                 <div class="label">Nomor pokok wajib pajak (NPWP)*</div>
                                 <input class="form-control" id="npwp" placeholder="masukkan nomor pokok wajib pajak (NPWP)" v-model="npwp">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="label">Gaji*</div>
+                                    <input class="form-control" id="gaji" placeholder="masukkan email" v-model="gaji">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="label">Sisa Cuti*</div>
+                                    <input class="form-control" id="sisaCuti" placeholder="masukkan nomor pokok wajib pajak (NPWP)" v-model="sisaCuti">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="label">Departemen*</div>
+                                    <input class="form-control" type="number" id="dept" placeholder="masukkan email" v-model="idDept">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="label">Section*</div>
+                                    <input class="form-control" type="number" id="sect" placeholder="masukkan nomor pokok wajib pajak (NPWP)" v-model="idSect">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -480,6 +566,26 @@
                         </div>
                     </div>
                 </div>
+                <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="label">Gaji*</div>
+                                    <input class="form-control" id="gaji" placeholder="masukkan email" v-model="karyawan.gaji">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="label">Sisa Cuti*</div>
+                                    <input class="form-control" id="sisaCuti" placeholder="masukkan nomor pokok wajib pajak (NPWP)" v-model="karyawan.sisaCuti">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
                 <br>
                 <div class="container">
                    <div class="row">
@@ -488,8 +594,6 @@
                        </div>
                    </div>
                </div>
-                
-
             </form>
         </b-modal>
 
@@ -583,52 +687,7 @@
     </v-container>
 </template>
 
-<style>
-.row{
-    margin-top: -10px;
-    margin-bottom: -10px;
-}
-.spacer{
-    margin-left: 93px;
-}
-.identifier{
-    font-family: 'archivo';
-    color: 'black';
-    font-size: 18px;
-}
-.content{
-    font-family: 'archivo';
-    color: #454545;
-    font-size: 18px;
-}
-.role{
-    font-family: 'archivo';
-    font-size: 16px;
-    color: white;
-}
-.label{
-    text-align: left;
-    font-family: 'archivo';
-    color: black;
-    margin-bottom: 2px;
-}
-.name{
-    font-family: "oswald";
-    color: white;
-    font-size: 35px;
-}
-.red-top{
-    background-color: #C53751;
-}
-.btn-primer{
-    background-color: #C53751 !important;
-    border:1px solid #C53751 !important;
-}
-.btn-primer:hover{
-    background-color: rgba(197, 55, 81, 0.883) !important;
-    border:1px solid rgba(197, 55, 81, 0.904) !important;
-}
-</style>
+
 
 <script>
 import authHeader from '../../service/AuthHeader'
@@ -660,7 +719,12 @@ export default{
             errMsg: '',
             kosongCount: 0,
             usersData: '',
-            tanggal:''
+            tanggal:'',
+            gaji:'',
+            sisaCuti:'',
+            idDept:'',
+            idSect:'',
+            karyawan:null,
         }
     },
     computed: {
@@ -699,8 +763,14 @@ export default{
                         this.tanggal = new Date(this.tanggal)
                         this.tanggal = moment(this.tanggal).format('MMMM Do YYYY')
                         console.log(this.tanggal)
+                        this.axios.get('http://localhost:8081/api/karyawan/get/'+res.data.user.nik,{ headers:authHeader() }).then(res=>{
+                            console.log(res);
+                            this.karyawan = res.data;
+                            console.log(this.karyawan);
+                        });
                     }
-                })
+                });
+                
             // )
         },
         formEdit(e){
@@ -767,7 +837,19 @@ export default{
             .then (ress => {
                     this.retStatus = ress.data
                     if(ress.status == 200){
-                        this.openModal()
+                        if(!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')){
+                            this.axios.put('http://localhost:8081/api/karyawan/edit/'+this.nik,{
+                                "nik":this.nik,
+                                "gaji":this.karyawan.gaji,
+                                "sisaCuti":this.karyawan.sisaCuti,
+                                "idDept":this.karyawan.departemen.id,
+                                "idSect":this.karyawan.section.idSection
+                            },{headers:authHeader()}).then(res =>{
+                                console.log(res);
+                            });
+                            this.openModal();
+                        }
+                        
                     }
                     else{
                         this.errorModal()
@@ -851,7 +933,23 @@ export default{
                     .then (ress => {
                         this.retStatus = ress.data
                         if(ress.status == 200){
+                            if(!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')){
+                            this.axios.post('http://localhost:8081/api/karyawan/tambah',{
+                                "nik":this.nik,
+                                "gaji":this.gaji,
+                                "sisaCuti":this.sisaCuti,
+                                "idDept":this.idDept,
+                                "idSect":this.idSect
+                            },{headers:authHeader()}).then(res =>{
+                                console.log(res);
+                                
+                            });
                             this.openModal2()
+                            }else if(this.usersData.roles[0].roleName === 'ROLE_PELAMAR'){
+                                this.axios.post('http://localhost:8081/profil/addPelamar/'+this.nik, {headers:authHeader()});
+                                
+                            }
+                            
                         }
                         else{
                             this.errorModal2()
@@ -888,3 +986,50 @@ export default{
 }
 
 </script>
+
+<style>
+.row{
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+.spacer{
+    margin-left: 93px;
+}
+.identifier{
+    font-family: 'archivo';
+    color: 'black';
+    font-size: 18px;
+}
+.content{
+    font-family: 'archivo';
+    color: #454545;
+    font-size: 18px;
+}
+.role{
+    font-family: 'archivo';
+    font-size: 16px;
+    color: white;
+}
+.label{
+    text-align: left;
+    font-family: 'archivo';
+    color: black;
+    margin-bottom: 2px;
+}
+.name{
+    font-family: "oswald";
+    color: white;
+    font-size: 35px;
+}
+.red-top{
+    background-color: #C53751;
+}
+.btn-primer{
+    background-color: #C53751 !important;
+    border:1px solid #C53751 !important;
+}
+.btn-primer:hover{
+    background-color: rgba(197, 55, 81, 0.883) !important;
+    border:1px solid rgba(197, 55, 81, 0.904) !important;
+}
+</style>
