@@ -92,10 +92,20 @@ export default {
         if (!this.loggedIn) {
             this.$router.push('/auth/login');
         }
+        if(this.loggedIn){
+            if(this.currentUser.role[0] === "ROLE_DEPARTMENTMANAGER" || 
+                this.currentUser.role[0] === "ROLE_PELAMAR" ||
+                this.currentUser.role[0] === "ROLE_KARYAWANTETAP"||
+                this.currentUser.role[0] === "ROLE_ASSISTANTMANAGER"||
+                this.currentUser.role[0] === "ROLE_SECTIONMANAGER"||
+                this.currentUser.role[0] === "ROLE_KARYAWANKONTRAK"){
+                    this.$router.push('/403')
+                }
+        }
     },
     methods: {
         load() {
-            axios.get('http://localhost:8081/detailKontrak/all',{ headers:authHeader() }).then(res => {
+            axios.get('http://sixacti-api.herokuapp.com/detailKontrak/all',{ headers:authHeader() }).then(res => {
                 for(var i = 0; i < res.data.length ; i++){
                     res.data[i]["name"] = this.name[i]
                     res.data[i]["departemen"] = this.departemen[i]
@@ -107,14 +117,14 @@ export default {
             })
         },
         loadName() {
-            axios.get('http://localhost:8081/detailKontrak/getName', { headers:authHeader() }).then(res => {
+            axios.get('http://sixacti-api.herokuapp.com/detailKontrak/getName', { headers:authHeader() }).then(res => {
                 this.name = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         loadDepartemen() {
-            axios.get('http://localhost:8081/detailKontrak/getDepartemen', { headers:authHeader() }).then(res => {
+            axios.get('http://sixacti-api.herokuapp.com/detailKontrak/getDepartemen', { headers:authHeader() }).then(res => {
                 this.departemen = res.data
             }).catch((err) => {
                 console.log(err);

@@ -1,5 +1,16 @@
 <template>
     <v-container>
+        <br>
+        <ul class="nav p-0 m-0">
+        <li><a class="brearcrumb-a" href="/">Home</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" href="/daftar-lowongan">Daftar Lowongan Pekerjaan</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" :href="'/detailLoker/'+idLowongan">Detail {{judul}}</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" :href="'/listPelamar/'+idLowongan">Daftar Pelamar</a></li>
+
+        </ul>
         <b-card>
             <b-card-text>
                 <div class="container justify-end">
@@ -59,7 +70,8 @@ export default {
             currentPage:1,
             perPage:10,
             et : [],
-            maksimalPeserta : ""            
+            maksimalPeserta : "",
+            judul : ""           
         }
 
     },
@@ -77,6 +89,7 @@ export default {
     methods: {
         refreshLamaranLoker() {
             LowonganKerjaService.getLokerById(this.idLowongan).then(res => {
+                this.judul = res.data.judulLoker;
                 this.et = res.data.listLamaran;
                 this.maksimalPeserta = res.data.requestLowongan.jumlah;
             });

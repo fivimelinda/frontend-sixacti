@@ -205,7 +205,10 @@ export default {
             else{
                 var currentDate = moment(new Date()).format("DD MMMM YYYY");
                 var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
+                console.log('Tanggal Mulai sebelum tanggal hari ini');
+                console.log(moment(tglMulai).isBefore(currentDate));
                 return !moment(tglMulai).isBefore(currentDate);
+               
             }
           
         },
@@ -214,16 +217,16 @@ export default {
                 return null;
             }
             else{
-                var currentDate = moment(new Date()).format("DD MMMM YYYY");
-                var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
-                var tglBerakhir = moment(this.tanggalBerakhir).format("DD MMMM YYYY");
-                if(moment(tglBerakhir).isBefore(tglMulai)){
+                var currentDate = moment();
+                if(moment(this.tanggalBerakhir).isBefore(moment(this.tanggalMulai))){
+                    console.log('Tanggal berakhir sebelum tanggal mulai');
                     return false;
                 }
-                else if(moment(tglBerakhir).isBefore(currentDate)){
+                else if(moment(this.tanggalBerakhir).isBefore(currentDate)){
+                    console.log('Tanggal berakhir sebelum tanggal skrng');
                     return false;
                 }
-                else if(moment(tglBerakhir).isSame(tglMulai)){
+                else if(moment(this.tanggalBerakhir).isSame(moment(this.tanggalMulai))){
                     console.log("hi");
                     return true;
                 }
@@ -256,16 +259,18 @@ export default {
             e.preventDefault();
             this.errors = [];
 
-            var currentDate = moment(new Date()).format("DD MMMM YYYY");
-            var tglMulai = moment(this.tanggalMulai).format("DD MMMM YYYY");
-            var tglBerakhir = moment(this.tanggalBerakhir).format("DD MMMM YYYY");
+            var currentDate = moment();
 
-            if(moment(tglMulai).isBefore(currentDate)){
-              console.log("Tanggal mulai yang anda masukan tidak valid")
-              this.errors.push("Tanggal mulai yang anda masukan tidak valid");
+            // if(moment(this.tanggalMulai).isBefore(currentDate)){
+            //   console.log("Tanggal mulai yang anda masukan tidak valid")
+            //   this.errors.push("Tanggal mulai yang anda masukan tidak valid");
+            // }
+
+            if(moment(this.tanggalBerakhir).isBefore(moment(this.tanggalMulai))){
+              console.log("Tanggal berakhir yang anda masukan tidak valid")
+              this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
             }
-
-            if(moment(tglBerakhir).isBefore(tglMulai)){
+            if(moment(this.tanggalBerakhir).isBefore(currentDate)){
               console.log("Tanggal berakhir yang anda masukan tidak valid")
               this.errors.push("Tanggal berakhir yang anda masukan tidak valid");
             }
@@ -298,7 +303,7 @@ export default {
         openModal() {
             this.$refs['modalOk'].show();
             window.setTimeout(function() {
-                window.location.href = "/listLoker";
+                window.location.href = "/daftar-lowongan";
             }, 2000);
         },
 
