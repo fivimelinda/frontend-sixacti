@@ -285,14 +285,14 @@ export default {
         }
      },
         checkProfil(){
-          this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
+          this.axios.get('https://sixacti-api.herokuapp.com/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
               this.usersData = res.data;
               this.nik = res.data.user.nik;
                 })
             // )
         },
           checkLamar(){
-          this.axios.get('http://localhost:8081/api/cekPelamar/'+this.$store.state.auth.user.user.nik,{ headers:authHeader() }).then(res =>{
+          this.axios.get('https://sixacti-api.herokuapp.com/api/cekPelamar/'+this.$store.state.auth.user.user.nik,{ headers:authHeader() }).then(res =>{
               this.hasilData = res.data;
               console.log(this.hasilData)
                 })

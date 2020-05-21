@@ -7,7 +7,7 @@
             :src="require('../assets/xacti.png')"
             ></v-img></span>
             <v-spacer></v-spacer>
-            <v-btn text color="grey" v-if="this.loggedIn">{{name}}
+            <v-btn text :to="'/profil'" style="text-decoration:none" color="grey" v-if="this.loggedIn">{{name}}
                 <v-icon right large>mdi-account-circle</v-icon>
             </v-btn>
             <v-btn text color="black" v-if="!this.loggedIn" router :to="'/auth/login'">Login

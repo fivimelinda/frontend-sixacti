@@ -11,13 +11,13 @@
             <div>
             </div>
             <div class="container">
-                <div class="row">
-                    <div class="col-1">
-
-                    </div>
-                    <div class="col -11" v-if="this.usersData.user != null">
+                <div class="d-flex justify-content-between">
+                    <div class="" v-if="this.usersData.user != null">
                         <div class="name" >{{this.usersData.user.nama}}</div>
                         <div class="role" v-if="this.usersData.roles.length != 0" >{{this.usersData.roles[0].roleName}}</div>
+                    </div>
+                    <div v-if="this.usersData.roles[0].roleName === 'ROLE_PELAMAR' " class="mb-0">
+                        <b-button class="">Atribut</b-button>
                     </div>
                     
                 </div>
@@ -192,7 +192,7 @@
                 </div>
                 
             </div>
-            <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')">
+            <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR')">
                 <hr class="spacer"/>
                 <div class="row">
                     <div class="col-1">
@@ -383,20 +383,20 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')">
+                <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR')">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="label">Gaji*</div>
-                                    <input class="form-control" id="gaji" placeholder="masukkan email" v-model="gaji">
+                                    <input class="form-control" id="gaji" placeholder="masukkan gaji" v-model="gaji">
                                 </div>
                             </div>
                             <hr>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="label">Sisa Cuti*</div>
-                                    <input class="form-control" id="sisaCuti" placeholder="masukkan nomor pokok wajib pajak (NPWP)" v-model="sisaCuti">
+                                    <input class="form-control" id="sisaCuti" :disabled="(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')" placeholder="masukkan sisa cuti anda" v-model="sisaCuti">
                                 </div>
                             </div>
                         </div>
@@ -406,14 +406,14 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="label">Departemen*</div>
-                                    <input class="form-control" type="number" id="dept" placeholder="masukkan email" v-model="idDept">
+                                    <input class="form-control" type="number" id="dept" placeholder="masukkan nomor departemen" v-model="idDept">
                                 </div>
                             </div>
                             <hr>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="label">Section*</div>
-                                    <input class="form-control" type="number" id="sect" placeholder="masukkan nomor pokok wajib pajak (NPWP)" v-model="idSect">
+                                    <input class="form-control" type="number" id="sect" placeholder="masukkan nomor nomor section" v-model="idSect">
                                 </div>
                             </div>
                         </div>
@@ -566,7 +566,7 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')">
+                <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR')">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-6">
@@ -579,7 +579,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="label">Sisa Cuti*</div>
-                                    <input class="form-control" id="sisaCuti" placeholder="masukkan nomor pokok wajib pajak (NPWP)" v-model="karyawan.sisaCuti">
+                                    <input class="form-control" id="sisaCuti" placeholder="masukkan nomor pokok wajib pajak (NPWP)" :disabled="(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')" v-model="karyawan.sisaCuti">
                                 </div>
                             </div>
                         </div>
@@ -693,6 +693,7 @@
 import authHeader from '../../service/AuthHeader'
 import moment from 'moment';
 import 'moment/locale/id';
+import axios from 'axios'
 
 export default{
     mounted(){
@@ -725,6 +726,7 @@ export default{
             idDept:'',
             idSect:'',
             karyawan:null,
+            pelamar:null
         }
     },
     computed: {
@@ -746,14 +748,20 @@ export default{
             //     this.$refs['create'].show();
             // }
             // if(
+
+                // console.log(this.$store.state.auth.user)
+                // console.log(authHeader())
+                
+                //this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
                 console.log(this.$store.state.auth.user)
                 this.axios.get('http://sixacti-api.herokuapp.com/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
+
                     
                     this.usersData = res.data;
                     console.log(this.usersData)
                     
                     if(res.data.user === null){
-                        this.$refs['create'].show();
+                        // this.$refs['create'].show();
                         this.createModal();
                     }
                     else{
@@ -763,11 +771,19 @@ export default{
                         this.tanggal = new Date(this.tanggal)
                         this.tanggal = moment(this.tanggal).format('MMMM Do YYYY')
                         console.log(this.tanggal)
-                        this.axios.get('http://sixacti-api.herokuapp.com/api/karyawan/get/'+res.data.user.nik,{ headers:authHeader() }).then(res=>{
-                            console.log(res);
-                            this.karyawan = res.data;
-                            console.log(this.karyawan);
+                        if(res.data.roles[0].roleName === 'ROLE_PELAMAR'){
+                            this.axios.get('http://sixacti-api.herokuapp.com/profil/getPelamar/'+res.data.user.nik,{ headers:authHeader() })
+                            .then(ress =>{
+                                this.pelamar = ress.data;
+                                console.log(this.pelamar);
+                            })
+                        }
+                        else{
+                            this.axios.get('http://sixacti-api.herokuapp.com/api/karyawan/get/'+res.data.user.nik,{ headers:authHeader() }).then(ress=>{
+                            this.karyawan = ress.data;
                         });
+                        }
+                        
                     }
                 });
                 
@@ -933,6 +949,9 @@ export default{
                     .then (ress => {
                         this.retStatus = ress.data
                         if(ress.status == 200){
+                            if((this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')){
+                                this.sisaCuti=0;
+                            }
                             if(!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')){
                             this.axios.post('http://sixacti-api.herokuapp.com/api/karyawan/tambah',{
                                 "nik":this.nik,
@@ -946,8 +965,8 @@ export default{
                             });
                             this.openModal2()
                             }else if(this.usersData.roles[0].roleName === 'ROLE_PELAMAR'){
-                                this.axios.post('http://sixacti-api.herokuapp.com/profil/addPelamar/'+this.nik, {headers:authHeader()});
-                                
+                                this.createPelamar();
+                                   
                             }
                             
                         }
@@ -967,6 +986,13 @@ export default{
                 window.location.href = "/profil";
             }, 2000);
         },
+
+        createPelamar(){
+            this.pelamar = axios.get('http://sixacti-api.herokuapp.com/profil/addPelamar/'+this.nik, { headers:authHeader() });
+            this.openModal2()
+            
+            },
+
         errorModal(){
             this.$refs['error-modal'].show();
         },

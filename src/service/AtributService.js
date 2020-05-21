@@ -1,6 +1,6 @@
 import axios from "axios";
 import authHeader from './AuthHeader'
-const URI = 'http://localhost:8081/api';
+const URI = 'https://sixacti-api.herokuapp.com/api';
 
 
 class AtributService {
