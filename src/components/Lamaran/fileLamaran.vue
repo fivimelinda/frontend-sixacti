@@ -18,9 +18,10 @@
               </b-form-file> -->
               <input class="form-control" type="file" ref="file" v-on:change="handleFileUpload()" id="file" required>
               <small class="form-text text-muted">Dalam format .jpg/.png</small>
+              <small class="form-text text-muted">*Foto KTP hanya dapat dimasukkan sekali</small>
             </div>
 
-            <button v-on:click="submitFile(); cekSukses()" type="" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
+            <button v-on:click="submitFile(); cekSukses()" @click="submitted = true" :disabled="submitted" type="" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
             <br>
             <button class=" mt-5 mb-5 btn btn-dark" v-on:click="afterClicked()">Selanjutnya</button>
         </form>
@@ -79,7 +80,8 @@ export default {
     return{
       file:null,
       ressData: '',
-      count: 0
+      count: 0,
+      submitted: false
     }
   },
   computed: {

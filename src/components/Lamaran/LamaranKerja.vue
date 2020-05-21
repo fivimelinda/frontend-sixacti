@@ -1,7 +1,7 @@
 <template>
   <div class="FormCreateLoker">
 
-    <div v-if="this.usersData.user == null">
+    <div v-if="this.$store.state.auth.user.user == null">
       <br>
       <br>
       <div class="title-top">
@@ -15,7 +15,7 @@
     </div> -->
 
 
-    <div v-if="this.usersData.user != null">
+    <div v-if="this.$store.state.auth.user.user != null">
       {{checkLamar()}}
       <div v-if="this.hasilData == this.nik">
           <div class="title-top">
@@ -309,7 +309,7 @@ export default {
 .title-top{
     font-family: "oswald";
     font-size: 50px;
-    margin-left: 500px;
+    margin-left: 200px;
 }
 
 h1{

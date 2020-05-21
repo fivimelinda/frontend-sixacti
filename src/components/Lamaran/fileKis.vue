@@ -12,6 +12,7 @@
               <div class="mb-2 label">Foto Kartu Indonesia Sehat</div>
               <input class="form-control" type="file" ref="file" v-on:change="handleFileUpload()" id="file" required>
               <small class="form-text text-muted">Dalam format .jpg/.png</small>
+              <small class="form-text text-muted">*Foto kartu indonesia sehat hanya dapat dimasukkan sekali</small>
             </div>
             <!-- <div class="form-group">
               <div class="mb-2 label">Foto Kartu Keluarga*</div>
@@ -34,7 +35,7 @@
               <input class="form-control" type="file" id="resume" >
             </div> -->
 
-            <button v-on:click="submitFile(); cekSukses()" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
+            <button v-on:click="submitFile(); cekSukses()" @click="submitted = true" :disabled="submitted" type="submit" class=" mt-5 mb-5 btn btn-danger">Simpan</button>
             <br>
             <button class=" btn btn-light border-dark w-10" v-on:click="beforeClicked()">Kembali</button>
             <button class=" mt-5 mb-5 btn btn-dark" v-on:click="afterClicked()">Selanjutnya</button>
@@ -90,7 +91,8 @@ export default {
     return{
      file:'',
       ressData: '',
-      count: 0
+      count: 0,
+      submitted : false
     }
   },
   computed: {
