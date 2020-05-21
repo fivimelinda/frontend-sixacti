@@ -41,7 +41,7 @@
                                     <option value="HR dan GA">HR dan GA</option>
                                     <option value="Accounting">Accounting</option>
                                     <option value="Business Planning">Business Planning</option>
-                                    <option value="J-SOX Control Office">J-SOX Control Office</option>
+                                    <option value="JSOX Control Office">J-SOX Control Office</option>
                                     <option value="Procurement">Procurement</option>
                                     <option value="Production Control">Production Control</option>
                                     <option value="Production">Production</option>
@@ -55,7 +55,28 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="label">Section*</div>
-                                <input class="form-control" id="section" placeholder="masukkan section" v-model="section">
+                                <!-- <input class="form-control" id="section" placeholder="masukkan section" v-model="section"> -->
+                                <select id="section" v-model="section" class="form-control">
+                                    <option v-if="this.departemen == 'HR dan GA'" value="Human Resource">Human Resource</option>
+                                    <option v-if="this.departemen == 'HR dan GA'" value="General Affair">General Affair</option>
+                                    <option v-if="this.departemen == 'Accounting'" value="Accounting">Accounting</option>
+                                    <option v-if="this.departemen == 'Accounting'" value="Costing">Costing</option>
+                                    <option v-if="this.departemen == 'Business Planning'" value="Business Planning">Business Planning</option>
+                                    <option v-if="this.departemen == 'Business Planning'" value="IT">IT</option>
+                                    <option v-if="this.departemen == 'JSOX Control Office'" value="JSOX Control Office">J-SOX Control Office</option>
+                                    <option v-if="this.departemen == 'Procurement'" value="Purchasing">Purchasing</option>
+                                    <option v-if="this.departemen == 'Procurement'" value="Material Control">Material Control</option>
+                                    <option v-if="this.departemen == 'Procurement'" value="Import and Export">Import and Export</option>
+                                    <option v-if="this.departemen == 'Production Control'" value="Production Control">Production Control</option>
+                                    <option v-if="this.departemen == 'Production'" value="Production">Production</option>
+                                    <option v-if="this.departemen == 'Production'" value="SMT">SMT</option>
+                                    <option v-if="this.departemen == 'Production Engineering'" value="Production Engineering">Production Engineering</option>
+                                    <option v-if="this.departemen == 'Quality Assurance'" value="Quality Assurance">Quality Assurance</option>
+                                    <option v-if="this.departemen == 'Quality Assurance'" value="Incoming Quality">Incoming Quality</option>
+                                    <option v-if="this.departemen == 'Quality Assurance'" value="Quality System">Quality System</option>
+                                    <option v-if="this.departemen == 'Business Development Group'" value="Business Development Group">Business Development Group</option>
+                                    <!-- <option v-else value="Section">Section</option> -->
+                                </select>
                             </div>
                         </div>
                     </div>
