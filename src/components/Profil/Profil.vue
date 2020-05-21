@@ -1003,7 +1003,8 @@ export default{
                                 "sisaCuti":this.sisaCuti,
                                 "idDept":this.idDept,
                                 "idSect":this.idSect
-                            },{headers:authHeader()}).then(res =>{
+                            },{headers:authHeader()}).then(data =>{
+                                this.karyawan = data.data;
                                 const nowUser = JSON.parse(localStorage.getItem('user'));
                                 nowUser.user = this.retStatus.user;
                                 localStorage.user = JSON.stringify(nowUser);
