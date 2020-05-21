@@ -37,7 +37,7 @@
           </div>
         </div>
         
-        <b-modal ref="modal" id="modal-1" title="Konfirmasi Penghapusan Lowongan" v-bind:hide-footer="true">
+        <b-modal ref="modal" id="modal-1" title="Konfirmasi Penolakan Request Lowongan" v-bind:hide-footer="true">
             <div class="detail">
                 <p class="title">Apakah anda yakin untuk menolaknya ? </p>
                 <hr>
@@ -139,7 +139,7 @@ export default {
   /* height: 300px; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: left;
-  min-height: 312px;
+  min-height: 320px;
 }
 
 #cardHeader{
