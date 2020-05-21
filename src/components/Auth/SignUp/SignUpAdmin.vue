@@ -191,8 +191,8 @@ export default {
     },
     mounted() {
 
-        if (!this.loggedIn) {
-            this.$router.push('/auth/login');
+        if (this.loggedIn) {
+            this.$router.push('/');
         }// } else if(!(this.currentUser.role[0] === "ROLE_ADMIN")){
         //     this.$router.push('/');
         // }
