@@ -51,20 +51,20 @@
                             <b-card-text>
                                 <div style="color:rgb(110, 109, 109)" v-if="!(pelamar.atribut === null)">
                                     <b-row class="mt-1">
-                                        <b-col class="pt-0 mt-0 pb-0 mb-0">Ukuran Sepatu</b-col>
-                                        <b-col class="pt-0 mt-0 pb-0 mb-0">:    {{atribut.ukuran_sepatu}}</b-col>
+                                        <b-col class="pt-0 mt-1 pb-0 mb-1">Ukuran Sepatu</b-col>
+                                        <b-col class="pt-0 mt-1 pb-0 mb-1">:    {{atribut.ukuran_sepatu}}</b-col>
                                     </b-row>
                                     <b-row class="mt-1">
-                                        <b-col class="pt-0 mt-0 pb-0 mb-0">Ukuran Baju Seragam</b-col>
-                                        <b-col class="pt-0 mt-0 pb-0 mb-0">:    {{atribut.ukuran_baju}}</b-col>
+                                        <b-col class="pt-0 mt-1 pb-0 mb-1">Ukuran Baju Seragam</b-col>
+                                        <b-col class="pt-0 mt-1 pb-0 mb-1">:    {{atribut.ukuran_baju}}</b-col>
                                     </b-row>
                                     <b-row class="mt-1">
-                                        <b-col class="pt-0 mt-0 pb-0 mb-0">Ukuran Jas Lab</b-col>
-                                        <b-col class="pt-0 mt-0 pb-0 mb-0">:    {{atribut.ukuran_jas_lab}}</b-col>
+                                        <b-col class="pt-0 mt-1 pb-0 mb-1">Ukuran Jas Lab</b-col>
+                                        <b-col class="pt-0 mt-1 pb-0 mb-1">:    {{atribut.ukuran_jas_lab}}</b-col>
                                     </b-row>
                                     <b-row class="mt-1">
-                                        <b-col class="pt-0 mt-0">Ukuran Helm</b-col>
-                                        <b-col class="pt-0 mt-0">:    {{atribut.ukuran_helm}}</b-col>
+                                        <b-col class="pt-0 mt-1">Ukuran Helm</b-col>
+                                        <b-col class="pt-0 mt-1">:    {{atribut.ukuran_helm}}</b-col>
                                     </b-row>
                                     <hr style="border:1px solid #C53751"/>
                                     <div class="d-flex justify-content-center">
