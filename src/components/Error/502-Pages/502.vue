@@ -4,6 +4,7 @@
         <br>
         <p class="title-top">502 Error</p>
         <p class="title-top1">Internal Server Error</p>
+        <button class="mt-5 mb-5 btn btn-link" v-on:click="home()">Kembali ke beranda</button>
     </div>
 
 </template>
