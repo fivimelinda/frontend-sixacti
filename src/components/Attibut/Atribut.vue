@@ -167,11 +167,7 @@ export default {
     methods:{
         async loadNewAtribut(){
             try{
-<<<<<<< HEAD
                 const URI = 'https://sixacti-api.herokuapp.com/api';
-=======
-                const URI = 'http://sixacti-api.herokuapp.com/api';
->>>>>>> master
                 const getPelamar =await axios.get(URI + "/pelamar/get/" + this.$route.params.id);
                 this.pelamar = getPelamar.data;
                 this.atribut = this.pelamar.atribut;
