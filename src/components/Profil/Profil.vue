@@ -192,7 +192,7 @@
                 </div>
                 
             </div>
-            <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')">
+            <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR')">
                 <hr class="spacer"/>
                 <div class="row">
                     <div class="col-1">
@@ -383,20 +383,20 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')">
+                <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR')">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="label">Gaji*</div>
-                                    <input class="form-control" id="gaji" placeholder="masukkan email" v-model="gaji">
+                                    <input class="form-control" id="gaji" placeholder="masukkan gaji" v-model="gaji">
                                 </div>
                             </div>
                             <hr>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="label">Sisa Cuti*</div>
-                                    <input class="form-control" id="sisaCuti" placeholder="masukkan nomor pokok wajib pajak (NPWP)" v-model="sisaCuti">
+                                    <input class="form-control" id="sisaCuti" :disabled="(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')" placeholder="masukkan sisa cuti anda" v-model="sisaCuti">
                                 </div>
                             </div>
                         </div>
@@ -406,14 +406,14 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="label">Departemen*</div>
-                                    <input class="form-control" type="number" id="dept" placeholder="masukkan email" v-model="idDept">
+                                    <input class="form-control" type="number" id="dept" placeholder="masukkan nomor departemen" v-model="idDept">
                                 </div>
                             </div>
                             <hr>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="label">Section*</div>
-                                    <input class="form-control" type="number" id="sect" placeholder="masukkan nomor pokok wajib pajak (NPWP)" v-model="idSect">
+                                    <input class="form-control" type="number" id="sect" placeholder="masukkan nomor nomor section" v-model="idSect">
                                 </div>
                             </div>
                         </div>
@@ -566,7 +566,7 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')">
+                <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR')">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-6">
@@ -579,7 +579,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="label">Sisa Cuti*</div>
-                                    <input class="form-control" id="sisaCuti" placeholder="masukkan nomor pokok wajib pajak (NPWP)" v-model="karyawan.sisaCuti">
+                                    <input class="form-control" id="sisaCuti" placeholder="masukkan nomor pokok wajib pajak (NPWP)" :disabled="(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')" v-model="karyawan.sisaCuti">
                                 </div>
                             </div>
                         </div>
@@ -772,7 +772,7 @@ export default{
                         this.tanggal = moment(this.tanggal).format('MMMM Do YYYY')
                         console.log(this.tanggal)
                         if(res.data.roles[0].roleName === 'ROLE_PELAMAR'){
-                            this.axios.get('http://localhost:8081/profil/getPelamar/'+res.data.user.nik,{ headers:authHeader() })
+                            this.axios.get('http://sixacti-api.herokuapp.com/profil/getPelamar/'+res.data.user.nik,{ headers:authHeader() })
                             .then(ress =>{
                                 this.pelamar = ress.data;
                                 console.log(this.pelamar);
@@ -949,6 +949,9 @@ export default{
                     .then (ress => {
                         this.retStatus = ress.data
                         if(ress.status == 200){
+                            if((this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')){
+                                this.sisaCuti=0;
+                            }
                             if(!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')){
                             this.axios.post('http://sixacti-api.herokuapp.com/api/karyawan/tambah',{
                                 "nik":this.nik,
@@ -985,7 +988,7 @@ export default{
         },
 
         createPelamar(){
-            this.pelamar = axios.get('http://localhost:8081/profil/addPelamar/'+this.nik, { headers:authHeader() });
+            this.pelamar = axios.get('http://sixacti-api.herokuapp.com/profil/addPelamar/'+this.nik, { headers:authHeader() });
             this.openModal2()
             
             },
