@@ -105,7 +105,7 @@ export default {
     },
     methods: {
         load() {
-            axios.get('http://sixacti-api.herokuapp.com/detailKontrak/all',{ headers:authHeader() }).then(res => {
+            axios.get('https://sixacti-api.herokuapp.com/detailKontrak/all',{ headers:authHeader() }).then(res => {
                 for(var i = 0; i < res.data.length ; i++){
                     res.data[i]["name"] = this.name[i]
                     res.data[i]["departemen"] = this.departemen[i]
@@ -117,14 +117,14 @@ export default {
             })
         },
         loadName() {
-            axios.get('http://sixacti-api.herokuapp.com/detailKontrak/getName', { headers:authHeader() }).then(res => {
+            axios.get('https://sixacti-api.herokuapp.com/detailKontrak/getName', { headers:authHeader() }).then(res => {
                 this.name = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         loadDepartemen() {
-            axios.get('http://sixacti-api.herokuapp.com/detailKontrak/getDepartemen', { headers:authHeader() }).then(res => {
+            axios.get('https://sixacti-api.herokuapp.com/detailKontrak/getDepartemen', { headers:authHeader() }).then(res => {
                 this.departemen = res.data
             }).catch((err) => {
                 console.log(err);
