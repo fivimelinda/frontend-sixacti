@@ -36,7 +36,19 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="label">Departemen*</div>
-                                <input class="form-control" id="departemen" placeholder="masukkan departemen" v-model="departemen">
+                                <!-- <input class="form-control" id="departemen" placeholder="masukkan departemen" v-model="departemen"> -->
+                                <select id="departemen" v-model="departemen" class="form-control">
+                                    <option value="HR dan GA">HR dan GA</option>
+                                    <option value="Accounting">Accounting</option>
+                                    <option value="Business Planning">Business Planning</option>
+                                    <option value="J-SOX Control Office">J-SOX Control Office</option>
+                                    <option value="Procurement">Procurement</option>
+                                    <option value="Production Control">Production Control</option>
+                                    <option value="Production">Production</option>
+                                    <option value="Production Engineering">Production Engineering</option>
+                                    <option value="Quality Assurance">Quality Assurance</option>
+                                    <option value="Business Development Group">Business Development Group</option>
+                                </select>
                             </div>
                         </div>
                         <hr>
@@ -122,7 +134,7 @@
                        <div class="col-sm-12">
                            <div class="form-group">
                             <div class="label">Nama replacement</div>
-                            <input class="form-control" id="nama-replacement" placeholder="Tuliskan nama dipisahkan dengan koma (contoh: budi, andi, didu)" v-model="replacement">
+                            <input class="form-control" id="nama-replacement" placeholder="Tuliskan nama dipisahkan dengan dua spasi (contoh: budi Irawan  andi  Anto budi)" v-model="replacement">
                         </div>
                        </div>
                    </div>
