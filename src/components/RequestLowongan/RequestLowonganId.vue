@@ -123,7 +123,7 @@
         <div v-if="req.status == 'pending'" class="button-wrapper">
             <b-button v-b-modal.modal-1 class="btn btn-danger">Hapus</b-button>
         </div>
-        <v-layout row class="div-link" v-if="req.status == 'disetujui'">
+        <v-layout row class="div-link" v-if="req.status == 'Diterima'">
             <a v-on:click="lihatProgres" id="link">Lihat Progres Pemenuhan</a>
         </v-layout>
     </v-card>

@@ -29,7 +29,7 @@ class TesService {
 
     //create tes tulis
     createTesTulis(idPelamar,tesTulis){
-        return axios.post(URI + "/tes/tulis/" + idPelamar, tesTulis), { headers:authHeader() };
+        return axios.post(URI + "/tes/tulis/" + idPelamar, tesTulis, { headers:authHeader() });
     }
     
     //update tes tulis

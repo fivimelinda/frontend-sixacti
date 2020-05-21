@@ -113,6 +113,15 @@
                         <v-list-item-title class="black--text">Atribut Karyawan</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+
+                <v-list-item v-if="isAdmin" style="text-decoration:none !important" router :to="'/BuatSuratKontrak'">
+                    <v-list-item-action>
+                        <v-icon class="black--text">mdi-book-plus-multiple</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title class="black--text">Buat Kontrak</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
                 
                 <v-list-item v-if="isPelamar" style="text-decoration:none !important" router :to="'/lowonganLamaran'">
                     <v-list-item-action>
