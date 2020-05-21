@@ -2,7 +2,7 @@ import axios from "axios";
 import authHeader from './AuthHeader';
 
 
-const URI = 'https://sixacti-api.herokuapp.com/api';
+const URI = 'http://localhost:8081/api';
 
 class LamaranService {
 
