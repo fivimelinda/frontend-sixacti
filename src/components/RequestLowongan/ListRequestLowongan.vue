@@ -1,6 +1,12 @@
 <template>
   <div class="container">
-    <h3 class="mt-10">Daftar Request Lowongan Pekerjaan</h3>
+    <br>
+    <ul class="nav p-0 m-0">
+        <li><a class="brearcrumb-a" href="/">Home</a></li>
+        <li><p class="breadcrumb-a">></p></li>
+        <li><a class="brearcrumb-a" href="/ListRequestLowongan">Daftar Request Lowongan</a></li>            
+    </ul>
+    <h3 class="mt-5">Daftar Request Lowongan Pekerjaan</h3>
     <div v-if="message" class="alert alert-success">
       {{message}}
     </div>

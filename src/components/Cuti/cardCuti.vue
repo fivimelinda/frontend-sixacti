@@ -68,6 +68,24 @@
             </b-col>
         </b-row>
     </v-card>
+    <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        {{errormessage}}
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
 </div>
 </template>
 <script>
@@ -78,6 +96,7 @@ export default {
         return{
             status: false,
             delete: false,
+            errormessage: ''
         }        
     },
     computed:{
@@ -106,6 +125,10 @@ export default {
                          CutiService.deleteCuti(this.cutiData.idCuti)
                          this.$router.go(0)
                     }
+                })
+                .catch((err) => {
+                    this.errormessage = err.message
+                    this.errorModal()
                 })
         },
         updateCuti(){

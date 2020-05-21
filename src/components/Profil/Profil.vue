@@ -748,10 +748,14 @@ export default{
             //     this.$refs['create'].show();
             // }
             // if(
+
                 // console.log(this.$store.state.auth.user)
                 // console.log(authHeader())
                 
-                this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
+                //this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
+                console.log(this.$store.state.auth.user)
+                this.axios.get('http://sixacti-api.herokuapp.com/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
+
                     
                     this.usersData = res.data;
                     console.log(this.usersData)
@@ -775,7 +779,7 @@ export default{
                             })
                         }
                         else{
-                            this.axios.get('http://localhost:8081/api/karyawan/get/'+res.data.user.nik,{ headers:authHeader() }).then(ress=>{
+                            this.axios.get('http://sixacti-api.herokuapp.com/api/karyawan/get/'+res.data.user.nik,{ headers:authHeader() }).then(ress=>{
                             this.karyawan = ress.data;
                         });
                         }
@@ -830,7 +834,7 @@ export default{
             if(!this.npwp){
                 this.npwp = this.usersData.user.npwp; 
             }
-            this.axios.put('http://localhost:8081/profil/editUser/'+this.$store.state.auth.user.id, {
+            this.axios.put('http://sixacti-api.herokuapp.com/profil/editUser/'+this.$store.state.auth.user.id, {
                 "nik" :this.nik,
                 "nama" : this.nama,
                 "tanggal_lahir" :this.tanggal_lahir,
@@ -850,7 +854,7 @@ export default{
                     this.retStatus = ress.data
                     if(ress.status == 200){
                         if(!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')){
-                            this.axios.put('http://localhost:8081/api/karyawan/edit/'+this.nik,{
+                            this.axios.put('http://sixacti-api.herokuapp.com/api/karyawan/edit/'+this.nik,{
                                 "nik":this.nik,
                                 "gaji":this.karyawan.gaji,
                                 "sisaCuti":this.karyawan.sisaCuti,
@@ -926,7 +930,7 @@ export default{
                 this.$refs['error-kosong'].show();
             }
             else{
-                this.axios.put('http://localhost:8081/profil/setUser/'+this.$store.state.auth.user.id, {
+                this.axios.put('http://sixacti-api.herokuapp.com/profil/setUser/'+this.$store.state.auth.user.id, {
                     "nik" :this.nik,
                     "nama" : this.nama,
                     "tanggal_lahir" :this.tanggal_lahir,
@@ -946,7 +950,7 @@ export default{
                         this.retStatus = ress.data
                         if(ress.status == 200){
                             if(!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')){
-                            this.axios.post('http://localhost:8081/api/karyawan/tambah',{
+                            this.axios.post('http://sixacti-api.herokuapp.com/api/karyawan/tambah',{
                                 "nik":this.nik,
                                 "gaji":this.gaji,
                                 "sisaCuti":this.sisaCuti,

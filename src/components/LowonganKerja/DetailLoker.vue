@@ -5,7 +5,7 @@
     <ul class="nav p-0 m-0">
         <li><a class="brearcrumb-a" href="/">Home</a></li>
         <li><p class="breadcrumb-a">></p></li>
-        <li><a class="brearcrumb-a" href="/listLoker">Daftar Lowongan Pekerjaan</a></li>
+        <li><a class="brearcrumb-a" href="/daftar-lowongan">Daftar Lowongan Pekerjaan</a></li>
         <li><p class="breadcrumb-a">></p></li>
         <li><a class="brearcrumb-a" :href="'/detailLoker/'+id">Detail {{judulLoker}}</a></li>              
     </ul>
@@ -30,7 +30,24 @@
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="d-flex justify-content-center">
                 <button v-if="currentUser.role == 'ROLE_ADMIN'" class="btn btn-lg btn-danger" v-on:click="viewPelamar()" id="viewPelamar"><span id="daftarPelamar">Lihat Pelamar</span></button>
-                <button v-if="currentUser.role == 'ROLE_PELAMAR'" class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Buat Lamaran</span></button> 
+<!-- 
+                <div v-if="this.nik == null"> -->
+                    <!-- <button v-if="currentUser.role == 'ROLE_PELAMAR'" class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Buat Lamaran</span></button>  -->
+                <!-- </div> -->
+
+                    <!-- <div v-if="this.daftarLowongan == 'gagal'">  -->
+                        <button v-if="currentUser.role == 'ROLE_PELAMAR'" class="btn btn-lg btn-danger" v-on:click="lamaranClicked()" id="viewPelamar"><span id="daftarPelamar">Buat Lamaran</span></button> 
+                     <!-- </div> -->
+
+                    <!-- <div v-if="this.daftarLowongan == this.$store.state.auth.user.user.nik">
+                        <h3 id="tulis"> Lamaran telah dibuat </h3> 
+                    </div> 
+
+                    <div v-if="this.daftarLowongan != 'gagal' && this.daftarLowongan!=this.$store.state.auth.user.user.nik"> 
+                        <button v-if="currentUser.role == 'ROLE_PELAMAR'" class="btn btn-lg btn-link" v-on:click="profil()" id="viewPelamar"><span id="daftarPelamar">Lengkapi Profil Sebelum Melamar</span></button> 
+                     </div> -->
+
+
             </div>
             
         </div>
@@ -57,7 +74,7 @@
     </v-card>
     
 
-
+    
 
 </div>
     
@@ -73,6 +90,17 @@
     line-height: 39px;
 
     color: #C53751;
+}
+
+
+#tulis{
+    font-family: Archivo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 39px;
+
+    color: #A6A6A6;
 }
 
 #ubahBtn{
@@ -132,6 +160,8 @@
 import moment from 'moment';
 import { EditIcon,CalendarIcon } from 'vue-feather-icons'
 import LowonganKerjaService from '../../service/LowonganKerjaService';
+import axios from 'axios';
+import authHeader from '../../service/AuthHeader';
 
 export default {
     components: {
@@ -149,6 +179,8 @@ export default {
             tanggalBerakhir: "",
             deskripsi: "",
             errors: [],
+            daftarLowongan: [],
+            nik:""
             
         };
         
@@ -161,6 +193,7 @@ export default {
             return this.$store.state.auth.user;
         }
     },
+
     methods: {
         refreshLokerDetails() {
             LowonganKerjaService.getLokerById(this.idLowongan).then(res => {
@@ -189,10 +222,37 @@ export default {
             var idLowongan = this.idLowongan;
             var apply = "/listPelamar/" + idLowongan;
             this.$router.push(apply);
+        },
+        profil(){
+            this.$router.push("/profil");
+        },
+        cekPelamar(){
+            if ( this.$store.state.auth.user.user.nik != null) {
+                axios.get("http://localhost:8081/api/cekPelamar/" + this.idLowongan + "/" + this.$store.state.auth.user.user.nik,{ headers:authHeader() }).then(res => {
+                this.daftarLowongan = res.data
+                console.log(res.data)
+                }).catch((err) => {
+                    console.log(err);
+                })
+            } else {
+                this.daftarLowongan = '1';
+                console.log("masuk");
+            }
         }
+        // checkProfil(){
+        //   this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
+        //       this.usersData = res.data;
+        //       this.nik = res.data.user.nik;
+        //         })
+        //     // )
+        // },
+
     },
     created(){
         this.refreshLokerDetails();
+        // this.checkProfil();
+        // this.cekPelamar();
+        
     }
     
 };

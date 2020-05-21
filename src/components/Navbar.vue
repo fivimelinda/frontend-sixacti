@@ -10,7 +10,7 @@
             <v-btn text :to="'/profil'" style="text-decoration:none" color="grey" v-if="this.loggedIn">{{name}}
                 <v-icon right large>mdi-account-circle</v-icon>
             </v-btn>
-            <v-btn text color="grey" v-if="!this.loggedIn" router :to="'/auth/login'">Login
+            <v-btn text color="black" v-if="!this.loggedIn" router :to="'/auth/login'">Login
                 <v-icon right large>mdi-login-variant</v-icon>
             </v-btn>
         </v-app-bar>
@@ -48,7 +48,6 @@
             <v-list
             expand
             nav>
-
                 <v-list-item-group  color="#C53751">
                 <v-list-item style="text-decoration:none !important" router :to="'/'">
                     <v-list-item-action>
@@ -87,7 +86,40 @@
                         <v-icon class="black--text">mdi-message-text-clock-outline</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>
-                        <v-list-item-title class="black--text">Request Lowongan</v-list-item-title>
+                        <v-list-item-title class="black--text">List Request Lowongan</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item v-if="isAdmin" style="text-decoration:none !important" router :to="'/GenerateSuratKontrak'">
+                    <v-list-item-action>
+                        <v-icon class="black--text">mdi-email-newsletter</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title class="black--text">Generate Surat Kontrak</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item v-if="isManager" style="text-decoration:none !important" router :to="'/RequestLowongan'">
+                    <v-list-item-action>
+                        <v-icon class="black--text">mdi-file-plus-outline</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title class="black--text">Buat Request Lowongan</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item v-if="isAdmin" style="text-decoration:none !important" router :to="'/listAtribut'">
+                    <v-list-item-action>
+                        <v-icon class="black--text">mdi-tshirt-v-outline</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title class="black--text">Atribut Karyawan</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                
+                <v-list-item v-if="isPelamar" style="text-decoration:none !important" router :to="'/lowonganLamaran'">
+                    <v-list-item-action>
+                        <v-icon class="black--text">mdi-note-outline</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title class="black--text">Lamaran</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
                 <!-- <v-list-item style="text-decoration:none !important" router :to="'/applications'">

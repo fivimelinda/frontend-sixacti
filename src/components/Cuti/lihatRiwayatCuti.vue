@@ -42,6 +42,24 @@
             </b-card-text>
         </b-card>
         <a @click="$router.go(-1)" id="link">Kembali ke halaman detail cuti</a>
+        <b-modal size="lg" ref="error-modal" hide-footer title="Notifikasi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm" id="berhasil">
+                        {{errormessage}}
+                    </div>
+                    <div class="col-sm">
+                        <!-- <v-img
+                                :src="require('../assets/success.png')"></v-img> -->
+                        <!-- <img src = "'src/assets/success.png'"> -->
+                        <v-img class="gagal"
+            :src="require('@/assets/fail.png')"
+            ></v-img>
+                    </div>
+                </div>
+            </div>
+            
+        </b-modal>
     </v-container>
 </template>
 
@@ -60,7 +78,8 @@ export default {
             currentPage:1,
             perPage:10,
             listCuti : [],
-            namaKaryawan:''         
+            namaKaryawan:'',
+            errormessage:''         
         }
     },
     computed: {
@@ -81,7 +100,10 @@ export default {
             })
             CutiService.getHistoryCuti(this.karyawanId).then(response => {
                 this.listCuti = response.data;
-            });
+            }).catch((err) => {
+                this.errormessage = err.message
+                this.errorModal()
+            })
         },
 
     },

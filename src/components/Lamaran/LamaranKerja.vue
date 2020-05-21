@@ -13,11 +13,24 @@
       <!-- <div this.openModal()>
       </div>
     </div> -->
+
+
     <div v-if="this.usersData.user != null">
+      {{checkLamar()}}
+      <div v-if="this.hasilData == this.nik">
+          <div class="title-top">
+            <br>
+            
+            <h5>Lamaran telah dibuat</h5>
+        
+        </div>
+      </div>
+      <div v-if="this.hasilData == 'gagal'">
       <br />
       <h1>Buat Lamaran Pekerjaan</h1>
       <br />
-      <div class="card">
+          <div class="card">
+
         <div class="card-header">Formulir Pembuatan Lamaran Pekerjaan</div>
         <div class="card-body">
           <form @submit.prevent="validateAndSubmit">
@@ -167,6 +180,9 @@
         </div>
 
       </div>
+
+      
+      </div>
     </div>
 
     <br>
@@ -203,6 +219,7 @@ export default {
       namaPekerjaan : "",
       lolos :"",
       usersData: '',
+      hasilData:''
       
     }
   },
@@ -271,6 +288,13 @@ export default {
           this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
               this.usersData = res.data;
               this.nik = res.data.user.nik;
+                })
+            // )
+        },
+          checkLamar(){
+          this.axios.get('http://localhost:8081/api/cekPelamar/'+this.$store.state.auth.user.user.nik,{ headers:authHeader() }).then(res =>{
+              this.hasilData = res.data;
+              console.log(this.hasilData)
                 })
             // )
         },

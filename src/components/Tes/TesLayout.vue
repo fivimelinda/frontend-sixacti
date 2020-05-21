@@ -627,6 +627,7 @@ export default {
             // BerkasLamaran.downloadKTP(fileName).then(() => {
             //     this.refreshDetailLamaran();
             // })
+            
             axios({
                 url: 'http://localhost:8081/api/download/ktp/' + fileName,
                 method : 'GET',
@@ -644,14 +645,12 @@ export default {
             })
         },
         downloadBerkas(fileName){
-            // BerkasLamaran.downloadKTP(fileName).then(() => {
-            //     this.refreshDetailLamaran();
-            // })
+           
             axios({
                 url: 'http://localhost:8081/api/download/resume/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
-                headers:authHeader(),
+                headers:authHeader()
             }).then((response) =>  {
                 var fileURL = window.URL.createObjectURL(new Blob([response.data]));
                 var fileLink = document.createElement('a');

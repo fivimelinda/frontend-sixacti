@@ -77,10 +77,20 @@ export default {
         if (!this.loggedIn) {
             this.$router.push('/auth/login');
         }
+        if(this.loggedIn){
+            if(this.currentUser.role[0] === "ROLE_DEPARTMENTMANAGER" || 
+                this.currentUser.role[0] === "ROLE_PELAMAR" ||
+                this.currentUser.role[0] === "ROLE_KARYAWANTETAP"||
+                this.currentUser.role[0] === "ROLE_ASSISTANTMANAGER"||
+                this.currentUser.role[0] === "ROLE_ADMIN"||
+                this.currentUser.role[0] === "ROLE_KARYAWANKONTRAK"){
+                    this.$router.push('/403')
+                }
+        }
     },
     methods: {
         load() {
-            axios.get('http://localhost:8081/request/all',{ headers:authHeader() }).then(res => {
+            axios.get('http://sixacti-api.herokuapp.com/request/all',{ headers:authHeader() }).then(res => {
                 this.requestLowongan = res.data
             }).catch((err) => {
                 console.log(err);
