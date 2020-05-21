@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from './AuthHeader';
 
-const URI = 'http://localhost:8081/request';
+const URI = 'http://sixacti-api.herokuapp.com/request';
 
 class RequestLowonganService {
     getAllRequest() {
