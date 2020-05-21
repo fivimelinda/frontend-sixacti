@@ -51,20 +51,20 @@
                             <b-card-text>
                                 <div style="color:rgb(110, 109, 109)" v-if="!(pelamar.atribut === null)">
                                     <b-row class="mt-1">
-                                        <b-col class="pt-0 mt-0 pb-0 mb-0">Ukuran Sepatu</b-col>
-                                        <b-col class="pt-0 mt-0 pb-0 mb-0">:    {{atribut.ukuran_sepatu}}</b-col>
+                                        <b-col class="pt-0 mt-1 pb-0 mb-1">Ukuran Sepatu</b-col>
+                                        <b-col class="pt-0 mt-1 pb-0 mb-1">:    {{atribut.ukuran_sepatu}}</b-col>
                                     </b-row>
                                     <b-row class="mt-1">
-                                        <b-col class="pt-0 mt-0 pb-0 mb-0">Ukuran Baju Seragam</b-col>
-                                        <b-col class="pt-0 mt-0 pb-0 mb-0">:    {{atribut.ukuran_baju}}</b-col>
+                                        <b-col class="pt-0 mt-1 pb-0 mb-1">Ukuran Baju Seragam</b-col>
+                                        <b-col class="pt-0 mt-1 pb-0 mb-1">:    {{atribut.ukuran_baju}}</b-col>
                                     </b-row>
                                     <b-row class="mt-1">
-                                        <b-col class="pt-0 mt-0 pb-0 mb-0">Ukuran Jas Lab</b-col>
-                                        <b-col class="pt-0 mt-0 pb-0 mb-0">:    {{atribut.ukuran_jas_lab}}</b-col>
+                                        <b-col class="pt-0 mt-1 pb-0 mb-1">Ukuran Jas Lab</b-col>
+                                        <b-col class="pt-0 mt-1 pb-0 mb-1">:    {{atribut.ukuran_jas_lab}}</b-col>
                                     </b-row>
                                     <b-row class="mt-1">
-                                        <b-col class="pt-0 mt-0">Ukuran Helm</b-col>
-                                        <b-col class="pt-0 mt-0">:    {{atribut.ukuran_helm}}</b-col>
+                                        <b-col class="pt-0 mt-1">Ukuran Helm</b-col>
+                                        <b-col class="pt-0 mt-1">:    {{atribut.ukuran_helm}}</b-col>
                                     </b-row>
                                     <hr style="border:1px solid #C53751"/>
                                     <div class="d-flex justify-content-center">
@@ -160,7 +160,10 @@ export default {
     mounted(){
         if (!this.loggedIn) {
             this.$router.push('/auth/login');
-        }// }else if(false){
+        }else if (!(this.currentUser.roles[0].roleName === 'ROLE_PELAMAR')){
+            this.$router.push('/');
+        }
+        // }else if(false){
         //     this.$router.push('403');
         // }
     },
@@ -168,7 +171,9 @@ export default {
         async loadNewAtribut(){
             try{
                 const URI = 'https://sixacti-api.herokuapp.com/api';
-                const getPelamar =await axios.get(URI + "/pelamar/get/" + this.$route.params.id);
+
+                const getPelamar =await axios.get(URI + "/pelamar/get/" + this.$route.params.id,{headers:authHeader()});
+
                 this.pelamar = getPelamar.data;
                 this.atribut = this.pelamar.atribut;
             }catch(error){
@@ -177,14 +182,13 @@ export default {
         },
 
         async tambahAtribut(){
-            await AtributService.createAtribut(Number(this.idPelamar),{
+            await AtributService.createAtribut(Number(this.$route.params.id),{
                 ukuran_sepatu:this.form.ukuran_sepatu,
                 ukuran_baju:this.form.ukuran_baju,
                 ukuran_jas_lab:this.form.ukuran_jas_lab,
                 ukuran_helm:this.form.ukuran_helm,
                 status:this.form.status,
-                }
-            );
+                },{headers:authHeader()});
             // notif
             this.notifikasi("Atribut berhasil ditambahkan!");
             // reload
@@ -199,7 +203,7 @@ export default {
                 ukuran_jas_lab:this.form.ukuran_jas_lab,
                 ukuran_helm:this.form.ukuran_helm,
                 status:this.atribut.status
-            }
+            },{headers:authHeader()}
             );
             await this.loadNewAtribut();
             this.notifikasi("Atribut berhasil diubah!");

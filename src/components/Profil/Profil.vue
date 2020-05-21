@@ -16,8 +16,8 @@
                         <div class="name" >{{this.usersData.user.nama}}</div>
                         <div class="role" v-if="this.usersData.roles.length != kosongCount" >{{this.usersData.roles[0].roleName}}</div>
                     </div>
-                    <div v-if="this.usersData.roles[0].roleName === 'ROLE_PELAMAR' " class="mb-0">
-                        <b-button class="">Atribut</b-button>
+                    <div v-if="(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.pelamar === null)" class="mb-0">
+                        <b-button @click="directAtribut()" class="btn-atribut">Atribut</b-button>
                     </div>
                     
                 </div>
@@ -406,19 +406,36 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="label">Departemen*</div>
-                                    <input class="form-control" type="number" id="dept" placeholder="masukkan nomor departemen" v-model="idDept">
+                                    <div>
+                                        <b-form-select v-model="idSect">
+                                            <b-form-select-option :value="null" disabled>Please select an option</b-form-select-option>
+                                            
+                                                <b-form-select-option v-for="(dept,index) in departemen" :key="index" value="index+1">{{departemen[index].namaDepartemen}}</b-form-select-option>
+                                            
+                                        </b-form-select>
+                                    </div>
+                                    <!-- <input class="form-control" type="number" id="dept" placeholder="masukkan nomor departemen" v-model="idDept"> -->
                                 </div>
                             </div>
                             <hr>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="label">Section*</div>
-                                    <input class="form-control" type="number" id="sect" placeholder="masukkan nomor nomor section" v-model="idSect">
+                                    <div>
+                                        <b-form-select v-model="idSect">
+                                            <b-form-select-option :value="null" disabled>Please select an option</b-form-select-option>
+                                            
+                                                <b-form-select-option v-for="(sect,index) in section" :key="index" value="index+1">{{section[index].namaSection}}</b-form-select-option>
+                                            
+                                        </b-form-select>
+                                    </div>
+                                    <!-- <input class="form-control" type="number" id="sect" placeholder="masukkan nomor nomor section" v-model="idSect"> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <br>
                 <div class="container">
                    <div class="row">
@@ -431,7 +448,6 @@
 
             </form>
         </b-modal>
-
 
         <b-modal size="lg" hide-footer title="Edit profil" id="edit-modal" ref="edit" v-if="this.usersData.user !== null">
             <form @submit ="formEdit">
@@ -698,7 +714,8 @@ import axios from 'axios'
 export default{
     mounted(){
         this.checkProfil();
-        
+        //this.loadSection()
+        //this.loadDepartement()
     },
     data(){
         return {
@@ -724,9 +741,11 @@ export default{
             gaji:'',
             sisaCuti:'',
             idDept:'',
-            idSect:'',
+            idSect:null,
             karyawan:null,
-            pelamar:null
+            pelamar:null,
+            section:null,
+            departemen:null,
         }
     },
     computed: {
@@ -741,8 +760,24 @@ export default{
         if (!this.loggedIn) {
             this.$router.push('/auth/login');
         }
+        this.getSection();
+        this.getDepartemen();
     },
     methods: {
+        directAtribut(){
+            this.$router.push('/atribut/'+this.pelamar.idPelamar)
+        },
+        async getSection(){
+            
+            const getSection = await this.axios.get('https://sixacti-api.herokuapp.com/api/get-section',{ headers:authHeader() });
+            this.section = getSection.data;
+            // console.log(this.section)
+        },
+        async getDepartemen(){
+            const getDepartemen = await this.axios.get('https://sixacti-api.herokuapp.com/api/get-departemen',{ headers:authHeader() });
+            this.departemen = getDepartemen.data;
+            // console.log(this.departemen);
+        },
         checkProfil(){
             // if(this.$store.state.auth.user.user == null){
             //     this.$refs['create'].show();
@@ -754,7 +789,7 @@ export default{
                 
                 //this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
                 console.log(this.$store.state.auth.user)
-                console.log(this.currentUser);
+                
                 this.axios.get('https://sixacti-api.herokuapp.com/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
 
                     
@@ -1067,5 +1102,11 @@ export default{
 .btn-primer:hover{
     background-color: rgba(197, 55, 81, 0.883) !important;
     border:1px solid rgba(197, 55, 81, 0.904) !important;
+}
+
+.btn-atribut{
+    background-color: white !important;
+    color: #C53751 !important;
+    border:1px solid white !important;
 }
 </style>

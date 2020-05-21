@@ -52,7 +52,10 @@ export default {
         }
     },
     mounted() {
-        this.load()
+
+            this.load()
+
+        
     },
     computed: {
         loggedIn(){
@@ -73,14 +76,18 @@ export default {
     },
     methods: {
         load() {
-            axios.get('https://sixacti-api.herokuapp.com/api/lowonganPelamar/' + this.nik,{ headers:authHeader() }).then(res => {
+            if (this.$store.state.auth.user.user != null){
+                axios.get('https://sixacti-api.herokuapp.com/api/lowonganPelamar/' + this.nik,{ headers:authHeader() }).then(res => {
                 this.daftarLowongan = res.data;
+                console.log(res.data)
                 // this.daftarLamaran = res.data.listLamaran;
                 // this.idPelamar = res.data.listLamaran.pelamar.userPelamar.idPelamar;
                 // console.log(res.data.listLamaran);
             }).catch((err) => {
                 console.log(err);
             })
+            }
+     
         },
         hasilTes(){
             this.$router.push("/hasilTes/"+ this.idPelamar);
