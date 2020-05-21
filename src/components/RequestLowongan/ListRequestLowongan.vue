@@ -24,7 +24,7 @@
 
             </div>
             <div class="card-footer" id="card-footer">
-              <div v-if="reqLoker.status != 'Diterima' && currentUser.role == 'ROLE_ADMIN'" class="row" > 
+              <div v-if="reqLoker.status == 'pending' && currentUser.role == 'ROLE_ADMIN'" class="row" > 
                 <div class="col-6 mb-3">
                   <button class="btn btn-danger w-100" v-on:click="buatLokerClicked(reqLoker.id)"><plus-circle-icon class="mr-3"></plus-circle-icon>Buat</button>
                 </div>
