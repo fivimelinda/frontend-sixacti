@@ -167,7 +167,11 @@ export default {
     methods:{
         async loadNewAtribut(){
             try{
+<<<<<<< HEAD
+                const URI = 'https://sixacti-api.herokuapp.com/api';
+=======
                 const URI = 'http://sixacti-api.herokuapp.com/api';
+>>>>>>> master
                 const getPelamar =await axios.get(URI + "/pelamar/get/" + this.$route.params.id);
                 this.pelamar = getPelamar.data;
                 this.atribut = this.pelamar.atribut;
@@ -223,7 +227,7 @@ export default {
     },
 
     async created(){
-        const URI = 'http://sixacti-api.herokuapp.com/api';
+        const URI = 'https://sixacti-api.herokuapp.com/api';
         // const pl= await axios.get(URI+"/getPelamar/"+ this.currentUser.user.nik);
         const getData = await axios.get(URI + "/pelamar/get/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
         this.pelamar = getData.data;

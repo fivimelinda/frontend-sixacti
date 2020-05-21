@@ -12,14 +12,31 @@
     <table class="table table-hover">
         <thead class="table-borderless">
             <tr class="tr-top">
-                <th scope="col">No.</th>
+                <th scope="col">Tahapan</th>
                 <th scope="col">Nama Tes </th>
                 <th scope="col">Hasil Tes</th>
             </tr>
         </thead>
         <tbody class="tbody">
-            <tr class="content">
+
+                <tr class="content">
                 <td> 1 </td>
+                <td> Tes Medis </td>
+                <td>
+                    <div v-if="tesMedis.isLolos == true">
+                        Lulus Tes Medis
+                    </div>
+                    <div v-if="tesMedis.isGagal == true">
+                        Tidak Lulus Tes Medis
+                    </div>
+                    <!-- <div v-if="tesMedis.nilai != null">
+                        Belum mengikuti tes
+                    </div> -->
+
+                </td>
+            </tr>           
+            <tr class="content">
+                <td> 2 </td>
                 <td> Tes Tulis </td>
                 <td>
                     <div v-if="tesTulis.isLolos == true">
@@ -35,22 +52,7 @@
                 </td>
             </tr>
             <!-- <div v-if="tesMedis.isLolos != null"> -->
-                <tr class="content">
-                    <td> 2 </td>
-                    <td> Tes Medis </td>
-                    <td>
-                        <div v-if="tesMedis.isLolos == true">
-                            Lulus Tes Medis
-                        </div>
-                        <div v-if="tesMedis.isGagal == true">
-                            Tidak Lulus Tes Medis
-                        </div>
-                        <!-- <div v-if="tesMedis.nilai != null">
-                            Belum mengikuti tes
-                        </div> -->
-    
-                    </td>
-                </tr>
+
             <!-- </div> -->
 
             <!-- <div v-if="tesWawancara.isLolos != null"> -->
