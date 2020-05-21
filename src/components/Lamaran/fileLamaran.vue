@@ -100,7 +100,7 @@ export default {
       formData.append('file', this.file);
       console.log(formData.getAll('file'));
 
-      this.axios.post('http://localhost:8081/api/uploadKtp/' + this.idLamaran,
+      this.axios.post('https://sixacti-api.herokuapp.com/api/uploadKtp/' + this.idLamaran,
         formData,{ headers:authHeader() }).then(ress => {
               this.ressData = ress;
             })
