@@ -22,7 +22,7 @@
                             <template v-slot:header>
                                 <div class="d-flex justify-content-between">
                                     <h6 class="mt-2 p-0 text-center">Atribut</h6>
-                                    <div v-if="!(karyawan.atributModel === null)">
+                                    <div v-if="!(atribut === null)">
                                     <b-button style="background-color:transparent; border:none" v-if="!atribut.status" size="sm" id="popover-info"><strong><b-icon-info-circle></b-icon-info-circle></strong></b-button>
                                     <b-popover
                                         variant="danger"
@@ -49,7 +49,7 @@
                                 
                             </template>
                             <b-card-text>
-                                <div style="color:rgb(110, 109, 109)" v-if="!(this.karyawan.atributModel === null)">
+                                <div style="color:rgb(110, 109, 109)" v-if="!(this.atribut === null)">
                                     <b-row class="mt-1">
                                         <b-col class="pt-0 mt-1 pb-0 mb-1">Ukuran Sepatu</b-col>
                                         <b-col class="pt-0 mt-1 pb-0 mb-1">:    {{atribut.ukuran_sepatu}}</b-col>
@@ -173,10 +173,10 @@ export default {
             try{
                 const URI = 'https://sixacti-api.herokuapp.com/api';
 
-                const getPelamar =await axios.get(URI + "/karyawan/get/" + this.currentUser.user.nik,{headers:authHeader()});
+                const getAtribut =await axios.get(URI + "/get-nik/" + this.currentUser.user.nik,{headers:authHeader()});
 
-                this.karyawan = getPelamar.data;
-                this.atribut = this.karyawan.atributMode;
+                // this.karyawan = getPelamar.data;
+                this.atribut = getAtribut.data;
             }catch(error){
                 console.log(error);
             }
@@ -230,13 +230,13 @@ export default {
     async created(){
         const URI = 'https://sixacti-api.herokuapp.com/api';
         // const pl= await axios.get(URI+"/getPelamar/"+ this.currentUser.user.nik);
-        const getData = await axios.get(URI + "/karyawan/get/" + this.currentUser.user.nik, {responseType:'json', headers:authHeader()});
-        this.karyawan = getData.data;
-        console.log(this.karyawan);
-        this.atribut = this.karyawan.atributModel;
-        if(!(this.karyawan.atribut === null)){
-            this.atribut = this.karyawan.atributModel;
-        }
+        const getData = await axios.get(URI + "/get-nik/" + this.currentUser.user.nik, {responseType:'json', headers:authHeader()});
+        this.atribut = getData.data;
+        console.log(this.atribut);
+        // this.atribut = this.karyawan.atributModel;
+        // if(!(this.karyawan.atribut === null)){
+        //     this.atribut = this.karyawan.atributModel;
+        // }
     },
 }
 </script>
