@@ -11,12 +11,12 @@ class AtributService {
 
     //tambah atribut
     createAtribut(idPelamar,atribut){
-        return axios.post(URI + "/tambahAtribut/" + idPelamar, atribut);
+        return axios.post(URI + "/tambahAtribut/" + idPelamar, atribut,{ headers:authHeader() });
     }
 
     // 
     updateAtribut(idAtribut, atribut){
-        return axios.put(URI + "/atribut/ubah/" + idAtribut, atribut);
+        return axios.put(URI + "/atribut/ubah/" + idAtribut, atribut,{ headers:authHeader() });
     }
 }
 

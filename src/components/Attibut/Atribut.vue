@@ -160,15 +160,18 @@ export default {
     mounted(){
         if (!this.loggedIn) {
             this.$router.push('/auth/login');
-        }// }else if(false){
+        }else if (!(this.currentUser.roles[0].roleName === 'ROLE_PELAMAR')){
+            this.$router.push('/');
+        }
+        // }else if(false){
         //     this.$router.push('403');
         // }
     },
     methods:{
         async loadNewAtribut(){
             try{
-                const URI = 'http://sixacti-api.herokuapp.com/api';
-                const getPelamar =await axios.get(URI + "/pelamar/get/" + this.$route.params.id);
+                const URI = 'https://sixacti-api.herokuapp.com/api';
+                const getPelamar =await axios.get(URI + "/pelamar/get/" + this.$route.params.id,{headers:authHeader()});
                 this.pelamar = getPelamar.data;
                 this.atribut = this.pelamar.atribut;
             }catch(error){
@@ -177,14 +180,13 @@ export default {
         },
 
         async tambahAtribut(){
-            await AtributService.createAtribut(Number(this.idPelamar),{
+            await AtributService.createAtribut(Number(this.$route.params.id),{
                 ukuran_sepatu:this.form.ukuran_sepatu,
                 ukuran_baju:this.form.ukuran_baju,
                 ukuran_jas_lab:this.form.ukuran_jas_lab,
                 ukuran_helm:this.form.ukuran_helm,
                 status:this.form.status,
-                }
-            );
+                },{headers:authHeader()});
             // notif
             this.notifikasi("Atribut berhasil ditambahkan!");
             // reload
@@ -199,7 +201,7 @@ export default {
                 ukuran_jas_lab:this.form.ukuran_jas_lab,
                 ukuran_helm:this.form.ukuran_helm,
                 status:this.atribut.status
-            }
+            },{headers:authHeader()}
             );
             await this.loadNewAtribut();
             this.notifikasi("Atribut berhasil diubah!");
@@ -223,7 +225,7 @@ export default {
     },
 
     async created(){
-        const URI = 'http://sixacti-api.herokuapp.com/api';
+        const URI = 'https://sixacti-api.herokuapp.com/api';
         // const pl= await axios.get(URI+"/getPelamar/"+ this.currentUser.user.nik);
         const getData = await axios.get(URI + "/pelamar/get/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
         this.pelamar = getData.data;
