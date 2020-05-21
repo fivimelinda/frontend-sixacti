@@ -250,14 +250,14 @@ export default {
     },
     methods: {
          load() {
-            axios.get('http://sixacti-api.herokuapp.com/request/get/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
+            axios.get('https://sixacti-api.herokuapp.com/request/get/'+this.$route.params.id,{ headers:authHeader() }).then(res => {
                 this.req = res.data
             }).catch((err) => {
                 console.log(err);
             })
         },
         deleteData() {
-            axios.delete('http://sixacti-api.herokuapp.com/request/delete/'+this.$route.params.id,{ headers:authHeader() }).then(ress => {
+            axios.delete('https://sixacti-api.herokuapp.com/request/delete/'+this.$route.params.id,{ headers:authHeader() }).then(ress => {
                 this.deleteStatus = ress.data
                 
                 if(ress.status == 200){
