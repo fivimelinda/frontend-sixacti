@@ -232,7 +232,8 @@ export default {
         // const pl= await axios.get(URI+"/getPelamar/"+ this.currentUser.user.nik);
         const getData = await axios.get(URI + "/karyawan/get/" + this.currentUser.user.nik, {responseType:'json', headers:authHeader()});
         this.karyawan = getData.data;
-        console.log(this.pelamar);
+        console.log(this.karyawan);
+        console.log("----------------------");
         if(!(this.karyawan.atribut === null)){
             this.atribut = this.karyawan.atribut;
         }

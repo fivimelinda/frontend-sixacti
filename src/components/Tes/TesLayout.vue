@@ -482,24 +482,23 @@ export default {
     //check error
     async created(){
         try{
+            this.refreshDetailLamaran();
             const URI = 'https://sixacti-api.herokuapp.com/api';
-            this.idPelamar = Number(this.$route.params.id);
-            this.user = this.$store.state.dummy[this.idPelamar-1]
-            const getData = await axios.get(URI + "/pelamar/get/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
+            // this.idPelamar = Number(this.$route.params.id);
+            // this.user = this.$store.state.dummy[this.idPelamar-1]
+            const getData = await axios.get(URI + "/pelamar/get/" + this.idPelamar, {responseType:'json', headers:authHeader()});
             this.data = getData;
             this.pelamar = getData.data;
-            const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
+            const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.idPelamar, {responseType:'json', headers:authHeader()});
             this.tesMedis = getTesMedis;
-            const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
+            const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.idPelamar, {responseType:'json', headers:authHeader()});
             this.tesTulis = getTesTulis;
-            const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
+            const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.idPelamar, {responseType:'json', headers:authHeader()});
             this.tesWawancara = getTesWawancara;
             console.log(getTesMedis);
             console.log(getTesTulis);
             console.log(getTesWawancara);
-            console.log(this.pelamar);
-
-            this.refreshDetailLamaran();
+            console.log(this.idPelamar);
         }catch(error){
             console.log(error);
         }
@@ -507,7 +506,7 @@ export default {
     async mounted(){
         try{
             const URI = 'https://sixacti-api.herokuapp.com/api';
-            const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
+            const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.idPelamar, {responseType:'json', headers:authHeader()});
             this.tesMedis = getTesMedis;
             console.log(getTesMedis);
             // console.log(getData);
@@ -526,6 +525,7 @@ export default {
     methods:{
         refreshDetailLamaran() {
             LamaranService.getLamaranById(this.id).then(res => {
+                console.log(res.data);
                 this.pelamar = res.data.pelamar;
                 this.berkas = res.data.berkasModel;
                 this.ktp = res.data.ktpModel;
@@ -553,7 +553,7 @@ export default {
                 this.pengalamanKerja = res.data.pengalamanKerja;
                 this.namaPekerjaan = res.data.namaPekerjaan;
                 this.statusLamaran = res.data.statusLamaran;
-
+                this.idPelamar = res.data.pelamar.idPelamar;
                 this.status =res.status;
             });
             
@@ -566,7 +566,7 @@ export default {
         async loadNewTesMedis(){
             try{
                 const URI = 'https://sixacti-api.herokuapp.com/api';
-                const getTesMedis =await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, { headers:authHeader() });
+                const getTesMedis =await axios.get(URI + "/tes/medis/pelamar/" + this.idPelamar, { headers:authHeader() });
                 this.tesMedis = getTesMedis;
             }catch(error){
                 console.log(error);
@@ -575,7 +575,7 @@ export default {
         async loadNewTesTulis(){
             try{
                 const URI = 'https://sixacti-api.herokuapp.com/api';
-                const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, { headers:authHeader() });
+                const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.idPelamar, { headers:authHeader() });
                 this.tesTulis = getTesTulis;
             }catch(error){
                 console.log(error);
@@ -584,7 +584,7 @@ export default {
         async loadNewTesWawancara(){
             try{
                 const URI = 'https://sixacti-api.herokuapp.com/api';
-                const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, { headers:authHeader() });
+                const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.idPelamar, { headers:authHeader() });
                 this.tesWawancara = getTesWawancara;
             }catch(error){
                 console.log(error);
