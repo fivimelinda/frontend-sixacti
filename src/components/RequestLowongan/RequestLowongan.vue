@@ -382,7 +382,7 @@ export default {
                 this.$refs['error-kosong'].show();
             }
                 else{
-                    this.axios.post('http://sixacti-api.herokuapp.com/request/add/'+this.$store.state.auth.user.id, {
+                    this.axios.post('http://localhost:8081/request/add/'+this.$store.state.auth.user.id, {
                     "jobTitle" : this.judul,
                     "departement" : this.departemen,
                     "section" : this.section,

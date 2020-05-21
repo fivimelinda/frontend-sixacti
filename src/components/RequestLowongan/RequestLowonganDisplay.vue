@@ -90,7 +90,7 @@ export default {
     },
     methods: {
         load() {
-            axios.get('http://sixacti-api.herokuapp.com/request/all',{ headers:authHeader() }).then(res => {
+            axios.get('http://localhost:8081/request/all',{ headers:authHeader() }).then(res => {
                 this.requestLowongan = res.data
             }).catch((err) => {
                 console.log(err);
