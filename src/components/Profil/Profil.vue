@@ -11,13 +11,13 @@
             <div>
             </div>
             <div class="container">
-                <div class="row">
-                    <div class="col-1">
-
-                    </div>
-                    <div class="col -11" v-if="this.usersData.user != null">
+                <div class="d-flex justify-content-between">
+                    <div class="" v-if="this.usersData.user != null">
                         <div class="name" >{{this.usersData.user.nama}}</div>
                         <div class="role" v-if="this.usersData.roles.length != 0" >{{this.usersData.roles[0].roleName}}</div>
+                    </div>
+                    <div v-if="this.usersData.roles[0].roleName === 'ROLE_PELAMAR' " class="mb-0">
+                        <b-button class="">Atribut</b-button>
                     </div>
                     
                 </div>
@@ -693,6 +693,7 @@
 import authHeader from '../../service/AuthHeader'
 import moment from 'moment';
 import 'moment/locale/id';
+import axios from 'axios'
 
 export default{
     mounted(){
@@ -725,6 +726,7 @@ export default{
             idDept:'',
             idSect:'',
             karyawan:null,
+            pelamar:null
         }
     },
     computed: {
@@ -746,14 +748,20 @@ export default{
             //     this.$refs['create'].show();
             // }
             // if(
+
+                // console.log(this.$store.state.auth.user)
+                // console.log(authHeader())
+                
+                //this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
                 console.log(this.$store.state.auth.user)
                 this.axios.get('http://sixacti-api.herokuapp.com/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
+
                     
                     this.usersData = res.data;
                     console.log(this.usersData)
                     
                     if(res.data.user === null){
-                        this.$refs['create'].show();
+                        // this.$refs['create'].show();
                         this.createModal();
                     }
                     else{
@@ -763,11 +771,19 @@ export default{
                         this.tanggal = new Date(this.tanggal)
                         this.tanggal = moment(this.tanggal).format('MMMM Do YYYY')
                         console.log(this.tanggal)
-                        this.axios.get('http://sixacti-api.herokuapp.com/api/karyawan/get/'+res.data.user.nik,{ headers:authHeader() }).then(res=>{
-                            console.log(res);
-                            this.karyawan = res.data;
-                            console.log(this.karyawan);
+                        if(res.data.roles[0].roleName === 'ROLE_PELAMAR'){
+                            this.axios.get('http://localhost:8081/profil/getPelamar/'+res.data.user.nik,{ headers:authHeader() })
+                            .then(ress =>{
+                                this.pelamar = ress.data;
+                                console.log(this.pelamar);
+                            })
+                        }
+                        else{
+                            this.axios.get('http://sixacti-api.herokuapp.com/api/karyawan/get/'+res.data.user.nik,{ headers:authHeader() }).then(ress=>{
+                            this.karyawan = ress.data;
                         });
+                        }
+                        
                     }
                 });
                 
@@ -946,8 +962,8 @@ export default{
                             });
                             this.openModal2()
                             }else if(this.usersData.roles[0].roleName === 'ROLE_PELAMAR'){
-                                this.axios.post('http://sixacti-api.herokuapp.com/profil/addPelamar/'+this.nik, {headers:authHeader()});
-                                
+                                this.createPelamar();
+                                   
                             }
                             
                         }
@@ -967,6 +983,13 @@ export default{
                 window.location.href = "/profil";
             }, 2000);
         },
+
+        createPelamar(){
+            this.pelamar = axios.get('http://localhost:8081/profil/addPelamar/'+this.nik, { headers:authHeader() });
+            this.openModal2()
+            
+            },
+
         errorModal(){
             this.$refs['error-modal'].show();
         },

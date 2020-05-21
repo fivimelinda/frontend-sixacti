@@ -149,6 +149,21 @@ export default {
             }
         }
     },
+    computed:{
+        loggedIn(){
+            return this.$store.state.auth.status.loggedIn;
+        },
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
+    mounted(){
+        if (!this.loggedIn) {
+            this.$router.push('/auth/login');
+        }// }else if(false){
+        //     this.$router.push('403');
+        // }
+    },
     methods:{
         async loadNewAtribut(){
             try{
@@ -209,7 +224,7 @@ export default {
 
     async created(){
         const URI = 'http://localhost:8081/api';
-        this.idPelamar = Number(this.$route.params.id);
+        // const pl= await axios.get(URI+"/getPelamar/"+ this.currentUser.user.nik);
         const getData = await axios.get(URI + "/pelamar/get/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
         this.pelamar = getData.data;
         console.log(this.pelamar);
