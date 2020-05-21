@@ -14,7 +14,7 @@
                 <div class="d-flex justify-content-between">
                     <div class="" v-if="this.usersData.user != null">
                         <div class="name" >{{this.usersData.user.nama}}</div>
-                        <div class="role" v-if="this.usersData.roles.length != 0" >{{this.usersData.roles[0].roleName}}</div>
+                        <div class="role" v-if="this.usersData.roles.length != kosongCount" >{{this.usersData.roles[0].roleName}}</div>
                     </div>
                     <div v-if="this.usersData.roles[0].roleName === 'ROLE_PELAMAR' " class="mb-0">
                         <b-button class="">Atribut</b-button>
@@ -754,6 +754,7 @@ export default{
                 
                 //this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
                 console.log(this.$store.state.auth.user)
+                console.log(this.currentUser);
                 this.axios.get('https://sixacti-api.herokuapp.com/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
 
                     
@@ -879,8 +880,9 @@ export default{
         formSubmit(e){
             e.preventDefault();
             let currentObj = this;
-            if (this.kosongCount != 0){
-                this.kosongCount = 0;
+            const nol = 0;
+            if (this.kosongCount != nol){
+                this.kosongCount = nol;
                 this.errMsg = "";
             }
             if(!this.nik){
