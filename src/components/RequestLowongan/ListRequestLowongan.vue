@@ -29,14 +29,24 @@
                   <button class="btn btn-danger w-100" v-on:click="buatLokerClicked(reqLoker.id)"><plus-circle-icon class="mr-3"></plus-circle-icon>Buat</button>
                 </div>
                 <div class="col-6 mb-3">
-                  <button class="btn btn-light border-danger w-100" id="hapusBtn"  v-on:click="deleteLokerClicked(loker.idLowongan)">Tolak Request</button>
+                  <button v-if="currentUser.role == 'ROLE_ADMIN'" v-b-modal.modal-1 class="btn btn-light border-danger w-100" id="hapusBtn"  v-on:click="saveId(reqLoker.id, reqLoker.jobTitle)">Tolak Request</button>
                 </div>
               </div>
               
             </div>
           </div>
         </div>
-        <!--  -->
+        
+        <b-modal ref="modal" id="modal-1" title="Konfirmasi Penghapusan Lowongan" v-bind:hide-footer="true">
+            <div class="detail">
+                <p class="title">Apakah anda yakin untuk menolaknya ? </p>
+                <hr>
+                <div class="btn-group">
+                  <button type="submit" class="btn btn-danger mr-2" @click="tolakRequest(idReqLoker)">Tolak Request</button>
+                  <button class="btn btn-light" @click="hideModal">Batal</button>
+                </div>
+            </div>
+        </b-modal>
         
       </div>
       
@@ -64,7 +74,9 @@ export default {
     data() {
         return{
             reqLoker : [],
-            message : ""
+            message : "",
+            idReqLoker :0,
+            jobTitle : "",
         };
     },
     computed: {
@@ -84,6 +96,22 @@ export default {
         },
         buatLokerClicked(idReqLowongan){
           this.$router.push("/buatLoker/"+idReqLowongan);
+        },
+        saveId(id, jobTitle){
+          this.idReqLoker = id;
+          this.jobTitle = jobTitle;
+        },
+        tolakRequest(idReqLoker){
+          RequestLowonganService.RejectRequest(idReqLoker).then(() =>{
+            var tmp = this.jobTitle
+            this.$refs['modal'].hide();
+            this.message = "Request Lowongan Kerja " + tmp + " Telah Ditolak";
+
+            this.refreshLoker();
+          });
+        },
+        hideModal(){
+          this.$refs['modal'].hide();
         }
   
     },
