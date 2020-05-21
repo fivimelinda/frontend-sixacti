@@ -73,7 +73,7 @@ export default {
     },
     methods: {
         load() {
-            axios.get('http://localhost:8081/api/lowonganPelamar/' + this.nik,{ headers:authHeader() }).then(res => {
+            axios.get('https://sixacti-api.herokuapp.com/api/lowonganPelamar/' + this.nik,{ headers:authHeader() }).then(res => {
                 this.daftarLowongan = res.data;
                 // this.daftarLamaran = res.data.listLamaran;
                 // this.idPelamar = res.data.listLamaran.pelamar.userPelamar.idPelamar;
@@ -87,7 +87,7 @@ export default {
         },
 
         getId(idLowongan){
-            axios.get('http://localhost:8081/api/getIdPelamar/'+idLowongan+'/' + this.nik,{ headers:authHeader() }).then(res => {
+            axios.get('https://sixacti-api.herokuapp.com/api/getIdPelamar/'+idLowongan+'/' + this.nik,{ headers:authHeader() }).then(res => {
                 this.idPelamar = res.data;
                 // this.daftarLamaran = res.data.listLamaran;
                 // this.idPelamar = res.data.listLamaran.pelamar.userPelamar.idPelamar;

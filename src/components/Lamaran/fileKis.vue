@@ -111,7 +111,7 @@ export default {
     submitFile(){
       let formData = new FormData();
       formData.append('file', this.file);
-      axios.post('http://localhost:8081/api/uploadKis/' + this.idLamaran,
+      axios.post('https://sixacti-api.herokuapp.com/api/uploadKis/' + this.idLamaran,
         formData,{ headers:authHeader() }).then(ress => {
               this.ressData = ress;
             })
