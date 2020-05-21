@@ -16,7 +16,7 @@
                         <div class="name" >{{this.usersData.user.nama}}</div>
                         <div class="role" v-if="this.usersData.roles.length != kosongCount" >{{this.usersData.roles[0].roleName}}</div>
                     </div>
-                    <div v-if="(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.pelamar === null)" class="mb-0">
+                    <div v-if="(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')" class="mb-0">
                         <b-button @click="directAtribut()" class="btn-atribut">Atribut</b-button>
                     </div>
                     
