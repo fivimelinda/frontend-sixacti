@@ -29,6 +29,9 @@
                     <div v-if="tesMedis.isGagal == true">
                         Tidak Lulus Tes Medis
                     </div>
+                    <div v-if="tesMedis.isGagal == null && tesMedis.isLolos == null">
+                        Belum Mengikuti Tes Medis
+                    </div>
                     <!-- <div v-if="tesMedis.nilai != null">
                         Belum mengikuti tes
                     </div> -->
@@ -44,6 +47,9 @@
                     </div>
                     <div v-if="tesTulis.isGagal == true">
                         Tidak Lulus Tes Tulis
+                    </div>
+                    <div v-if="tesTulis.isLolos == null && tesTulis.isGagal == null">
+                        Belum Mengikuti Tes Tulis
                     </div>
                     <!-- <div v-if="tesTulis.id_tes_tulis = null">
                         Belum mengikuti tes
@@ -65,6 +71,9 @@
                         </div>
                         <div v-if="tesWawancara.isGagal == true">
                             Tidak Lulus Tes Wawancara
+                        </div>
+                        <div v-if="tesWawancara.isLolos == null || tesWawancara.isGagal == null">
+                            Belum Mengikuti Tes Wawancara
                         </div>
                         <!-- <div v-if="tesWawancara.nilai != null">
                             Belum mengikuti tes
@@ -114,6 +123,7 @@ export default {
         loadMedis() {
             axios.get('https://sixacti-api.herokuapp.com/api/tes/medis/pelamar/'+this.$route.params.idPelamar,{ headers:authHeader() }).then(res => {
                 this.tesMedis = res.data
+                // console.log("masuk " + res.data.status)
             }).catch((err) => {
                 console.log(err);
             })
@@ -121,6 +131,7 @@ export default {
         loadWawancara() {
             axios.get('https://sixacti-api.herokuapp.com/api/tes/wawancara/pelamar/'+this.$route.params.idPelamar,{ headers:authHeader() }).then(res => {
                 this.tesWawancara = res.data
+                // console.log("masuk " + res.data.status)
             }).catch((err) => {
                 console.log(err);
             })
@@ -128,6 +139,7 @@ export default {
         loadTulis() {
             axios.get('https://sixacti-api.herokuapp.com/api/tes/tulis/pelamar/'+this.$route.params.idPelamar,{ headers:authHeader() }).then(res => {
                 this.tesTulis = res.data
+                // console.log("masuk " + res.data.status)
             }).catch((err) => {
                 console.log(err);
             })
