@@ -228,7 +228,7 @@ export default {
         },
         cekPelamar(){
             if ( this.$store.state.auth.user.user.nik != null) {
-                axios.get("http://localhost:8081/api/cekPelamar/" + this.idLowongan + "/" + this.$store.state.auth.user.user.nik,{ headers:authHeader() }).then(res => {
+                axios.get("https://sixacti-api.herokuapp.com/api/cekPelamar/" + this.idLowongan + "/" + this.$store.state.auth.user.user.nik,{ headers:authHeader() }).then(res => {
                 this.daftarLowongan = res.data
                 console.log(res.data)
                 }).catch((err) => {

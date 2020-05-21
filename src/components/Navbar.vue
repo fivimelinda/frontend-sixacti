@@ -86,7 +86,7 @@
                         <v-icon class="black--text">mdi-message-text-clock-outline</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>
-                        <v-list-item-title class="black--text">List Request Lowongan</v-list-item-title>
+                        <v-list-item-title class="black--text">Daftar Request Lowongan</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
                 <v-list-item v-if="isAdmin" style="text-decoration:none !important" router :to="'/GenerateSuratKontrak'">

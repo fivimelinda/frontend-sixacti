@@ -171,7 +171,9 @@ export default {
         async loadNewAtribut(){
             try{
                 const URI = 'https://sixacti-api.herokuapp.com/api';
+
                 const getPelamar =await axios.get(URI + "/pelamar/get/" + this.$route.params.id,{headers:authHeader()});
+
                 this.pelamar = getPelamar.data;
                 this.atribut = this.pelamar.atribut;
             }catch(error){
