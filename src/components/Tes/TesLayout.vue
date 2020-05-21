@@ -482,7 +482,7 @@ export default {
     //check error
     async created(){
         try{
-            const URI = 'http://localhost:8081/api';
+            const URI = 'https://sixacti-api.herokuapp.com/api';
             this.idPelamar = Number(this.$route.params.id);
             this.user = this.$store.state.dummy[this.idPelamar-1]
             const getData = await axios.get(URI + "/pelamar/get/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
@@ -506,7 +506,7 @@ export default {
     },
     async mounted(){
         try{
-            const URI = 'http://localhost:8081/api';
+            const URI = 'https://sixacti-api.herokuapp.com/api';
             const getTesMedis = await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
             this.tesMedis = getTesMedis;
             console.log(getTesMedis);
@@ -565,7 +565,7 @@ export default {
         },
         async loadNewTesMedis(){
             try{
-                const URI = 'http://localhost:8081/api';
+                const URI = 'https://sixacti-api.herokuapp.com/api';
                 const getTesMedis =await axios.get(URI + "/tes/medis/pelamar/" + this.$route.params.id, { headers:authHeader() });
                 this.tesMedis = getTesMedis;
             }catch(error){
@@ -574,7 +574,7 @@ export default {
         },
         async loadNewTesTulis(){
             try{
-                const URI = 'http://localhost:8081/api';
+                const URI = 'https://sixacti-api.herokuapp.com/api';
                 const getTesTulis = await axios.get(URI + "/tes/tulis/pelamar/" + this.$route.params.id, { headers:authHeader() });
                 this.tesTulis = getTesTulis;
             }catch(error){
@@ -583,7 +583,7 @@ export default {
         },
         async loadNewTesWawancara(){
             try{
-                const URI = 'http://localhost:8081/api';
+                const URI = 'https://sixacti-api.herokuapp.com/api';
                 const getTesWawancara = await axios.get(URI + "/tes/wawancara/pelamar/" + this.$route.params.id, { headers:authHeader() });
                 this.tesWawancara = getTesWawancara;
             }catch(error){
@@ -629,7 +629,7 @@ export default {
             // })
             
             axios({
-                url: 'http://localhost:8081/api/download/ktp/' + fileName,
+                url: 'https://sixacti-api.herokuapp.com/api/download/ktp/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
                 headers:authHeader(),
@@ -647,7 +647,7 @@ export default {
         downloadBerkas(fileName){
            
             axios({
-                url: 'http://localhost:8081/api/download/resume/' + fileName,
+                url: 'https://sixacti-api.herokuapp.com/api/download/resume/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
                 headers:authHeader()
@@ -667,7 +667,7 @@ export default {
             //     this.refreshDetailLamaran();
             // })
             axios({
-                url: 'http://localhost:8081/api/download/kk/' + fileName,
+                url: 'https://sixacti-api.herokuapp.com/api/download/kk/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
                 headers:authHeader(),
@@ -687,7 +687,7 @@ export default {
             //     this.refreshDetailLamaran();
             // })
             axios({
-                url: 'http://localhost:8081/api/download/bpjsKes/' + fileName,
+                url: 'https://sixacti-api.herokuapp.com/api/download/bpjsKes/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
                 headers:authHeader(),
@@ -707,7 +707,7 @@ export default {
             //     this.refreshDetailLamaran();
             // })
             axios({
-                url: 'http://localhost:8081/api/download/bpjsKet/' + fileName,
+                url: 'https://sixacti-api.herokuapp.com/api/download/bpjsKet/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
                 headers:authHeader(),
@@ -727,7 +727,7 @@ export default {
             //     this.refreshDetailLamaran();
             // })
             axios({
-                url: 'http://localhost:8081/api/download/kis/' + fileName,
+                url: 'https://sixacti-api.herokuapp.com/api/download/kis/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
                 headers:authHeader(),
@@ -747,7 +747,7 @@ export default {
             //     this.refreshDetailLamaran();
             // })
             axios({
-                url: 'http://localhost:8081/api/download/npwp/' + fileName,
+                url: 'https://sixacti-api.herokuapp.com/api/download/npwp/' + fileName,
                 method : 'GET',
                 responseType : 'blob',
                 headers:authHeader(),
