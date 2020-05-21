@@ -11,7 +11,7 @@ class RequestLowonganService {
         return axios.get(URI+"/get/" + idReqLowongan, { headers:authHeader() });
     }
     RejectRequest(idReqLowongan){
-        return axios.get(URI + "/tolakRequest/" +idReqLowongan, { headers:authHeader() })
+        return axios.put(URI + "/tolakRequest/" +idReqLowongan, { headers:authHeader() })
     }
 }
 
