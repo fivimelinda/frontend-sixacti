@@ -12,7 +12,7 @@
         <thead class="table-borderless">
             <tr class="tr-top">
                 <th scope="col">No.</th>
-                <th scope="col">Nama Karyawan </th>
+                <!-- <th scope="col">Nama Karyawan </th> -->
                 <th scope="col">Ukuran Baju</th>
                 <th scope="col">Ukuran Jas Lab</th>
                 <th scope="col">Ukuran Helm</th>
@@ -26,7 +26,7 @@
         <tbody class="tbody">
             <tr v-for="atr in atribut" :key="atr.id_atribut" class="content">
                 <th scope=row class="th-bottom" v-text="getLast()" v-bind="add()"></th>
-                <td>{{atr.karyawan.user.nama}}</td>
+                <!-- <td>{{atr.karyawan.user.nama}}</td> -->
                 <td>{{atr.ukuran_baju}}</td>
                 <td>{{atr.ukuran_jas_lab}}</td>
                 <td>{{atr.ukuran_helm}}</td>
