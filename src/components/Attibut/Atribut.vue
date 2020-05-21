@@ -22,7 +22,7 @@
                             <template v-slot:header>
                                 <div class="d-flex justify-content-between">
                                     <h6 class="mt-2 p-0 text-center">Atribut</h6>
-                                    <div v-if="!(pelamar.atribut === null)">
+                                    <div v-if="!(karyawan.atributModel === null)">
                                     <b-button style="background-color:transparent; border:none" v-if="!atribut.status" size="sm" id="popover-info"><strong><b-icon-info-circle></b-icon-info-circle></strong></b-button>
                                     <b-popover
                                         variant="danger"
@@ -49,7 +49,7 @@
                                 
                             </template>
                             <b-card-text>
-                                <div style="color:rgb(110, 109, 109)" v-if="!(pelamar.atribut === null)">
+                                <div style="color:rgb(110, 109, 109)" v-if="!(this.karyawan.atributModel === null)">
                                     <b-row class="mt-1">
                                         <b-col class="pt-0 mt-1 pb-0 mb-1">Ukuran Sepatu</b-col>
                                         <b-col class="pt-0 mt-1 pb-0 mb-1">:    {{atribut.ukuran_sepatu}}</b-col>
@@ -176,7 +176,7 @@ export default {
                 const getPelamar =await axios.get(URI + "/karyawan/get/" + this.currentUser.user.nik,{headers:authHeader()});
 
                 this.karyawan = getPelamar.data;
-                this.atribut = this.karyawan.atribut;
+                this.atribut = this.karyawan.atributMode;
             }catch(error){
                 console.log(error);
             }
@@ -233,9 +233,9 @@ export default {
         const getData = await axios.get(URI + "/karyawan/get/" + this.currentUser.user.nik, {responseType:'json', headers:authHeader()});
         this.karyawan = getData.data;
         console.log(this.karyawan);
-        console.log("----------------------");
+        this.atribut = this.karyawan.atributModel;
         if(!(this.karyawan.atribut === null)){
-            this.atribut = this.karyawan.atribut;
+            this.atribut = this.karyawan.atributModel;
         }
     },
 }
