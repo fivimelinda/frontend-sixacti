@@ -16,7 +16,7 @@
                         <div class="name" >{{this.usersData.user.nama}}</div>
                         <div class="role" v-if="this.usersData.roles.length != kosongCount" >{{this.usersData.roles[0].roleName}}</div>
                     </div>
-                    <div v-if="(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')" class="mb-0">
+                    <div v-if="!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.karyawan === null)" class="mb-0">
                         <b-button @click="directAtribut()" class="btn-atribut">Atribut</b-button>
                     </div>
                     
@@ -407,10 +407,10 @@
                                 <div class="form-group">
                                     <div class="label">Departemen*</div>
                                     <div>
-                                        <b-form-select v-model="idSect">
+                                        <b-form-select v-model="idDept">
                                             <b-form-select-option :value="null" disabled>Please select an option</b-form-select-option>
                                             
-                                                <b-form-select-option v-for="(dept,index) in departemen" :key="index" value="index+1">{{departemen[index].namaDepartemen}}</b-form-select-option>
+                                                <b-form-select-option v-for="(dept,index) in departemen" :key="index" :value="dept.id">{{departemen[index].namaDepartemen}}</b-form-select-option>
                                             
                                         </b-form-select>
                                     </div>
@@ -425,7 +425,7 @@
                                         <b-form-select v-model="idSect">
                                             <b-form-select-option :value="null" disabled>Please select an option</b-form-select-option>
                                             
-                                                <b-form-select-option v-for="(sect,index) in section" :key="index" value="index+1">{{section[index].namaSection}}</b-form-select-option>
+                                                <b-form-select-option v-for="(sect,index) in section" :key="index" :value="sect.idSection">{{section[index].namaSection}}</b-form-select-option>
                                             
                                         </b-form-select>
                                     </div>
@@ -738,8 +738,8 @@ export default{
             kosongCount: 0,
             usersData: '',
             tanggal:'',
-            gaji:'',
-            sisaCuti:'',
+            gaji:0,
+            sisaCuti:0,
             idDept:'',
             idSect:null,
             karyawan:null,
@@ -765,7 +765,7 @@ export default{
     },
     methods: {
         directAtribut(){
-            this.$router.push('/atribut/'+this.pelamar.idPelamar)
+            this.$router.push('/atribut/'+this.usersData.user.nik)
         },
         async getSection(){
             
@@ -807,6 +807,7 @@ export default{
                         this.tanggal = new Date(this.tanggal)
                         this.tanggal = moment(this.tanggal).format('MMMM Do YYYY')
                         console.log(this.tanggal)
+
                         if(res.data.roles[0].roleName === 'ROLE_PELAMAR'){
                             this.axios.get('https://sixacti-api.herokuapp.com/profil/getPelamar/'+res.data.user.nik,{ headers:authHeader() })
                             .then(ress =>{
@@ -817,6 +818,7 @@ export default{
                         else{
                             this.axios.get('https://sixacti-api.herokuapp.com/api/karyawan/get/'+res.data.user.nik,{ headers:authHeader() }).then(ress=>{
                             this.karyawan = ress.data;
+                            console.log(this.karyawan);
                         });
                         }
                         
@@ -889,7 +891,7 @@ export default{
             .then (ress => {
                     this.retStatus = ress.data
                     if(ress.status == 200){
-                        if(!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')){
+                        if(!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') ){
                             this.axios.put('https://sixacti-api.herokuapp.com/api/karyawan/edit/'+this.nik,{
                                 "nik":this.nik,
                                 "gaji":this.karyawan.gaji,
@@ -985,11 +987,16 @@ export default{
                     }, { headers:authHeader() })
                     .then (ress => {
                         this.retStatus = ress.data
+                        console.log(ress.data);
+                        console.log(this.idDept);
+                        console.log(this.idSect);
                         if(ress.status == 200){
                             if((this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')){
                                 this.sisaCuti=0;
                             }
-                            if(!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')){
+
+                            
+                            if(!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR')){
                             this.axios.post('https://sixacti-api.herokuapp.com/api/karyawan/tambah',{
                                 "nik":this.nik,
                                 "gaji":this.gaji,
@@ -998,9 +1005,9 @@ export default{
                                 "idSect":this.idSect
                             },{headers:authHeader()}).then(res =>{
                                 console.log(res);
-                                
+                                this.openModal2()
                             });
-                            this.openModal2()
+                            
                             }else if(this.usersData.roles[0].roleName === 'ROLE_PELAMAR'){
                                 this.createPelamar();
                                    
