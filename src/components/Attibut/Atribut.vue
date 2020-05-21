@@ -140,6 +140,7 @@ export default {
             pelamar:Object,
             atribut:Object,
             message:'',
+            karyawan:Object,
             form:{
                 ukuran_sepatu:null,
                 ukuran_baju:null,
@@ -172,10 +173,10 @@ export default {
             try{
                 const URI = 'https://sixacti-api.herokuapp.com/api';
 
-                const getPelamar =await axios.get(URI + "/pelamar/get/" + this.$route.params.id,{headers:authHeader()});
+                const getPelamar =await axios.get(URI + "/karyawan/get/" + this.currentUser.user.nik,{headers:authHeader()});
 
-                this.pelamar = getPelamar.data;
-                this.atribut = this.pelamar.atribut;
+                this.karyawan = getPelamar.data;
+                this.atribut = this.karyawan.atribut;
             }catch(error){
                 console.log(error);
             }
@@ -229,11 +230,11 @@ export default {
     async created(){
         const URI = 'https://sixacti-api.herokuapp.com/api';
         // const pl= await axios.get(URI+"/getPelamar/"+ this.currentUser.user.nik);
-        const getData = await axios.get(URI + "/pelamar/get/" + this.$route.params.id, {responseType:'json', headers:authHeader()});
-        this.pelamar = getData.data;
+        const getData = await axios.get(URI + "/karyawan/get/" + this.currentUser.user.nik, {responseType:'json', headers:authHeader()});
+        this.karyawan = getData.data;
         console.log(this.pelamar);
-        if(!(this.pelamar.atribut === null)){
-            this.atribut = this.pelamar.atribut;
+        if(!(this.karyawan.atribut === null)){
+            this.atribut = this.karyawan.atribut;
         }
     },
 }
