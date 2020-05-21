@@ -58,7 +58,7 @@ export default {
     },
     methods: {
         load(){
-            axios.get('http://localhost:8081/detailKontrak/karyawan', { headers:authHeader() }).then(res => {
+            axios.get('https://sixacti-api.herokuapp.com/detailKontrak/karyawan', { headers:authHeader() }).then(res => {
                 this.karyawan = res.data
             }).catch((err) => {
                 console.log(err);
