@@ -16,7 +16,7 @@
             </b-row>
             <v-divider id="line" style="margin-bottom:15px"></v-divider>
             <b-row v-if="cutiActive">
-                <cardCuti v-bind:cutiData="cutiData"/>
+                <cardCuti />
             </b-row>
             <b-row id="sub-title" v-else-if="cutiHabis" v-show="!cutiActive">
                 <h4>Sisa cuti anda sudah habis, anda tidak dapat mengajukan cuti</h4>
@@ -90,6 +90,8 @@ export default {
         },
         getCutiActive(){
             CutiService.getCutiActive(this.nik).then(response => {
+                console.log('a' + this.nik)
+                console.log(this.currentUser)
                 if (response.data.cutiActive == "true"){
                     this.cutiData = response.data
                     this.cutiActive = true

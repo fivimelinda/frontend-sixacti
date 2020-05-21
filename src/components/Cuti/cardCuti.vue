@@ -91,12 +91,13 @@
 <script>
 import CutiService from '../../service/CutiService'
 export default {
-    props: ['cutiData'],
+    props: ['nik'],
     data(){
         return{
             status: false,
             delete: false,
-            errormessage: ''
+            errormessage: '',
+            cutiData: null
         }        
     },
     computed:{
@@ -122,8 +123,11 @@ export default {
                 }).then(value => {
                     this.delete = value
                     if(this.delete){
-                         CutiService.deleteCuti(this.cutiData.idCuti)
-                         this.$router.go(0)
+                         CutiService.deleteCuti(this.cutiData.idCuti).then((res)=>{
+                            if(res.status == 200){
+                                this.$router.go(0)
+                            }
+                         })
                     }
                 })
                 .catch((err) => {
@@ -134,14 +138,23 @@ export default {
         updateCuti(){
             this.$router.push('/updateCuti/' + this.cutiData.idKaryawan)
         },
-        checkStatus(){
-            if (this.cutiData.statusCuti == "Diajukan"){
+        getCutiActive(){
+            CutiService.getCutiActive(this.currentUser.user.nik).then(response => {
+                console.log('a')
+                this.cutiData = response.data
+                if (this.cutiData.statusCuti == "Diajukan"){
                 this.status = true
             } 
-        }
+            })
+            .catch((err) => {
+                this.errormessage = err.message
+                this.errorModal()
+            })
+        },
     },
     created(){
-        this.checkStatus()
+        this.getCutiActive()
+        console.log('bbdbaa')
     }
 }
 </script>

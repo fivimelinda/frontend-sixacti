@@ -185,7 +185,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
         })
       },
       getCutiData(){
-          CutiService.getCutiActive(this.karyawanId).then(response => {
+          CutiService.getCutiActive(this.currentUser.user.nik).then(response => {
               this.form.tanggalMulai = response.data.tanggalMulai;
               this.form.tanggalSampai = response.data.tanggalSampai;
               this.form.idKategori = response.data.idKategori;

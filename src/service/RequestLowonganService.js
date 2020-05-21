@@ -10,6 +10,9 @@ class RequestLowonganService {
     getReqLokerById(idReqLowongan){
         return axios.get(URI+"/get/" + idReqLowongan, { headers:authHeader() });
     }
+    RejectRequest(idReqLowongan){
+        return axios.put(URI + "/tolakRequest/" +idReqLowongan, { headers:authHeader() })
+    }
 }
 
 export default new RequestLowonganService();
