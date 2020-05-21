@@ -1004,7 +1004,10 @@ export default{
                                 "idDept":this.idDept,
                                 "idSect":this.idSect
                             },{headers:authHeader()}).then(res =>{
-                                console.log(res);
+                                const nowUser = JSON.parse(localStorage.getItem('user'));
+                                nowUser.user = this.retStatus.user;
+                                localStorage.user = JSON.stringify(nowUser);
+                                console.log(localStorage.user)
                                 this.openModal2()
                             });
                             
@@ -1033,6 +1036,10 @@ export default{
 
         createPelamar(){
             this.pelamar = axios.get('https://sixacti-api.herokuapp.com/profil/addPelamar/'+this.nik, { headers:authHeader() });
+            const nowUser = JSON.parse(localStorage.getItem('user'));
+            nowUser.user = this.retStatus.user;
+            localStorage.user = JSON.stringify(nowUser);
+            console.log(localStorage.user)
             this.openModal2()
             
             },
