@@ -16,8 +16,8 @@
                         <div class="name" >{{this.usersData.user.nama}}</div>
                         <div class="role" v-if="this.usersData.roles.length != kosongCount" >{{this.usersData.roles[0].roleName}}</div>
                     </div>
-                    <div v-if="this.usersData.roles[0].roleName === 'ROLE_PELAMAR' " class="mb-0">
-                        <b-button class="">Atribut</b-button>
+                    <div v-if="(this.usersData.roles[0].roleName === 'ROLE_PELAMAR') && !(this.pelamar === null)" class="mb-0">
+                        <b-button @click="directAtribut()" class="">Atribut</b-button>
                     </div>
                     
                 </div>
@@ -764,6 +764,9 @@ export default{
         this.getDepartemen();
     },
     methods: {
+        directAtribut(){
+            this.$router.push('/atribut/'+this.pelamar.idPelamar)
+        },
         async getSection(){
             
             const getSection = await this.axios.get('https://sixacti-api.herokuapp.com/api/get-section',{ headers:authHeader() });
