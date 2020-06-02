@@ -131,6 +131,7 @@ export default {
         load() {
             axios.get('https://sixacti-api.herokuapp.com/api/listAtribut',{ headers:authHeader() }).then(res => {
                 this.atribut = res.data
+                console.log(this.atribut);
             }).catch((err) => {
                 console.log(err);
             })
