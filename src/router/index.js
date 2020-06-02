@@ -15,6 +15,8 @@ import formCuti from '../components/Cuti/formCuti.vue'
 import viewCuti from '../components/Cuti/viewCuti.vue'
 import GenerateSuratKontrakDetail from '../components/GenerateSuratKontrak/GenerateSuratKontrakDetail.vue'
 import GenerateSuratKontrakAll from '../components/GenerateSuratKontrak/GenerateSuratKontrakAll.vue'
+import BuatSuratKontrakAll from '../components/GenerateSuratKontrak/BuatSuratKontrakAll.vue'
+import BuatSuratKontrakDetail from '../components/GenerateSuratKontrak/BuatSuratKontrakDetail.vue'
 import Profil from '../components/Profil/Profil.vue'
 
 import updateCuti from '../components/Cuti/updateCuti.vue'
@@ -288,6 +290,16 @@ const routes = [
         path: '/GenerateSuratKontrak/:id/:index',
         name: 'GenerateSuratKontrak',
         component: GenerateSuratKontrakDetail
+      },
+      {
+        path: '/BuatSuratKontrak',
+        name: 'BuatSuratKontrakAll',
+        component: BuatSuratKontrakAll
+      },
+      {
+        path: '/BuatSuratKontrakDetail/:id/:nama/:nik',
+        name: 'BuatSuratKontrakDetail',
+        component: BuatSuratKontrakDetail
       },
       
       {
