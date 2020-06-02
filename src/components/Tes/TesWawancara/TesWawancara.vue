@@ -211,7 +211,7 @@ import { SweetModal } from 'sweet-modal-vue'
 import FormTesWawancara from './FormTesWawancara.vue'
 import TesService from '../../../service/TesService'
 import {BIconPlus, BIconCheck, BIconPencilSquare, BIconCheckCircle, BIconXCircle} from 'bootstrap-vue'
-
+import authHeader from '../../../service/AuthHeader'
 
 export default {
     name:"tes-wawancara",
@@ -332,9 +332,26 @@ export default {
                 }
             );
             await this.refreshTesWawancara();
+            await this.updateRoles();
+            await this.createKaryawan();
             this.$nextTick(() => {
                 this.$bvModal.hide('gagal-wawancara')
             })
+        },
+
+        async updateRoles(){
+            await this.axios.get('https://sixacti-api.herokuapp.com/profil/update/role/'+ this.$store.state.auth.user.id,
+            {headers:authHeader()})
+        },
+        
+        async createKaryawan(){
+            await this.axios.post('https://sixacti-api.herokuapp.com/api/karyawan/tambah',{
+                "nik":this.$store.state.auth.user.user.nik,
+                "gaji":1000000,
+                "sisaCuti":0,
+                "idDept":1,
+                "idSect":1
+            },{headers:authHeader()})
         },
 
         async gagalTesWawancara(){

@@ -788,8 +788,7 @@ export default{
                 // console.log(authHeader())
                 
                 //this.axios.get('http://localhost:8081/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
-                console.log(this.$store.state.auth.user)
-                
+                console.log(this.$store.state.auth.user.user.nik)
                 this.axios.get('https://sixacti-api.herokuapp.com/profil/users/'+this.$store.state.auth.user.id,{ headers:authHeader() }).then(res =>{
 
                     
@@ -987,15 +986,13 @@ export default{
                     }, { headers:authHeader() })
                     .then (ress => {
                         this.retStatus = ress.data
-                        console.log(ress.data);
-                        console.log(this.idDept);
-                        console.log(this.idSect);
+                        // console.log(ress.data);
+                        // console.log(this.idDept);
+                        // console.log(this.idSect);
                         if(ress.status == 200){
                             if((this.usersData.roles[0].roleName === 'ROLE_KARYAWANKONTRAK')){
                                 this.sisaCuti=0;
                             }
-
-                            
                             if(!(this.usersData.roles[0].roleName === 'ROLE_PELAMAR')){
                             this.axios.post('https://sixacti-api.herokuapp.com/api/karyawan/tambah',{
                                 "nik":this.nik,
