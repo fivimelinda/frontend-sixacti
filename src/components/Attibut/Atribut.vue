@@ -230,6 +230,7 @@ export default {
     async created(){
         const URI = 'https://sixacti-api.herokuapp.com/api';
         // const pl= await axios.get(URI+"/getPelamar/"+ this.currentUser.user.nik);
+        // console.log(this.currentUser);
         const getData = await axios.get(URI + "/get-nik/" + this.currentUser.user.nik, {responseType:'json', headers:authHeader()});
         this.atribut = getData.data;
         console.log(this.atribut);
