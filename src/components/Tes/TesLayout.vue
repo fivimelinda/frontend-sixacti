@@ -482,6 +482,12 @@ export default {
     //check error
     async created(){
         try{
+            if (!this.loggedIn) {
+            this.$router.push('/auth/login');
+        }
+        if (this.$store.state.auth.user.role[0] === 'ROLE_ADMIN'){
+            this.$router.push('/profil');
+        }
             this.refreshDetailLamaran();
             const URI = 'https://sixacti-api.herokuapp.com/api';
             // this.idPelamar = Number(this.$route.params.id);

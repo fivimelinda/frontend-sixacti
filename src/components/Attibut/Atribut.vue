@@ -161,12 +161,10 @@ export default {
     mounted(){
         if (!this.loggedIn) {
             this.$router.push('/auth/login');
-        }else if (!(this.currentUser.roles[0].roleName === 'ROLE_PELAMAR')){
-            this.$router.push('/');
         }
-        // }else if(false){
-        //     this.$router.push('403');
-        // }
+        if (this.$store.state.auth.user.roles[0] === 'ROLE_PELAMAR'){
+            this.$router.push('/profil');
+        }
     },
     methods:{
         async loadNewAtribut(){
@@ -228,6 +226,12 @@ export default {
     },
 
     async created(){
+        if (!this.loggedIn) {
+            this.$router.push('/auth/login');
+        }
+        if (this.$store.state.auth.user.role[0] === 'ROLE_PELAMAR'){
+            this.$router.push('/profil');
+        }
         const URI = 'https://sixacti-api.herokuapp.com/api';
         // const pl= await axios.get(URI+"/getPelamar/"+ this.currentUser.user.nik);
         // console.log(this.currentUser);
